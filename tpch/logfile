@@ -1,0 +1,2347 @@
+2024-04-06 10:39:08.559 PDT [15171] LOG:  starting PostgreSQL 16devel on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0, 64-bit
+2024-04-06 10:39:08.559 PDT [15171] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-04-06 10:39:08.569 PDT [15171] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2024-04-06 10:39:08.579 PDT [15174] LOG:  database system was shut down at 2024-04-06 10:39:05 PDT
+2024-04-06 10:39:08.584 PDT [15171] LOG:  database system is ready to accept connections
+2024-04-06 10:39:11.706 PDT [15179] FATAL:  database "vboxuser" does not exist
+2024-04-06 10:39:37.109 PDT [15238] FATAL:  database "vboxuser" does not exist
+2024-04-06 10:41:29.959 PDT [15766] FATAL:  database "vboxuser" does not exist
+2024-04-06 10:42:05.349 PDT [15814] FATAL:  database "vboxuser" does not exist
+2024-04-06 10:42:15.250 PDT [15840] FATAL:  database "vboxuser" does not exist
+2024-04-06 10:43:05.072 PDT [16069] FATAL:  database "vboxuser" does not exist
+2024-04-06 10:44:08.639 PDT [15172] LOG:  checkpoint starting: time
+2024-04-06 10:44:08.660 PDT [15172] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.002 s, total=0.021 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB; lsn=0/30B1E60, redo lsn=0/30B1E28
+2024-04-06 10:47:04.388 PDT [16899] ERROR:  syntax error at or near "quit" at character 1
+2024-04-06 10:47:04.388 PDT [16899] STATEMENT:  quit
+2024-04-06 10:49:32.467 PDT [17432] ERROR:  syntax error at or near "not" at character 20
+2024-04-06 10:49:32.467 PDT [17432] STATEMENT:  create database if not exists tpch;
+2024-04-06 10:53:55.312 PDT [18288] ERROR:  cannot drop the currently open database
+2024-04-06 10:53:55.312 PDT [18288] STATEMENT:  DROP DATABASE tpch;
+2024-04-06 10:54:05.738 PDT [15172] LOG:  checkpoint starting: immediate force wait
+2024-04-06 10:54:05.758 PDT [15172] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.005 s, total=0.021 s; sync files=4, longest=0.003 s, average=0.002 s; distance=4149 kB, estimate=4149 kB; lsn=0/34BF498, redo lsn=0/34BF460
+2024-04-06 10:59:05.823 PDT [15172] LOG:  checkpoint starting: time
+2024-04-06 10:59:05.938 PDT [15172] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.104 s, sync=0.003 s, total=0.116 s; sync files=2, longest=0.002 s, average=0.002 s; distance=0 kB, estimate=3734 kB; lsn=0/34BF600, redo lsn=0/34BF5C8
+2024-04-06 11:17:28.643 PDT [23201] FATAL:  database "tpch" does not exist
+2024-04-06 11:17:37.971 PDT [23210] FATAL:  database "tpch" does not exist
+2024-04-06 11:17:50.875 PDT [23220] FATAL:  database "tpch" does not exist
+2024-04-06 11:19:45.570 PDT [23855] FATAL:  database "tpch" does not exist
+2024-04-06 11:21:33.626 PDT [24185] ERROR:  could not open file "<DATA_DIR>/data/nation.tbl" for reading: No such file or directory
+2024-04-06 11:21:33.626 PDT [24185] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:21:33.626 PDT [24185] STATEMENT:  COPY nation FROM '<DATA_DIR>/data/nation.tbl' WITH (FORMAT csv);
+2024-04-06 11:21:33.630 PDT [24185] ERROR:  could not open file "<DATA_DIR>/data/region.tbl" for reading: No such file or directory
+2024-04-06 11:21:33.630 PDT [24185] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:21:33.630 PDT [24185] STATEMENT:  COPY region FROM '<DATA_DIR>/data/region.tbl' WITH (FORMAT csv);
+2024-04-06 11:21:33.634 PDT [24185] ERROR:  could not open file "<DATA_DIR>/data/part.tbl" for reading: No such file or directory
+2024-04-06 11:21:33.634 PDT [24185] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:21:33.634 PDT [24185] STATEMENT:  COPY part FROM '<DATA_DIR>/data/part.tbl' WITH (FORMAT csv);
+2024-04-06 11:21:33.639 PDT [24185] ERROR:  could not open file "<DATA_DIR>/data/supplier.tbl" for reading: No such file or directory
+2024-04-06 11:21:33.639 PDT [24185] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:21:33.639 PDT [24185] STATEMENT:  COPY supplier FROM '<DATA_DIR>/data/supplier.tbl' WITH (FORMAT csv);
+2024-04-06 11:21:33.648 PDT [24185] ERROR:  could not open file "<DATA_DIR>/data/partsupp.tbl" for reading: No such file or directory
+2024-04-06 11:21:33.648 PDT [24185] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:21:33.648 PDT [24185] STATEMENT:  COPY partsupp FROM '<DATA_DIR>/data/partsupp.tbl' WITH (FORMAT csv);
+2024-04-06 11:21:33.652 PDT [24185] ERROR:  could not open file "<DATA_DIR>/data/customer.tbl" for reading: No such file or directory
+2024-04-06 11:21:33.652 PDT [24185] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:21:33.652 PDT [24185] STATEMENT:  COPY customer FROM '<DATA_DIR>/data/customer.tbl' WITH (FORMAT csv);
+2024-04-06 11:21:33.657 PDT [24185] ERROR:  could not open file "<DATA_DIR>/data/orders.tbl" for reading: No such file or directory
+2024-04-06 11:21:33.657 PDT [24185] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:21:33.657 PDT [24185] STATEMENT:  COPY orders FROM '<DATA_DIR>/data/orders.tbl' WITH (FORMAT csv);
+2024-04-06 11:21:33.663 PDT [24185] ERROR:  could not open file "<DATA_DIR>/data/lineitem.tbl" for reading: No such file or directory
+2024-04-06 11:21:33.663 PDT [24185] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:21:33.663 PDT [24185] STATEMENT:  COPY lineitem FROM '<DATA_DIR>/data/lineitem.tbl' WITH (FORMAT csv);
+2024-04-06 11:23:31.739 PDT [24707] FATAL:  database "vboxuser" does not exist
+2024-04-06 11:24:06.263 PDT [15172] LOG:  checkpoint starting: time
+2024-04-06 11:25:38.537 PDT [15172] LOG:  checkpoint complete: wrote 909 buffers (5.5%); 0 WAL file(s) added, 0 removed, 0 recycled; write=92.112 s, sync=0.143 s, total=92.275 s; sync files=249, longest=0.005 s, average=0.001 s; distance=4158 kB, estimate=4158 kB; lsn=0/38CF170, redo lsn=0/38CF138
+2024-04-06 11:30:21.928 PDT [26195] ERROR:  database "tpch" already exists
+2024-04-06 11:30:21.928 PDT [26195] STATEMENT:  create database tpch;
+2024-04-06 11:30:21.935 PDT [26197] ERROR:  relation "nation" already exists
+2024-04-06 11:30:21.935 PDT [26197] STATEMENT:  CREATE TABLE NATION  ( N_NATIONKEY  INTEGER NOT NULL,
+	                            N_NAME       CHAR(25) NOT NULL,
+	                            N_REGIONKEY  INTEGER NOT NULL,
+	                            N_COMMENT    VARCHAR(152),
+	PRIMARY KEY (N_NATIONKEY));
+2024-04-06 11:30:21.935 PDT [26197] ERROR:  relation "region" already exists
+2024-04-06 11:30:21.935 PDT [26197] STATEMENT:  CREATE TABLE REGION  ( R_REGIONKEY  INTEGER NOT NULL,
+	                            R_NAME       CHAR(25) NOT NULL,
+	                            R_COMMENT    VARCHAR(152),
+	PRIMARY KEY (R_REGIONKEY));
+2024-04-06 11:30:21.935 PDT [26197] ERROR:  relation "part" already exists
+2024-04-06 11:30:21.935 PDT [26197] STATEMENT:  CREATE TABLE PART  ( P_PARTKEY     INTEGER NOT NULL,
+	                          P_NAME        VARCHAR(55) NOT NULL,
+	                          P_MFGR        CHAR(25) NOT NULL,
+	                          P_BRAND       CHAR(10) NOT NULL,
+	                          P_TYPE        VARCHAR(25) NOT NULL,
+	                          P_SIZE        INTEGER NOT NULL,
+	                          P_CONTAINER   CHAR(10) NOT NULL,
+	                          P_RETAILPRICE DECIMAL(15,2) NOT NULL,
+	                          P_COMMENT     VARCHAR(23) NOT NULL,
+	PRIMARY KEY (P_PARTKEY));
+2024-04-06 11:30:21.936 PDT [26197] ERROR:  relation "supplier" already exists
+2024-04-06 11:30:21.936 PDT [26197] STATEMENT:  CREATE TABLE SUPPLIER ( S_SUPPKEY     INTEGER NOT NULL,
+	                             S_NAME        CHAR(25) NOT NULL,
+	                             S_ADDRESS     VARCHAR(40) NOT NULL,
+	                             S_NATIONKEY   INTEGER NOT NULL,
+	                             S_PHONE       CHAR(15) NOT NULL,
+	                             S_ACCTBAL     DECIMAL(15,2) NOT NULL,
+	                             S_COMMENT     VARCHAR(101) NOT NULL,
+	PRIMARY KEY (S_SUPPKEY));
+2024-04-06 11:30:21.936 PDT [26197] ERROR:  relation "partsupp" already exists
+2024-04-06 11:30:21.936 PDT [26197] STATEMENT:  CREATE TABLE PARTSUPP ( PS_PARTKEY     INTEGER NOT NULL,
+	                             PS_SUPPKEY     INTEGER NOT NULL,
+	                             PS_AVAILQTY    INTEGER NOT NULL,
+	                             PS_SUPPLYCOST  DECIMAL(15,2)  NOT NULL,
+	                             PS_COMMENT     VARCHAR(199) NOT NULL,
+	PRIMARY KEY (PS_PARTKEY,PS_SUPPKEY));
+2024-04-06 11:30:21.936 PDT [26197] ERROR:  relation "customer" already exists
+2024-04-06 11:30:21.936 PDT [26197] STATEMENT:  CREATE TABLE CUSTOMER ( C_CUSTKEY     INTEGER NOT NULL,
+	                             C_NAME        VARCHAR(25) NOT NULL,
+	                             C_ADDRESS     VARCHAR(40) NOT NULL,
+	                             C_NATIONKEY   INTEGER NOT NULL,
+	                             C_PHONE       CHAR(15) NOT NULL,
+	                             C_ACCTBAL     DECIMAL(15,2)   NOT NULL,
+	                             C_MKTSEGMENT  CHAR(10) NOT NULL,
+	                             C_COMMENT     VARCHAR(117) NOT NULL,
+	PRIMARY KEY (C_CUSTKEY));
+2024-04-06 11:30:21.936 PDT [26197] ERROR:  relation "orders" already exists
+2024-04-06 11:30:21.936 PDT [26197] STATEMENT:  CREATE TABLE ORDERS  ( O_ORDERKEY       INTEGER NOT NULL,
+	                           O_CUSTKEY        INTEGER NOT NULL,
+	                           O_ORDERSTATUS    CHAR(1) NOT NULL,
+	                           O_TOTALPRICE     DECIMAL(15,2) NOT NULL,
+	                           O_ORDERDATE      DATE NOT NULL,
+	                           O_ORDERPRIORITY  CHAR(15) NOT NULL,  
+	                           O_CLERK          CHAR(15) NOT NULL, 
+	                           O_SHIPPRIORITY   INTEGER NOT NULL,
+	                           O_COMMENT        VARCHAR(79) NOT NULL,
+	PRIMARY KEY (O_ORDERKEY));
+2024-04-06 11:30:21.936 PDT [26197] ERROR:  relation "lineitem" already exists
+2024-04-06 11:30:21.936 PDT [26197] STATEMENT:  CREATE TABLE LINEITEM ( L_ORDERKEY    INTEGER NOT NULL,
+	                             L_PARTKEY     INTEGER NOT NULL,
+	                             L_SUPPKEY     INTEGER NOT NULL,
+	                             L_LINENUMBER  INTEGER NOT NULL,
+	                             L_QUANTITY    DECIMAL(15,2) NOT NULL,
+	                             L_EXTENDEDPRICE  DECIMAL(15,2) NOT NULL,
+	                             L_DISCOUNT    DECIMAL(15,2) NOT NULL,
+	                             L_TAX         DECIMAL(15,2) NOT NULL,
+	                             L_RETURNFLAG  CHAR(1) NOT NULL,
+	                             L_LINESTATUS  CHAR(1) NOT NULL,
+	                             L_SHIPDATE    DATE NOT NULL,
+	                             L_COMMITDATE  DATE NOT NULL,
+	                             L_RECEIPTDATE DATE NOT NULL,
+	                             L_SHIPINSTRUCT CHAR(25) NOT NULL,
+	                             L_SHIPMODE     CHAR(10) NOT NULL,
+	                             L_COMMENT      VARCHAR(44) NOT NULL,
+	PRIMARY KEY (L_ORDERKEY,L_LINENUMBER));
+2024-04-06 11:30:21.954 PDT [26199] ERROR:  could not open file "<DATA_DIR>/data/nation.tbl" for reading: No such file or directory
+2024-04-06 11:30:21.954 PDT [26199] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:30:21.954 PDT [26199] STATEMENT:  COPY nation FROM '<DATA_DIR>/data/nation.tbl' WITH (FORMAT csv);
+2024-04-06 11:30:21.963 PDT [26199] ERROR:  could not open file "<DATA_DIR>/data/region.tbl" for reading: No such file or directory
+2024-04-06 11:30:21.963 PDT [26199] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:30:21.963 PDT [26199] STATEMENT:  COPY region FROM '<DATA_DIR>/data/region.tbl' WITH (FORMAT csv);
+2024-04-06 11:30:21.968 PDT [26199] ERROR:  could not open file "<DATA_DIR>/data/part.tbl" for reading: No such file or directory
+2024-04-06 11:30:21.968 PDT [26199] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:30:21.968 PDT [26199] STATEMENT:  COPY part FROM '<DATA_DIR>/data/part.tbl' WITH (FORMAT csv);
+2024-04-06 11:30:21.972 PDT [26199] ERROR:  could not open file "<DATA_DIR>/data/supplier.tbl" for reading: No such file or directory
+2024-04-06 11:30:21.972 PDT [26199] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:30:21.972 PDT [26199] STATEMENT:  COPY supplier FROM '<DATA_DIR>/data/supplier.tbl' WITH (FORMAT csv);
+2024-04-06 11:30:21.977 PDT [26199] ERROR:  could not open file "<DATA_DIR>/data/partsupp.tbl" for reading: No such file or directory
+2024-04-06 11:30:21.977 PDT [26199] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:30:21.977 PDT [26199] STATEMENT:  COPY partsupp FROM '<DATA_DIR>/data/partsupp.tbl' WITH (FORMAT csv);
+2024-04-06 11:30:21.982 PDT [26199] ERROR:  could not open file "<DATA_DIR>/data/customer.tbl" for reading: No such file or directory
+2024-04-06 11:30:21.982 PDT [26199] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:30:21.982 PDT [26199] STATEMENT:  COPY customer FROM '<DATA_DIR>/data/customer.tbl' WITH (FORMAT csv);
+2024-04-06 11:30:21.988 PDT [26199] ERROR:  could not open file "<DATA_DIR>/data/orders.tbl" for reading: No such file or directory
+2024-04-06 11:30:21.988 PDT [26199] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:30:21.988 PDT [26199] STATEMENT:  COPY orders FROM '<DATA_DIR>/data/orders.tbl' WITH (FORMAT csv);
+2024-04-06 11:30:21.992 PDT [26199] ERROR:  could not open file "<DATA_DIR>/data/lineitem.tbl" for reading: No such file or directory
+2024-04-06 11:30:21.992 PDT [26199] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:30:21.992 PDT [26199] STATEMENT:  COPY lineitem FROM '<DATA_DIR>/data/lineitem.tbl' WITH (FORMAT csv);
+2024-04-06 11:32:17.919 PDT [26569] ERROR:  database "tpch" already exists
+2024-04-06 11:32:17.919 PDT [26569] STATEMENT:  create database tpch;
+2024-04-06 11:32:17.927 PDT [26571] ERROR:  relation "nation" already exists
+2024-04-06 11:32:17.927 PDT [26571] STATEMENT:  CREATE TABLE NATION  ( N_NATIONKEY  INTEGER NOT NULL,
+	                            N_NAME       CHAR(25) NOT NULL,
+	                            N_REGIONKEY  INTEGER NOT NULL,
+	                            N_COMMENT    VARCHAR(152),
+	PRIMARY KEY (N_NATIONKEY));
+2024-04-06 11:32:17.927 PDT [26571] ERROR:  relation "region" already exists
+2024-04-06 11:32:17.927 PDT [26571] STATEMENT:  CREATE TABLE REGION  ( R_REGIONKEY  INTEGER NOT NULL,
+	                            R_NAME       CHAR(25) NOT NULL,
+	                            R_COMMENT    VARCHAR(152),
+	PRIMARY KEY (R_REGIONKEY));
+2024-04-06 11:32:17.927 PDT [26571] ERROR:  relation "part" already exists
+2024-04-06 11:32:17.927 PDT [26571] STATEMENT:  CREATE TABLE PART  ( P_PARTKEY     INTEGER NOT NULL,
+	                          P_NAME        VARCHAR(55) NOT NULL,
+	                          P_MFGR        CHAR(25) NOT NULL,
+	                          P_BRAND       CHAR(10) NOT NULL,
+	                          P_TYPE        VARCHAR(25) NOT NULL,
+	                          P_SIZE        INTEGER NOT NULL,
+	                          P_CONTAINER   CHAR(10) NOT NULL,
+	                          P_RETAILPRICE DECIMAL(15,2) NOT NULL,
+	                          P_COMMENT     VARCHAR(23) NOT NULL,
+	PRIMARY KEY (P_PARTKEY));
+2024-04-06 11:32:17.927 PDT [26571] ERROR:  relation "supplier" already exists
+2024-04-06 11:32:17.927 PDT [26571] STATEMENT:  CREATE TABLE SUPPLIER ( S_SUPPKEY     INTEGER NOT NULL,
+	                             S_NAME        CHAR(25) NOT NULL,
+	                             S_ADDRESS     VARCHAR(40) NOT NULL,
+	                             S_NATIONKEY   INTEGER NOT NULL,
+	                             S_PHONE       CHAR(15) NOT NULL,
+	                             S_ACCTBAL     DECIMAL(15,2) NOT NULL,
+	                             S_COMMENT     VARCHAR(101) NOT NULL,
+	PRIMARY KEY (S_SUPPKEY));
+2024-04-06 11:32:17.927 PDT [26571] ERROR:  relation "partsupp" already exists
+2024-04-06 11:32:17.927 PDT [26571] STATEMENT:  CREATE TABLE PARTSUPP ( PS_PARTKEY     INTEGER NOT NULL,
+	                             PS_SUPPKEY     INTEGER NOT NULL,
+	                             PS_AVAILQTY    INTEGER NOT NULL,
+	                             PS_SUPPLYCOST  DECIMAL(15,2)  NOT NULL,
+	                             PS_COMMENT     VARCHAR(199) NOT NULL,
+	PRIMARY KEY (PS_PARTKEY,PS_SUPPKEY));
+2024-04-06 11:32:17.928 PDT [26571] ERROR:  relation "customer" already exists
+2024-04-06 11:32:17.928 PDT [26571] STATEMENT:  CREATE TABLE CUSTOMER ( C_CUSTKEY     INTEGER NOT NULL,
+	                             C_NAME        VARCHAR(25) NOT NULL,
+	                             C_ADDRESS     VARCHAR(40) NOT NULL,
+	                             C_NATIONKEY   INTEGER NOT NULL,
+	                             C_PHONE       CHAR(15) NOT NULL,
+	                             C_ACCTBAL     DECIMAL(15,2)   NOT NULL,
+	                             C_MKTSEGMENT  CHAR(10) NOT NULL,
+	                             C_COMMENT     VARCHAR(117) NOT NULL,
+	PRIMARY KEY (C_CUSTKEY));
+2024-04-06 11:32:17.928 PDT [26571] ERROR:  relation "orders" already exists
+2024-04-06 11:32:17.928 PDT [26571] STATEMENT:  CREATE TABLE ORDERS  ( O_ORDERKEY       INTEGER NOT NULL,
+	                           O_CUSTKEY        INTEGER NOT NULL,
+	                           O_ORDERSTATUS    CHAR(1) NOT NULL,
+	                           O_TOTALPRICE     DECIMAL(15,2) NOT NULL,
+	                           O_ORDERDATE      DATE NOT NULL,
+	                           O_ORDERPRIORITY  CHAR(15) NOT NULL,  
+	                           O_CLERK          CHAR(15) NOT NULL, 
+	                           O_SHIPPRIORITY   INTEGER NOT NULL,
+	                           O_COMMENT        VARCHAR(79) NOT NULL,
+	PRIMARY KEY (O_ORDERKEY));
+2024-04-06 11:32:17.928 PDT [26571] ERROR:  relation "lineitem" already exists
+2024-04-06 11:32:17.928 PDT [26571] STATEMENT:  CREATE TABLE LINEITEM ( L_ORDERKEY    INTEGER NOT NULL,
+	                             L_PARTKEY     INTEGER NOT NULL,
+	                             L_SUPPKEY     INTEGER NOT NULL,
+	                             L_LINENUMBER  INTEGER NOT NULL,
+	                             L_QUANTITY    DECIMAL(15,2) NOT NULL,
+	                             L_EXTENDEDPRICE  DECIMAL(15,2) NOT NULL,
+	                             L_DISCOUNT    DECIMAL(15,2) NOT NULL,
+	                             L_TAX         DECIMAL(15,2) NOT NULL,
+	                             L_RETURNFLAG  CHAR(1) NOT NULL,
+	                             L_LINESTATUS  CHAR(1) NOT NULL,
+	                             L_SHIPDATE    DATE NOT NULL,
+	                             L_COMMITDATE  DATE NOT NULL,
+	                             L_RECEIPTDATE DATE NOT NULL,
+	                             L_SHIPINSTRUCT CHAR(25) NOT NULL,
+	                             L_SHIPMODE     CHAR(10) NOT NULL,
+	                             L_COMMENT      VARCHAR(44) NOT NULL,
+	PRIMARY KEY (L_ORDERKEY,L_LINENUMBER));
+2024-04-06 11:32:17.955 PDT [26578] ERROR:  could not open file "/home/vboxuser/contribs/ssb2-bench/data/nation.tbl" for reading: No such file or directory
+2024-04-06 11:32:17.955 PDT [26578] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:32:17.955 PDT [26578] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/data/nation.tbl' WITH (FORMAT csv);
+2024-04-06 11:32:17.960 PDT [26578] ERROR:  could not open file "/home/vboxuser/contribs/ssb2-bench/data/region.tbl" for reading: No such file or directory
+2024-04-06 11:32:17.960 PDT [26578] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:32:17.960 PDT [26578] STATEMENT:  COPY region FROM '/home/vboxuser/contribs/ssb2-bench/data/region.tbl' WITH (FORMAT csv);
+2024-04-06 11:32:17.965 PDT [26578] ERROR:  could not open file "/home/vboxuser/contribs/ssb2-bench/data/part.tbl" for reading: No such file or directory
+2024-04-06 11:32:17.965 PDT [26578] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:32:17.965 PDT [26578] STATEMENT:  COPY part FROM '/home/vboxuser/contribs/ssb2-bench/data/part.tbl' WITH (FORMAT csv);
+2024-04-06 11:32:17.971 PDT [26578] ERROR:  could not open file "/home/vboxuser/contribs/ssb2-bench/data/supplier.tbl" for reading: No such file or directory
+2024-04-06 11:32:17.971 PDT [26578] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:32:17.971 PDT [26578] STATEMENT:  COPY supplier FROM '/home/vboxuser/contribs/ssb2-bench/data/supplier.tbl' WITH (FORMAT csv);
+2024-04-06 11:32:17.977 PDT [26578] ERROR:  could not open file "/home/vboxuser/contribs/ssb2-bench/data/partsupp.tbl" for reading: No such file or directory
+2024-04-06 11:32:17.977 PDT [26578] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:32:17.977 PDT [26578] STATEMENT:  COPY partsupp FROM '/home/vboxuser/contribs/ssb2-bench/data/partsupp.tbl' WITH (FORMAT csv);
+2024-04-06 11:32:17.980 PDT [26578] ERROR:  could not open file "/home/vboxuser/contribs/ssb2-bench/data/customer.tbl" for reading: No such file or directory
+2024-04-06 11:32:17.980 PDT [26578] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:32:17.980 PDT [26578] STATEMENT:  COPY customer FROM '/home/vboxuser/contribs/ssb2-bench/data/customer.tbl' WITH (FORMAT csv);
+2024-04-06 11:32:17.984 PDT [26578] ERROR:  could not open file "/home/vboxuser/contribs/ssb2-bench/data/orders.tbl" for reading: No such file or directory
+2024-04-06 11:32:17.984 PDT [26578] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:32:17.984 PDT [26578] STATEMENT:  COPY orders FROM '/home/vboxuser/contribs/ssb2-bench/data/orders.tbl' WITH (FORMAT csv);
+2024-04-06 11:32:17.989 PDT [26578] ERROR:  could not open file "/home/vboxuser/contribs/ssb2-bench/data/lineitem.tbl" for reading: No such file or directory
+2024-04-06 11:32:17.989 PDT [26578] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:32:17.989 PDT [26578] STATEMENT:  COPY lineitem FROM '/home/vboxuser/contribs/ssb2-bench/data/lineitem.tbl' WITH (FORMAT csv);
+2024-04-06 11:34:06.627 PDT [15172] LOG:  checkpoint starting: time
+2024-04-06 11:34:07.156 PDT [15172] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.515 s, sync=0.006 s, total=0.530 s; sync files=5, longest=0.003 s, average=0.002 s; distance=47 kB, estimate=3747 kB; lsn=0/38DADB0, redo lsn=0/38DAD78
+2024-04-06 11:35:12.416 PDT [15172] LOG:  checkpoint starting: immediate force wait
+2024-04-06 11:35:12.435 PDT [15172] LOG:  checkpoint complete: wrote 1 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.002 s, total=0.019 s; sync files=1, longest=0.002 s, average=0.002 s; distance=1 kB, estimate=3373 kB; lsn=0/38DB338, redo lsn=0/38DB300
+2024-04-06 11:35:12.590 PDT [27203] ERROR:  invalid input syntax for type integer: "0|ALGERIA|0| haggle. carefully final deposits detect slyly agai|"
+2024-04-06 11:35:12.590 PDT [27203] CONTEXT:  COPY nation, line 1, column n_nationkey: "0|ALGERIA|0| haggle. carefully final deposits detect slyly agai|"
+2024-04-06 11:35:12.590 PDT [27203] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.tbl' WITH (FORMAT csv);
+2024-04-06 11:35:12.598 PDT [27203] ERROR:  invalid input syntax for type integer: "0|AFRICA|lar deposits. blithely final packages cajole. regular waters are final requests. regular accounts are according to |"
+2024-04-06 11:35:12.598 PDT [27203] CONTEXT:  COPY region, line 1, column r_regionkey: "0|AFRICA|lar deposits. blithely final packages cajole. regular waters are final requests. regular ac..."
+2024-04-06 11:35:12.598 PDT [27203] STATEMENT:  COPY region FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/region.tbl' WITH (FORMAT csv);
+2024-04-06 11:35:12.605 PDT [27203] ERROR:  invalid input syntax for type integer: "1|goldenrod lavender spring chocolate lace|Manufacturer#1|Brand#13|PROMO BURNISHED COPPER|7|JUMBO PKG|901.00|ly. slyly ironi|"
+2024-04-06 11:35:12.605 PDT [27203] CONTEXT:  COPY part, line 1, column p_partkey: "1|goldenrod lavender spring chocolate lace|Manufacturer#1|Brand#13|PROMO BURNISHED COPPER|7|JUMBO PK..."
+2024-04-06 11:35:12.605 PDT [27203] STATEMENT:  COPY part FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/part.tbl' WITH (FORMAT csv);
+2024-04-06 11:35:12.610 PDT [27203] ERROR:  invalid input syntax for type integer: "1|Supplier#000000001| N kD4on9OM Ipw3"
+2024-04-06 11:35:12.610 PDT [27203] CONTEXT:  COPY supplier, line 1, column s_suppkey: "1|Supplier#000000001| N kD4on9OM Ipw3"
+2024-04-06 11:35:12.610 PDT [27203] STATEMENT:  COPY supplier FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/supplier.tbl' WITH (FORMAT csv);
+2024-04-06 11:35:12.615 PDT [27203] ERROR:  invalid input syntax for type integer: "1|2|3325|771.64|"
+2024-04-06 11:35:12.615 PDT [27203] CONTEXT:  COPY partsupp, line 1, column ps_partkey: "1|2|3325|771.64|"
+2024-04-06 11:35:12.615 PDT [27203] STATEMENT:  COPY partsupp FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/partsupp.tbl' WITH (FORMAT csv);
+2024-04-06 11:35:12.620 PDT [27203] ERROR:  invalid input syntax for type integer: "1|Customer#000000001|IVhzIApeRb ot"
+2024-04-06 11:35:12.620 PDT [27203] CONTEXT:  COPY customer, line 1, column c_custkey: "1|Customer#000000001|IVhzIApeRb ot"
+2024-04-06 11:35:12.620 PDT [27203] STATEMENT:  COPY customer FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/customer.tbl' WITH (FORMAT csv);
+2024-04-06 11:35:12.628 PDT [27203] ERROR:  invalid input syntax for type integer: "1|36901|O|173665.47|1996-01-02|5-LOW|Clerk#000000951|0|nstructions sleep furiously among |"
+2024-04-06 11:35:12.628 PDT [27203] CONTEXT:  COPY orders, line 1, column o_orderkey: "1|36901|O|173665.47|1996-01-02|5-LOW|Clerk#000000951|0|nstructions sleep furiously among |"
+2024-04-06 11:35:12.628 PDT [27203] STATEMENT:  COPY orders FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/orders.tbl' WITH (FORMAT csv);
+2024-04-06 11:35:12.632 PDT [27203] ERROR:  invalid input syntax for type integer: "1|155190|7706|1|17|21168.23|0.04|0.02|N|O|1996-03-13|1996-02-12|1996-03-22|DELIVER IN PERSON|TRUCK|egular courts above the|"
+2024-04-06 11:35:12.632 PDT [27203] CONTEXT:  COPY lineitem, line 1, column l_orderkey: "1|155190|7706|1|17|21168.23|0.04|0.02|N|O|1996-03-13|1996-02-12|1996-03-22|DELIVER IN PERSON|TRUCK|e..."
+2024-04-06 11:35:12.632 PDT [27203] STATEMENT:  COPY lineitem FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/lineitem.tbl' WITH (FORMAT csv);
+2024-04-06 11:38:07.078 PDT [27892] ERROR:  syntax error at or near "(" at character 95
+2024-04-06 11:38:07.078 PDT [27892] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.tbl' WITH DELIMITER ',' (FORMAT csv);
+2024-04-06 11:38:16.825 PDT [27892] ERROR:  syntax error at or near "FORMAT" at character 95
+2024-04-06 11:38:16.825 PDT [27892] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.tbl' WITH DELIMITER ',' FORMAT csv;
+2024-04-06 11:38:36.038 PDT [27892] ERROR:  extra data after last expected column
+2024-04-06 11:38:36.038 PDT [27892] CONTEXT:  COPY nation, line 1: "0|ALGERIA|0| haggle. carefully final deposits detect slyly agai|"
+2024-04-06 11:38:36.038 PDT [27892] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.tbl' WITH DELIMITER '|' csv;
+2024-04-06 11:39:36.074 PDT [27892] ERROR:  extra data after last expected column
+2024-04-06 11:39:36.074 PDT [27892] CONTEXT:  COPY nation, line 2: "1|ARGENTINA|1|al foxes promise slyly according to the regular accounts. bold requests alon|"
+2024-04-06 11:39:36.074 PDT [27892] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.tbl' CSV HEADER DELIMITER '|';
+2024-04-06 11:39:51.997 PDT [27892] ERROR:  relation "nations" does not exist at character 15
+2024-04-06 11:39:51.997 PDT [27892] STATEMENT:  select * from nations
+	;
+2024-04-06 11:40:12.537 PDT [15172] LOG:  checkpoint starting: time
+2024-04-06 11:41:44.693 PDT [15172] LOG:  checkpoint complete: wrote 909 buffers (5.5%); 0 WAL file(s) added, 0 removed, 0 recycled; write=92.001 s, sync=0.144 s, total=92.156 s; sync files=249, longest=0.003 s, average=0.001 s; distance=4159 kB, estimate=4159 kB; lsn=0/3CEAFC8, redo lsn=0/3CEAF90
+2024-04-06 11:43:23.752 PDT [15172] LOG:  checkpoint starting: immediate force wait
+2024-04-06 11:43:23.790 PDT [15172] LOG:  checkpoint complete: wrote 1 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.002 s, total=0.039 s; sync files=1, longest=0.002 s, average=0.002 s; distance=1 kB, estimate=3743 kB; lsn=0/3CEB5F0, redo lsn=0/3CEB5B8
+2024-04-06 11:43:24.409 PDT [29095] ERROR:  syntax error at or near "(" at character 95
+2024-04-06 11:43:24.409 PDT [29095] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' WITH DELIMITER ',' (FORMAT csv);
+2024-04-06 11:43:24.418 PDT [29095] ERROR:  invalid input syntax for type integer: "0|AFRICA|lar deposits. blithely final packages cajole. regular waters are final requests. regular accounts are according to "
+2024-04-06 11:43:24.418 PDT [29095] CONTEXT:  COPY region, line 1, column r_regionkey: "0|AFRICA|lar deposits. blithely final packages cajole. regular waters are final requests. regular ac..."
+2024-04-06 11:43:24.418 PDT [29095] STATEMENT:  COPY region FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/region.csv' WITH (FORMAT csv);
+2024-04-06 11:43:24.440 PDT [29095] ERROR:  invalid input syntax for type integer: "1|goldenrod lavender spring chocolate lace|Manufacturer#1|Brand#13|PROMO BURNISHED COPPER|7|JUMBO PKG|901.00|ly. slyly ironi"
+2024-04-06 11:43:24.440 PDT [29095] CONTEXT:  COPY part, line 1, column p_partkey: "1|goldenrod lavender spring chocolate lace|Manufacturer#1|Brand#13|PROMO BURNISHED COPPER|7|JUMBO PK..."
+2024-04-06 11:43:24.440 PDT [29095] STATEMENT:  COPY part FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/part.csv' WITH (FORMAT csv);
+2024-04-06 11:43:24.449 PDT [29095] ERROR:  invalid input syntax for type integer: "1|Supplier#000000001| N kD4on9OM Ipw3"
+2024-04-06 11:43:24.449 PDT [29095] CONTEXT:  COPY supplier, line 1, column s_suppkey: "1|Supplier#000000001| N kD4on9OM Ipw3"
+2024-04-06 11:43:24.449 PDT [29095] STATEMENT:  COPY supplier FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/supplier.csv' WITH (FORMAT csv);
+2024-04-06 11:43:24.453 PDT [29095] ERROR:  invalid input syntax for type integer: "1|2|3325|771.64|"
+2024-04-06 11:43:24.453 PDT [29095] CONTEXT:  COPY partsupp, line 1, column ps_partkey: "1|2|3325|771.64|"
+2024-04-06 11:43:24.453 PDT [29095] STATEMENT:  COPY partsupp FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/partsupp.csv' WITH (FORMAT csv);
+2024-04-06 11:43:24.459 PDT [29095] ERROR:  invalid input syntax for type integer: "1|Customer#000000001|IVhzIApeRb ot"
+2024-04-06 11:43:24.459 PDT [29095] CONTEXT:  COPY customer, line 1, column c_custkey: "1|Customer#000000001|IVhzIApeRb ot"
+2024-04-06 11:43:24.459 PDT [29095] STATEMENT:  COPY customer FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/customer.csv' WITH (FORMAT csv);
+2024-04-06 11:43:24.464 PDT [29095] ERROR:  invalid input syntax for type integer: "1|36901|O|173665.47|1996-01-02|5-LOW|Clerk#000000951|0|nstructions sleep furiously among "
+2024-04-06 11:43:24.464 PDT [29095] CONTEXT:  COPY orders, line 1, column o_orderkey: "1|36901|O|173665.47|1996-01-02|5-LOW|Clerk#000000951|0|nstructions sleep furiously among "
+2024-04-06 11:43:24.464 PDT [29095] STATEMENT:  COPY orders FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/orders.csv' WITH (FORMAT csv);
+2024-04-06 11:43:24.469 PDT [29095] ERROR:  invalid input syntax for type integer: "1|155190|7706|1|17|21168.23|0.04|0.02|N|O|1996-03-13|1996-02-12|1996-03-22|DELIVER IN PERSON|TRUCK|egular courts above the"
+2024-04-06 11:43:24.469 PDT [29095] CONTEXT:  COPY lineitem, line 1, column l_orderkey: "1|155190|7706|1|17|21168.23|0.04|0.02|N|O|1996-03-13|1996-02-12|1996-03-22|DELIVER IN PERSON|TRUCK|e..."
+2024-04-06 11:43:24.469 PDT [29095] STATEMENT:  COPY lineitem FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/lineitem.csv' WITH (FORMAT csv);
+2024-04-06 11:44:53.213 PDT [29140] ERROR:  could not open file "/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.tbl" for reading: No such file or directory
+2024-04-06 11:44:53.213 PDT [29140] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 11:44:53.213 PDT [29140] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.tbl' CSV HEADER DELIMITER '|';
+2024-04-06 11:47:20.041 PDT [15172] LOG:  checkpoint starting: immediate force wait
+2024-04-06 11:47:20.076 PDT [15172] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 1 recycled; write=0.004 s, sync=0.009 s, total=0.036 s; sync files=4, longest=0.006 s, average=0.003 s; distance=4163 kB, estimate=4163 kB; lsn=0/40FC5E8, redo lsn=0/40FC5B0
+2024-04-06 11:47:31.388 PDT [15172] LOG:  checkpoints are occurring too frequently (11 seconds apart)
+2024-04-06 11:47:31.388 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 11:47:31.388 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 11:47:48.252 PDT [15172] LOG:  checkpoint complete: wrote 11195 buffers (68.3%); 0 WAL file(s) added, 0 removed, 33 recycled; write=16.151 s, sync=0.556 s, total=16.865 s; sync files=274, longest=0.193 s, average=0.003 s; distance=540098 kB, estimate=540098 kB; lsn=0/432B12B0, redo lsn=0/2506D1A0
+2024-04-06 11:47:49.772 PDT [15172] LOG:  checkpoints are occurring too frequently (18 seconds apart)
+2024-04-06 11:47:49.772 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 11:47:49.772 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 11:48:08.513 PDT [15172] LOG:  checkpoint complete: wrote 7740 buffers (47.2%); 0 WAL file(s) added, 0 removed, 33 recycled; write=18.354 s, sync=0.233 s, total=18.741 s; sync files=23, longest=0.202 s, average=0.011 s; distance=540330 kB, estimate=540330 kB; lsn=0/63DD1AB0, redo lsn=0/46017CB8
+2024-04-06 11:48:10.232 PDT [15172] LOG:  checkpoints are occurring too frequently (21 seconds apart)
+2024-04-06 11:48:10.232 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 11:48:10.232 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 11:52:40.329 PDT [15172] LOG:  checkpoint complete: wrote 7722 buffers (47.1%); 0 WAL file(s) added, 0 removed, 33 recycled; write=269.809 s, sync=0.069 s, total=270.097 s; sync files=17, longest=0.034 s, average=0.005 s; distance=540590 kB, estimate=540590 kB; lsn=0/6B693128, redo lsn=0/670035D8
+2024-04-06 12:01:15.879 PDT [15172] LOG:  checkpoint starting: immediate force wait
+2024-04-06 12:01:15.910 PDT [15172] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 4 recycled; write=0.003 s, sync=0.003 s, total=0.032 s; sync files=2, longest=0.002 s, average=0.002 s; distance=72256 kB, estimate=493756 kB; lsn=0/6B6938D0, redo lsn=0/6B693898
+2024-04-06 12:01:26.191 PDT [15172] LOG:  checkpoints are occurring too frequently (11 seconds apart)
+2024-04-06 12:01:26.191 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 12:01:26.191 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:01:42.893 PDT [15172] LOG:  checkpoint complete: wrote 11177 buffers (68.2%); 0 WAL file(s) added, 0 removed, 33 recycled; write=16.036 s, sync=0.517 s, total=16.702 s; sync files=274, longest=0.286 s, average=0.002 s; distance=535228 kB, estimate=535228 kB; lsn=0/AAB08150, redo lsn=0/8C142BF8
+2024-04-06 12:01:43.879 PDT [15172] LOG:  checkpoints are occurring too frequently (17 seconds apart)
+2024-04-06 12:01:43.879 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 12:01:43.879 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:01:58.815 PDT [15172] LOG:  checkpoint complete: wrote 7752 buffers (47.3%); 0 WAL file(s) added, 0 removed, 33 recycled; write=13.829 s, sync=0.956 s, total=14.937 s; sync files=11, longest=0.824 s, average=0.087 s; distance=540637 kB, estimate=540637 kB; lsn=0/CBC21430, redo lsn=0/AD13A3C8
+2024-04-06 12:01:59.909 PDT [15172] LOG:  checkpoints are occurring too frequently (16 seconds apart)
+2024-04-06 12:01:59.909 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 12:01:59.909 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:02:01.806 PDT [32976] ERROR:  database "ssb2" does not exist
+2024-04-06 12:02:01.806 PDT [32976] STATEMENT:  DROP DATABASE ssb2;
+2024-04-06 12:02:01.881 PDT [32980] ERROR:  syntax error at or near "USE" at character 1
+2024-04-06 12:02:01.881 PDT [32980] STATEMENT:  USE ssb2;
+2024-04-06 12:02:01.914 PDT [32982] ERROR:  relation "ssb.supplier" does not exist at character 13
+2024-04-06 12:02:01.914 PDT [32982] STATEMENT:  insert into ssb.SUPPLIER
+	select
+	s.S_SUPPKEY,
+	s.S_NAME,
+	s.S_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	s.S_PHONE,
+	s.S_ACCTBAL,
+	s.S_COMMENT
+	from tpch.SUPPLIER as s inner join tpch.NATION as n on s.S_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:02:01.915 PDT [32982] ERROR:  relation "ssb.customer" does not exist at character 13
+2024-04-06 12:02:01.915 PDT [32982] STATEMENT:  insert into ssb.CUSTOMER
+	select
+	c.C_CUSTKEY,
+	c.C_NAME,
+	c.C_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	c.C_PHONE,
+	c.C_ACCTBAL,
+	c.C_MKTSEGMENT
+	from tpch.CUSTOMER as c inner join tpch.NATION as n on c.C_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:02:01.915 PDT [32982] ERROR:  relation "ssb.part" does not exist at character 13
+2024-04-06 12:02:01.915 PDT [32982] STATEMENT:  insert into ssb.PART
+	select
+	p.P_PARTKEY,
+	p.P_NAME,
+	p.P_MFGR,
+	p.P_BRAND,
+	p.P_TYPE,
+	p.P_SIZE,
+	p.P_CONTAINER,
+	p.P_RETAILPRICE,
+	ps.PS_SUPPKEY,
+	ps.PS_AVAILQTY,
+	ps.PS_SUPPLYCOST
+	from tpch.PART p inner join tpch.PARTSUPP ps on p.P_PARTKEY = ps.PS_PARTKEY;
+2024-04-06 12:02:01.915 PDT [32982] ERROR:  relation "ssb.lineorder" does not exist at character 13
+2024-04-06 12:02:01.915 PDT [32982] STATEMENT:  insert into ssb.LINEORDER
+	select
+	l.L_ORDERKEY,
+	l.L_PARTKEY,
+	l.L_SUPPKEY,
+	l.L_LINENUMBER,
+	l.L_QUANTITY,
+	l.L_EXTENDEDPRICE,
+	l.L_DISCOUNT,
+	l.L_TAX,
+	l.L_RETURNFLAG,
+	l.L_LINESTATUS,
+	l.L_SHIPDATE,
+	l.L_COMMITDATE,
+	l.L_RECEIPTDATE,
+	l.L_SHIPINSTRUCT,
+	l.L_SHIPMODE,
+	o.O_CUSTKEY,
+	o.O_ORDERSTATUS,
+	o.O_TOTALPRICE,
+	o.O_ORDERDATE,
+	o.O_ORDERPRIORITY,
+	o.O_CLERK,
+	o.O_SHIPPRIORITY,
+	o.O_COMMENT
+	from tpch.LINEITEM l inner join tpch.ORDERS o on l.L_ORDERKEY = o.O_ORDERKEY;
+2024-04-06 12:02:47.386 PDT [33029] FATAL:  terminating autovacuum process due to administrator command
+2024-04-06 12:02:47.386 PDT [33029] CONTEXT:  while scanning block 1033 of relation "public.lineitem"
+2024-04-06 12:02:47.641 PDT [15172] LOG:  checkpoint complete: wrote 88 buffers (0.5%); 0 WAL file(s) added, 0 removed, 33 recycled; write=47.574 s, sync=0.004 s, total=47.733 s; sync files=3, longest=0.003 s, average=0.002 s; distance=541900 kB, estimate=541900 kB; lsn=0/D2910738, redo lsn=0/CE26D668
+2024-04-06 12:02:47.641 PDT [15172] LOG:  checkpoint starting: immediate force wait
+2024-04-06 12:02:48.065 PDT [15172] LOG:  checkpoint complete: wrote 908 buffers (5.5%); 0 WAL file(s) added, 0 removed, 4 recycled; write=0.107 s, sync=0.293 s, total=0.424 s; sync files=249, longest=0.022 s, average=0.002 s; distance=72332 kB, estimate=494943 kB; lsn=0/D29107E8, redo lsn=0/D29107B0
+2024-04-06 12:02:59.233 PDT [15172] LOG:  checkpoints are occurring too frequently (12 seconds apart)
+2024-04-06 12:02:59.233 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 12:02:59.233 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:03:13.114 PDT [15172] LOG:  checkpoint complete: wrote 11185 buffers (68.3%); 0 WAL file(s) added, 0 removed, 33 recycled; write=13.398 s, sync=0.366 s, total=13.882 s; sync files=272, longest=0.158 s, average=0.002 s; distance=535489 kB, estimate=535489 kB; lsn=1/11B095D8, redo lsn=0/F3400C50
+2024-04-06 12:03:14.055 PDT [15172] LOG:  checkpoints are occurring too frequently (15 seconds apart)
+2024-04-06 12:03:14.055 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 12:03:14.055 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:03:27.866 PDT [15172] LOG:  checkpoint complete: wrote 7720 buffers (47.1%); 0 WAL file(s) added, 1 removed, 32 recycled; write=12.889 s, sync=0.786 s, total=13.812 s; sync files=3, longest=0.688 s, average=0.262 s; distance=539546 kB, estimate=539546 kB; lsn=1/33400A48, redo lsn=1/142E76D0
+2024-04-06 12:03:28.581 PDT [15172] LOG:  checkpoints are occurring too frequently (14 seconds apart)
+2024-04-06 12:03:28.581 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 12:03:28.581 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:03:30.823 PDT [15172] LOG:  checkpoint complete: wrote 7731 buffers (47.2%); 0 WAL file(s) added, 0 removed, 33 recycled; write=1.891 s, sync=0.264 s, total=2.242 s; sync files=3, longest=0.242 s, average=0.088 s; distance=540157 kB, estimate=540157 kB; lsn=1/39460F38, redo lsn=1/35266DA8
+2024-04-06 12:03:30.823 PDT [15172] LOG:  checkpoint starting: immediate force wait
+2024-04-06 12:03:30.868 PDT [15172] LOG:  checkpoint complete: wrote 2872 buffers (17.5%); 0 WAL file(s) added, 0 removed, 4 recycled; write=0.021 s, sync=0.008 s, total=0.046 s; sync files=5, longest=0.005 s, average=0.002 s; distance=67560 kB, estimate=492897 kB; lsn=1/39460FE8, redo lsn=1/39460FB0
+2024-04-06 12:03:30.981 PDT [33313] ERROR:  relation "ssb.supplier" does not exist at character 13
+2024-04-06 12:03:30.981 PDT [33313] STATEMENT:  insert into ssb.SUPPLIER
+	select
+	s.S_SUPPKEY,
+	s.S_NAME,
+	s.S_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	s.S_PHONE,
+	s.S_ACCTBAL,
+	s.S_COMMENT
+	from tpch.SUPPLIER as s inner join tpch.NATION as n on s.S_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:03:30.981 PDT [33313] ERROR:  relation "ssb.customer" does not exist at character 13
+2024-04-06 12:03:30.981 PDT [33313] STATEMENT:  insert into ssb.CUSTOMER
+	select
+	c.C_CUSTKEY,
+	c.C_NAME,
+	c.C_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	c.C_PHONE,
+	c.C_ACCTBAL,
+	c.C_MKTSEGMENT
+	from tpch.CUSTOMER as c inner join tpch.NATION as n on c.C_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:03:30.981 PDT [33313] ERROR:  relation "ssb.part" does not exist at character 13
+2024-04-06 12:03:30.981 PDT [33313] STATEMENT:  insert into ssb.PART
+	select
+	p.P_PARTKEY,
+	p.P_NAME,
+	p.P_MFGR,
+	p.P_BRAND,
+	p.P_TYPE,
+	p.P_SIZE,
+	p.P_CONTAINER,
+	p.P_RETAILPRICE,
+	ps.PS_SUPPKEY,
+	ps.PS_AVAILQTY,
+	ps.PS_SUPPLYCOST
+	from tpch.PART p inner join tpch.PARTSUPP ps on p.P_PARTKEY = ps.PS_PARTKEY;
+2024-04-06 12:03:30.981 PDT [33313] ERROR:  relation "ssb.lineorder" does not exist at character 13
+2024-04-06 12:03:30.981 PDT [33313] STATEMENT:  insert into ssb.LINEORDER
+	select
+	l.L_ORDERKEY,
+	l.L_PARTKEY,
+	l.L_SUPPKEY,
+	l.L_LINENUMBER,
+	l.L_QUANTITY,
+	l.L_EXTENDEDPRICE,
+	l.L_DISCOUNT,
+	l.L_TAX,
+	l.L_RETURNFLAG,
+	l.L_LINESTATUS,
+	l.L_SHIPDATE,
+	l.L_COMMITDATE,
+	l.L_RECEIPTDATE,
+	l.L_SHIPINSTRUCT,
+	l.L_SHIPMODE,
+	o.O_CUSTKEY,
+	o.O_ORDERSTATUS,
+	o.O_TOTALPRICE,
+	o.O_ORDERDATE,
+	o.O_ORDERPRIORITY,
+	o.O_CLERK,
+	o.O_SHIPPRIORITY,
+	o.O_COMMENT
+	from tpch.LINEITEM l inner join tpch.ORDERS o on l.L_ORDERKEY = o.O_ORDERKEY;
+2024-04-06 12:04:06.796 PDT [33345] FATAL:  terminating autovacuum process due to administrator command
+2024-04-06 12:04:06.796 PDT [33345] CONTEXT:  while scanning block 23029 of relation "public.orders"
+2024-04-06 12:04:06.899 PDT [15172] LOG:  checkpoint starting: immediate force wait
+2024-04-06 12:04:07.316 PDT [15172] LOG:  checkpoint complete: wrote 908 buffers (5.5%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.133 s, sync=0.258 s, total=0.418 s; sync files=249, longest=0.021 s, average=0.002 s; distance=6975 kB, estimate=444305 kB; lsn=1/39B30EB0, redo lsn=1/39B30E78
+2024-04-06 12:04:19.972 PDT [15172] LOG:  checkpoints are occurring too frequently (13 seconds apart)
+2024-04-06 12:04:19.972 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 12:04:19.980 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:04:33.942 PDT [15172] LOG:  checkpoint complete: wrote 10270 buffers (62.7%); 0 WAL file(s) added, 1 removed, 32 recycled; write=12.977 s, sync=0.844 s, total=13.971 s; sync files=276, longest=0.336 s, average=0.004 s; distance=533308 kB, estimate=533308 kB; lsn=1/79930C78, redo lsn=1/5A400098
+2024-04-06 12:04:34.433 PDT [15172] LOG:  checkpoints are occurring too frequently (15 seconds apart)
+2024-04-06 12:04:34.433 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 12:04:34.435 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:04:48.060 PDT [15172] LOG:  checkpoint complete: wrote 7678 buffers (46.9%); 0 WAL file(s) added, 1 removed, 32 recycled; write=12.803 s, sync=0.648 s, total=13.628 s; sync files=22, longest=0.514 s, average=0.030 s; distance=537278 kB, estimate=537278 kB; lsn=1/9A3496B0, redo lsn=1/7B0AFB60
+2024-04-06 12:04:48.793 PDT [15172] LOG:  checkpoints are occurring too frequently (14 seconds apart)
+2024-04-06 12:04:48.793 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 12:04:48.793 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:04:50.957 PDT [15172] LOG:  checkpoint complete: wrote 7790 buffers (47.5%); 0 WAL file(s) added, 0 removed, 33 recycled; write=1.941 s, sync=0.146 s, total=2.164 s; sync files=14, longest=0.124 s, average=0.011 s; distance=543738 kB, estimate=543738 kB; lsn=1/A0933358, redo lsn=1/9C3AE4F8
+2024-04-06 12:04:50.957 PDT [15172] LOG:  checkpoint starting: immediate force wait
+2024-04-06 12:04:51.005 PDT [15172] LOG:  checkpoint complete: wrote 3061 buffers (18.7%); 0 WAL file(s) added, 0 removed, 4 recycled; write=0.027 s, sync=0.007 s, total=0.049 s; sync files=5, longest=0.003 s, average=0.002 s; distance=71187 kB, estimate=496483 kB; lsn=1/A0933408, redo lsn=1/A09333D0
+2024-04-06 12:04:51.115 PDT [33610] ERROR:  relation "ssb2.supplier" does not exist at character 13
+2024-04-06 12:04:51.115 PDT [33610] STATEMENT:  insert into ssb2.SUPPLIER
+	select
+	s.S_SUPPKEY,
+	s.S_NAME,
+	s.S_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	s.S_PHONE,
+	s.S_ACCTBAL,
+	s.S_COMMENT
+	from tpch.SUPPLIER as s inner join tpch.NATION as n on s.S_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:04:51.115 PDT [33610] ERROR:  relation "ssb2.customer" does not exist at character 13
+2024-04-06 12:04:51.115 PDT [33610] STATEMENT:  insert into ssb2.CUSTOMER
+	select
+	c.C_CUSTKEY,
+	c.C_NAME,
+	c.C_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	c.C_PHONE,
+	c.C_ACCTBAL,
+	c.C_MKTSEGMENT
+	from tpch.CUSTOMER as c inner join tpch.NATION as n on c.C_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:04:51.115 PDT [33610] ERROR:  relation "ssb2.part" does not exist at character 13
+2024-04-06 12:04:51.115 PDT [33610] STATEMENT:  insert into ssb2.PART
+	select
+	p.P_PARTKEY,
+	p.P_NAME,
+	p.P_MFGR,
+	p.P_BRAND,
+	p.P_TYPE,
+	p.P_SIZE,
+	p.P_CONTAINER,
+	p.P_RETAILPRICE,
+	ps.PS_SUPPKEY,
+	ps.PS_AVAILQTY,
+	ps.PS_SUPPLYCOST
+	from tpch.PART p inner join tpch.PARTSUPP ps on p.P_PARTKEY = ps.PS_PARTKEY;
+2024-04-06 12:04:51.115 PDT [33610] ERROR:  relation "ssb2.lineorder" does not exist at character 13
+2024-04-06 12:04:51.115 PDT [33610] STATEMENT:  insert into ssb2.LINEORDER
+	select
+	l.L_ORDERKEY,
+	l.L_PARTKEY,
+	l.L_SUPPKEY,
+	l.L_LINENUMBER,
+	l.L_QUANTITY,
+	l.L_EXTENDEDPRICE,
+	l.L_DISCOUNT,
+	l.L_TAX,
+	l.L_RETURNFLAG,
+	l.L_LINESTATUS,
+	l.L_SHIPDATE,
+	l.L_COMMITDATE,
+	l.L_RECEIPTDATE,
+	l.L_SHIPINSTRUCT,
+	l.L_SHIPMODE,
+	o.O_CUSTKEY,
+	o.O_ORDERSTATUS,
+	o.O_TOTALPRICE,
+	o.O_ORDERDATE,
+	o.O_ORDERPRIORITY,
+	o.O_CLERK,
+	o.O_SHIPPRIORITY,
+	o.O_COMMENT
+	from tpch.LINEITEM l inner join tpch.ORDERS o on l.L_ORDERKEY = o.O_ORDERKEY;
+2024-04-06 12:07:26.284 PDT [34032] ERROR:  relation "ssb2.supplier" does not exist at character 13
+2024-04-06 12:07:26.284 PDT [34032] STATEMENT:  insert into ssb2.SUPPLIER
+	select
+	s.S_SUPPKEY,
+	s.S_NAME,
+	s.S_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	s.S_PHONE,
+	s.S_ACCTBAL,
+	s.S_COMMENT
+	from tpch.SUPPLIER as s inner join tpch.NATION as n on s.S_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:07:46.581 PDT [34032] ERROR:  relation "tpch.supplier" does not exist at character 126
+2024-04-06 12:07:46.581 PDT [34032] STATEMENT:  insert into SUPPLIER
+	select
+	s.S_SUPPKEY,
+	s.S_NAME,
+	s.S_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	s.S_PHONE,
+	s.S_ACCTBAL,
+	s.S_COMMENT
+	from tpch.SUPPLIER as s inner join tpch.NATION as n on s.S_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:07:57.446 PDT [34032] ERROR:  relation "tpch.supplier" does not exist at character 15
+2024-04-06 12:07:57.446 PDT [34032] STATEMENT:  select * from tpch.supplier
+	;
+2024-04-06 12:08:00.750 PDT [34032] ERROR:  syntax error at or near "use" at character 1
+2024-04-06 12:08:00.750 PDT [34032] STATEMENT:  use tpch;
+2024-04-06 12:09:50.958 PDT [15172] LOG:  checkpoint starting: time
+2024-04-06 12:14:20.274 PDT [15172] LOG:  checkpoint complete: wrote 2969 buffers (18.1%); 0 WAL file(s) added, 1 removed, 0 recycled; write=269.121 s, sync=0.181 s, total=269.317 s; sync files=257, longest=0.006 s, average=0.001 s; distance=11245 kB, estimate=447959 kB; lsn=1/A142EAA0, redo lsn=1/A142EA68
+2024-04-06 12:14:23.393 PDT [35637] ERROR:  relation "ssb2.part" does not exist at character 22
+2024-04-06 12:14:23.393 PDT [35637] STATEMENT:  select count(*) from ssb2.part;
+2024-04-06 12:14:30.921 PDT [35637] ERROR:  cross-database references are not implemented: "postgres.ssb2.part" at character 22
+2024-04-06 12:14:30.921 PDT [35637] STATEMENT:  select count(*) from postgres.ssb2.part;
+2024-04-06 12:14:54.300 PDT [35637] ERROR:  cross-database references are not implemented: "ssb2.public.part" at character 22
+2024-04-06 12:14:54.300 PDT [35637] STATEMENT:  select count(*) from ssb2.public.part;
+2024-04-06 12:16:07.853 PDT [15172] LOG:  checkpoint starting: immediate force wait
+2024-04-06 12:16:07.865 PDT [15172] LOG:  checkpoint complete: wrote 1 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.002 s, total=0.012 s; sync files=1, longest=0.002 s, average=0.002 s; distance=2 kB, estimate=403163 kB; lsn=1/A142F5E8, redo lsn=1/A142F5B0
+2024-04-06 12:16:15.155 PDT [15172] LOG:  checkpoint starting: immediate force wait
+2024-04-06 12:16:15.173 PDT [15172] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.004 s, sync=0.004 s, total=0.019 s; sync files=2, longest=0.003 s, average=0.002 s; distance=2 kB, estimate=362847 kB; lsn=1/A14301C8, redo lsn=1/A1430190
+2024-04-06 12:16:53.463 PDT [36299] FATAL:  database "tpch" does not exist
+2024-04-06 12:17:20.742 PDT [36227] ERROR:  missing FROM-clause entry for table "tpch" at character 8
+2024-04-06 12:17:20.742 PDT [36227] STATEMENT:  select tpch.t1;
+2024-04-06 12:18:06.173 PDT [36602] FATAL:  database "vboxuser" does not exist
+2024-04-06 12:18:11.529 PDT [36604] ERROR:  syntax error at or near "use" at character 1
+2024-04-06 12:18:11.529 PDT [36604] STATEMENT:  use tpch;
+2024-04-06 12:20:05.205 PDT [36604] ERROR:  syntax error at or near "set" at character 19
+2024-04-06 12:20:05.205 PDT [36604] STATEMENT:  SET SCHEMA 'TPCH'
+	set schem 'ssb2'
+	set schema 'ssb2'
+	set schema 'tpch'
+	create table tpch.t1 (a int);
+2024-04-06 12:20:10.109 PDT [36604] ERROR:  relation "t1" already exists
+2024-04-06 12:20:10.109 PDT [36604] STATEMENT:  create table tpch.t1 (a int);
+2024-04-06 12:21:15.250 PDT [15172] LOG:  checkpoint starting: time
+2024-04-06 12:21:18.205 PDT [15172] LOG:  checkpoint complete: wrote 30 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.927 s, sync=0.021 s, total=2.956 s; sync files=24, longest=0.006 s, average=0.001 s; distance=108 kB, estimate=326573 kB; lsn=1/A144B310, redo lsn=1/A144B2D8
+2024-04-06 12:22:34.448 PDT [36604] ERROR:  relation "t1" does not exist at character 15
+2024-04-06 12:22:34.448 PDT [36604] STATEMENT:  select * from t1;
+2024-04-06 12:22:39.168 PDT [36604] ERROR:  syntax error at or near "tpch" at character 12
+2024-04-06 12:22:39.168 PDT [36604] STATEMENT:  set schema tpch
+	;
+2024-04-06 12:25:04.084 PDT [38024] ERROR:  cannot drop schema tpch because other objects depend on it
+2024-04-06 12:25:04.084 PDT [38024] DETAIL:  table tpch.t1 depends on schema tpch
+2024-04-06 12:25:04.084 PDT [38024] HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2024-04-06 12:25:04.084 PDT [38024] STATEMENT:  DROP schema tpch;
+2024-04-06 12:25:04.091 PDT [38026] ERROR:  schema "tpch" already exists
+2024-04-06 12:25:04.091 PDT [38026] STATEMENT:  create schema tpch;
+2024-04-06 12:25:04.095 PDT [38028] FATAL:  database "tpch" does not exist
+2024-04-06 12:25:04.102 PDT [38030] FATAL:  database "tpch" does not exist
+2024-04-06 12:25:04.123 PDT [38036] FATAL:  database "ssb2" does not exist
+2024-04-06 12:25:04.128 PDT [38038] FATAL:  database "ssb2" does not exist
+2024-04-06 12:25:44.316 PDT [38300] ERROR:  cannot drop schema tpch because other objects depend on it
+2024-04-06 12:25:44.316 PDT [38300] DETAIL:  table tpch.t1 depends on schema tpch
+2024-04-06 12:25:44.316 PDT [38300] HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2024-04-06 12:25:44.316 PDT [38300] STATEMENT:  DROP schema tpch;
+2024-04-06 12:25:44.322 PDT [38302] ERROR:  schema "tpch" already exists
+2024-04-06 12:25:44.322 PDT [38302] STATEMENT:  create schema tpch;
+2024-04-06 12:25:44.329 PDT [38304] ERROR:  syntax error at or near "CREATE" at character 19
+2024-04-06 12:25:44.329 PDT [38304] STATEMENT:  SET schema 'tpch'
+	CREATE TABLE NATION  ( N_NATIONKEY  INTEGER NOT NULL,
+	                            N_NAME       CHAR(25) NOT NULL,
+	                            N_REGIONKEY  INTEGER NOT NULL,
+	                            N_COMMENT    VARCHAR(152),
+	PRIMARY KEY (N_NATIONKEY));
+2024-04-06 12:25:44.383 PDT [38306] ERROR:  relation "nation" does not exist
+2024-04-06 12:25:44.383 PDT [38306] STATEMENT:  truncate table nation;
+2024-04-06 12:25:44.383 PDT [38306] ERROR:  relation "nation" does not exist
+2024-04-06 12:25:44.383 PDT [38306] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:25:54.173 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:26:06.284 PDT [38306] ERROR:  canceling statement due to user request
+2024-04-06 12:26:06.284 PDT [38306] CONTEXT:  COPY lineitem, line 2426314: "2426407|34819|2329|3|31|54368.11|0.07|0.00|A|F|1995-01-14|1995-01-20|1995-02-02|COLLECT COD|FOB|ely ..."
+2024-04-06 12:26:06.284 PDT [38306] STATEMENT:  COPY lineitem FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/lineitem.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:26:06.310 PDT [38326] ERROR:  syntax error at or near "ssb2" at character 12
+2024-04-06 12:26:06.310 PDT [38326] STATEMENT:  SET schema ssb2
+	CREATE TABLE LINEORDER
+	(
+	LO_ORDERKEY INTEGER NOT NULL,    
+	LO_PARTKEY INTEGER NOT NULL,    
+	LO_SUPPKEY INTEGER NOT NULL,    
+	LO_LINENUMBER INTEGER NOT NULL,    
+	LO_QUANTITY INTEGER NOT NULL,    
+	LO_EXTENDEDPRICE DECIMAL(15,2) NOT NULL,    
+	LO_DISCOUNT DECIMAL(15,2) NOT NULL,    
+	LO_TAX DECIMAL(15,2) NOT NULL,    
+	LO_RETURNFLAG CHAR(1) NOT NULL,
+	LO_LINESTATUS CHAR(1) NOT NULL,
+	LO_SHIPDATE DATE NOT NULL,  
+	LO_COMMITDATE DATE NOT NULL,  
+	LO_RECEIPTDATE DATE NOT NULL,  
+	LO_SHIPINSTRUCT VARCHAR(25) NOT NULL,
+	LO_SHIPMODE VARCHAR(10) NOT NULL,
+	LO_CUSTKEY INTEGER NOT NULL,    
+	LO_ORDERSTATUS VARCHAR(1) NOT NULL,
+	LO_TOTALPRICE DECIMAL(15,2) NOT NULL,    
+	LO_ORDERDATE DATE NOT NULL,  
+	LO_ORDERPRIORITY VARCHAR(15) NOT NULL,
+	LO_CLERK VARCHAR(15) NOT NULL,
+	LO_SHIPPRIORITY INTEGER NOT NULL,    
+	LO_COMMENT VARCHAR(79) NOT NULL,
+	PRIMARY KEY ( LO_ORDERKEY,LO_LINENUMBER ));
+2024-04-06 12:26:06.310 PDT [38326] ERROR:  relation "part" already exists
+2024-04-06 12:26:06.310 PDT [38326] STATEMENT:  CREATE TABLE PART
+	(
+	P_PARTKEY INTEGER NOT NULL,    
+	P_NAME VARCHAR(55) NOT NULL,
+	P_MFGR VARCHAR(25) NOT NULL,
+	P_BRAND VARCHAR(10) NOT NULL,
+	P_TYPE VARCHAR(25) NOT NULL,
+	P_SIZE INTEGER NOT NULL,    
+	P_CONTAINER VARCHAR(10) NOT NULL,
+	P_RETAILPRICE DECIMAL(15,2) NOT NULL,
+	P_SUPPKEY INTEGER NOT NULL,
+	P_AVAILQTY INTEGER NOT NULL,
+	P_SUPPLYCOST DECIMAL(15,2) NOT NULL,
+	PRIMARY KEY ( P_PARTKEY,P_SUPPKEY ));
+2024-04-06 12:26:06.311 PDT [38326] ERROR:  relation "customer" already exists
+2024-04-06 12:26:06.311 PDT [38326] STATEMENT:  CREATE TABLE CUSTOMER
+	(
+	C_CUSTKEY INTEGER NOT NULL,    
+	C_NAME VARCHAR(25) NOT NULL,
+	C_ADDRESS VARCHAR(40) NOT NULL,
+	C_NATION VARCHAR(25) NOT NULL,
+	C_REGION VARCHAR(25) NOT NULL,
+	C_PHONE VARCHAR(15) NOT NULL,
+	C_ACCTBAL DECIMAL(15,2) NOT NULL,    
+	C_MKTSEGMENT VARCHAR(10) NOT NULL,
+	PRIMARY KEY ( C_CUSTKEY ));
+2024-04-06 12:26:06.311 PDT [38326] ERROR:  relation "supplier" already exists
+2024-04-06 12:26:06.311 PDT [38326] STATEMENT:  CREATE TABLE SUPPLIER
+	(
+	S_SUPPKEY INTEGER NOT NULL,    
+	S_NAME VARCHAR(25) NOT NULL,
+	S_ADDRESS VARCHAR(40) NOT NULL,
+	S_NATION VARCHAR(25) NOT NULL,
+	S_REGION VARCHAR(25) NOT NULL,
+	S_PHONE VARCHAR(15) NOT NULL,
+	S_ACCTBAL DECIMAL(15,2) NOT NULL,
+	S_COMMENT VARCHAR(101) NOT NULL, 
+	PRIMARY KEY ( S_SUPPKEY ));
+2024-04-06 12:26:06.318 PDT [38328] ERROR:  syntax error at or near "insert" at character 19
+2024-04-06 12:26:06.318 PDT [38328] STATEMENT:  SET schema 'ssb2'
+	insert into ssb2.SUPPLIER
+	select
+	s.S_SUPPKEY,
+	s.S_NAME,
+	s.S_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	s.S_PHONE,
+	s.S_ACCTBAL,
+	s.S_COMMENT
+	from tpch.SUPPLIER as s inner join tpch.NATION as n on s.S_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:26:06.319 PDT [38328] ERROR:  relation "ssb2.customer" does not exist at character 13
+2024-04-06 12:26:06.319 PDT [38328] STATEMENT:  insert into ssb2.CUSTOMER
+	select
+	c.C_CUSTKEY,
+	c.C_NAME,
+	c.C_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	c.C_PHONE,
+	c.C_ACCTBAL,
+	c.C_MKTSEGMENT
+	from tpch.CUSTOMER as c inner join tpch.NATION as n on c.C_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:26:06.319 PDT [38328] ERROR:  relation "ssb2.part" does not exist at character 13
+2024-04-06 12:26:06.319 PDT [38328] STATEMENT:  insert into ssb2.PART
+	select
+	p.P_PARTKEY,
+	p.P_NAME,
+	p.P_MFGR,
+	p.P_BRAND,
+	p.P_TYPE,
+	p.P_SIZE,
+	p.P_CONTAINER,
+	p.P_RETAILPRICE,
+	ps.PS_SUPPKEY,
+	ps.PS_AVAILQTY,
+	ps.PS_SUPPLYCOST
+	from tpch.PART p inner join tpch.PARTSUPP ps on p.P_PARTKEY = ps.PS_PARTKEY;
+2024-04-06 12:26:06.319 PDT [38328] ERROR:  relation "ssb2.lineorder" does not exist at character 13
+2024-04-06 12:26:06.319 PDT [38328] STATEMENT:  insert into ssb2.LINEORDER
+	select
+	l.L_ORDERKEY,
+	l.L_PARTKEY,
+	l.L_SUPPKEY,
+	l.L_LINENUMBER,
+	l.L_QUANTITY,
+	l.L_EXTENDEDPRICE,
+	l.L_DISCOUNT,
+	l.L_TAX,
+	l.L_RETURNFLAG,
+	l.L_LINESTATUS,
+	l.L_SHIPDATE,
+	l.L_COMMITDATE,
+	l.L_RECEIPTDATE,
+	l.L_SHIPINSTRUCT,
+	l.L_SHIPMODE,
+	o.O_CUSTKEY,
+	o.O_ORDERSTATUS,
+	o.O_TOTALPRICE,
+	o.O_ORDERDATE,
+	o.O_ORDERPRIORITY,
+	o.O_CLERK,
+	o.O_SHIPPRIORITY,
+	o.O_COMMENT
+	from tpch.LINEITEM l inner join tpch.ORDERS o on l.L_ORDERKEY = o.O_ORDERKEY;
+2024-04-06 12:26:41.186 PDT [38405] ERROR:  syntax error at or near "CREATE" at character 19
+2024-04-06 12:26:41.186 PDT [38405] STATEMENT:  SET schema 'tpch'
+	CREATE TABLE NATION  ( N_NATIONKEY  INTEGER NOT NULL,
+	                            N_NAME       CHAR(25) NOT NULL,
+	                            N_REGIONKEY  INTEGER NOT NULL,
+	                            N_COMMENT    VARCHAR(152),
+	PRIMARY KEY (N_NATIONKEY));
+2024-04-06 12:26:41.187 PDT [38405] ERROR:  relation "region" already exists
+2024-04-06 12:26:41.187 PDT [38405] STATEMENT:  CREATE TABLE REGION  ( R_REGIONKEY  INTEGER NOT NULL,
+	                            R_NAME       CHAR(25) NOT NULL,
+	                            R_COMMENT    VARCHAR(152),
+	PRIMARY KEY (R_REGIONKEY));
+2024-04-06 12:26:41.187 PDT [38405] ERROR:  relation "part" already exists
+2024-04-06 12:26:41.187 PDT [38405] STATEMENT:  CREATE TABLE PART  ( P_PARTKEY     INTEGER NOT NULL,
+	                          P_NAME        VARCHAR(55) NOT NULL,
+	                          P_MFGR        CHAR(25) NOT NULL,
+	                          P_BRAND       CHAR(10) NOT NULL,
+	                          P_TYPE        VARCHAR(25) NOT NULL,
+	                          P_SIZE        INTEGER NOT NULL,
+	                          P_CONTAINER   CHAR(10) NOT NULL,
+	                          P_RETAILPRICE DECIMAL(15,2) NOT NULL,
+	                          P_COMMENT     VARCHAR(23) NOT NULL,
+	PRIMARY KEY (P_PARTKEY));
+2024-04-06 12:26:41.188 PDT [38405] ERROR:  relation "supplier" already exists
+2024-04-06 12:26:41.188 PDT [38405] STATEMENT:  CREATE TABLE SUPPLIER ( S_SUPPKEY     INTEGER NOT NULL,
+	                             S_NAME        CHAR(25) NOT NULL,
+	                             S_ADDRESS     VARCHAR(40) NOT NULL,
+	                             S_NATIONKEY   INTEGER NOT NULL,
+	                             S_PHONE       CHAR(15) NOT NULL,
+	                             S_ACCTBAL     DECIMAL(15,2) NOT NULL,
+	                             S_COMMENT     VARCHAR(101) NOT NULL,
+	PRIMARY KEY (S_SUPPKEY));
+2024-04-06 12:26:41.188 PDT [38405] ERROR:  relation "partsupp" already exists
+2024-04-06 12:26:41.188 PDT [38405] STATEMENT:  CREATE TABLE PARTSUPP ( PS_PARTKEY     INTEGER NOT NULL,
+	                             PS_SUPPKEY     INTEGER NOT NULL,
+	                             PS_AVAILQTY    INTEGER NOT NULL,
+	                             PS_SUPPLYCOST  DECIMAL(15,2)  NOT NULL,
+	                             PS_COMMENT     VARCHAR(199) NOT NULL,
+	PRIMARY KEY (PS_PARTKEY,PS_SUPPKEY));
+2024-04-06 12:26:41.188 PDT [38405] ERROR:  relation "customer" already exists
+2024-04-06 12:26:41.188 PDT [38405] STATEMENT:  CREATE TABLE CUSTOMER ( C_CUSTKEY     INTEGER NOT NULL,
+	                             C_NAME        VARCHAR(25) NOT NULL,
+	                             C_ADDRESS     VARCHAR(40) NOT NULL,
+	                             C_NATIONKEY   INTEGER NOT NULL,
+	                             C_PHONE       CHAR(15) NOT NULL,
+	                             C_ACCTBAL     DECIMAL(15,2)   NOT NULL,
+	                             C_MKTSEGMENT  CHAR(10) NOT NULL,
+	                             C_COMMENT     VARCHAR(117) NOT NULL,
+	PRIMARY KEY (C_CUSTKEY));
+2024-04-06 12:26:41.189 PDT [38405] ERROR:  relation "orders" already exists
+2024-04-06 12:26:41.189 PDT [38405] STATEMENT:  CREATE TABLE ORDERS  ( O_ORDERKEY       INTEGER NOT NULL,
+	                           O_CUSTKEY        INTEGER NOT NULL,
+	                           O_ORDERSTATUS    CHAR(1) NOT NULL,
+	                           O_TOTALPRICE     DECIMAL(15,2) NOT NULL,
+	                           O_ORDERDATE      DATE NOT NULL,
+	                           O_ORDERPRIORITY  CHAR(15) NOT NULL,  
+	                           O_CLERK          CHAR(15) NOT NULL, 
+	                           O_SHIPPRIORITY   INTEGER NOT NULL,
+	                           O_COMMENT        VARCHAR(79) NOT NULL,
+	PRIMARY KEY (O_ORDERKEY));
+2024-04-06 12:26:41.189 PDT [38405] ERROR:  relation "lineitem" already exists
+2024-04-06 12:26:41.189 PDT [38405] STATEMENT:  CREATE TABLE LINEITEM ( L_ORDERKEY    INTEGER NOT NULL,
+	                             L_PARTKEY     INTEGER NOT NULL,
+	                             L_SUPPKEY     INTEGER NOT NULL,
+	                             L_LINENUMBER  INTEGER NOT NULL,
+	                             L_QUANTITY    DECIMAL(15,2) NOT NULL,
+	                             L_EXTENDEDPRICE  DECIMAL(15,2) NOT NULL,
+	                             L_DISCOUNT    DECIMAL(15,2) NOT NULL,
+	                             L_TAX         DECIMAL(15,2) NOT NULL,
+	                             L_RETURNFLAG  CHAR(1) NOT NULL,
+	                             L_LINESTATUS  CHAR(1) NOT NULL,
+	                             L_SHIPDATE    DATE NOT NULL,
+	                             L_COMMITDATE  DATE NOT NULL,
+	                             L_RECEIPTDATE DATE NOT NULL,
+	                             L_SHIPINSTRUCT CHAR(25) NOT NULL,
+	                             L_SHIPMODE     CHAR(10) NOT NULL,
+	                             L_COMMENT      VARCHAR(44) NOT NULL,
+	PRIMARY KEY (L_ORDERKEY,L_LINENUMBER));
+2024-04-06 12:26:41.195 PDT [38407] ERROR:  relation "nation" does not exist
+2024-04-06 12:26:41.195 PDT [38407] STATEMENT:  truncate table nation;
+2024-04-06 12:26:41.195 PDT [38407] ERROR:  relation "nation" does not exist
+2024-04-06 12:26:41.195 PDT [38407] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:26:42.211 PDT [15172] LOG:  checkpoint complete: wrote 11979 buffers (73.1%); 0 WAL file(s) added, 0 removed, 33 recycled; write=47.657 s, sync=0.201 s, total=48.039 s; sync files=62, longest=0.110 s, average=0.004 s; distance=538227 kB, estimate=538227 kB; lsn=1/E0400278, redo lsn=1/C21E8028
+2024-04-06 12:26:43.161 PDT [38392] ERROR:  canceling autovacuum task
+2024-04-06 12:26:43.161 PDT [38392] CONTEXT:  while scanning block 15667 of relation "public.partsupp"
+	automatic vacuum of table "postgres.public.partsupp"
+2024-04-06 12:26:43.924 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:26:44.043 PDT [38407] ERROR:  canceling statement due to user request
+2024-04-06 12:26:44.043 PDT [38407] CONTEXT:  COPY partsupp, line 244374: "61094|3601|4193|936.51|s sleep carefully doggedly ironic theodolites. attainments nag slyly. final, ..."
+2024-04-06 12:26:44.043 PDT [38407] STATEMENT:  COPY partsupp FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/partsupp.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:26:44.070 PDT [38415] ERROR:  syntax error at or near "ssb2" at character 12
+2024-04-06 12:26:44.070 PDT [38415] STATEMENT:  SET schema ssb2
+	CREATE TABLE LINEORDER
+	(
+	LO_ORDERKEY INTEGER NOT NULL,    
+	LO_PARTKEY INTEGER NOT NULL,    
+	LO_SUPPKEY INTEGER NOT NULL,    
+	LO_LINENUMBER INTEGER NOT NULL,    
+	LO_QUANTITY INTEGER NOT NULL,    
+	LO_EXTENDEDPRICE DECIMAL(15,2) NOT NULL,    
+	LO_DISCOUNT DECIMAL(15,2) NOT NULL,    
+	LO_TAX DECIMAL(15,2) NOT NULL,    
+	LO_RETURNFLAG CHAR(1) NOT NULL,
+	LO_LINESTATUS CHAR(1) NOT NULL,
+	LO_SHIPDATE DATE NOT NULL,  
+	LO_COMMITDATE DATE NOT NULL,  
+	LO_RECEIPTDATE DATE NOT NULL,  
+	LO_SHIPINSTRUCT VARCHAR(25) NOT NULL,
+	LO_SHIPMODE VARCHAR(10) NOT NULL,
+	LO_CUSTKEY INTEGER NOT NULL,    
+	LO_ORDERSTATUS VARCHAR(1) NOT NULL,
+	LO_TOTALPRICE DECIMAL(15,2) NOT NULL,    
+	LO_ORDERDATE DATE NOT NULL,  
+	LO_ORDERPRIORITY VARCHAR(15) NOT NULL,
+	LO_CLERK VARCHAR(15) NOT NULL,
+	LO_SHIPPRIORITY INTEGER NOT NULL,    
+	LO_COMMENT VARCHAR(79) NOT NULL,
+	PRIMARY KEY ( LO_ORDERKEY,LO_LINENUMBER ));
+2024-04-06 12:26:44.071 PDT [38415] ERROR:  relation "part" already exists
+2024-04-06 12:26:44.071 PDT [38415] STATEMENT:  CREATE TABLE PART
+	(
+	P_PARTKEY INTEGER NOT NULL,    
+	P_NAME VARCHAR(55) NOT NULL,
+	P_MFGR VARCHAR(25) NOT NULL,
+	P_BRAND VARCHAR(10) NOT NULL,
+	P_TYPE VARCHAR(25) NOT NULL,
+	P_SIZE INTEGER NOT NULL,    
+	P_CONTAINER VARCHAR(10) NOT NULL,
+	P_RETAILPRICE DECIMAL(15,2) NOT NULL,
+	P_SUPPKEY INTEGER NOT NULL,
+	P_AVAILQTY INTEGER NOT NULL,
+	P_SUPPLYCOST DECIMAL(15,2) NOT NULL,
+	PRIMARY KEY ( P_PARTKEY,P_SUPPKEY ));
+2024-04-06 12:26:44.072 PDT [38415] ERROR:  relation "customer" already exists
+2024-04-06 12:26:44.072 PDT [38415] STATEMENT:  CREATE TABLE CUSTOMER
+	(
+	C_CUSTKEY INTEGER NOT NULL,    
+	C_NAME VARCHAR(25) NOT NULL,
+	C_ADDRESS VARCHAR(40) NOT NULL,
+	C_NATION VARCHAR(25) NOT NULL,
+	C_REGION VARCHAR(25) NOT NULL,
+	C_PHONE VARCHAR(15) NOT NULL,
+	C_ACCTBAL DECIMAL(15,2) NOT NULL,    
+	C_MKTSEGMENT VARCHAR(10) NOT NULL,
+	PRIMARY KEY ( C_CUSTKEY ));
+2024-04-06 12:26:44.072 PDT [38415] ERROR:  relation "supplier" already exists
+2024-04-06 12:26:44.072 PDT [38415] STATEMENT:  CREATE TABLE SUPPLIER
+	(
+	S_SUPPKEY INTEGER NOT NULL,    
+	S_NAME VARCHAR(25) NOT NULL,
+	S_ADDRESS VARCHAR(40) NOT NULL,
+	S_NATION VARCHAR(25) NOT NULL,
+	S_REGION VARCHAR(25) NOT NULL,
+	S_PHONE VARCHAR(15) NOT NULL,
+	S_ACCTBAL DECIMAL(15,2) NOT NULL,
+	S_COMMENT VARCHAR(101) NOT NULL, 
+	PRIMARY KEY ( S_SUPPKEY ));
+2024-04-06 12:26:44.079 PDT [38417] ERROR:  syntax error at or near "insert" at character 19
+2024-04-06 12:26:44.079 PDT [38417] STATEMENT:  SET schema 'ssb2'
+	insert into ssb2.SUPPLIER
+	select
+	s.S_SUPPKEY,
+	s.S_NAME,
+	s.S_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	s.S_PHONE,
+	s.S_ACCTBAL,
+	s.S_COMMENT
+	from tpch.SUPPLIER as s inner join tpch.NATION as n on s.S_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:26:44.079 PDT [38417] ERROR:  relation "ssb2.customer" does not exist at character 13
+2024-04-06 12:26:44.079 PDT [38417] STATEMENT:  insert into ssb2.CUSTOMER
+	select
+	c.C_CUSTKEY,
+	c.C_NAME,
+	c.C_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	c.C_PHONE,
+	c.C_ACCTBAL,
+	c.C_MKTSEGMENT
+	from tpch.CUSTOMER as c inner join tpch.NATION as n on c.C_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:26:44.082 PDT [38417] ERROR:  relation "ssb2.part" does not exist at character 13
+2024-04-06 12:26:44.082 PDT [38417] STATEMENT:  insert into ssb2.PART
+	select
+	p.P_PARTKEY,
+	p.P_NAME,
+	p.P_MFGR,
+	p.P_BRAND,
+	p.P_TYPE,
+	p.P_SIZE,
+	p.P_CONTAINER,
+	p.P_RETAILPRICE,
+	ps.PS_SUPPKEY,
+	ps.PS_AVAILQTY,
+	ps.PS_SUPPLYCOST
+	from tpch.PART p inner join tpch.PARTSUPP ps on p.P_PARTKEY = ps.PS_PARTKEY;
+2024-04-06 12:26:44.083 PDT [38417] ERROR:  relation "ssb2.lineorder" does not exist at character 13
+2024-04-06 12:26:44.083 PDT [38417] STATEMENT:  insert into ssb2.LINEORDER
+	select
+	l.L_ORDERKEY,
+	l.L_PARTKEY,
+	l.L_SUPPKEY,
+	l.L_LINENUMBER,
+	l.L_QUANTITY,
+	l.L_EXTENDEDPRICE,
+	l.L_DISCOUNT,
+	l.L_TAX,
+	l.L_RETURNFLAG,
+	l.L_LINESTATUS,
+	l.L_SHIPDATE,
+	l.L_COMMITDATE,
+	l.L_RECEIPTDATE,
+	l.L_SHIPINSTRUCT,
+	l.L_SHIPMODE,
+	o.O_CUSTKEY,
+	o.O_ORDERSTATUS,
+	o.O_TOTALPRICE,
+	o.O_ORDERDATE,
+	o.O_ORDERPRIORITY,
+	o.O_CLERK,
+	o.O_SHIPPRIORITY,
+	o.O_COMMENT
+	from tpch.LINEITEM l inner join tpch.ORDERS o on l.L_ORDERKEY = o.O_ORDERKEY;
+2024-04-06 12:28:49.299 PDT [38992] ERROR:  relation "nation" does not exist
+2024-04-06 12:28:49.299 PDT [38992] STATEMENT:  truncate table nation;
+2024-04-06 12:28:49.299 PDT [38992] ERROR:  relation "nation" does not exist
+2024-04-06 12:28:49.299 PDT [38992] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:28:49.299 PDT [38992] ERROR:  relation "region" does not exist
+2024-04-06 12:28:49.299 PDT [38992] STATEMENT:  truncate table region;
+2024-04-06 12:28:49.299 PDT [38992] ERROR:  relation "region" does not exist
+2024-04-06 12:28:49.299 PDT [38992] STATEMENT:  COPY region FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/region.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:28:49.299 PDT [38992] ERROR:  relation "part" does not exist
+2024-04-06 12:28:49.299 PDT [38992] STATEMENT:  truncate table part;
+2024-04-06 12:28:49.299 PDT [38992] ERROR:  relation "part" does not exist
+2024-04-06 12:28:49.299 PDT [38992] STATEMENT:  COPY part FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/part.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:28:49.299 PDT [38992] ERROR:  relation "supplier" does not exist
+2024-04-06 12:28:49.299 PDT [38992] STATEMENT:  truncate table supplier;
+2024-04-06 12:28:49.300 PDT [38992] ERROR:  relation "supplier" does not exist
+2024-04-06 12:28:49.300 PDT [38992] STATEMENT:  COPY supplier FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/supplier.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:28:49.300 PDT [38992] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:28:49.300 PDT [38992] STATEMENT:  truncate table partsupp;
+2024-04-06 12:28:49.300 PDT [38992] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:28:49.300 PDT [38992] STATEMENT:  COPY partsupp FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/partsupp.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:28:49.300 PDT [38992] ERROR:  relation "customer" does not exist
+2024-04-06 12:28:49.300 PDT [38992] STATEMENT:  truncate table customer;
+2024-04-06 12:28:49.300 PDT [38992] ERROR:  relation "customer" does not exist
+2024-04-06 12:28:49.300 PDT [38992] STATEMENT:  COPY customer FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/customer.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:28:49.300 PDT [38992] ERROR:  relation "orders" does not exist
+2024-04-06 12:28:49.300 PDT [38992] STATEMENT:  truncate table orders;
+2024-04-06 12:28:49.301 PDT [38992] ERROR:  relation "orders" does not exist
+2024-04-06 12:28:49.301 PDT [38992] STATEMENT:  COPY orders FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/orders.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:28:49.301 PDT [38992] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:28:49.301 PDT [38992] STATEMENT:  truncate table lineitem;
+2024-04-06 12:28:49.301 PDT [38992] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:28:49.301 PDT [38992] STATEMENT:  COPY lineitem FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/lineitem.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:28:49.326 PDT [38998] ERROR:  syntax error at or near "ssb2" at character 12
+2024-04-06 12:28:49.326 PDT [38998] STATEMENT:  SET schema ssb2
+	CREATE TABLE LINEORDER
+	(
+	LO_ORDERKEY INTEGER NOT NULL,    
+	LO_PARTKEY INTEGER NOT NULL,    
+	LO_SUPPKEY INTEGER NOT NULL,    
+	LO_LINENUMBER INTEGER NOT NULL,    
+	LO_QUANTITY INTEGER NOT NULL,    
+	LO_EXTENDEDPRICE DECIMAL(15,2) NOT NULL,    
+	LO_DISCOUNT DECIMAL(15,2) NOT NULL,    
+	LO_TAX DECIMAL(15,2) NOT NULL,    
+	LO_RETURNFLAG CHAR(1) NOT NULL,
+	LO_LINESTATUS CHAR(1) NOT NULL,
+	LO_SHIPDATE DATE NOT NULL,  
+	LO_COMMITDATE DATE NOT NULL,  
+	LO_RECEIPTDATE DATE NOT NULL,  
+	LO_SHIPINSTRUCT VARCHAR(25) NOT NULL,
+	LO_SHIPMODE VARCHAR(10) NOT NULL,
+	LO_CUSTKEY INTEGER NOT NULL,    
+	LO_ORDERSTATUS VARCHAR(1) NOT NULL,
+	LO_TOTALPRICE DECIMAL(15,2) NOT NULL,    
+	LO_ORDERDATE DATE NOT NULL,  
+	LO_ORDERPRIORITY VARCHAR(15) NOT NULL,
+	LO_CLERK VARCHAR(15) NOT NULL,
+	LO_SHIPPRIORITY INTEGER NOT NULL,    
+	LO_COMMENT VARCHAR(79) NOT NULL,
+	PRIMARY KEY ( LO_ORDERKEY,LO_LINENUMBER ));
+2024-04-06 12:28:49.371 PDT [39000] ERROR:  syntax error at or near "insert" at character 19
+2024-04-06 12:28:49.371 PDT [39000] STATEMENT:  SET schema 'ssb2'
+	insert into ssb2.SUPPLIER
+	select
+	s.S_SUPPKEY,
+	s.S_NAME,
+	s.S_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	s.S_PHONE,
+	s.S_ACCTBAL,
+	s.S_COMMENT
+	from tpch.SUPPLIER as s inner join tpch.NATION as n on s.S_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:28:49.371 PDT [39000] ERROR:  relation "ssb2.customer" does not exist at character 13
+2024-04-06 12:28:49.371 PDT [39000] STATEMENT:  insert into ssb2.CUSTOMER
+	select
+	c.C_CUSTKEY,
+	c.C_NAME,
+	c.C_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	c.C_PHONE,
+	c.C_ACCTBAL,
+	c.C_MKTSEGMENT
+	from tpch.CUSTOMER as c inner join tpch.NATION as n on c.C_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:28:49.371 PDT [39000] ERROR:  relation "ssb2.part" does not exist at character 13
+2024-04-06 12:28:49.371 PDT [39000] STATEMENT:  insert into ssb2.PART
+	select
+	p.P_PARTKEY,
+	p.P_NAME,
+	p.P_MFGR,
+	p.P_BRAND,
+	p.P_TYPE,
+	p.P_SIZE,
+	p.P_CONTAINER,
+	p.P_RETAILPRICE,
+	ps.PS_SUPPKEY,
+	ps.PS_AVAILQTY,
+	ps.PS_SUPPLYCOST
+	from tpch.PART p inner join tpch.PARTSUPP ps on p.P_PARTKEY = ps.PS_PARTKEY;
+2024-04-06 12:28:49.371 PDT [39000] ERROR:  relation "ssb2.lineorder" does not exist at character 13
+2024-04-06 12:28:49.371 PDT [39000] STATEMENT:  insert into ssb2.LINEORDER
+	select
+	l.L_ORDERKEY,
+	l.L_PARTKEY,
+	l.L_SUPPKEY,
+	l.L_LINENUMBER,
+	l.L_QUANTITY,
+	l.L_EXTENDEDPRICE,
+	l.L_DISCOUNT,
+	l.L_TAX,
+	l.L_RETURNFLAG,
+	l.L_LINESTATUS,
+	l.L_SHIPDATE,
+	l.L_COMMITDATE,
+	l.L_RECEIPTDATE,
+	l.L_SHIPINSTRUCT,
+	l.L_SHIPMODE,
+	o.O_CUSTKEY,
+	o.O_ORDERSTATUS,
+	o.O_TOTALPRICE,
+	o.O_ORDERDATE,
+	o.O_ORDERPRIORITY,
+	o.O_CLERK,
+	o.O_SHIPPRIORITY,
+	o.O_COMMENT
+	from tpch.LINEITEM l inner join tpch.ORDERS o on l.L_ORDERKEY = o.O_ORDERKEY;
+2024-04-06 12:30:11.741 PDT [39309] ERROR:  relation "nation" does not exist
+2024-04-06 12:30:11.741 PDT [39309] STATEMENT:  truncate table nation;
+2024-04-06 12:30:11.741 PDT [39309] ERROR:  relation "nation" does not exist
+2024-04-06 12:30:11.741 PDT [39309] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:30:11.741 PDT [39309] ERROR:  relation "region" does not exist
+2024-04-06 12:30:11.741 PDT [39309] STATEMENT:  truncate table region;
+2024-04-06 12:30:11.742 PDT [39309] ERROR:  relation "region" does not exist
+2024-04-06 12:30:11.742 PDT [39309] STATEMENT:  COPY region FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/region.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:30:11.746 PDT [39309] ERROR:  invalid input syntax for type integer: "lar accounts amo"
+2024-04-06 12:30:11.746 PDT [39309] CONTEXT:  COPY part, line 2, column p_suppkey: "lar accounts amo"
+2024-04-06 12:30:11.746 PDT [39309] STATEMENT:  COPY part FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/part.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:30:11.751 PDT [39309] ERROR:  invalid input syntax for type numeric: " slyly bold instructions. idle dependen"
+2024-04-06 12:30:11.751 PDT [39309] CONTEXT:  COPY supplier, line 2, column s_acctbal: " slyly bold instructions. idle dependen"
+2024-04-06 12:30:11.751 PDT [39309] STATEMENT:  COPY supplier FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/supplier.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:30:11.751 PDT [39309] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:30:11.751 PDT [39309] STATEMENT:  truncate table partsupp;
+2024-04-06 12:30:11.751 PDT [39309] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:30:11.751 PDT [39309] STATEMENT:  COPY partsupp FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/partsupp.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:30:11.755 PDT [39309] ERROR:  invalid input syntax for type numeric: "AUTOMOBILE"
+2024-04-06 12:30:11.755 PDT [39309] CONTEXT:  COPY customer, line 2, column c_acctbal: "AUTOMOBILE"
+2024-04-06 12:30:11.755 PDT [39309] STATEMENT:  COPY customer FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/customer.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:30:11.755 PDT [39309] ERROR:  relation "orders" does not exist
+2024-04-06 12:30:11.755 PDT [39309] STATEMENT:  truncate table orders;
+2024-04-06 12:30:11.755 PDT [39309] ERROR:  relation "orders" does not exist
+2024-04-06 12:30:11.755 PDT [39309] STATEMENT:  COPY orders FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/orders.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:30:11.755 PDT [39309] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:30:11.755 PDT [39309] STATEMENT:  truncate table lineitem;
+2024-04-06 12:30:11.755 PDT [39309] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:30:11.755 PDT [39309] STATEMENT:  COPY lineitem FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/lineitem.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:30:11.777 PDT [39315] ERROR:  syntax error at or near "ssb2" at character 12
+2024-04-06 12:30:11.777 PDT [39315] STATEMENT:  SET schema ssb2
+	CREATE TABLE LINEORDER
+	(
+	LO_ORDERKEY INTEGER NOT NULL,    
+	LO_PARTKEY INTEGER NOT NULL,    
+	LO_SUPPKEY INTEGER NOT NULL,    
+	LO_LINENUMBER INTEGER NOT NULL,    
+	LO_QUANTITY INTEGER NOT NULL,    
+	LO_EXTENDEDPRICE DECIMAL(15,2) NOT NULL,    
+	LO_DISCOUNT DECIMAL(15,2) NOT NULL,    
+	LO_TAX DECIMAL(15,2) NOT NULL,    
+	LO_RETURNFLAG CHAR(1) NOT NULL,
+	LO_LINESTATUS CHAR(1) NOT NULL,
+	LO_SHIPDATE DATE NOT NULL,  
+	LO_COMMITDATE DATE NOT NULL,  
+	LO_RECEIPTDATE DATE NOT NULL,  
+	LO_SHIPINSTRUCT VARCHAR(25) NOT NULL,
+	LO_SHIPMODE VARCHAR(10) NOT NULL,
+	LO_CUSTKEY INTEGER NOT NULL,    
+	LO_ORDERSTATUS VARCHAR(1) NOT NULL,
+	LO_TOTALPRICE DECIMAL(15,2) NOT NULL,    
+	LO_ORDERDATE DATE NOT NULL,  
+	LO_ORDERPRIORITY VARCHAR(15) NOT NULL,
+	LO_CLERK VARCHAR(15) NOT NULL,
+	LO_SHIPPRIORITY INTEGER NOT NULL,    
+	LO_COMMENT VARCHAR(79) NOT NULL,
+	PRIMARY KEY ( LO_ORDERKEY,LO_LINENUMBER ));
+2024-04-06 12:30:11.777 PDT [39315] ERROR:  relation "part" already exists
+2024-04-06 12:30:11.777 PDT [39315] STATEMENT:  CREATE TABLE PART
+	(
+	P_PARTKEY INTEGER NOT NULL,    
+	P_NAME VARCHAR(55) NOT NULL,
+	P_MFGR VARCHAR(25) NOT NULL,
+	P_BRAND VARCHAR(10) NOT NULL,
+	P_TYPE VARCHAR(25) NOT NULL,
+	P_SIZE INTEGER NOT NULL,    
+	P_CONTAINER VARCHAR(10) NOT NULL,
+	P_RETAILPRICE DECIMAL(15,2) NOT NULL,
+	P_SUPPKEY INTEGER NOT NULL,
+	P_AVAILQTY INTEGER NOT NULL,
+	P_SUPPLYCOST DECIMAL(15,2) NOT NULL,
+	PRIMARY KEY ( P_PARTKEY,P_SUPPKEY ));
+2024-04-06 12:30:11.778 PDT [39315] ERROR:  relation "customer" already exists
+2024-04-06 12:30:11.778 PDT [39315] STATEMENT:  CREATE TABLE CUSTOMER
+	(
+	C_CUSTKEY INTEGER NOT NULL,    
+	C_NAME VARCHAR(25) NOT NULL,
+	C_ADDRESS VARCHAR(40) NOT NULL,
+	C_NATION VARCHAR(25) NOT NULL,
+	C_REGION VARCHAR(25) NOT NULL,
+	C_PHONE VARCHAR(15) NOT NULL,
+	C_ACCTBAL DECIMAL(15,2) NOT NULL,    
+	C_MKTSEGMENT VARCHAR(10) NOT NULL,
+	PRIMARY KEY ( C_CUSTKEY ));
+2024-04-06 12:30:11.778 PDT [39315] ERROR:  relation "supplier" already exists
+2024-04-06 12:30:11.778 PDT [39315] STATEMENT:  CREATE TABLE SUPPLIER
+	(
+	S_SUPPKEY INTEGER NOT NULL,    
+	S_NAME VARCHAR(25) NOT NULL,
+	S_ADDRESS VARCHAR(40) NOT NULL,
+	S_NATION VARCHAR(25) NOT NULL,
+	S_REGION VARCHAR(25) NOT NULL,
+	S_PHONE VARCHAR(15) NOT NULL,
+	S_ACCTBAL DECIMAL(15,2) NOT NULL,
+	S_COMMENT VARCHAR(101) NOT NULL, 
+	PRIMARY KEY ( S_SUPPKEY ));
+2024-04-06 12:30:11.784 PDT [39317] ERROR:  syntax error at or near "insert" at character 19
+2024-04-06 12:30:11.784 PDT [39317] STATEMENT:  SET schema 'ssb2'
+	insert into ssb2.SUPPLIER
+	select
+	s.S_SUPPKEY,
+	s.S_NAME,
+	s.S_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	s.S_PHONE,
+	s.S_ACCTBAL,
+	s.S_COMMENT
+	from tpch.SUPPLIER as s inner join tpch.NATION as n on s.S_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:30:11.785 PDT [39317] ERROR:  relation "ssb2.customer" does not exist at character 13
+2024-04-06 12:30:11.785 PDT [39317] STATEMENT:  insert into ssb2.CUSTOMER
+	select
+	c.C_CUSTKEY,
+	c.C_NAME,
+	c.C_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	c.C_PHONE,
+	c.C_ACCTBAL,
+	c.C_MKTSEGMENT
+	from tpch.CUSTOMER as c inner join tpch.NATION as n on c.C_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:30:11.785 PDT [39317] ERROR:  relation "ssb2.part" does not exist at character 13
+2024-04-06 12:30:11.785 PDT [39317] STATEMENT:  insert into ssb2.PART
+	select
+	p.P_PARTKEY,
+	p.P_NAME,
+	p.P_MFGR,
+	p.P_BRAND,
+	p.P_TYPE,
+	p.P_SIZE,
+	p.P_CONTAINER,
+	p.P_RETAILPRICE,
+	ps.PS_SUPPKEY,
+	ps.PS_AVAILQTY,
+	ps.PS_SUPPLYCOST
+	from tpch.PART p inner join tpch.PARTSUPP ps on p.P_PARTKEY = ps.PS_PARTKEY;
+2024-04-06 12:30:11.785 PDT [39317] ERROR:  relation "ssb2.lineorder" does not exist at character 13
+2024-04-06 12:30:11.785 PDT [39317] STATEMENT:  insert into ssb2.LINEORDER
+	select
+	l.L_ORDERKEY,
+	l.L_PARTKEY,
+	l.L_SUPPKEY,
+	l.L_LINENUMBER,
+	l.L_QUANTITY,
+	l.L_EXTENDEDPRICE,
+	l.L_DISCOUNT,
+	l.L_TAX,
+	l.L_RETURNFLAG,
+	l.L_LINESTATUS,
+	l.L_SHIPDATE,
+	l.L_COMMITDATE,
+	l.L_RECEIPTDATE,
+	l.L_SHIPINSTRUCT,
+	l.L_SHIPMODE,
+	o.O_CUSTKEY,
+	o.O_ORDERSTATUS,
+	o.O_TOTALPRICE,
+	o.O_ORDERDATE,
+	o.O_ORDERPRIORITY,
+	o.O_CLERK,
+	o.O_SHIPPRIORITY,
+	o.O_COMMENT
+	from tpch.LINEITEM l inner join tpch.ORDERS o on l.L_ORDERKEY = o.O_ORDERKEY;
+2024-04-06 12:30:41.801 PDT [39367] ERROR:  relation "nation" does not exist
+2024-04-06 12:30:41.801 PDT [39367] STATEMENT:  truncate table nation;
+2024-04-06 12:30:41.802 PDT [39367] ERROR:  relation "nation" does not exist
+2024-04-06 12:30:41.802 PDT [39367] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:30:41.802 PDT [39367] ERROR:  relation "region" does not exist
+2024-04-06 12:30:41.802 PDT [39367] STATEMENT:  truncate table region;
+2024-04-06 12:30:41.802 PDT [39367] ERROR:  relation "region" does not exist
+2024-04-06 12:30:41.802 PDT [39367] STATEMENT:  COPY region FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/region.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:30:41.809 PDT [39367] ERROR:  invalid input syntax for type integer: "lar accounts amo"
+2024-04-06 12:30:41.809 PDT [39367] CONTEXT:  COPY part, line 2, column p_suppkey: "lar accounts amo"
+2024-04-06 12:30:41.809 PDT [39367] STATEMENT:  COPY part FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/part.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:30:41.814 PDT [39367] ERROR:  invalid input syntax for type numeric: " slyly bold instructions. idle dependen"
+2024-04-06 12:30:41.814 PDT [39367] CONTEXT:  COPY supplier, line 2, column s_acctbal: " slyly bold instructions. idle dependen"
+2024-04-06 12:30:41.814 PDT [39367] STATEMENT:  COPY supplier FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/supplier.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:30:41.814 PDT [39367] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:30:41.814 PDT [39367] STATEMENT:  truncate table partsupp;
+2024-04-06 12:30:41.814 PDT [39367] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:30:41.814 PDT [39367] STATEMENT:  COPY partsupp FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/partsupp.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:30:41.818 PDT [39367] ERROR:  invalid input syntax for type numeric: "AUTOMOBILE"
+2024-04-06 12:30:41.818 PDT [39367] CONTEXT:  COPY customer, line 2, column c_acctbal: "AUTOMOBILE"
+2024-04-06 12:30:41.818 PDT [39367] STATEMENT:  COPY customer FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/customer.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:30:41.818 PDT [39367] ERROR:  relation "orders" does not exist
+2024-04-06 12:30:41.818 PDT [39367] STATEMENT:  truncate table orders;
+2024-04-06 12:30:41.818 PDT [39367] ERROR:  relation "orders" does not exist
+2024-04-06 12:30:41.818 PDT [39367] STATEMENT:  COPY orders FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/orders.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:30:41.818 PDT [39367] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:30:41.818 PDT [39367] STATEMENT:  truncate table lineitem;
+2024-04-06 12:30:41.819 PDT [39367] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:30:41.819 PDT [39367] STATEMENT:  COPY lineitem FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/lineitem.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:30:41.838 PDT [39373] ERROR:  syntax error at or near "ssb2" at character 12
+2024-04-06 12:30:41.838 PDT [39373] STATEMENT:  SET schema ssb2
+	CREATE TABLE LINEORDER
+	(
+	LO_ORDERKEY INTEGER NOT NULL,    
+	LO_PARTKEY INTEGER NOT NULL,    
+	LO_SUPPKEY INTEGER NOT NULL,    
+	LO_LINENUMBER INTEGER NOT NULL,    
+	LO_QUANTITY INTEGER NOT NULL,    
+	LO_EXTENDEDPRICE DECIMAL(15,2) NOT NULL,    
+	LO_DISCOUNT DECIMAL(15,2) NOT NULL,    
+	LO_TAX DECIMAL(15,2) NOT NULL,    
+	LO_RETURNFLAG CHAR(1) NOT NULL,
+	LO_LINESTATUS CHAR(1) NOT NULL,
+	LO_SHIPDATE DATE NOT NULL,  
+	LO_COMMITDATE DATE NOT NULL,  
+	LO_RECEIPTDATE DATE NOT NULL,  
+	LO_SHIPINSTRUCT VARCHAR(25) NOT NULL,
+	LO_SHIPMODE VARCHAR(10) NOT NULL,
+	LO_CUSTKEY INTEGER NOT NULL,    
+	LO_ORDERSTATUS VARCHAR(1) NOT NULL,
+	LO_TOTALPRICE DECIMAL(15,2) NOT NULL,    
+	LO_ORDERDATE DATE NOT NULL,  
+	LO_ORDERPRIORITY VARCHAR(15) NOT NULL,
+	LO_CLERK VARCHAR(15) NOT NULL,
+	LO_SHIPPRIORITY INTEGER NOT NULL,    
+	LO_COMMENT VARCHAR(79) NOT NULL,
+	PRIMARY KEY ( LO_ORDERKEY,LO_LINENUMBER ));
+2024-04-06 12:30:41.839 PDT [39373] ERROR:  relation "part" already exists
+2024-04-06 12:30:41.839 PDT [39373] STATEMENT:  CREATE TABLE PART
+	(
+	P_PARTKEY INTEGER NOT NULL,    
+	P_NAME VARCHAR(55) NOT NULL,
+	P_MFGR VARCHAR(25) NOT NULL,
+	P_BRAND VARCHAR(10) NOT NULL,
+	P_TYPE VARCHAR(25) NOT NULL,
+	P_SIZE INTEGER NOT NULL,    
+	P_CONTAINER VARCHAR(10) NOT NULL,
+	P_RETAILPRICE DECIMAL(15,2) NOT NULL,
+	P_SUPPKEY INTEGER NOT NULL,
+	P_AVAILQTY INTEGER NOT NULL,
+	P_SUPPLYCOST DECIMAL(15,2) NOT NULL,
+	PRIMARY KEY ( P_PARTKEY,P_SUPPKEY ));
+2024-04-06 12:30:41.839 PDT [39373] ERROR:  relation "customer" already exists
+2024-04-06 12:30:41.839 PDT [39373] STATEMENT:  CREATE TABLE CUSTOMER
+	(
+	C_CUSTKEY INTEGER NOT NULL,    
+	C_NAME VARCHAR(25) NOT NULL,
+	C_ADDRESS VARCHAR(40) NOT NULL,
+	C_NATION VARCHAR(25) NOT NULL,
+	C_REGION VARCHAR(25) NOT NULL,
+	C_PHONE VARCHAR(15) NOT NULL,
+	C_ACCTBAL DECIMAL(15,2) NOT NULL,    
+	C_MKTSEGMENT VARCHAR(10) NOT NULL,
+	PRIMARY KEY ( C_CUSTKEY ));
+2024-04-06 12:30:41.839 PDT [39373] ERROR:  relation "supplier" already exists
+2024-04-06 12:30:41.839 PDT [39373] STATEMENT:  CREATE TABLE SUPPLIER
+	(
+	S_SUPPKEY INTEGER NOT NULL,    
+	S_NAME VARCHAR(25) NOT NULL,
+	S_ADDRESS VARCHAR(40) NOT NULL,
+	S_NATION VARCHAR(25) NOT NULL,
+	S_REGION VARCHAR(25) NOT NULL,
+	S_PHONE VARCHAR(15) NOT NULL,
+	S_ACCTBAL DECIMAL(15,2) NOT NULL,
+	S_COMMENT VARCHAR(101) NOT NULL, 
+	PRIMARY KEY ( S_SUPPKEY ));
+2024-04-06 12:30:41.845 PDT [39375] ERROR:  syntax error at or near "insert" at character 19
+2024-04-06 12:30:41.845 PDT [39375] STATEMENT:  SET schema 'ssb2'
+	insert into ssb2.SUPPLIER
+	select
+	s.S_SUPPKEY,
+	s.S_NAME,
+	s.S_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	s.S_PHONE,
+	s.S_ACCTBAL,
+	s.S_COMMENT
+	from tpch.SUPPLIER as s inner join tpch.NATION as n on s.S_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:30:41.846 PDT [39375] ERROR:  relation "ssb2.customer" does not exist at character 13
+2024-04-06 12:30:41.846 PDT [39375] STATEMENT:  insert into ssb2.CUSTOMER
+	select
+	c.C_CUSTKEY,
+	c.C_NAME,
+	c.C_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	c.C_PHONE,
+	c.C_ACCTBAL,
+	c.C_MKTSEGMENT
+	from tpch.CUSTOMER as c inner join tpch.NATION as n on c.C_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:30:41.846 PDT [39375] ERROR:  relation "ssb2.part" does not exist at character 13
+2024-04-06 12:30:41.846 PDT [39375] STATEMENT:  insert into ssb2.PART
+	select
+	p.P_PARTKEY,
+	p.P_NAME,
+	p.P_MFGR,
+	p.P_BRAND,
+	p.P_TYPE,
+	p.P_SIZE,
+	p.P_CONTAINER,
+	p.P_RETAILPRICE,
+	ps.PS_SUPPKEY,
+	ps.PS_AVAILQTY,
+	ps.PS_SUPPLYCOST
+	from tpch.PART p inner join tpch.PARTSUPP ps on p.P_PARTKEY = ps.PS_PARTKEY;
+2024-04-06 12:30:41.847 PDT [39375] ERROR:  relation "ssb2.lineorder" does not exist at character 13
+2024-04-06 12:30:41.847 PDT [39375] STATEMENT:  insert into ssb2.LINEORDER
+	select
+	l.L_ORDERKEY,
+	l.L_PARTKEY,
+	l.L_SUPPKEY,
+	l.L_LINENUMBER,
+	l.L_QUANTITY,
+	l.L_EXTENDEDPRICE,
+	l.L_DISCOUNT,
+	l.L_TAX,
+	l.L_RETURNFLAG,
+	l.L_LINESTATUS,
+	l.L_SHIPDATE,
+	l.L_COMMITDATE,
+	l.L_RECEIPTDATE,
+	l.L_SHIPINSTRUCT,
+	l.L_SHIPMODE,
+	o.O_CUSTKEY,
+	o.O_ORDERSTATUS,
+	o.O_TOTALPRICE,
+	o.O_ORDERDATE,
+	o.O_ORDERPRIORITY,
+	o.O_CLERK,
+	o.O_SHIPPRIORITY,
+	o.O_COMMENT
+	from tpch.LINEITEM l inner join tpch.ORDERS o on l.L_ORDERKEY = o.O_ORDERKEY;
+2024-04-06 12:31:13.208 PDT [15172] LOG:  checkpoint complete: wrote 2613 buffers (15.9%); 0 WAL file(s) added, 0 removed, 33 recycled; write=269.156 s, sync=0.023 s, total=269.284 s; sync files=35, longest=0.003 s, average=0.001 s; distance=542836 kB, estimate=542836 kB; lsn=1/E91A1450, redo lsn=1/E3405200
+2024-04-06 12:31:22.847 PDT [39458] ERROR:  relation "nation" does not exist
+2024-04-06 12:31:22.847 PDT [39458] STATEMENT:  truncate table nation;
+2024-04-06 12:31:22.847 PDT [39458] ERROR:  relation "nation" does not exist
+2024-04-06 12:31:22.847 PDT [39458] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:31:22.847 PDT [39458] ERROR:  relation "region" does not exist
+2024-04-06 12:31:22.847 PDT [39458] STATEMENT:  truncate table region;
+2024-04-06 12:31:22.847 PDT [39458] ERROR:  relation "region" does not exist
+2024-04-06 12:31:22.847 PDT [39458] STATEMENT:  COPY region FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/region.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:31:22.851 PDT [39458] ERROR:  invalid input syntax for type integer: "lar accounts amo"
+2024-04-06 12:31:22.851 PDT [39458] CONTEXT:  COPY part, line 2, column p_suppkey: "lar accounts amo"
+2024-04-06 12:31:22.851 PDT [39458] STATEMENT:  COPY part FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/part.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:31:22.859 PDT [39458] ERROR:  invalid input syntax for type numeric: " slyly bold instructions. idle dependen"
+2024-04-06 12:31:22.859 PDT [39458] CONTEXT:  COPY supplier, line 2, column s_acctbal: " slyly bold instructions. idle dependen"
+2024-04-06 12:31:22.859 PDT [39458] STATEMENT:  COPY supplier FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/supplier.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:31:22.860 PDT [39458] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:31:22.860 PDT [39458] STATEMENT:  truncate table partsupp;
+2024-04-06 12:31:22.860 PDT [39458] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:31:22.860 PDT [39458] STATEMENT:  COPY partsupp FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/partsupp.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:31:22.864 PDT [39458] ERROR:  invalid input syntax for type numeric: "AUTOMOBILE"
+2024-04-06 12:31:22.864 PDT [39458] CONTEXT:  COPY customer, line 2, column c_acctbal: "AUTOMOBILE"
+2024-04-06 12:31:22.864 PDT [39458] STATEMENT:  COPY customer FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/customer.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:31:22.864 PDT [39458] ERROR:  relation "orders" does not exist
+2024-04-06 12:31:22.864 PDT [39458] STATEMENT:  truncate table orders;
+2024-04-06 12:31:22.864 PDT [39458] ERROR:  relation "orders" does not exist
+2024-04-06 12:31:22.864 PDT [39458] STATEMENT:  COPY orders FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/orders.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:31:22.864 PDT [39458] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:31:22.864 PDT [39458] STATEMENT:  truncate table lineitem;
+2024-04-06 12:31:22.864 PDT [39458] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:31:22.864 PDT [39458] STATEMENT:  COPY lineitem FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/lineitem.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:31:22.883 PDT [39464] ERROR:  syntax error at or near "ssb2" at character 12
+2024-04-06 12:31:22.883 PDT [39464] STATEMENT:  SET schema ssb2
+	CREATE TABLE LINEORDER
+	(
+	LO_ORDERKEY INTEGER NOT NULL,    
+	LO_PARTKEY INTEGER NOT NULL,    
+	LO_SUPPKEY INTEGER NOT NULL,    
+	LO_LINENUMBER INTEGER NOT NULL,    
+	LO_QUANTITY INTEGER NOT NULL,    
+	LO_EXTENDEDPRICE DECIMAL(15,2) NOT NULL,    
+	LO_DISCOUNT DECIMAL(15,2) NOT NULL,    
+	LO_TAX DECIMAL(15,2) NOT NULL,    
+	LO_RETURNFLAG CHAR(1) NOT NULL,
+	LO_LINESTATUS CHAR(1) NOT NULL,
+	LO_SHIPDATE DATE NOT NULL,  
+	LO_COMMITDATE DATE NOT NULL,  
+	LO_RECEIPTDATE DATE NOT NULL,  
+	LO_SHIPINSTRUCT VARCHAR(25) NOT NULL,
+	LO_SHIPMODE VARCHAR(10) NOT NULL,
+	LO_CUSTKEY INTEGER NOT NULL,    
+	LO_ORDERSTATUS VARCHAR(1) NOT NULL,
+	LO_TOTALPRICE DECIMAL(15,2) NOT NULL,    
+	LO_ORDERDATE DATE NOT NULL,  
+	LO_ORDERPRIORITY VARCHAR(15) NOT NULL,
+	LO_CLERK VARCHAR(15) NOT NULL,
+	LO_SHIPPRIORITY INTEGER NOT NULL,    
+	LO_COMMENT VARCHAR(79) NOT NULL,
+	PRIMARY KEY ( LO_ORDERKEY,LO_LINENUMBER ));
+2024-04-06 12:31:22.883 PDT [39464] ERROR:  relation "part" already exists
+2024-04-06 12:31:22.883 PDT [39464] STATEMENT:  CREATE TABLE PART
+	(
+	P_PARTKEY INTEGER NOT NULL,    
+	P_NAME VARCHAR(55) NOT NULL,
+	P_MFGR VARCHAR(25) NOT NULL,
+	P_BRAND VARCHAR(10) NOT NULL,
+	P_TYPE VARCHAR(25) NOT NULL,
+	P_SIZE INTEGER NOT NULL,    
+	P_CONTAINER VARCHAR(10) NOT NULL,
+	P_RETAILPRICE DECIMAL(15,2) NOT NULL,
+	P_SUPPKEY INTEGER NOT NULL,
+	P_AVAILQTY INTEGER NOT NULL,
+	P_SUPPLYCOST DECIMAL(15,2) NOT NULL,
+	PRIMARY KEY ( P_PARTKEY,P_SUPPKEY ));
+2024-04-06 12:31:22.883 PDT [39464] ERROR:  relation "customer" already exists
+2024-04-06 12:31:22.883 PDT [39464] STATEMENT:  CREATE TABLE CUSTOMER
+	(
+	C_CUSTKEY INTEGER NOT NULL,    
+	C_NAME VARCHAR(25) NOT NULL,
+	C_ADDRESS VARCHAR(40) NOT NULL,
+	C_NATION VARCHAR(25) NOT NULL,
+	C_REGION VARCHAR(25) NOT NULL,
+	C_PHONE VARCHAR(15) NOT NULL,
+	C_ACCTBAL DECIMAL(15,2) NOT NULL,    
+	C_MKTSEGMENT VARCHAR(10) NOT NULL,
+	PRIMARY KEY ( C_CUSTKEY ));
+2024-04-06 12:31:22.884 PDT [39464] ERROR:  relation "supplier" already exists
+2024-04-06 12:31:22.884 PDT [39464] STATEMENT:  CREATE TABLE SUPPLIER
+	(
+	S_SUPPKEY INTEGER NOT NULL,    
+	S_NAME VARCHAR(25) NOT NULL,
+	S_ADDRESS VARCHAR(40) NOT NULL,
+	S_NATION VARCHAR(25) NOT NULL,
+	S_REGION VARCHAR(25) NOT NULL,
+	S_PHONE VARCHAR(15) NOT NULL,
+	S_ACCTBAL DECIMAL(15,2) NOT NULL,
+	S_COMMENT VARCHAR(101) NOT NULL, 
+	PRIMARY KEY ( S_SUPPKEY ));
+2024-04-06 12:31:22.891 PDT [39466] ERROR:  syntax error at or near "insert" at character 19
+2024-04-06 12:31:22.891 PDT [39466] STATEMENT:  SET schema 'ssb2'
+	insert into ssb2.SUPPLIER
+	select
+	s.S_SUPPKEY,
+	s.S_NAME,
+	s.S_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	s.S_PHONE,
+	s.S_ACCTBAL,
+	s.S_COMMENT
+	from tpch.SUPPLIER as s inner join tpch.NATION as n on s.S_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:31:22.891 PDT [39466] ERROR:  relation "ssb2.customer" does not exist at character 13
+2024-04-06 12:31:22.891 PDT [39466] STATEMENT:  insert into ssb2.CUSTOMER
+	select
+	c.C_CUSTKEY,
+	c.C_NAME,
+	c.C_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	c.C_PHONE,
+	c.C_ACCTBAL,
+	c.C_MKTSEGMENT
+	from tpch.CUSTOMER as c inner join tpch.NATION as n on c.C_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:31:22.891 PDT [39466] ERROR:  relation "ssb2.part" does not exist at character 13
+2024-04-06 12:31:22.891 PDT [39466] STATEMENT:  insert into ssb2.PART
+	select
+	p.P_PARTKEY,
+	p.P_NAME,
+	p.P_MFGR,
+	p.P_BRAND,
+	p.P_TYPE,
+	p.P_SIZE,
+	p.P_CONTAINER,
+	p.P_RETAILPRICE,
+	ps.PS_SUPPKEY,
+	ps.PS_AVAILQTY,
+	ps.PS_SUPPLYCOST
+	from tpch.PART p inner join tpch.PARTSUPP ps on p.P_PARTKEY = ps.PS_PARTKEY;
+2024-04-06 12:31:22.891 PDT [39466] ERROR:  relation "ssb2.lineorder" does not exist at character 13
+2024-04-06 12:31:22.891 PDT [39466] STATEMENT:  insert into ssb2.LINEORDER
+	select
+	l.L_ORDERKEY,
+	l.L_PARTKEY,
+	l.L_SUPPKEY,
+	l.L_LINENUMBER,
+	l.L_QUANTITY,
+	l.L_EXTENDEDPRICE,
+	l.L_DISCOUNT,
+	l.L_TAX,
+	l.L_RETURNFLAG,
+	l.L_LINESTATUS,
+	l.L_SHIPDATE,
+	l.L_COMMITDATE,
+	l.L_RECEIPTDATE,
+	l.L_SHIPINSTRUCT,
+	l.L_SHIPMODE,
+	o.O_CUSTKEY,
+	o.O_ORDERSTATUS,
+	o.O_TOTALPRICE,
+	o.O_ORDERDATE,
+	o.O_ORDERPRIORITY,
+	o.O_CLERK,
+	o.O_SHIPPRIORITY,
+	o.O_COMMENT
+	from tpch.LINEITEM l inner join tpch.ORDERS o on l.L_ORDERKEY = o.O_ORDERKEY;
+2024-04-06 12:31:43.240 PDT [15172] LOG:  checkpoint starting: time
+2024-04-06 12:31:55.289 PDT [15172] LOG:  checkpoint complete: wrote 119 buffers (0.7%); 0 WAL file(s) added, 0 removed, 6 recycled; write=11.986 s, sync=0.027 s, total=12.050 s; sync files=40, longest=0.002 s, average=0.001 s; distance=96041 kB, estimate=498156 kB; lsn=1/E91DA828, redo lsn=1/E91CF860
+2024-04-06 12:32:36.907 PDT [39763] ERROR:  relation "nation" does not exist
+2024-04-06 12:32:36.907 PDT [39763] STATEMENT:  truncate table nation;
+2024-04-06 12:32:36.907 PDT [39763] ERROR:  relation "nation" does not exist
+2024-04-06 12:32:36.907 PDT [39763] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:32:36.907 PDT [39763] ERROR:  relation "region" does not exist
+2024-04-06 12:32:36.907 PDT [39763] STATEMENT:  truncate table region;
+2024-04-06 12:32:36.908 PDT [39763] ERROR:  relation "region" does not exist
+2024-04-06 12:32:36.908 PDT [39763] STATEMENT:  COPY region FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/region.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:32:36.908 PDT [39763] ERROR:  relation "part" does not exist
+2024-04-06 12:32:36.908 PDT [39763] STATEMENT:  truncate table part;
+2024-04-06 12:32:36.908 PDT [39763] ERROR:  relation "part" does not exist
+2024-04-06 12:32:36.908 PDT [39763] STATEMENT:  COPY part FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/part.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:32:36.908 PDT [39763] ERROR:  relation "supplier" does not exist
+2024-04-06 12:32:36.908 PDT [39763] STATEMENT:  truncate table supplier;
+2024-04-06 12:32:36.908 PDT [39763] ERROR:  relation "supplier" does not exist
+2024-04-06 12:32:36.908 PDT [39763] STATEMENT:  COPY supplier FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/supplier.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:32:36.908 PDT [39763] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:32:36.908 PDT [39763] STATEMENT:  truncate table partsupp;
+2024-04-06 12:32:36.908 PDT [39763] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:32:36.908 PDT [39763] STATEMENT:  COPY partsupp FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/partsupp.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:32:36.908 PDT [39763] ERROR:  relation "customer" does not exist
+2024-04-06 12:32:36.908 PDT [39763] STATEMENT:  truncate table customer;
+2024-04-06 12:32:36.908 PDT [39763] ERROR:  relation "customer" does not exist
+2024-04-06 12:32:36.908 PDT [39763] STATEMENT:  COPY customer FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/customer.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:32:36.909 PDT [39763] ERROR:  relation "orders" does not exist
+2024-04-06 12:32:36.909 PDT [39763] STATEMENT:  truncate table orders;
+2024-04-06 12:32:36.909 PDT [39763] ERROR:  relation "orders" does not exist
+2024-04-06 12:32:36.909 PDT [39763] STATEMENT:  COPY orders FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/orders.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:32:36.909 PDT [39763] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:32:36.909 PDT [39763] STATEMENT:  truncate table lineitem;
+2024-04-06 12:32:36.909 PDT [39763] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:32:36.909 PDT [39763] STATEMENT:  COPY lineitem FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/lineitem.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:32:36.929 PDT [39769] ERROR:  syntax error at or near "ssb2" at character 12
+2024-04-06 12:32:36.929 PDT [39769] STATEMENT:  SET schema ssb2
+	CREATE TABLE LINEORDER
+	(
+	LO_ORDERKEY INTEGER NOT NULL,    
+	LO_PARTKEY INTEGER NOT NULL,    
+	LO_SUPPKEY INTEGER NOT NULL,    
+	LO_LINENUMBER INTEGER NOT NULL,    
+	LO_QUANTITY INTEGER NOT NULL,    
+	LO_EXTENDEDPRICE DECIMAL(15,2) NOT NULL,    
+	LO_DISCOUNT DECIMAL(15,2) NOT NULL,    
+	LO_TAX DECIMAL(15,2) NOT NULL,    
+	LO_RETURNFLAG CHAR(1) NOT NULL,
+	LO_LINESTATUS CHAR(1) NOT NULL,
+	LO_SHIPDATE DATE NOT NULL,  
+	LO_COMMITDATE DATE NOT NULL,  
+	LO_RECEIPTDATE DATE NOT NULL,  
+	LO_SHIPINSTRUCT VARCHAR(25) NOT NULL,
+	LO_SHIPMODE VARCHAR(10) NOT NULL,
+	LO_CUSTKEY INTEGER NOT NULL,    
+	LO_ORDERSTATUS VARCHAR(1) NOT NULL,
+	LO_TOTALPRICE DECIMAL(15,2) NOT NULL,    
+	LO_ORDERDATE DATE NOT NULL,  
+	LO_ORDERPRIORITY VARCHAR(15) NOT NULL,
+	LO_CLERK VARCHAR(15) NOT NULL,
+	LO_SHIPPRIORITY INTEGER NOT NULL,    
+	LO_COMMENT VARCHAR(79) NOT NULL,
+	PRIMARY KEY ( LO_ORDERKEY,LO_LINENUMBER ));
+2024-04-06 12:32:36.956 PDT [39771] ERROR:  syntax error at or near "insert" at character 19
+2024-04-06 12:32:36.956 PDT [39771] STATEMENT:  SET schema 'ssb2'
+	insert into ssb2.SUPPLIER
+	select
+	s.S_SUPPKEY,
+	s.S_NAME,
+	s.S_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	s.S_PHONE,
+	s.S_ACCTBAL,
+	s.S_COMMENT
+	from tpch.SUPPLIER as s inner join tpch.NATION as n on s.S_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:32:36.957 PDT [39771] ERROR:  relation "ssb2.customer" does not exist at character 13
+2024-04-06 12:32:36.957 PDT [39771] STATEMENT:  insert into ssb2.CUSTOMER
+	select
+	c.C_CUSTKEY,
+	c.C_NAME,
+	c.C_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	c.C_PHONE,
+	c.C_ACCTBAL,
+	c.C_MKTSEGMENT
+	from tpch.CUSTOMER as c inner join tpch.NATION as n on c.C_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:32:36.957 PDT [39771] ERROR:  relation "ssb2.part" does not exist at character 13
+2024-04-06 12:32:36.957 PDT [39771] STATEMENT:  insert into ssb2.PART
+	select
+	p.P_PARTKEY,
+	p.P_NAME,
+	p.P_MFGR,
+	p.P_BRAND,
+	p.P_TYPE,
+	p.P_SIZE,
+	p.P_CONTAINER,
+	p.P_RETAILPRICE,
+	ps.PS_SUPPKEY,
+	ps.PS_AVAILQTY,
+	ps.PS_SUPPLYCOST
+	from tpch.PART p inner join tpch.PARTSUPP ps on p.P_PARTKEY = ps.PS_PARTKEY;
+2024-04-06 12:32:36.957 PDT [39771] ERROR:  relation "ssb2.lineorder" does not exist at character 13
+2024-04-06 12:32:36.957 PDT [39771] STATEMENT:  insert into ssb2.LINEORDER
+	select
+	l.L_ORDERKEY,
+	l.L_PARTKEY,
+	l.L_SUPPKEY,
+	l.L_LINENUMBER,
+	l.L_QUANTITY,
+	l.L_EXTENDEDPRICE,
+	l.L_DISCOUNT,
+	l.L_TAX,
+	l.L_RETURNFLAG,
+	l.L_LINESTATUS,
+	l.L_SHIPDATE,
+	l.L_COMMITDATE,
+	l.L_RECEIPTDATE,
+	l.L_SHIPINSTRUCT,
+	l.L_SHIPMODE,
+	o.O_CUSTKEY,
+	o.O_ORDERSTATUS,
+	o.O_TOTALPRICE,
+	o.O_ORDERDATE,
+	o.O_ORDERPRIORITY,
+	o.O_CLERK,
+	o.O_SHIPPRIORITY,
+	o.O_COMMENT
+	from tpch.LINEITEM l inner join tpch.ORDERS o on l.L_ORDERKEY = o.O_ORDERKEY;
+2024-04-06 12:33:05.610 PDT [39809] FATAL:  database "postres" does not exist
+2024-04-06 12:34:38.344 PDT [40181] ERROR:  relation "nation" does not exist
+2024-04-06 12:34:38.344 PDT [40181] STATEMENT:  truncate table nation;
+2024-04-06 12:34:38.344 PDT [40181] ERROR:  relation "nation" does not exist
+2024-04-06 12:34:38.344 PDT [40181] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:34:38.345 PDT [40181] ERROR:  relation "region" does not exist
+2024-04-06 12:34:38.345 PDT [40181] STATEMENT:  truncate table region;
+2024-04-06 12:34:38.345 PDT [40181] ERROR:  relation "region" does not exist
+2024-04-06 12:34:38.345 PDT [40181] STATEMENT:  COPY region FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/region.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:34:38.345 PDT [40181] ERROR:  relation "part" does not exist
+2024-04-06 12:34:38.345 PDT [40181] STATEMENT:  truncate table part;
+2024-04-06 12:34:38.345 PDT [40181] ERROR:  relation "part" does not exist
+2024-04-06 12:34:38.345 PDT [40181] STATEMENT:  COPY part FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/part.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:34:38.345 PDT [40181] ERROR:  relation "supplier" does not exist
+2024-04-06 12:34:38.345 PDT [40181] STATEMENT:  truncate table supplier;
+2024-04-06 12:34:38.345 PDT [40181] ERROR:  relation "supplier" does not exist
+2024-04-06 12:34:38.345 PDT [40181] STATEMENT:  COPY supplier FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/supplier.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:34:38.345 PDT [40181] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:34:38.345 PDT [40181] STATEMENT:  truncate table partsupp;
+2024-04-06 12:34:38.345 PDT [40181] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:34:38.345 PDT [40181] STATEMENT:  COPY partsupp FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/partsupp.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:34:38.345 PDT [40181] ERROR:  relation "customer" does not exist
+2024-04-06 12:34:38.345 PDT [40181] STATEMENT:  truncate table customer;
+2024-04-06 12:34:38.346 PDT [40181] ERROR:  relation "customer" does not exist
+2024-04-06 12:34:38.346 PDT [40181] STATEMENT:  COPY customer FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/customer.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:34:38.346 PDT [40181] ERROR:  relation "orders" does not exist
+2024-04-06 12:34:38.346 PDT [40181] STATEMENT:  truncate table orders;
+2024-04-06 12:34:38.346 PDT [40181] ERROR:  relation "orders" does not exist
+2024-04-06 12:34:38.346 PDT [40181] STATEMENT:  COPY orders FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/orders.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:34:38.346 PDT [40181] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:34:38.346 PDT [40181] STATEMENT:  truncate table lineitem;
+2024-04-06 12:34:38.346 PDT [40181] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:34:38.346 PDT [40181] STATEMENT:  COPY lineitem FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/lineitem.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:34:38.362 PDT [40185] ERROR:  syntax error at or near "cascade" at character 20
+2024-04-06 12:34:38.362 PDT [40185] STATEMENT:  create schema ssb2 cascade;
+2024-04-06 12:34:38.368 PDT [40187] ERROR:  schema "ssb2" does not exist at character 14
+2024-04-06 12:34:38.368 PDT [40187] STATEMENT:  CREATE TABLE ssb2.LINEORDER
+	(
+	LO_ORDERKEY INTEGER NOT NULL,    
+	LO_PARTKEY INTEGER NOT NULL,    
+	LO_SUPPKEY INTEGER NOT NULL,    
+	LO_LINENUMBER INTEGER NOT NULL,    
+	LO_QUANTITY INTEGER NOT NULL,    
+	LO_EXTENDEDPRICE DECIMAL(15,2) NOT NULL,    
+	LO_DISCOUNT DECIMAL(15,2) NOT NULL,    
+	LO_TAX DECIMAL(15,2) NOT NULL,    
+	LO_RETURNFLAG CHAR(1) NOT NULL,
+	LO_LINESTATUS CHAR(1) NOT NULL,
+	LO_SHIPDATE DATE NOT NULL,  
+	LO_COMMITDATE DATE NOT NULL,  
+	LO_RECEIPTDATE DATE NOT NULL,  
+	LO_SHIPINSTRUCT VARCHAR(25) NOT NULL,
+	LO_SHIPMODE VARCHAR(10) NOT NULL,
+	LO_CUSTKEY INTEGER NOT NULL,    
+	LO_ORDERSTATUS VARCHAR(1) NOT NULL,
+	LO_TOTALPRICE DECIMAL(15,2) NOT NULL,    
+	LO_ORDERDATE DATE NOT NULL,  
+	LO_ORDERPRIORITY VARCHAR(15) NOT NULL,
+	LO_CLERK VARCHAR(15) NOT NULL,
+	LO_SHIPPRIORITY INTEGER NOT NULL,    
+	LO_COMMENT VARCHAR(79) NOT NULL,
+	PRIMARY KEY ( LO_ORDERKEY,LO_LINENUMBER ));
+2024-04-06 12:34:38.368 PDT [40187] ERROR:  schema "ssb2" does not exist at character 14
+2024-04-06 12:34:38.368 PDT [40187] STATEMENT:  CREATE TABLE ssb2.PART
+	(
+	P_PARTKEY INTEGER NOT NULL,    
+	P_NAME VARCHAR(55) NOT NULL,
+	P_MFGR VARCHAR(25) NOT NULL,
+	P_BRAND VARCHAR(10) NOT NULL,
+	P_TYPE VARCHAR(25) NOT NULL,
+	P_SIZE INTEGER NOT NULL,    
+	P_CONTAINER VARCHAR(10) NOT NULL,
+	P_RETAILPRICE DECIMAL(15,2) NOT NULL,
+	P_SUPPKEY INTEGER NOT NULL,
+	P_AVAILQTY INTEGER NOT NULL,
+	P_SUPPLYCOST DECIMAL(15,2) NOT NULL,
+	PRIMARY KEY ( P_PARTKEY,P_SUPPKEY ));
+2024-04-06 12:34:38.368 PDT [40187] ERROR:  schema "ssb2" does not exist at character 14
+2024-04-06 12:34:38.368 PDT [40187] STATEMENT:  CREATE TABLE ssb2.CUSTOMER
+	(
+	C_CUSTKEY INTEGER NOT NULL,    
+	C_NAME VARCHAR(25) NOT NULL,
+	C_ADDRESS VARCHAR(40) NOT NULL,
+	C_NATION VARCHAR(25) NOT NULL,
+	C_REGION VARCHAR(25) NOT NULL,
+	C_PHONE VARCHAR(15) NOT NULL,
+	C_ACCTBAL DECIMAL(15,2) NOT NULL,    
+	C_MKTSEGMENT VARCHAR(10) NOT NULL,
+	PRIMARY KEY ( C_CUSTKEY ));
+2024-04-06 12:34:38.368 PDT [40187] ERROR:  schema "ssb2" does not exist at character 14
+2024-04-06 12:34:38.368 PDT [40187] STATEMENT:  CREATE TABLE ssb2.SUPPLIER
+	(
+	S_SUPPKEY INTEGER NOT NULL,    
+	S_NAME VARCHAR(25) NOT NULL,
+	S_ADDRESS VARCHAR(40) NOT NULL,
+	S_NATION VARCHAR(25) NOT NULL,
+	S_REGION VARCHAR(25) NOT NULL,
+	S_PHONE VARCHAR(15) NOT NULL,
+	S_ACCTBAL DECIMAL(15,2) NOT NULL,
+	S_COMMENT VARCHAR(101) NOT NULL, 
+	PRIMARY KEY ( S_SUPPKEY ));
+2024-04-06 12:34:38.374 PDT [40189] ERROR:  relation "ssb2.supplier" does not exist at character 13
+2024-04-06 12:34:38.374 PDT [40189] STATEMENT:  insert into ssb2.SUPPLIER
+	select
+	s.S_SUPPKEY,
+	s.S_NAME,
+	s.S_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	s.S_PHONE,
+	s.S_ACCTBAL,
+	s.S_COMMENT
+	from tpch.SUPPLIER as s inner join tpch.NATION as n on s.S_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:34:38.374 PDT [40189] ERROR:  relation "ssb2.customer" does not exist at character 13
+2024-04-06 12:34:38.374 PDT [40189] STATEMENT:  insert into ssb2.CUSTOMER
+	select
+	c.C_CUSTKEY,
+	c.C_NAME,
+	c.C_ADDRESS,
+	n.N_NAME,
+	r.R_NAME,
+	c.C_PHONE,
+	c.C_ACCTBAL,
+	c.C_MKTSEGMENT
+	from tpch.CUSTOMER as c inner join tpch.NATION as n on c.C_NATIONKEY = n.N_NATIONKEY
+	inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
+2024-04-06 12:34:38.374 PDT [40189] ERROR:  relation "ssb2.part" does not exist at character 13
+2024-04-06 12:34:38.374 PDT [40189] STATEMENT:  insert into ssb2.PART
+	select
+	p.P_PARTKEY,
+	p.P_NAME,
+	p.P_MFGR,
+	p.P_BRAND,
+	p.P_TYPE,
+	p.P_SIZE,
+	p.P_CONTAINER,
+	p.P_RETAILPRICE,
+	ps.PS_SUPPKEY,
+	ps.PS_AVAILQTY,
+	ps.PS_SUPPLYCOST
+	from tpch.PART p inner join tpch.PARTSUPP ps on p.P_PARTKEY = ps.PS_PARTKEY;
+2024-04-06 12:34:38.374 PDT [40189] ERROR:  relation "ssb2.lineorder" does not exist at character 13
+2024-04-06 12:34:38.374 PDT [40189] STATEMENT:  insert into ssb2.LINEORDER
+	select
+	l.L_ORDERKEY,
+	l.L_PARTKEY,
+	l.L_SUPPKEY,
+	l.L_LINENUMBER,
+	l.L_QUANTITY,
+	l.L_EXTENDEDPRICE,
+	l.L_DISCOUNT,
+	l.L_TAX,
+	l.L_RETURNFLAG,
+	l.L_LINESTATUS,
+	l.L_SHIPDATE,
+	l.L_COMMITDATE,
+	l.L_RECEIPTDATE,
+	l.L_SHIPINSTRUCT,
+	l.L_SHIPMODE,
+	o.O_CUSTKEY,
+	o.O_ORDERSTATUS,
+	o.O_TOTALPRICE,
+	o.O_ORDERDATE,
+	o.O_ORDERPRIORITY,
+	o.O_CLERK,
+	o.O_SHIPPRIORITY,
+	o.O_COMMENT
+	from tpch.LINEITEM l inner join tpch.ORDERS o on l.L_ORDERKEY = o.O_ORDERKEY;
+2024-04-06 12:35:11.166 PDT [40443] ERROR:  relation "nation" does not exist
+2024-04-06 12:35:11.166 PDT [40443] STATEMENT:  truncate table nation;
+2024-04-06 12:35:11.166 PDT [40443] ERROR:  relation "nation" does not exist
+2024-04-06 12:35:11.166 PDT [40443] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:35:11.166 PDT [40443] ERROR:  relation "region" does not exist
+2024-04-06 12:35:11.166 PDT [40443] STATEMENT:  truncate table region;
+2024-04-06 12:35:11.166 PDT [40443] ERROR:  relation "region" does not exist
+2024-04-06 12:35:11.166 PDT [40443] STATEMENT:  COPY region FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/region.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:35:11.166 PDT [40443] ERROR:  relation "part" does not exist
+2024-04-06 12:35:11.166 PDT [40443] STATEMENT:  truncate table part;
+2024-04-06 12:35:11.166 PDT [40443] ERROR:  relation "part" does not exist
+2024-04-06 12:35:11.166 PDT [40443] STATEMENT:  COPY part FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/part.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:35:11.166 PDT [40443] ERROR:  relation "supplier" does not exist
+2024-04-06 12:35:11.166 PDT [40443] STATEMENT:  truncate table supplier;
+2024-04-06 12:35:11.166 PDT [40443] ERROR:  relation "supplier" does not exist
+2024-04-06 12:35:11.166 PDT [40443] STATEMENT:  COPY supplier FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/supplier.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:35:11.166 PDT [40443] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:35:11.166 PDT [40443] STATEMENT:  truncate table partsupp;
+2024-04-06 12:35:11.166 PDT [40443] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:35:11.166 PDT [40443] STATEMENT:  COPY partsupp FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/partsupp.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:35:11.167 PDT [40443] ERROR:  relation "customer" does not exist
+2024-04-06 12:35:11.167 PDT [40443] STATEMENT:  truncate table customer;
+2024-04-06 12:35:11.167 PDT [40443] ERROR:  relation "customer" does not exist
+2024-04-06 12:35:11.167 PDT [40443] STATEMENT:  COPY customer FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/customer.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:35:11.167 PDT [40443] ERROR:  relation "orders" does not exist
+2024-04-06 12:35:11.167 PDT [40443] STATEMENT:  truncate table orders;
+2024-04-06 12:35:11.167 PDT [40443] ERROR:  relation "orders" does not exist
+2024-04-06 12:35:11.167 PDT [40443] STATEMENT:  COPY orders FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/orders.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:35:11.167 PDT [40443] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:35:11.167 PDT [40443] STATEMENT:  truncate table lineitem;
+2024-04-06 12:35:11.167 PDT [40443] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:35:11.167 PDT [40443] STATEMENT:  COPY lineitem FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/lineitem.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:35:11.173 PDT [40445] ERROR:  schema "ssb2" does not exist
+2024-04-06 12:35:11.173 PDT [40445] STATEMENT:  DROP schema ssb2 CASCADE;
+2024-04-06 12:36:04.171 PDT [40540] ERROR:  relation "nation" does not exist
+2024-04-06 12:36:04.171 PDT [40540] STATEMENT:  truncate table nation;
+2024-04-06 12:36:04.172 PDT [40540] ERROR:  relation "nation" does not exist
+2024-04-06 12:36:04.172 PDT [40540] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:36:04.172 PDT [40540] ERROR:  relation "region" does not exist
+2024-04-06 12:36:04.172 PDT [40540] STATEMENT:  truncate table region;
+2024-04-06 12:36:04.172 PDT [40540] ERROR:  relation "region" does not exist
+2024-04-06 12:36:04.172 PDT [40540] STATEMENT:  COPY region FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/region.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:36:04.172 PDT [40540] ERROR:  relation "part" does not exist
+2024-04-06 12:36:04.172 PDT [40540] STATEMENT:  truncate table part;
+2024-04-06 12:36:04.172 PDT [40540] ERROR:  relation "part" does not exist
+2024-04-06 12:36:04.172 PDT [40540] STATEMENT:  COPY part FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/part.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:36:04.172 PDT [40540] ERROR:  relation "supplier" does not exist
+2024-04-06 12:36:04.172 PDT [40540] STATEMENT:  truncate table supplier;
+2024-04-06 12:36:04.172 PDT [40540] ERROR:  relation "supplier" does not exist
+2024-04-06 12:36:04.172 PDT [40540] STATEMENT:  COPY supplier FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/supplier.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:36:04.172 PDT [40540] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:36:04.172 PDT [40540] STATEMENT:  truncate table partsupp;
+2024-04-06 12:36:04.172 PDT [40540] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:36:04.172 PDT [40540] STATEMENT:  COPY partsupp FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/partsupp.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:36:04.172 PDT [40540] ERROR:  relation "customer" does not exist
+2024-04-06 12:36:04.172 PDT [40540] STATEMENT:  truncate table customer;
+2024-04-06 12:36:04.173 PDT [40540] ERROR:  relation "customer" does not exist
+2024-04-06 12:36:04.173 PDT [40540] STATEMENT:  COPY customer FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/customer.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:36:04.173 PDT [40540] ERROR:  relation "orders" does not exist
+2024-04-06 12:36:04.173 PDT [40540] STATEMENT:  truncate table orders;
+2024-04-06 12:36:04.173 PDT [40540] ERROR:  relation "orders" does not exist
+2024-04-06 12:36:04.173 PDT [40540] STATEMENT:  COPY orders FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/orders.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:36:04.173 PDT [40540] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:36:04.173 PDT [40540] STATEMENT:  truncate table lineitem;
+2024-04-06 12:36:04.173 PDT [40540] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:36:04.173 PDT [40540] STATEMENT:  COPY lineitem FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/lineitem.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:36:43.352 PDT [15172] LOG:  checkpoint starting: time
+2024-04-06 12:36:44.710 PDT [40785] ERROR:  relation "nation" does not exist
+2024-04-06 12:36:44.710 PDT [40785] STATEMENT:  truncate table nation;
+2024-04-06 12:36:44.711 PDT [40785] ERROR:  relation "nation" does not exist
+2024-04-06 12:36:44.711 PDT [40785] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:36:44.711 PDT [40785] ERROR:  relation "region" does not exist
+2024-04-06 12:36:44.711 PDT [40785] STATEMENT:  truncate table region;
+2024-04-06 12:36:44.711 PDT [40785] ERROR:  relation "region" does not exist
+2024-04-06 12:36:44.711 PDT [40785] STATEMENT:  COPY region FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/region.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:36:44.711 PDT [40785] ERROR:  relation "part" does not exist
+2024-04-06 12:36:44.711 PDT [40785] STATEMENT:  truncate table part;
+2024-04-06 12:36:44.711 PDT [40785] ERROR:  relation "part" does not exist
+2024-04-06 12:36:44.711 PDT [40785] STATEMENT:  COPY part FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/part.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:36:44.711 PDT [40785] ERROR:  relation "supplier" does not exist
+2024-04-06 12:36:44.711 PDT [40785] STATEMENT:  truncate table supplier;
+2024-04-06 12:36:44.711 PDT [40785] ERROR:  relation "supplier" does not exist
+2024-04-06 12:36:44.711 PDT [40785] STATEMENT:  COPY supplier FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/supplier.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:36:44.711 PDT [40785] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:36:44.711 PDT [40785] STATEMENT:  truncate table partsupp;
+2024-04-06 12:36:44.711 PDT [40785] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:36:44.711 PDT [40785] STATEMENT:  COPY partsupp FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/partsupp.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:36:44.711 PDT [40785] ERROR:  relation "customer" does not exist
+2024-04-06 12:36:44.711 PDT [40785] STATEMENT:  truncate table customer;
+2024-04-06 12:36:44.712 PDT [40785] ERROR:  relation "customer" does not exist
+2024-04-06 12:36:44.712 PDT [40785] STATEMENT:  COPY customer FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/customer.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:36:44.712 PDT [40785] ERROR:  relation "orders" does not exist
+2024-04-06 12:36:44.712 PDT [40785] STATEMENT:  truncate table orders;
+2024-04-06 12:36:44.712 PDT [40785] ERROR:  relation "orders" does not exist
+2024-04-06 12:36:44.712 PDT [40785] STATEMENT:  COPY orders FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/orders.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:36:44.712 PDT [40785] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:36:44.712 PDT [40785] STATEMENT:  truncate table lineitem;
+2024-04-06 12:36:44.712 PDT [40785] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:36:44.712 PDT [40785] STATEMENT:  COPY lineitem FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/lineitem.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:36:56.041 PDT [15172] LOG:  checkpoint complete: wrote 125 buffers (0.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=12.646 s, sync=0.033 s, total=12.689 s; sync files=37, longest=0.003 s, average=0.001 s; distance=1044 kB, estimate=448445 kB; lsn=1/E932CFA0, redo lsn=1/E92D4898
+2024-04-06 12:37:23.679 PDT [40851] ERROR:  relation "nation" does not exist
+2024-04-06 12:37:23.679 PDT [40851] STATEMENT:  truncate table nation;
+2024-04-06 12:37:23.679 PDT [40851] ERROR:  relation "nation" does not exist
+2024-04-06 12:37:23.679 PDT [40851] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:37:23.679 PDT [40851] ERROR:  relation "region" does not exist
+2024-04-06 12:37:23.679 PDT [40851] STATEMENT:  truncate table region;
+2024-04-06 12:37:23.679 PDT [40851] ERROR:  relation "region" does not exist
+2024-04-06 12:37:23.679 PDT [40851] STATEMENT:  COPY region FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/region.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:37:23.679 PDT [40851] ERROR:  relation "part" does not exist
+2024-04-06 12:37:23.679 PDT [40851] STATEMENT:  truncate table part;
+2024-04-06 12:37:23.680 PDT [40851] ERROR:  relation "part" does not exist
+2024-04-06 12:37:23.680 PDT [40851] STATEMENT:  COPY part FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/part.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:37:23.680 PDT [40851] ERROR:  relation "supplier" does not exist
+2024-04-06 12:37:23.680 PDT [40851] STATEMENT:  truncate table supplier;
+2024-04-06 12:37:23.680 PDT [40851] ERROR:  relation "supplier" does not exist
+2024-04-06 12:37:23.680 PDT [40851] STATEMENT:  COPY supplier FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/supplier.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:37:23.680 PDT [40851] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:37:23.680 PDT [40851] STATEMENT:  truncate table partsupp;
+2024-04-06 12:37:23.680 PDT [40851] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:37:23.680 PDT [40851] STATEMENT:  COPY partsupp FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/partsupp.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:37:23.680 PDT [40851] ERROR:  relation "customer" does not exist
+2024-04-06 12:37:23.680 PDT [40851] STATEMENT:  truncate table customer;
+2024-04-06 12:37:23.680 PDT [40851] ERROR:  relation "customer" does not exist
+2024-04-06 12:37:23.680 PDT [40851] STATEMENT:  COPY customer FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/customer.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:37:23.680 PDT [40851] ERROR:  relation "orders" does not exist
+2024-04-06 12:37:23.680 PDT [40851] STATEMENT:  truncate table orders;
+2024-04-06 12:37:23.680 PDT [40851] ERROR:  relation "orders" does not exist
+2024-04-06 12:37:23.680 PDT [40851] STATEMENT:  COPY orders FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/orders.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:37:23.680 PDT [40851] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:37:23.680 PDT [40851] STATEMENT:  truncate table lineitem;
+2024-04-06 12:37:23.680 PDT [40851] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:37:23.680 PDT [40851] STATEMENT:  COPY lineitem FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/lineitem.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:37:37.054 PDT [40897] ERROR:  relation "nation" does not exist
+2024-04-06 12:37:37.054 PDT [40897] STATEMENT:  truncate table nation;
+2024-04-06 12:37:37.054 PDT [40897] ERROR:  relation "nation" does not exist
+2024-04-06 12:37:37.054 PDT [40897] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:37:37.054 PDT [40897] ERROR:  relation "region" does not exist
+2024-04-06 12:37:37.054 PDT [40897] STATEMENT:  truncate table region;
+2024-04-06 12:37:37.054 PDT [40897] ERROR:  relation "region" does not exist
+2024-04-06 12:37:37.054 PDT [40897] STATEMENT:  COPY region FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/region.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:37:37.054 PDT [40897] ERROR:  relation "part" does not exist
+2024-04-06 12:37:37.054 PDT [40897] STATEMENT:  truncate table part;
+2024-04-06 12:37:37.054 PDT [40897] ERROR:  relation "part" does not exist
+2024-04-06 12:37:37.054 PDT [40897] STATEMENT:  COPY part FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/part.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:37:37.055 PDT [40897] ERROR:  relation "supplier" does not exist
+2024-04-06 12:37:37.055 PDT [40897] STATEMENT:  truncate table supplier;
+2024-04-06 12:37:37.055 PDT [40897] ERROR:  relation "supplier" does not exist
+2024-04-06 12:37:37.055 PDT [40897] STATEMENT:  COPY supplier FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/supplier.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:37:37.055 PDT [40897] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:37:37.055 PDT [40897] STATEMENT:  truncate table partsupp;
+2024-04-06 12:37:37.055 PDT [40897] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:37:37.055 PDT [40897] STATEMENT:  COPY partsupp FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/partsupp.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:37:37.055 PDT [40897] ERROR:  relation "customer" does not exist
+2024-04-06 12:37:37.055 PDT [40897] STATEMENT:  truncate table customer;
+2024-04-06 12:37:37.055 PDT [40897] ERROR:  relation "customer" does not exist
+2024-04-06 12:37:37.055 PDT [40897] STATEMENT:  COPY customer FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/customer.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:37:37.055 PDT [40897] ERROR:  relation "orders" does not exist
+2024-04-06 12:37:37.055 PDT [40897] STATEMENT:  truncate table orders;
+2024-04-06 12:37:37.055 PDT [40897] ERROR:  relation "orders" does not exist
+2024-04-06 12:37:37.055 PDT [40897] STATEMENT:  COPY orders FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/orders.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:37:37.055 PDT [40897] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:37:37.055 PDT [40897] STATEMENT:  truncate table lineitem;
+2024-04-06 12:37:37.055 PDT [40897] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:37:37.055 PDT [40897] STATEMENT:  COPY lineitem FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/lineitem.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:38:20.388 PDT [41168] ERROR:  relation "nation" does not exist
+2024-04-06 12:38:20.388 PDT [41168] STATEMENT:  truncate table nation;
+2024-04-06 12:38:20.388 PDT [41168] ERROR:  relation "nation" does not exist
+2024-04-06 12:38:20.388 PDT [41168] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:38:20.389 PDT [41168] ERROR:  relation "region" does not exist
+2024-04-06 12:38:20.389 PDT [41168] STATEMENT:  truncate table region;
+2024-04-06 12:38:20.389 PDT [41168] ERROR:  relation "region" does not exist
+2024-04-06 12:38:20.389 PDT [41168] STATEMENT:  COPY region FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/region.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:38:20.389 PDT [41168] ERROR:  relation "part" does not exist
+2024-04-06 12:38:20.389 PDT [41168] STATEMENT:  truncate table part;
+2024-04-06 12:38:20.389 PDT [41168] ERROR:  relation "part" does not exist
+2024-04-06 12:38:20.389 PDT [41168] STATEMENT:  COPY part FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/part.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:38:20.389 PDT [41168] ERROR:  relation "supplier" does not exist
+2024-04-06 12:38:20.389 PDT [41168] STATEMENT:  truncate table supplier;
+2024-04-06 12:38:20.389 PDT [41168] ERROR:  relation "supplier" does not exist
+2024-04-06 12:38:20.389 PDT [41168] STATEMENT:  COPY supplier FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/supplier.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:38:20.389 PDT [41168] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:38:20.389 PDT [41168] STATEMENT:  truncate table partsupp;
+2024-04-06 12:38:20.389 PDT [41168] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:38:20.389 PDT [41168] STATEMENT:  COPY partsupp FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/partsupp.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:38:20.389 PDT [41168] ERROR:  relation "customer" does not exist
+2024-04-06 12:38:20.389 PDT [41168] STATEMENT:  truncate table customer;
+2024-04-06 12:38:20.390 PDT [41168] ERROR:  relation "customer" does not exist
+2024-04-06 12:38:20.390 PDT [41168] STATEMENT:  COPY customer FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/customer.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:38:20.390 PDT [41168] ERROR:  relation "orders" does not exist
+2024-04-06 12:38:20.390 PDT [41168] STATEMENT:  truncate table orders;
+2024-04-06 12:38:20.390 PDT [41168] ERROR:  relation "orders" does not exist
+2024-04-06 12:38:20.390 PDT [41168] STATEMENT:  COPY orders FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/orders.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:38:20.390 PDT [41168] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:38:20.390 PDT [41168] STATEMENT:  truncate table lineitem;
+2024-04-06 12:38:20.390 PDT [41168] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:38:20.390 PDT [41168] STATEMENT:  COPY lineitem FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/lineitem.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:39:06.623 PDT [41255] ERROR:  relation "nation" does not exist
+2024-04-06 12:39:06.623 PDT [41255] STATEMENT:  truncate table nation;
+2024-04-06 12:39:06.623 PDT [41255] ERROR:  relation "nation" does not exist
+2024-04-06 12:39:06.623 PDT [41255] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:39:06.623 PDT [41255] ERROR:  relation "region" does not exist
+2024-04-06 12:39:06.623 PDT [41255] STATEMENT:  truncate table region;
+2024-04-06 12:39:06.623 PDT [41255] ERROR:  relation "region" does not exist
+2024-04-06 12:39:06.623 PDT [41255] STATEMENT:  COPY region FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/region.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:39:06.623 PDT [41255] ERROR:  relation "part" does not exist
+2024-04-06 12:39:06.623 PDT [41255] STATEMENT:  truncate table part;
+2024-04-06 12:39:06.623 PDT [41255] ERROR:  relation "part" does not exist
+2024-04-06 12:39:06.623 PDT [41255] STATEMENT:  COPY part FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/part.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:39:06.623 PDT [41255] ERROR:  relation "supplier" does not exist
+2024-04-06 12:39:06.623 PDT [41255] STATEMENT:  truncate table supplier;
+2024-04-06 12:39:06.623 PDT [41255] ERROR:  relation "supplier" does not exist
+2024-04-06 12:39:06.623 PDT [41255] STATEMENT:  COPY supplier FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/supplier.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:39:06.623 PDT [41255] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:39:06.623 PDT [41255] STATEMENT:  truncate table partsupp;
+2024-04-06 12:39:06.623 PDT [41255] ERROR:  relation "partsupp" does not exist
+2024-04-06 12:39:06.623 PDT [41255] STATEMENT:  COPY partsupp FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/partsupp.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:39:06.623 PDT [41255] ERROR:  relation "customer" does not exist
+2024-04-06 12:39:06.623 PDT [41255] STATEMENT:  truncate table customer;
+2024-04-06 12:39:06.624 PDT [41255] ERROR:  relation "customer" does not exist
+2024-04-06 12:39:06.624 PDT [41255] STATEMENT:  COPY customer FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/customer.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:39:06.624 PDT [41255] ERROR:  relation "orders" does not exist
+2024-04-06 12:39:06.624 PDT [41255] STATEMENT:  truncate table orders;
+2024-04-06 12:39:06.624 PDT [41255] ERROR:  relation "orders" does not exist
+2024-04-06 12:39:06.624 PDT [41255] STATEMENT:  COPY orders FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/orders.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:39:06.624 PDT [41255] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:39:06.624 PDT [41255] STATEMENT:  truncate table lineitem;
+2024-04-06 12:39:06.624 PDT [41255] ERROR:  relation "lineitem" does not exist
+2024-04-06 12:39:06.624 PDT [41255] STATEMENT:  COPY lineitem FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/lineitem.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:39:38.439 PDT [41492] ERROR:  could not open file "/home/vboxuser/contribs/ssb2-bench/nation.csv" for reading: No such file or directory
+2024-04-06 12:39:38.439 PDT [41492] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:39:38.439 PDT [41492] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:39:38.448 PDT [41492] ERROR:  could not open file "<DATA_DIR>/tpch/data/region.csv" for reading: No such file or directory
+2024-04-06 12:39:38.448 PDT [41492] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:39:38.448 PDT [41492] STATEMENT:  COPY tpch.region FROM '<DATA_DIR>/tpch/data/region.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:39:38.452 PDT [41492] ERROR:  could not open file "<DATA_DIR>/tpch/data/part.csv" for reading: No such file or directory
+2024-04-06 12:39:38.452 PDT [41492] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:39:38.452 PDT [41492] STATEMENT:  COPY tpch.part FROM '<DATA_DIR>/tpch/data/part.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:39:38.457 PDT [41492] ERROR:  could not open file "<DATA_DIR>/tpch/data/supplier.csv" for reading: No such file or directory
+2024-04-06 12:39:38.457 PDT [41492] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:39:38.457 PDT [41492] STATEMENT:  COPY tpch.supplier FROM '<DATA_DIR>/tpch/data/supplier.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:39:38.462 PDT [41492] ERROR:  could not open file "<DATA_DIR>/tpch/data/partsupp.csv" for reading: No such file or directory
+2024-04-06 12:39:38.462 PDT [41492] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:39:38.462 PDT [41492] STATEMENT:  COPY tpch.partsupp FROM '<DATA_DIR>/tpch/data/partsupp.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:39:38.467 PDT [41492] ERROR:  could not open file "<DATA_DIR>/tpch/data/customer.csv" for reading: No such file or directory
+2024-04-06 12:39:38.467 PDT [41492] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:39:38.467 PDT [41492] STATEMENT:  COPY tpch.customer FROM '<DATA_DIR>/tpch/data/customer.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:39:38.475 PDT [41492] ERROR:  could not open file "<DATA_DIR>/tpch/data/orders.csv" for reading: No such file or directory
+2024-04-06 12:39:38.475 PDT [41492] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:39:38.475 PDT [41492] STATEMENT:  COPY tpch.orders FROM '<DATA_DIR>/tpch/data/orders.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:39:38.479 PDT [41492] ERROR:  could not open file "<DATA_DIR>/tpch/data/lineitem.csv" for reading: No such file or directory
+2024-04-06 12:39:38.479 PDT [41492] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:39:38.479 PDT [41492] STATEMENT:  COPY tpch.lineitem FROM '<DATA_DIR>/tpch/data/lineitem.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:40:30.566 PDT [41569] ERROR:  could not open file "/home/vboxuser/contribs/ssb2-bench/tpch/nation.csv" for reading: No such file or directory
+2024-04-06 12:40:30.566 PDT [41569] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:40:30.566 PDT [41569] STATEMENT:  COPY nation FROM '/home/vboxuser/contribs/ssb2-bench/tpch/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:40:30.570 PDT [41569] ERROR:  could not open file "<DATA_DIR>/tpch/data/region.csv" for reading: No such file or directory
+2024-04-06 12:40:30.570 PDT [41569] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:40:30.570 PDT [41569] STATEMENT:  COPY tpch.region FROM '<DATA_DIR>/tpch/data/region.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:40:30.575 PDT [41569] ERROR:  could not open file "<DATA_DIR>/tpch/data/part.csv" for reading: No such file or directory
+2024-04-06 12:40:30.575 PDT [41569] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:40:30.575 PDT [41569] STATEMENT:  COPY tpch.part FROM '<DATA_DIR>/tpch/data/part.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:40:30.580 PDT [41569] ERROR:  could not open file "<DATA_DIR>/tpch/data/supplier.csv" for reading: No such file or directory
+2024-04-06 12:40:30.580 PDT [41569] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:40:30.580 PDT [41569] STATEMENT:  COPY tpch.supplier FROM '<DATA_DIR>/tpch/data/supplier.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:40:30.585 PDT [41569] ERROR:  could not open file "<DATA_DIR>/tpch/data/partsupp.csv" for reading: No such file or directory
+2024-04-06 12:40:30.585 PDT [41569] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:40:30.585 PDT [41569] STATEMENT:  COPY tpch.partsupp FROM '<DATA_DIR>/tpch/data/partsupp.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:40:30.589 PDT [41569] ERROR:  could not open file "<DATA_DIR>/tpch/data/customer.csv" for reading: No such file or directory
+2024-04-06 12:40:30.589 PDT [41569] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:40:30.589 PDT [41569] STATEMENT:  COPY tpch.customer FROM '<DATA_DIR>/tpch/data/customer.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:40:30.598 PDT [41569] ERROR:  could not open file "<DATA_DIR>/tpch/data/orders.csv" for reading: No such file or directory
+2024-04-06 12:40:30.598 PDT [41569] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:40:30.598 PDT [41569] STATEMENT:  COPY tpch.orders FROM '<DATA_DIR>/tpch/data/orders.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:40:30.603 PDT [41569] ERROR:  could not open file "<DATA_DIR>/tpch/data/lineitem.csv" for reading: No such file or directory
+2024-04-06 12:40:30.603 PDT [41569] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:40:30.603 PDT [41569] STATEMENT:  COPY tpch.lineitem FROM '<DATA_DIR>/tpch/data/lineitem.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:41:15.426 PDT [41843] ERROR:  could not open file "<DATA_DIR>/tpch/data/region.csv" for reading: No such file or directory
+2024-04-06 12:41:15.426 PDT [41843] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:41:15.426 PDT [41843] STATEMENT:  COPY tpch.region FROM '<DATA_DIR>/tpch/data/region.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:41:15.430 PDT [41843] ERROR:  could not open file "<DATA_DIR>/tpch/data/part.csv" for reading: No such file or directory
+2024-04-06 12:41:15.430 PDT [41843] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:41:15.430 PDT [41843] STATEMENT:  COPY tpch.part FROM '<DATA_DIR>/tpch/data/part.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:41:15.434 PDT [41843] ERROR:  could not open file "<DATA_DIR>/tpch/data/supplier.csv" for reading: No such file or directory
+2024-04-06 12:41:15.434 PDT [41843] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:41:15.434 PDT [41843] STATEMENT:  COPY tpch.supplier FROM '<DATA_DIR>/tpch/data/supplier.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:41:15.439 PDT [41843] ERROR:  could not open file "<DATA_DIR>/tpch/data/partsupp.csv" for reading: No such file or directory
+2024-04-06 12:41:15.439 PDT [41843] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:41:15.439 PDT [41843] STATEMENT:  COPY tpch.partsupp FROM '<DATA_DIR>/tpch/data/partsupp.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:41:15.449 PDT [41843] ERROR:  could not open file "<DATA_DIR>/tpch/data/customer.csv" for reading: No such file or directory
+2024-04-06 12:41:15.449 PDT [41843] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:41:15.449 PDT [41843] STATEMENT:  COPY tpch.customer FROM '<DATA_DIR>/tpch/data/customer.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:41:15.453 PDT [41843] ERROR:  could not open file "<DATA_DIR>/tpch/data/orders.csv" for reading: No such file or directory
+2024-04-06 12:41:15.453 PDT [41843] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:41:15.453 PDT [41843] STATEMENT:  COPY tpch.orders FROM '<DATA_DIR>/tpch/data/orders.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:41:15.460 PDT [41843] ERROR:  could not open file "<DATA_DIR>/tpch/data/lineitem.csv" for reading: No such file or directory
+2024-04-06 12:41:15.460 PDT [41843] HINT:  COPY FROM instructs the PostgreSQL server process to read a file. You may want a client-side facility such as psql's \copy.
+2024-04-06 12:41:15.460 PDT [41843] STATEMENT:  COPY tpch.lineitem FROM '<DATA_DIR>/tpch/data/lineitem.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:41:43.140 PDT [15172] LOG:  checkpoint starting: time
+2024-04-06 12:42:00.256 PDT [15172] LOG:  checkpoint complete: wrote 169 buffers (1.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=17.064 s, sync=0.040 s, total=17.117 s; sync files=49, longest=0.003 s, average=0.001 s; distance=1901 kB, estimate=403791 kB; lsn=1/E94AFFE0, redo lsn=1/E94AFFA8
+2024-04-06 12:43:36.069 PDT [42221] ERROR:  syntax error at or near ":" at character 23
+2024-04-06 12:43:36.069 PDT [42221] STATEMENT:  COPY tpch.region FROM :'localhost' CSV HEADER DELIMITER '|';
+2024-04-06 12:43:36.073 PDT [42221] ERROR:  syntax error at or near ":" at character 21
+2024-04-06 12:43:36.073 PDT [42221] STATEMENT:  COPY tpch.part FROM :'localhost' CSV HEADER DELIMITER '|';
+2024-04-06 12:43:36.078 PDT [42221] ERROR:  syntax error at or near ":" at character 25
+2024-04-06 12:43:36.078 PDT [42221] STATEMENT:  COPY tpch.supplier FROM :'localhost' HEADER DELIMITER '|';
+2024-04-06 12:43:36.083 PDT [42221] ERROR:  syntax error at or near ":" at character 25
+2024-04-06 12:43:36.083 PDT [42221] STATEMENT:  COPY tpch.partsupp FROM :'localhost'  CSV HEADER DELIMITER '|';
+2024-04-06 12:43:36.089 PDT [42221] ERROR:  syntax error at or near ":" at character 25
+2024-04-06 12:43:36.089 PDT [42221] STATEMENT:  COPY tpch.customer FROM :'localhost'  CSV HEADER DELIMITER '|';
+2024-04-06 12:43:36.095 PDT [42221] ERROR:  syntax error at or near ":" at character 23
+2024-04-06 12:43:36.095 PDT [42221] STATEMENT:  COPY tpch.orders FROM :'localhost' CSV HEADER DELIMITER '|';
+2024-04-06 12:43:36.101 PDT [42221] ERROR:  syntax error at or near ":" at character 25
+2024-04-06 12:43:36.101 PDT [42221] STATEMENT:  COPY tpch.lineitem FROM :'localhost' CSV HEADER DELIMITER '|';
+2024-04-06 12:44:01.930 PDT [42274] ERROR:  extra data after last expected column
+2024-04-06 12:44:01.930 PDT [42274] CONTEXT:  COPY region, line 2: "1|ARGENTINA|1|al foxes promise slyly according to the regular accounts. bold requests alon"
+2024-04-06 12:44:01.930 PDT [42274] STATEMENT:  COPY tpch.region FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:44:01.934 PDT [42274] ERROR:  value too long for type character(10)
+2024-04-06 12:44:01.934 PDT [42274] CONTEXT:  COPY part, line 2, column p_brand: "al foxes promise slyly according to the regular accounts. bold requests alon"
+2024-04-06 12:44:01.934 PDT [42274] STATEMENT:  COPY tpch.part FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:44:01.943 PDT [42274] ERROR:  invalid input syntax for type integer: "al foxes promise slyly according to the regular accounts. bold requests alon"
+2024-04-06 12:44:01.943 PDT [42274] CONTEXT:  COPY supplier, line 2, column s_nationkey: "al foxes promise slyly according to the regular accounts. bold requests alon"
+2024-04-06 12:44:01.943 PDT [42274] STATEMENT:  COPY tpch.supplier FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' HEADER DELIMITER '|';
+2024-04-06 12:44:01.947 PDT [42274] ERROR:  invalid input syntax for type integer: "ARGENTINA"
+2024-04-06 12:44:01.947 PDT [42274] CONTEXT:  COPY partsupp, line 2, column ps_suppkey: "ARGENTINA"
+2024-04-06 12:44:01.947 PDT [42274] STATEMENT:  COPY tpch.partsupp FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv'  CSV HEADER DELIMITER '|';
+2024-04-06 12:44:01.951 PDT [42274] ERROR:  invalid input syntax for type integer: "al foxes promise slyly according to the regular accounts. bold requests alon"
+2024-04-06 12:44:01.951 PDT [42274] CONTEXT:  COPY customer, line 2, column c_nationkey: "al foxes promise slyly according to the regular accounts. bold requests alon"
+2024-04-06 12:44:01.951 PDT [42274] STATEMENT:  COPY tpch.customer FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv'  CSV HEADER DELIMITER '|';
+2024-04-06 12:44:01.956 PDT [42274] ERROR:  invalid input syntax for type integer: "ARGENTINA"
+2024-04-06 12:44:01.956 PDT [42274] CONTEXT:  COPY orders, line 2, column o_custkey: "ARGENTINA"
+2024-04-06 12:44:01.956 PDT [42274] STATEMENT:  COPY tpch.orders FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:44:01.965 PDT [42274] ERROR:  invalid input syntax for type integer: "ARGENTINA"
+2024-04-06 12:44:01.965 PDT [42274] CONTEXT:  COPY lineitem, line 2, column l_partkey: "ARGENTINA"
+2024-04-06 12:44:01.965 PDT [42274] STATEMENT:  COPY tpch.lineitem FROM '/home/vboxuser/contribs/ssb2-bench/tpch/data/nation.csv' CSV HEADER DELIMITER '|';
+2024-04-06 12:46:43.291 PDT [15172] LOG:  checkpoint starting: time
+2024-04-06 12:46:56.300 PDT [15172] LOG:  checkpoint complete: wrote 129 buffers (0.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=12.964 s, sync=0.035 s, total=13.009 s; sync files=50, longest=0.002 s, average=0.001 s; distance=873 kB, estimate=363499 kB; lsn=1/E958A6A0, redo lsn=1/E958A668
+2024-04-06 12:47:23.009 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:47:39.417 PDT [15172] LOG:  checkpoint complete: wrote 11778 buffers (71.9%); 0 WAL file(s) added, 0 removed, 33 recycled; write=16.016 s, sync=0.235 s, total=16.409 s; sync files=62, longest=0.107 s, average=0.004 s; distance=539127 kB, estimate=539127 kB; lsn=2/2832A1C8, redo lsn=2/A408388
+2024-04-06 12:47:40.779 PDT [15172] LOG:  checkpoints are occurring too frequently (17 seconds apart)
+2024-04-06 12:47:40.779 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 12:47:40.779 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:47:58.181 PDT [15172] LOG:  checkpoint complete: wrote 7694 buffers (47.0%); 0 WAL file(s) added, 0 removed, 33 recycled; write=16.941 s, sync=0.320 s, total=17.402 s; sync files=27, longest=0.198 s, average=0.012 s; distance=536607 kB, estimate=538875 kB; lsn=2/49062A40, redo lsn=2/2B00FFA8
+2024-04-06 12:47:59.612 PDT [15172] LOG:  checkpoints are occurring too frequently (19 seconds apart)
+2024-04-06 12:47:59.612 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 12:47:59.612 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:48:19.629 PDT [15172] LOG:  checkpoint complete: wrote 1203 buffers (7.3%); 0 WAL file(s) added, 0 removed, 33 recycled; write=19.284 s, sync=0.582 s, total=20.017 s; sync files=64, longest=0.251 s, average=0.010 s; distance=540850 kB, estimate=540850 kB; lsn=2/6AED7A60, redo lsn=2/4C03C890
+2024-04-06 12:48:20.484 PDT [15172] LOG:  checkpoints are occurring too frequently (21 seconds apart)
+2024-04-06 12:48:20.484 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 12:48:20.484 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:48:37.603 PDT [15172] LOG:  checkpoint complete: wrote 3098 buffers (18.9%); 0 WAL file(s) added, 1 removed, 32 recycled; write=15.694 s, sync=1.277 s, total=17.120 s; sync files=6, longest=0.702 s, average=0.213 s; distance=544529 kB, estimate=544529 kB; lsn=2/8CDC6AF0, redo lsn=2/6D400EB0
+2024-04-06 12:48:38.053 PDT [15172] LOG:  checkpoints are occurring too frequently (18 seconds apart)
+2024-04-06 12:48:38.053 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 12:48:38.053 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:48:51.071 PDT [15172] LOG:  checkpoint complete: wrote 263 buffers (1.6%); 0 WAL file(s) added, 0 removed, 33 recycled; write=12.603 s, sync=0.265 s, total=13.019 s; sync files=5, longest=0.163 s, average=0.053 s; distance=540674 kB, estimate=544144 kB; lsn=2/AC78B930, redo lsn=2/8E401840
+2024-04-06 12:48:52.209 PDT [15172] LOG:  checkpoints are occurring too frequently (14 seconds apart)
+2024-04-06 12:48:52.209 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 12:48:52.219 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:49:04.893 PDT [15172] LOG:  checkpoint complete: wrote 43 buffers (0.3%); 0 WAL file(s) added, 0 removed, 33 recycled; write=12.042 s, sync=0.479 s, total=12.684 s; sync files=6, longest=0.276 s, average=0.080 s; distance=540665 kB, estimate=543796 kB; lsn=2/CDA892E0, redo lsn=2/AF400028
+2024-04-06 12:49:05.976 PDT [15172] LOG:  checkpoints are occurring too frequently (13 seconds apart)
+2024-04-06 12:49:05.976 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
+2024-04-06 12:49:05.976 PDT [15172] LOG:  checkpoint starting: wal
+2024-04-06 12:53:35.116 PDT [15172] LOG:  checkpoint complete: wrote 1482 buffers (9.0%); 0 WAL file(s) added, 0 removed, 33 recycled; write=269.053 s, sync=0.011 s, total=269.141 s; sync files=15, longest=0.002 s, average=0.001 s; distance=540669 kB, estimate=543483 kB; lsn=2/DF54BD60, redo lsn=2/D03FF690
