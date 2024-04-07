@@ -34,7 +34,7 @@ where
 				select
 					p_partkey
 				from
-					part
+					tpch.part
 				where
 					p_name like 'powder%'
 			)

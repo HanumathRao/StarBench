@@ -6775,3 +6775,390 @@
 	limit 1;
 2024-04-06 14:34:06.923 PDT [15172] LOG:  checkpoint starting: time
 2024-04-06 14:34:06.951 PDT [15172] LOG:  checkpoint complete: wrote 1 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.017 s, total=0.028 s; sync files=21, longest=0.002 s, average=0.001 s; distance=87 kB, estimate=416224 kB; lsn=2/DF568810, redo lsn=2/DF5687D8
+2024-04-07 09:44:47.412 PDT [313006] ERROR:  relation "revenue0" already exists
+2024-04-07 09:44:47.412 PDT [313006] STATEMENT:  create view revenue0 (supplier_no, total_revenue) as
+		select
+			l_suppkey,
+			sum(l_extendedprice * (1 - l_discount))
+		from
+			tpch.lineitem
+		where
+			l_shipdate >= date '1997-05-01'
+			and l_shipdate < date '1997-05-01' + interval '3' month
+		group by
+			l_suppkey;
+2024-04-07 09:44:47.412 PDT [313006] ERROR:  relation "supplier" does not exist at character 97
+2024-04-07 09:44:47.412 PDT [313006] STATEMENT:  select
+		tpch.s_suppkey,
+		tpch.s_name,
+		tpch.s_address,
+		tpch.s_phone,
+		tpch.total_revenue
+	from
+		supplier,
+		revenue0
+	where
+		s_suppkey = supplier_no
+		and total_revenue = (
+			select
+				max(total_revenue)
+			from
+				revenue0
+		)
+	order by
+		s_suppkey;
+2024-04-07 09:44:47.412 PDT [313006] ERROR:  syntax error at or near "limit" at character 20
+2024-04-07 09:44:47.412 PDT [313006] STATEMENT:  drop view revenue0
+	limit 1;
+2024-04-07 09:44:52.669 PDT [313027] ERROR:  relation "part" does not exist at character 575
+2024-04-07 09:44:52.669 PDT [313027] STATEMENT:  select
+		s_name,
+		s_address
+	from
+		tpch.supplier,
+		tpch.nation
+	where
+		s_suppkey in (
+			select
+				ps_suppkey
+			from
+				tpch.partsupp,
+				(
+					select
+						l_partkey agg_partkey,
+						l_suppkey agg_suppkey,
+						0.5 * sum(l_quantity) AS agg_quantity
+					from
+						tpch.lineitem
+					where
+						l_shipdate >= date '1997-01-01'
+						and l_shipdate < date '1997-01-01' + interval '1' year
+					group by
+						l_partkey,
+						l_suppkey
+				) agg_lineitem
+			where
+				agg_partkey = ps_partkey
+				and agg_suppkey = ps_suppkey
+				and ps_partkey in (
+					select
+						p_partkey
+					from
+						part
+					where
+						p_name like 'powder%'
+				)
+				and ps_availqty > agg_quantity
+		)
+		and s_nationkey = n_nationkey
+		and n_name = 'ARGENTINA'
+	order by
+		s_name
+	limit 1;
+2024-04-07 09:55:28.904 PDT [315235] ERROR:  relation "revenue0" already exists
+2024-04-07 09:55:28.904 PDT [315235] STATEMENT:  create view revenue0 (supplier_no, total_revenue) as
+		select
+			l_suppkey,
+			sum(l_extendedprice * (1 - l_discount))
+		from
+			tpch.lineitem
+		where
+			l_shipdate >= date '1997-05-01'
+			and l_shipdate < date '1997-05-01' + interval '3' month
+		group by
+			l_suppkey;
+2024-04-07 09:55:28.905 PDT [315235] ERROR:  relation "supplier" does not exist at character 97
+2024-04-07 09:55:28.905 PDT [315235] STATEMENT:  select
+		tpch.s_suppkey,
+		tpch.s_name,
+		tpch.s_address,
+		tpch.s_phone,
+		tpch.total_revenue
+	from
+		supplier,
+		revenue0
+	where
+		s_suppkey = supplier_no
+		and total_revenue = (
+			select
+				max(total_revenue)
+			from
+				revenue0
+		)
+	order by
+		s_suppkey;
+2024-04-07 09:55:34.002 PDT [315258] ERROR:  relation "part" does not exist at character 575
+2024-04-07 09:55:34.002 PDT [315258] STATEMENT:  select
+		s_name,
+		s_address
+	from
+		tpch.supplier,
+		tpch.nation
+	where
+		s_suppkey in (
+			select
+				ps_suppkey
+			from
+				tpch.partsupp,
+				(
+					select
+						l_partkey agg_partkey,
+						l_suppkey agg_suppkey,
+						0.5 * sum(l_quantity) AS agg_quantity
+					from
+						tpch.lineitem
+					where
+						l_shipdate >= date '1997-01-01'
+						and l_shipdate < date '1997-01-01' + interval '1' year
+					group by
+						l_partkey,
+						l_suppkey
+				) agg_lineitem
+			where
+				agg_partkey = ps_partkey
+				and agg_suppkey = ps_suppkey
+				and ps_partkey in (
+					select
+						p_partkey
+					from
+						part
+					where
+						p_name like 'powder%'
+				)
+				and ps_availqty > agg_quantity
+		)
+		and s_nationkey = n_nationkey
+		and n_name = 'ARGENTINA'
+	order by
+		s_name
+	limit 1;
+2024-04-07 09:55:49.148 PDT [315265] ERROR:  canceling statement due to user request
+2024-04-07 09:55:49.148 PDT [315265] STATEMENT:  select
+		cntrycode,
+		count(*) as numcust,
+		sum(c_acctbal) as totacctbal
+	from
+		(
+			select
+				substring(c_phone from 1 for 2) as cntrycode,
+				c_acctbal
+			from
+				tpch.customer
+			where
+				substring(c_phone from 1 for 2) in
+					('11', '18', '15', '20', '12', '29', '30')
+				and c_acctbal > (
+					select
+						avg(c_acctbal)
+					from
+						tpch.customer
+					where
+						c_acctbal > 0.00
+						and substring(c_phone from 1 for 2) in
+							('11', '18', '15', '20', '12', '29', '30')
+				)
+				and not exists (
+					select
+						*
+					from
+						tpch.orders
+					where
+						o_custkey = c_custkey
+				)
+		) as custsale
+	group by
+		cntrycode
+	order by
+		cntrycode
+	limit 1;
+2024-04-07 09:55:49.149 PDT [315269] FATAL:  terminating background worker "parallel worker" due to administrator command
+2024-04-07 09:55:49.149 PDT [315269] STATEMENT:  select
+		cntrycode,
+		count(*) as numcust,
+		sum(c_acctbal) as totacctbal
+	from
+		(
+			select
+				substring(c_phone from 1 for 2) as cntrycode,
+				c_acctbal
+			from
+				tpch.customer
+			where
+				substring(c_phone from 1 for 2) in
+					('11', '18', '15', '20', '12', '29', '30')
+				and c_acctbal > (
+					select
+						avg(c_acctbal)
+					from
+						tpch.customer
+					where
+						c_acctbal > 0.00
+						and substring(c_phone from 1 for 2) in
+							('11', '18', '15', '20', '12', '29', '30')
+				)
+				and not exists (
+					select
+						*
+					from
+						tpch.orders
+					where
+						o_custkey = c_custkey
+				)
+		) as custsale
+	group by
+		cntrycode
+	order by
+		cntrycode
+	limit 1;
+2024-04-07 09:55:49.149 PDT [315268] FATAL:  terminating background worker "parallel worker" due to administrator command
+2024-04-07 09:55:49.149 PDT [315268] STATEMENT:  select
+		cntrycode,
+		count(*) as numcust,
+		sum(c_acctbal) as totacctbal
+	from
+		(
+			select
+				substring(c_phone from 1 for 2) as cntrycode,
+				c_acctbal
+			from
+				tpch.customer
+			where
+				substring(c_phone from 1 for 2) in
+					('11', '18', '15', '20', '12', '29', '30')
+				and c_acctbal > (
+					select
+						avg(c_acctbal)
+					from
+						tpch.customer
+					where
+						c_acctbal > 0.00
+						and substring(c_phone from 1 for 2) in
+							('11', '18', '15', '20', '12', '29', '30')
+				)
+				and not exists (
+					select
+						*
+					from
+						tpch.orders
+					where
+						o_custkey = c_custkey
+				)
+		) as custsale
+	group by
+		cntrycode
+	order by
+		cntrycode
+	limit 1;
+2024-04-07 09:55:49.153 PDT [15171] LOG:  background worker "parallel worker" (PID 315268) exited with exit code 1
+2024-04-07 09:55:49.153 PDT [15171] LOG:  background worker "parallel worker" (PID 315269) exited with exit code 1
+2024-04-07 09:56:24.213 PDT [315353] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.219 PDT [315355] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.224 PDT [315357] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.229 PDT [315359] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.234 PDT [315361] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.239 PDT [315363] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.244 PDT [315365] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.250 PDT [315367] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.255 PDT [315369] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.260 PDT [315371] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.264 PDT [315373] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.268 PDT [315375] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.273 PDT [315377] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.277 PDT [315379] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.282 PDT [315381] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.287 PDT [315383] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.291 PDT [315385] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.295 PDT [315387] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.299 PDT [315389] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.304 PDT [315391] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.309 PDT [315393] FATAL:  role "2" does not exist
+2024-04-07 09:56:24.313 PDT [315395] FATAL:  role "2" does not exist
+2024-04-07 09:57:22.045 PDT [315791] ERROR:  relation "supplier" does not exist at character 97
+2024-04-07 09:57:22.045 PDT [315791] STATEMENT:  select
+		tpch.s_suppkey,
+		tpch.s_name,
+		tpch.s_address,
+		tpch.s_phone,
+		tpch.total_revenue
+	from
+		supplier,
+		revenue0
+	where
+		s_suppkey = supplier_no
+		and total_revenue = (
+			select
+				max(total_revenue)
+			from
+				revenue0
+		)
+	order by
+		s_suppkey;
+2024-04-07 09:57:27.173 PDT [315812] ERROR:  relation "part" does not exist at character 575
+2024-04-07 09:57:27.173 PDT [315812] STATEMENT:  select
+		s_name,
+		s_address
+	from
+		tpch.supplier,
+		tpch.nation
+	where
+		s_suppkey in (
+			select
+				ps_suppkey
+			from
+				tpch.partsupp,
+				(
+					select
+						l_partkey agg_partkey,
+						l_suppkey agg_suppkey,
+						0.5 * sum(l_quantity) AS agg_quantity
+					from
+						tpch.lineitem
+					where
+						l_shipdate >= date '1997-01-01'
+						and l_shipdate < date '1997-01-01' + interval '1' year
+					group by
+						l_partkey,
+						l_suppkey
+				) agg_lineitem
+			where
+				agg_partkey = ps_partkey
+				and agg_suppkey = ps_suppkey
+				and ps_partkey in (
+					select
+						p_partkey
+					from
+						part
+					where
+						p_name like 'powder%'
+				)
+				and ps_availqty > agg_quantity
+		)
+		and s_nationkey = n_nationkey
+		and n_name = 'ARGENTINA'
+	order by
+		s_name
+	limit 1;
+2024-04-07 09:59:22.877 PDT [15172] LOG:  checkpoint starting: time
+2024-04-07 09:59:22.899 PDT [15172] LOG:  checkpoint complete: wrote 1 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.011 s, total=0.022 s; sync files=18, longest=0.001 s, average=0.001 s; distance=88 kB, estimate=374611 kB; lsn=2/DF57EBA8, redo lsn=2/DF57EB70
+2024-04-07 10:12:58.112 PDT [318750] ERROR:  missing FROM-clause entry for table "tpch" at character 9
+2024-04-07 10:12:58.112 PDT [318750] STATEMENT:  select
+		tpch.s_suppkey,
+		tpch.s_name,
+		tpch.s_address,
+		tpch.s_phone,
+		tpch.total_revenue
+	from
+		tpch.supplier,
+		revenue0
+	where
+		s_suppkey = supplier_no
+		and total_revenue = (
+			select
+				max(total_revenue)
+			from
+				revenue0
+		)
+	order by
+		s_suppkey;
+2024-04-07 10:14:23.074 PDT [15172] LOG:  checkpoint starting: time
+2024-04-07 10:14:23.094 PDT [15172] LOG:  checkpoint complete: wrote 1 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.011 s, total=0.020 s; sync files=17, longest=0.002 s, average=0.001 s; distance=86 kB, estimate=337158 kB; lsn=2/DF594450, redo lsn=2/DF594418

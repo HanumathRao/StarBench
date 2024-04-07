@@ -20,7 +20,7 @@ select
 	tpch.s_phone,
 	tpch.total_revenue
 from
-	supplier,
+	tpch.supplier,
 	revenue0
 where
 	s_suppkey = supplier_no
@@ -33,5 +33,4 @@ where
 order by
 	s_suppkey;
 
-drop view revenue0
-limit 1;
+drop view revenue0;
