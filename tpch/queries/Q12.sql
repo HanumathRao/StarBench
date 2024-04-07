@@ -1,28 +1,32 @@
-/* Query 12 - Var_0 Rev_01 - SSBench Shipping Modes and Order Priority Query */
-SELECT /* dss_12.sql */
-        LO_SHIPMODE,
-        SUM(CASE
-                WHEN LO_ORDERPRIORITY = '1-URGENT'
-                        OR LO_ORDERPRIORITY = '2-HIGH'
-                THEN 1 
-                ELSE 0 
-        END) AS HIGH_LINE_COUNT,
-        SUM(CASE 
-                WHEN LO_ORDERPRIORITY <> '1-URGENT'
-                        AND LO_ORDERPRIORITY <> '2-HIGH' 
-                THEN 1 
-                ELSE 0 
-        END) AS LOW_LINE_COUNT
-FROM 
-        LINEORDER
-WHERE 
-        LO_SHIPMODE IN ('MAIL','SHIP')
-        AND LO_COMMITDATE < LO_RECEIPTDATE
-        AND LO_SHIPDATE < LO_COMMITDATE
-        AND LO_RECEIPTDATE >= '1994-01-01'
-        AND LO_RECEIPTDATE < DATE '1994-01-01' + INTERVAL '1' YEAR
-GROUP BY 
-        LO_SHIPMODE
-ORDER BY 
-        LO_SHIPMODE;
+-- using 1472396759 as a seed to the RNG
 
+
+select
+	l_shipmode,
+	sum(case
+		when o_orderpriority = '1-URGENT'
+			or o_orderpriority = '2-HIGH'
+			then 1
+		else 0
+	end) as high_line_count,
+	sum(case
+		when o_orderpriority <> '1-URGENT'
+			and o_orderpriority <> '2-HIGH'
+			then 1
+		else 0
+	end) as low_line_count
+from
+	tpch.orders,
+	tpch.lineitem
+where
+	o_orderkey = l_orderkey
+	and l_shipmode in ('TRUCK', 'AIR')
+	and l_commitdate < l_receiptdate
+	and l_shipdate < l_commitdate
+	and l_receiptdate >= date '1997-01-01'
+	and l_receiptdate < date '1997-01-01' + interval '1' year
+group by
+	l_shipmode
+order by
+	l_shipmode
+limit 1;

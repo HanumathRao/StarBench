@@ -1,21 +1,16 @@
-/* Query 17 - Var_0 Rev_01 - TPC-H/TPC-R Small-Quantity-Order Revenue Query */
-SELECT /* dss_17.sql */
-        SUM(LO_EXTENDEDPRICE) / 7.0 AS AVG_YEARLY
-FROM
-        LINEORDER,
-        PART
-WHERE
-        P_PARTKEY = LO_PARTKEY
-        AND P_SUPPKEY = LO_SUPPKEY
---        AND P_BRAND = 'Brand#23'
-        AND P_CONTAINER = 'MED BOX'
-        AND LO_QUANTITY < (
-                SELECT
-                        0.2 * AVG(LO_QUANTITY)
-                FROM
-                        LINEORDER
-                WHERE
-                        LO_PARTKEY = P_PARTKEY
-        )
-;
+-- using 1472396759 as a seed to the RNG
 
+
+select
+	sum(l_extendedprice) / 7.0 as avg_yearly
+from
+	tpch.lineitem,
+	tpch.part,
+        (select l_partkey as agg_partkey, 0.2 * avg(l_quantity) as avg_quantity from tpch.lineitem group by l_partkey) part_agg
+where
+	p_partkey = l_partkey
+        and agg_partkey = l_partkey
+	and p_brand = 'brand#33'
+	and p_container = 'wrap jar'
+	and l_quantity < avg_quantity  
+limit 1;

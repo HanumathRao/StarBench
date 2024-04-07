@@ -1,21 +1,29 @@
-/* Query 05 - Var_0 Rev_01 - SSBench Local Supplier Volume Query */
-SELECT /* dss_05.sql */
-        S_NATION,
-        CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT))  AS DECIMAL(18,2)) AS REVENUE
-FROM 
-        CUSTOMER,
-        LINEORDER,
-        SUPPLIER
-WHERE
-        C_CUSTKEY = LO_CUSTKEY
-        AND LO_SUPPKEY = S_SUPPKEY
-        AND S_NATION = C_NATION
-        AND C_REGION = 'ASIA'
-        AND S_REGION = 'ASIA'
-        AND LO_ORDERDATE >= '1994-01-01'
-        AND LO_ORDERDATE < DATE '1994-01-01' + INTERVAL '1' YEAR
-GROUP BY
-        S_NATION
-ORDER BY
-        REVENUE DESC;
+-- using 1472396759 as a seed to the RNG
+
+
+select
+	n_name,
+	sum(l_extendedprice * (1 - l_discount)) as revenue
+from
+	tpch.customer,
+	tpch.orders,
+	tpch.lineitem,
+	tpch.supplier,
+	tpch.nation,
+	tpch.region
+where
+	c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and l_suppkey = s_suppkey
+	and c_nationkey = s_nationkey
+	and s_nationkey = n_nationkey
+	and n_regionkey = r_regionkey
+	and r_name = 'AMERICA'
+	and o_orderdate >= date '1995-01-01'
+	and o_orderdate < date '1995-01-01' + interval '1' year
+group by
+	n_name
+order by
+	revenue desc
+limit 1;
 

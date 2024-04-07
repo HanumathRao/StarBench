@@ -2345,3 +2345,4433 @@
 2024-04-06 12:49:05.976 PDT [15172] HINT:  Consider increasing the configuration parameter "max_wal_size".
 2024-04-06 12:49:05.976 PDT [15172] LOG:  checkpoint starting: wal
 2024-04-06 12:53:35.116 PDT [15172] LOG:  checkpoint complete: wrote 1482 buffers (9.0%); 0 WAL file(s) added, 0 removed, 33 recycled; write=269.053 s, sync=0.011 s, total=269.141 s; sync files=15, longest=0.002 s, average=0.001 s; distance=540669 kB, estimate=543483 kB; lsn=2/DF54BD60, redo lsn=2/D03FF690
+2024-04-06 13:55:16.517 PDT [56058] ERROR:  relation "lineorder" does not exist at character 696
+2024-04-06 13:55:16.517 PDT [56058] STATEMENT:  /* Query 01 - Var_0 Rev_01 - TPC-H/TPC-R Pricing Summary Report Query   */
+	SELECT /* dss_01.sql */
+	        LO_RETURNFLAG, 
+	        LO_LINESTATUS,
+	        CAST(SUM(LO_QUANTITY) AS DECIMAL(18,2)) AS SUM_QTY,
+	        CAST(SUM(LO_EXTENDEDPRICE) AS DECIMAL(18,2)) AS SUM_BASE_PRICE,
+	        CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)) AS DECIMAL(18,2)) AS SUM_DISC_PRICE,
+	        CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)*(1+LO_TAX)) AS DECIMAL(18,2)) AS SUM_CHARGE,
+	        CAST(AVG(LO_QUANTITY) AS DECIMAL(18,2)) AS AVG_QTY,
+	        CAST(AVG(LO_EXTENDEDPRICE) AS DECIMAL(18,2)) AS AVG_PRICE,
+	        CAST(AVG(LO_DISCOUNT) AS DECIMAL(18,2)) AS AVG_DISC,
+	        COUNT(*) AS COUNT_ORDER
+	FROM 
+	        LINEORDER
+	WHERE
+	        LO_SHIPDATE <= DATE '1998-12-01' - INTERVAL '90' DAY
+	GROUP BY
+	        LO_RETURNFLAG,
+	        LO_LINESTATUS
+	ORDER BY
+	        LO_RETURNFLAG,
+	        LO_LINESTATUS;
+2024-04-06 13:55:16.526 PDT [56060] ERROR:  syntax error at or near "*/" at character 74
+2024-04-06 13:55:16.526 PDT [56060] STATEMENT:  /* Query 02 - Var_0 Rev_01 - TPC-H/TPC-R Minimum Cost Supplier Query  */
+	*/ Return the first 100 selected rows                                 */
+	SELECT /* dss_02.sql */ DISTINCT
+	        S_ACCTBAL,
+	        S_NAME,
+	        S_REGION,
+	        P_PARTKEY,
+	        P_MFGR,
+	        S_ADDRESS,
+	        S_PHONE
+	        S_COMMENT 
+	FROM PART O, 
+	        SUPPLIER
+	WHERE O.P_SUPPKEY = S_SUPPKEY
+	       AND O.P_TYPE LIKE '%BRASS'
+	       AND O.P_SIZE = 15
+	    AND S_REGION = 'ASIA'
+	       AND O.P_SUPPLYCOST =
+	       (SELECT  Min(P_SUPPLYCOST)
+	                FROM 
+	                        PART,
+	                        SUPPLIER
+	                WHERE
+	                        O.P_PARTKEY = P_PARTKEY 
+	                         AND S_SUPPKEY = P_SUPPKEY
+	                         AND S_REGION = 'ASIA'  
+	                GROUP BY P_PARTKEY)
+	       ORDER BY
+	       S_ACCTBAL DESC,
+	        S_REGION,
+	        S_NAME,
+	        P_PARTKEY
+	LIMIT 100;
+2024-04-06 13:55:16.532 PDT [56062] ERROR:  relation "customer" does not exist at character 338
+2024-04-06 13:55:16.532 PDT [56062] STATEMENT:  /* Query 03 - Var_0 Rev_01 - SSBench TPC-H Shipping Priority Query      */
+	/* Return the first 100 selected rows                                   */
+	SELECT /* dss_03.sql */
+	        LO_ORDERKEY,
+	        CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE,
+	        LO_ORDERDATE,
+	        LO_SHIPPRIORITY
+	FROM  
+	        CUSTOMER,
+	        LINEORDER
+	WHERE
+	--        C_MKTSEGMENT  = 'BUILDING'
+	--        AND C_CUSTKEY    = LO_CUSTKEY
+	         C_CUSTKEY    = LO_CUSTKEY
+	--        AND LO_ORDERDATE  < '1995-03-15'
+	--        AND LO_SHIPDATE   > '1995-03-15'
+	GROUP BY
+	        LO_ORDERKEY,
+	        LO_ORDERDATE,
+	        LO_SHIPPRIORITY
+	ORDER BY
+	        REVENUE DESC,
+	        LO_ORDERDATE
+	LIMIT 100;
+2024-04-06 13:55:16.539 PDT [56064] ERROR:  relation "lineorder" does not exist at character 189
+2024-04-06 13:55:16.539 PDT [56064] STATEMENT:  /* Query 04 - Var_0 Rev_01 - SSB Order Priority Checking Query */
+	WITH   /* dss_04.sql */ 
+	        T1(OKEY) AS  (
+	                SELECT 
+	                LO_ORDERKEY 
+	                FROM LINEORDER 
+	                WHERE LO_COMMITDATE < LO_RECEIPTDATE
+	        )
+	        SELECT 
+	        LO_ORDERPRIORITY, 
+	        COUNT(DISTINCT LO_ORDERKEY) AS ORDER_COUNT
+	        FROM 
+	                T1, 
+	                LINEORDER
+	        WHERE
+	                OKEY=LO_ORDERKEY
+	                AND LO_ORDERDATE >=  '1993-07-01'
+	                AND LO_ORDERDATE < DATE '1993-07-01' + INTERVAL '3' MONTH
+	GROUP BY LO_ORDERPRIORITY
+	ORDER BY LO_ORDERPRIORITY;
+2024-04-06 13:55:16.545 PDT [56066] ERROR:  relation "customer" does not exist at character 206
+2024-04-06 13:55:16.545 PDT [56066] STATEMENT:  /* Query 05 - Var_0 Rev_01 - SSBench Local Supplier Volume Query */
+	SELECT /* dss_05.sql */
+	        S_NATION,
+	        CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT))  AS DECIMAL(18,2)) AS REVENUE
+	FROM 
+	        CUSTOMER,
+	        LINEORDER,
+	        SUPPLIER
+	WHERE
+	        C_CUSTKEY = LO_CUSTKEY
+	        AND LO_SUPPKEY = S_SUPPKEY
+	        AND S_NATION = C_NATION
+	        AND C_REGION = 'ASIA'
+	        AND S_REGION = 'ASIA'
+	        AND LO_ORDERDATE >= '1994-01-01'
+	        AND LO_ORDERDATE < DATE '1994-01-01' + INTERVAL '1' YEAR
+	GROUP BY
+	        S_NATION
+	ORDER BY
+	        REVENUE DESC;
+2024-04-06 13:55:16.554 PDT [56068] ERROR:  relation "lineorder" does not exist at character 188
+2024-04-06 13:55:16.554 PDT [56068] STATEMENT:  /* Query 06 - Var_0 Rev_01 - SSBench Forecasting Revenue Change Query */
+	SELECT /* dss_06.sql */
+	        CAST(SUM(LO_EXTENDEDPRICE*LO_DISCOUNT) AS DECIMAL(18,2)) AS REVENUE
+	FROM 
+	        LINEORDER
+	WHERE
+	        LO_SHIPDATE >= '1994-01-01'
+	        AND LO_SHIPDATE < DATE '1994-01-01' + INTERVAL '1' YEAR
+	        AND LO_DISCOUNT BETWEEN .06 - 0.01 AND .06 + 0.01
+	        AND LO_QUANTITY < 24;
+2024-04-06 13:55:16.562 PDT [56070] ERROR:  relation "supplier" does not exist at character 302
+2024-04-06 13:55:16.562 PDT [56070] STATEMENT:  /* Query 07 - Var_0 Rev_01 - SSBench Volume Shipping Query  */ 
+	SELECT /* dss_07.sql */
+	        S_NATION  AS SUPP_NATION,
+	        C_NATION  AS CUST_NATION,
+	        EXTRACT(YEAR FROM LO_SHIPDATE) AS YEAR1,
+	        CAST(SUM(LO_EXTENDEDPRICE * (1-LO_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE
+	FROM 
+	        SUPPLIER,
+	        LINEORDER,
+	        CUSTOMER
+	WHERE
+	        S_SUPPKEY  = LO_SUPPKEY
+	        AND C_CUSTKEY = LO_CUSTKEY
+	        AND (
+	                (S_NATION = 'FRANCE' AND C_NATION = 'GERMANY')
+	                OR (S_NATION = 'GERMANY' AND C_NATION = 'FRANCE')
+	        )
+	        AND  LO_SHIPDATE BETWEEN '1995-01-01' AND '1996-12-31'
+	GROUP BY
+	        SUPP_NATION,
+	        CUST_NATION,
+	        YEAR1
+	ORDER BY
+	        SUPP_NATION,
+	        CUST_NATION,
+	        YEAR1;
+2024-04-06 13:55:16.569 PDT [56072] ERROR:  relation "part" does not exist at character 406
+2024-04-06 13:55:16.569 PDT [56072] STATEMENT:  /* Query 08 - Var_0 Rev_01 - SSBench National Market Share Query */
+	SELECT /* dss_08.sql */
+	        EXTRACT(YEAR FROM LO_ORDERDATE) AS YEAR1,
+	        SUM(CASE
+	                WHEN S_NATION = 'BRAZIL'  
+	                THEN CAST(LO_EXTENDEDPRICE*(1-LO_DISCOUNT) AS DECIMAL(18,2))
+	                ELSE 0
+	        END) / CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)) AS DECIMAL(18,2)) AS MKT_SHARE
+	FROM 
+	        PART,
+	        SUPPLIER,
+	        LINEORDER,
+	        CUSTOMER
+	WHERE
+	        P_PARTKEY = LO_PARTKEY
+	        AND S_SUPPKEY = LO_SUPPKEY
+	        AND LO_ORDERKEY = LO_ORDERKEY
+	        AND LO_CUSTKEY = C_CUSTKEY
+	        AND C_REGION = 'AMERICA'
+	        AND LO_ORDERDATE BETWEEN '1995-01-01' AND '1996-12-31'
+	        AND P_TYPE = 'ECONOMY ANODIZED STEEL'
+	GROUP BY
+	        YEAR1
+	ORDER BY
+	        YEAR1;
+2024-04-06 13:55:16.575 PDT [56074] ERROR:  relation "part" does not exist at character 299
+2024-04-06 13:55:16.575 PDT [56074] STATEMENT:  /* Query 09 - Var_0 Rev_01 - SSBench Product Type Profit Measure Query */
+	SELECT /* dss_09.sql */
+	        S_NATION  AS NATION,
+	        EXTRACT(YEAR FROM LO_ORDERDATE) AS YEAR1,
+	        CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)-P_SUPPLYCOST*LO_QUANTITY) AS DECIMAL(18,2)) AS SUM_PROFIT
+	FROM
+	        PART,
+	        SUPPLIER,
+	        LINEORDER
+	WHERE
+	        S_SUPPKEY = LO_SUPPKEY
+	        AND S_SUPPKEY = LO_SUPPKEY
+	        AND P_PARTKEY = LO_PARTKEY
+	        AND P_SUPPKEY = LO_SUPPKEY
+	        AND P_NAME LIKE '%green%'
+	GROUP BY
+	        NATION,
+	        YEAR1
+	ORDER BY
+	        NATION,
+	        YEAR1 DESC;
+2024-04-06 13:55:16.584 PDT [56076] ERROR:  relation "customer" does not exist at character 376
+2024-04-06 13:55:16.584 PDT [56076] STATEMENT:  /* Query 10 - Var_0 Rev_01 - TPC-H/TPC-R Returned Item Reporting Query */
+	/* Return the first 20 selected rows                                   */
+	SELECT /* dss_10.sql */
+	        C_CUSTKEY,
+	        C_NAME,
+	        CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE,
+	        C_ACCTBAL,
+	        C_NATION,
+	        C_ADDRESS,
+	        C_PHONE 
+	FROM 
+	        CUSTOMER,
+	        LINEORDER
+	WHERE
+	        C_CUSTKEY = LO_CUSTKEY
+	        AND LO_ORDERDATE >= '1993-10-01'
+	        AND LO_ORDERDATE < DATE '1993-10-01' + INTERVAL '3' MONTH
+	        AND LO_RETURNFLAG = 'R'
+	GROUP BY 
+	        C_CUSTKEY,
+	        C_NAME,
+	        C_ACCTBAL,
+	        C_PHONE,
+	        C_NATION,
+	        C_ADDRESS
+	ORDER BY 
+	        REVENUE DESC
+	LIMIT 20;
+2024-04-06 13:55:16.590 PDT [56078] ERROR:  relation "part" does not exist at character 250
+2024-04-06 13:55:16.590 PDT [56078] STATEMENT:  /* Query 11 - Var_0 Rev_01 - SSBench Important Stock Identification Query */
+	/* modified to minimize size of the output */
+	SELECT /* dss_11.sql */
+	        P_PARTKEY,
+	        CAST(SUM(P_SUPPLYCOST * P_AVAILQTY) AS DEC(18,2)) AS "VALUE"
+	FROM 
+	        PART,
+	        SUPPLIER
+	WHERE
+	         P_SUPPKEY=S_SUPPKEY
+	AND      S_NATION = 'GERMANY'
+	GROUP BY
+	        P_PARTKEY HAVING 
+	                SUM(P_SUPPLYCOST * P_AVAILQTY) > (
+	                        SELECT
+	                                CAST(SUM(P_SUPPLYCOST * P_AVAILQTY) * 0.0001000000 AS DECIMAL(18,2))
+	                        FROM
+	                                PART,
+	                                SUPPLIER
+	                        WHERE
+	                                P_SUPPKEY=S_SUPPKEY
+	                        AND     S_NATION = 'GERMANY'
+	                )
+	ORDER BY
+	        "VALUE" DESC
+	LIMIT 10;
+2024-04-06 13:55:16.597 PDT [56080] ERROR:  relation "lineorder" does not exist at character 551
+2024-04-06 13:55:16.597 PDT [56080] STATEMENT:  /* Query 12 - Var_0 Rev_01 - SSBench Shipping Modes and Order Priority Query */
+	SELECT /* dss_12.sql */
+	        LO_SHIPMODE,
+	        SUM(CASE
+	                WHEN LO_ORDERPRIORITY = '1-URGENT'
+	                        OR LO_ORDERPRIORITY = '2-HIGH'
+	                THEN 1 
+	                ELSE 0 
+	        END) AS HIGH_LINE_COUNT,
+	        SUM(CASE 
+	                WHEN LO_ORDERPRIORITY <> '1-URGENT'
+	                        AND LO_ORDERPRIORITY <> '2-HIGH' 
+	                THEN 1 
+	                ELSE 0 
+	        END) AS LOW_LINE_COUNT
+	FROM 
+	        LINEORDER
+	WHERE 
+	        LO_SHIPMODE IN ('MAIL','SHIP')
+	        AND LO_COMMITDATE < LO_RECEIPTDATE
+	        AND LO_SHIPDATE < LO_COMMITDATE
+	        AND LO_RECEIPTDATE >= '1994-01-01'
+	        AND LO_RECEIPTDATE < DATE '1994-01-01' + INTERVAL '1' YEAR
+	GROUP BY 
+	        LO_SHIPMODE
+	ORDER BY 
+	        LO_SHIPMODE;
+2024-04-06 13:55:16.604 PDT [56082] ERROR:  relation "customer" does not exist at character 259
+2024-04-06 13:55:16.604 PDT [56082] STATEMENT:  /* Query 13 - Var_0 Rev_01 - TPC-H/TPC-R Customer Distribution Query */
+	SELECT /* dss_13.sql */
+	        C_COUNT, COUNT(*) AS CUSTDIST
+	FROM   (
+	        SELECT
+	                C_CUSTKEY,
+	                COUNT(DISTINCT LO_ORDERKEY)
+	        FROM
+	                CUSTOMER LEFT OUTER JOIN LINEORDER ON
+	                        C_CUSTKEY = LO_CUSTKEY
+	                        AND LO_COMMENT NOT LIKE '%special%requests%'
+	        GROUP BY
+	                C_CUSTKEY
+	        ) AS C_ORDERS (C_CUSTKEY, C_COUNT)
+	GROUP BY
+	        C_COUNT
+	ORDER BY
+	        CUSTDIST DESC,
+	        C_COUNT DESC;
+2024-04-06 13:55:16.613 PDT [56084] ERROR:  relation "lineorder" does not exist at character 343
+2024-04-06 13:55:16.613 PDT [56084] STATEMENT:  /* Query 14 - Var_0 Rev_01 - SSBench Promotion Effect Query */
+	SELECT /* dss_14.sql */
+	        100.00*SUM(CASE 
+	                WHEN P_TYPE LIKE 'PROMO%'
+	                THEN LO_EXTENDEDPRICE*(1-LO_DISCOUNT) 
+	                ELSE 0 
+	        END ) / CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)) AS DECIMAL (18,2)) AS PROMO_REVENUE
+	FROM 
+	        LINEORDER,
+	        PART
+	WHERE
+	        LO_PARTKEY = P_PARTKEY
+	        AND LO_SHIPDATE >= '1995-09-01'
+	        AND LO_SHIPDATE < DATE '1995-09-01' + INTERVAL '1' MONTH;
+2024-04-06 13:55:16.618 PDT [56086] ERROR:  relation "lineorder" does not exist at character 218
+2024-04-06 13:55:16.618 PDT [56086] STATEMENT:  /* Query 15 - Var_0 Rev_01 - TPC-H/TPC-R  Top Supplier Query */
+	WITH   /* dss_15.sql */ REVENUE (SUPPLIER_NO, TOTAL_REVENUE) AS (
+	SELECT
+	LO_SUPPKEY,
+	CAST(SUM(LO_EXTENDEDPRICE * (1-LO_DISCOUNT)) AS DECIMAL(18,2))
+	FROM
+	LINEORDER
+	WHERE
+	LO_SHIPDATE >= DATE '1996-01-01'
+	AND LO_SHIPDATE <  DATE '1996-01-01'+ INTERVAL '3' MONTH
+	GROUP BY
+	LO_SUPPKEY
+	)
+	SELECT 
+	DISTINCT S_SUPPKEY,
+	S_NAME,
+	S_ADDRESS,
+	S_PHONE,
+	TOTAL_REVENUE
+	FROM
+	SUPPLIER,
+	REVENUE
+	WHERE
+	S_SUPPKEY = SUPPLIER_NO
+	AND TOTAL_REVENUE = (
+	SELECT
+	MAX(TOTAL_REVENUE)
+	FROM
+	REVENUE
+	)
+	ORDER BY
+	S_SUPPKEY;
+2024-04-06 13:55:16.624 PDT [56088] ERROR:  relation "part" does not exist at character 255
+2024-04-06 13:55:16.624 PDT [56088] STATEMENT:  /* Query 16 - Var_0 Rev_01 - SSBench Parts/Supplier Relationship Query */
+	/* modified to minimize size of output  */
+	SELECT /* dss_16.sql */
+	        P_BRAND,
+	        P_TYPE,
+	        P_SIZE,
+	        COUNT(DISTINCT P_SUPPKEY) AS SUPPLIER_CNT
+	FROM 
+	        PART
+	WHERE
+	        P_BRAND <> 'Brand#45'
+	        AND P_TYPE NOT LIKE 'MEDIUM POLISHED%'
+	        AND P_SIZE IN (49,14,23,45,19,3,36,9)
+	        AND P_SUPPKEY NOT IN (
+	                SELECT 
+	                        S_SUPPKEY 
+	                FROM 
+	                        SUPPLIER
+	                WHERE 
+	                        S_COMMENT LIKE '%Customer%Complaints%'
+	        )
+	GROUP BY
+	        P_BRAND,
+	        P_TYPE,
+	        P_SIZE
+	ORDER BY
+	        SUPPLIER_CNT DESC,
+	        P_BRAND,
+	        P_TYPE,
+	        P_SIZE
+	LIMIT 10;
+2024-04-06 13:55:16.632 PDT [56090] ERROR:  relation "lineorder" does not exist at character 167
+2024-04-06 13:55:16.632 PDT [56090] STATEMENT:  /* Query 17 - Var_0 Rev_01 - TPC-H/TPC-R Small-Quantity-Order Revenue Query */
+	SELECT /* dss_17.sql */
+	        SUM(LO_EXTENDEDPRICE) / 7.0 AS AVG_YEARLY
+	FROM
+	        LINEORDER,
+	        PART
+	WHERE
+	        P_PARTKEY = LO_PARTKEY
+	        AND P_SUPPKEY = LO_SUPPKEY
+	--        AND P_BRAND = 'Brand#23'
+	        AND P_CONTAINER = 'MED BOX'
+	        AND LO_QUANTITY < (
+	                SELECT
+	                        0.2 * AVG(LO_QUANTITY)
+	                FROM
+	                        LINEORDER
+	                WHERE
+	                        LO_PARTKEY = P_PARTKEY
+	        )
+	;
+2024-04-06 13:55:16.639 PDT [56092] ERROR:  relation "customer" does not exist at character 372
+2024-04-06 13:55:16.639 PDT [56092] STATEMENT:  /* @(#)TERADATA 18.sql 1.1.1.1@(#) */
+	/* Query 18 - Var_0 Rev_01 - SSBench Large Volume Customer Query */
+	/* Return the first 100 selected rows                            */
+	SELECT /* dss_18.sql */
+	        C_NAME,
+	        C_CUSTKEY,
+	        LO_ORDERKEY,
+	        LO_ORDERDATE,
+	        LO_TOTALPRICE,
+	        CAST(SUM(LO_QUANTITY) AS DECIMAL(18,2)) AS SUM_QTY
+	FROM
+	        CUSTOMER,
+	        LINEORDER
+	WHERE
+	        LO_ORDERKEY IN (
+	                SELECT
+	                        LO_ORDERKEY
+	                FROM
+	                        LINEORDER
+	                GROUP BY
+	                        LO_ORDERKEY HAVING
+	                                SUM(LO_QUANTITY) > 300
+	        )
+	        AND C_CUSTKEY = LO_CUSTKEY
+	GROUP BY
+	        C_NAME,
+	        C_CUSTKEY,
+	        LO_ORDERKEY,
+	        LO_ORDERDATE,
+	        LO_TOTALPRICE
+	ORDER BY
+	        LO_TOTALPRICE DESC,
+	        LO_ORDERDATE
+	LIMIT 100;
+2024-04-06 13:55:16.646 PDT [56094] ERROR:  relation "lineorder" does not exist at character 222
+2024-04-06 13:55:16.646 PDT [56094] STATEMENT:  /* @(#)TERADATA 19.sql 1.1.1.1@(#) */
+	/* Query 19 - Var_0 Rev_1 - SSBench Discounted Revenue Query */
+	SELECT /* dss_19.sql */
+	        CAST(SUM(LO_EXTENDEDPRICE*(1 - LO_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE
+	FROM
+	        LINEORDER,
+	        PART
+	WHERE
+	        (
+	                P_PARTKEY = LO_PARTKEY
+	                AND P_SUPPKEY = LO_SUPPKEY
+	                AND P_BRAND = 'Brand#12'
+	                AND P_CONTAINER IN  ( 'SM CASE', 'SM BOX', 'SM PACK', 'SM PKG')
+	                AND LO_QUANTITY >= 1 AND LO_QUANTITY <= 1 + 10
+	                AND P_SIZE BETWEEN 1 AND 5
+	                AND LO_SHIPMODE IN ('AIR', 'AIR REG')
+	                AND LO_SHIPINSTRUCT = 'DELIVER IN PERSON'
+	        )
+	        OR
+	        (
+	                P_PARTKEY = LO_PARTKEY
+	                AND P_SUPPKEY = LO_SUPPKEY
+	                AND P_BRAND = 'Brand#23'
+	                AND P_CONTAINER IN  ('MED BAG', 'MED BOX', 'MED PKG', 'MED PACK')
+	                AND LO_QUANTITY >= 10 AND LO_QUANTITY <= 10 + 10
+	                AND P_SIZE BETWEEN 1  AND 10
+	                AND LO_SHIPMODE IN ('AIR', 'AIR REG')
+	                AND LO_SHIPINSTRUCT = 'DELIVER IN PERSON'
+	        )
+	        OR
+	        (
+	                P_PARTKEY = LO_PARTKEY
+	                AND P_SUPPKEY = LO_SUPPKEY
+	                AND P_BRAND = 'Brand#34'
+	                AND P_CONTAINER IN  ( 'LG CASE', 'LG BOX', 'LG PACK', 'LG PKG')
+	                AND LO_QUANTITY >= 20 AND LO_QUANTITY <= 20 + 10
+	                AND P_SIZE BETWEEN 1  AND 15
+	                AND LO_SHIPMODE IN ('AIR', 'AIR REG')
+	                AND LO_SHIPINSTRUCT = 'DELIVER IN PERSON'
+	        );
+2024-04-06 13:55:16.652 PDT [56096] ERROR:  relation "supplier" does not exist at character 189
+2024-04-06 13:55:16.652 PDT [56096] STATEMENT:  /* @(#)TERADATA 20.sql 1.1.1.1@(#) */
+	/* Query 20 - Var_0 Rev_01 - TPC-H/TPC-R The Potential Part Promotion query */
+	SELECT /* dss_20.sql */
+	        S_NAME,
+	        S_ADDRESS
+	FROM
+	        SUPPLIER
+	WHERE
+	        S_SUPPKEY IN (
+	                SELECT
+	                        P_SUPPKEY
+	                FROM
+	                        PART
+	                WHERE
+	                        P_PARTKEY IN (
+	                                SELECT
+	                                        P_PARTKEY
+	                                FROM
+	                                        PART
+	                                WHERE
+	                                        P_NAME LIKE 'forest%'
+	                        )
+	                AND  P_AVAILQTY > (
+	                        SELECT
+	                                0.5 * SUM(LO_QUANTITY)
+	                        FROM
+	                                LINEORDER
+	                        WHERE
+	                                LO_PARTKEY = P_PARTKEY
+	                                AND  LO_SUPPKEY = P_SUPPKEY
+	                                AND  LO_SHIPDATE >= '1994-01-01'
+	                                AND  LO_SHIPDATE <  DATE '1994-01-01' + INTERVAL '1' YEAR
+	                )
+	        )
+	        AND S_NATION = 'CANADA'
+	ORDER BY
+	        S_NAME
+	LIMIT 10;
+2024-04-06 13:55:16.659 PDT [56098] ERROR:  relation "supplier" does not exist at character 260
+2024-04-06 13:55:16.659 PDT [56098] STATEMENT:  /* Query 21 - Var_0 Rev_01 - TPC-H/TPC-R  The Suppliers Who Kept Orders Waiting Query */
+	/* Return the first 100 selected rows.                                                */
+	SELECT /* dss_21.sql */
+	        S_NAME,
+	        COUNT(*) AS NUMWAIT
+	FROM
+	        SUPPLIER,
+	        LINEORDER L1
+	WHERE
+	        S_SUPPKEY = L1.LO_SUPPKEY
+	        AND LO_ORDERSTATUS='F'
+	        AND L1.LO_RECEIPTDATE > L1.LO_COMMITDATE
+	        AND EXISTS (
+	                SELECT
+	                        *
+	                FROM 
+	                        LINEORDER L2
+	                WHERE
+	                        L2.LO_ORDERKEY = L1.LO_ORDERKEY
+	                        AND L2.LO_SUPPKEY <> L1.LO_SUPPKEY
+	        )
+	        AND NOT EXISTS (
+	                SELECT
+	                        *
+	                FROM 
+	                        LINEORDER L3
+	                WHERE
+	                        L3.LO_ORDERKEY = L1.LO_ORDERKEY
+	                        AND L3.LO_SUPPKEY <> L1.LO_SUPPKEY
+	                        AND L3.LO_RECEIPTDATE > L3.LO_COMMITDATE
+	        )
+	        AND S_NATION = 'SAUDI ARABIA'
+	GROUP BY
+	        S_NAME
+	ORDER BY
+	        NUMWAIT DESC,
+	        S_NAME
+	LIMIT 100;
+2024-04-06 13:55:16.666 PDT [56100] ERROR:  relation "customer" does not exist at character 357
+2024-04-06 13:55:16.666 PDT [56100] STATEMENT:  /* @(#)TERADATA 22.sql 1.1.1.1@(#) */
+	/* Query 22 - Var_0 Rev_01 - TPC-H/TPC-R Global Saleds opportunity Query */
+	SELECT /* dss_22.sql */
+	        CNTRYCODE,
+	        COUNT(*) AS NUMCUST,
+	        SUM(C_ACCTBAL) AS TOTACCTBAL
+	FROM    (
+	        SELECT
+	                SUBSTRING(C_PHONE,1,2) AS CNTRYCODE,
+	                C_ACCTBAL
+	        FROM
+	                CUSTOMER
+	        WHERE
+	                SUBSTRING(C_PHONE,1,2) IN
+	                        ('13','31','23','29','30','18','17')
+	                AND C_ACCTBAL > (
+	                        SELECT
+	                                AVG(C_ACCTBAL)
+	                        FROM
+	                                CUSTOMER
+	                        WHERE
+	                                C_ACCTBAL > 0.00
+	                                AND SUBSTRING(C_PHONE,1,2) IN
+	                                        ('13','31','23','29','30','18','17')
+	                )
+	                AND NOT EXISTS (
+	                        SELECT
+	                                *
+	                        FROM
+	                                LINEORDER
+	                        WHERE
+	                                LO_CUSTKEY=C_CUSTKEY
+	                )
+	        ) AS CUSTSALE
+	GROUP BY
+	        CNTRYCODE
+	ORDER BY
+	        CNTRYCODE;
+2024-04-06 14:01:39.766 PDT [57359] ERROR:  relation "tpch.lineorder" does not exist at character 696
+2024-04-06 14:01:39.766 PDT [57359] STATEMENT:  /* Query 01 - Var_0 Rev_01 - TPC-H/TPC-R Pricing Summary Report Query   */
+	SELECT /* dss_01.sql */
+	        LO_RETURNFLAG, 
+	        LO_LINESTATUS,
+	        CAST(SUM(LO_QUANTITY) AS DECIMAL(18,2)) AS SUM_QTY,
+	        CAST(SUM(LO_EXTENDEDPRICE) AS DECIMAL(18,2)) AS SUM_BASE_PRICE,
+	        CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)) AS DECIMAL(18,2)) AS SUM_DISC_PRICE,
+	        CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)*(1+LO_TAX)) AS DECIMAL(18,2)) AS SUM_CHARGE,
+	        CAST(AVG(LO_QUANTITY) AS DECIMAL(18,2)) AS AVG_QTY,
+	        CAST(AVG(LO_EXTENDEDPRICE) AS DECIMAL(18,2)) AS AVG_PRICE,
+	        CAST(AVG(LO_DISCOUNT) AS DECIMAL(18,2)) AS AVG_DISC,
+	        COUNT(*) AS COUNT_ORDER
+	FROM 
+	        tpch.LINEORDER
+	WHERE
+	        LO_SHIPDATE <= DATE '1998-12-01' - INTERVAL '90' DAY
+	GROUP BY
+	        LO_RETURNFLAG,
+	        LO_LINESTATUS
+	ORDER BY
+	        LO_RETURNFLAG,
+	        LO_LINESTATUS;
+2024-04-06 14:01:39.772 PDT [57361] ERROR:  syntax error at or near "*/" at character 74
+2024-04-06 14:01:39.772 PDT [57361] STATEMENT:  /* Query 02 - Var_0 Rev_01 - TPC-H/TPC-R Minimum Cost Supplier Query  */
+	*/ Return the first 100 selected rows                                 */
+	SELECT /* dss_02.sql */ DISTINCT
+	        S_ACCTBAL,
+	        S_NAME,
+	        S_REGION,
+	        P_PARTKEY,
+	        P_MFGR,
+	        S_ADDRESS,
+	        S_PHONE
+	        S_COMMENT 
+	FROM tpch.PART O, 
+	        SUPPLIER
+	WHERE O.P_SUPPKEY = S_SUPPKEY
+	       AND O.P_TYPE LIKE '%BRASS'
+	       AND O.P_SIZE = 15
+	    AND S_REGION = 'ASIA'
+	       AND O.P_SUPPLYCOST =
+	       (SELECT  Min(P_SUPPLYCOST)
+	                FROM 
+	                        tpch.PART,
+	                        tpch.SUPPLIER
+	                WHERE
+	                        O.P_PARTKEY = P_PARTKEY 
+	                         AND S_SUPPKEY = P_SUPPKEY
+	                         AND S_REGION = 'ASIA'  
+	                GROUP BY P_PARTKEY)
+	       ORDER BY
+	       S_ACCTBAL DESC,
+	        S_REGION,
+	        S_NAME,
+	        P_PARTKEY
+	LIMIT 100;
+2024-04-06 14:01:39.778 PDT [57363] ERROR:  relation "tpch.lineorder" does not exist at character 361
+2024-04-06 14:01:39.778 PDT [57363] STATEMENT:  /* Query 03 - Var_0 Rev_01 - SSBench TPC-H Shipping Priority Query      */
+	/* Return the first 100 selected rows                                   */
+	SELECT /* dss_03.sql */
+	        LO_ORDERKEY,
+	        CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE,
+	        LO_ORDERDATE,
+	        LO_SHIPPRIORITY
+	FROM  
+	        tpch.CUSTOMER,
+	        tpch.LINEORDER
+	WHERE
+	--        C_MKTSEGMENT  = 'BUILDING'
+	--        AND C_CUSTKEY    = LO_CUSTKEY
+	         C_CUSTKEY    = LO_CUSTKEY
+	--        AND LO_ORDERDATE  < '1995-03-15'
+	--        AND LO_SHIPDATE   > '1995-03-15'
+	GROUP BY
+	        LO_ORDERKEY,
+	        LO_ORDERDATE,
+	        LO_SHIPPRIORITY
+	ORDER BY
+	        REVENUE DESC,
+	        LO_ORDERDATE
+	LIMIT 100;
+2024-04-06 14:01:39.784 PDT [57365] ERROR:  relation "tpch.lineorder" does not exist at character 189
+2024-04-06 14:01:39.784 PDT [57365] STATEMENT:  /* Query 04 - Var_0 Rev_01 - SSB Order Priority Checking Query */
+	WITH   /* dss_04.sql */ 
+	        T1(OKEY) AS  (
+	                SELECT 
+	                LO_ORDERKEY 
+	                FROM tpch.LINEORDER 
+	                WHERE LO_COMMITDATE < LO_RECEIPTDATE
+	        )
+	        SELECT 
+	        LO_ORDERPRIORITY, 
+	        COUNT(DISTINCT LO_ORDERKEY) AS ORDER_COUNT
+	        FROM 
+	                T1, 
+	                tpch.LINEORDER
+	        WHERE
+	                OKEY=LO_ORDERKEY
+	                AND LO_ORDERDATE >=  '1993-07-01'
+	                AND LO_ORDERDATE < DATE '1993-07-01' + INTERVAL '3' MONTH
+	GROUP BY LO_ORDERPRIORITY
+	ORDER BY LO_ORDERPRIORITY;
+2024-04-06 14:01:39.789 PDT [57367] ERROR:  relation "tpch.lineorder" does not exist at character 229
+2024-04-06 14:01:39.789 PDT [57367] STATEMENT:  /* Query 05 - Var_0 Rev_01 - SSBench Local Supplier Volume Query */
+	SELECT /* dss_05.sql */
+	        S_NATION,
+	        CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT))  AS DECIMAL(18,2)) AS REVENUE
+	FROM 
+	        tpch.CUSTOMER,
+	        tpch.LINEORDER,
+	        tpch.SUPPLIER
+	WHERE
+	        C_CUSTKEY = LO_CUSTKEY
+	        AND LO_SUPPKEY = S_SUPPKEY
+	        AND S_NATION = C_NATION
+	        AND C_REGION = 'ASIA'
+	        AND S_REGION = 'ASIA'
+	        AND LO_ORDERDATE >= '1994-01-01'
+	        AND LO_ORDERDATE < DATE '1994-01-01' + INTERVAL '1' YEAR
+	GROUP BY
+	        S_NATION
+	ORDER BY
+	        REVENUE DESC;
+2024-04-06 14:01:39.797 PDT [57369] ERROR:  relation "tpch.lineorder" does not exist at character 188
+2024-04-06 14:01:39.797 PDT [57369] STATEMENT:  /* Query 06 - Var_0 Rev_01 - SSBench Forecasting Revenue Change Query */
+	SELECT /* dss_06.sql */
+	        CAST(SUM(LO_EXTENDEDPRICE*LO_DISCOUNT) AS DECIMAL(18,2)) AS REVENUE
+	FROM 
+	        tpch.LINEORDER
+	WHERE
+	        LO_SHIPDATE >= '1994-01-01'
+	        AND LO_SHIPDATE < DATE '1994-01-01' + INTERVAL '1' YEAR
+	        AND LO_DISCOUNT BETWEEN .06 - 0.01 AND .06 + 0.01
+	        AND LO_QUANTITY < 24;
+2024-04-06 14:01:39.805 PDT [57371] ERROR:  relation "tpch.lineorder" does not exist at character 325
+2024-04-06 14:01:39.805 PDT [57371] STATEMENT:  /* Query 07 - Var_0 Rev_01 - SSBench Volume Shipping Query  */ 
+	SELECT /* dss_07.sql */
+	        S_NATION  AS SUPP_NATION,
+	        C_NATION  AS CUST_NATION,
+	        EXTRACT(YEAR FROM LO_SHIPDATE) AS YEAR1,
+	        CAST(SUM(LO_EXTENDEDPRICE * (1-LO_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE
+	FROM 
+	        tpch.SUPPLIER,
+	        tpch.LINEORDER,
+	        tpch.CUSTOMER
+	WHERE
+	        S_SUPPKEY  = LO_SUPPKEY
+	        AND C_CUSTKEY = LO_CUSTKEY
+	        AND (
+	                (S_NATION = 'FRANCE' AND C_NATION = 'GERMANY')
+	                OR (S_NATION = 'GERMANY' AND C_NATION = 'FRANCE')
+	        )
+	        AND  LO_SHIPDATE BETWEEN '1995-01-01' AND '1996-12-31'
+	GROUP BY
+	        SUPP_NATION,
+	        CUST_NATION,
+	        YEAR1
+	ORDER BY
+	        SUPP_NATION,
+	        CUST_NATION,
+	        YEAR1;
+2024-04-06 14:01:39.811 PDT [57373] ERROR:  relation "tpch.lineorder" does not exist at character 448
+2024-04-06 14:01:39.811 PDT [57373] STATEMENT:  /* Query 08 - Var_0 Rev_01 - SSBench National Market Share Query */
+	SELECT /* dss_08.sql */
+	        EXTRACT(YEAR FROM LO_ORDERDATE) AS YEAR1,
+	        SUM(CASE
+	                WHEN S_NATION = 'BRAZIL'  
+	                THEN CAST(LO_EXTENDEDPRICE*(1-LO_DISCOUNT) AS DECIMAL(18,2))
+	                ELSE 0
+	        END) / CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)) AS DECIMAL(18,2)) AS MKT_SHARE
+	FROM 
+	        tpch.PART,
+	        tpch.SUPPLIER,
+	        tpch.LINEORDER,
+	        tpch.CUSTOMER
+	WHERE
+	        P_PARTKEY = LO_PARTKEY
+	        AND S_SUPPKEY = LO_SUPPKEY
+	        AND LO_ORDERKEY = LO_ORDERKEY
+	        AND LO_CUSTKEY = C_CUSTKEY
+	        AND C_REGION = 'AMERICA'
+	        AND LO_ORDERDATE BETWEEN '1995-01-01' AND '1996-12-31'
+	        AND P_TYPE = 'ECONOMY ANODIZED STEEL'
+	GROUP BY
+	        YEAR1
+	ORDER BY
+	        YEAR1;
+2024-04-06 14:01:39.818 PDT [57375] ERROR:  relation "tpch.lineorder" does not exist at character 341
+2024-04-06 14:01:39.818 PDT [57375] STATEMENT:  /* Query 09 - Var_0 Rev_01 - SSBench Product Type Profit Measure Query */
+	SELECT /* dss_09.sql */
+	        S_NATION  AS NATION,
+	        EXTRACT(YEAR FROM LO_ORDERDATE) AS YEAR1,
+	        CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)-P_SUPPLYCOST*LO_QUANTITY) AS DECIMAL(18,2)) AS SUM_PROFIT
+	FROM
+	        tpch.PART,
+	        tpch.SUPPLIER,
+	        tpch.LINEORDER
+	WHERE
+	        S_SUPPKEY = LO_SUPPKEY
+	        AND S_SUPPKEY = LO_SUPPKEY
+	        AND P_PARTKEY = LO_PARTKEY
+	        AND P_SUPPKEY = LO_SUPPKEY
+	        AND P_NAME LIKE '%green%'
+	GROUP BY
+	        NATION,
+	        YEAR1
+	ORDER BY
+	        NATION,
+	        YEAR1 DESC;
+2024-04-06 14:01:39.824 PDT [57377] ERROR:  relation "tpch.lineorder" does not exist at character 399
+2024-04-06 14:01:39.824 PDT [57377] STATEMENT:  /* Query 10 - Var_0 Rev_01 - TPC-H/TPC-R Returned Item Reporting Query */
+	/* Return the first 20 selected rows                                   */
+	SELECT /* dss_10.sql */
+	        C_CUSTKEY,
+	        C_NAME,
+	        CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE,
+	        C_ACCTBAL,
+	        C_NATION,
+	        C_ADDRESS,
+	        C_PHONE 
+	FROM 
+	        tpch.CUSTOMER,
+	        tpch.LINEORDER
+	WHERE
+	        C_CUSTKEY = LO_CUSTKEY
+	        AND LO_ORDERDATE >= '1993-10-01'
+	        AND LO_ORDERDATE < DATE '1993-10-01' + INTERVAL '3' MONTH
+	        AND LO_RETURNFLAG = 'R'
+	GROUP BY 
+	        C_CUSTKEY,
+	        C_NAME,
+	        C_ACCTBAL,
+	        C_PHONE,
+	        C_NATION,
+	        C_ADDRESS
+	ORDER BY 
+	        REVENUE DESC
+	LIMIT 20;
+2024-04-06 14:01:39.832 PDT [57379] ERROR:  column "p_supplycost" does not exist at character 184
+2024-04-06 14:01:39.832 PDT [57379] STATEMENT:  /* Query 11 - Var_0 Rev_01 - SSBench Important Stock Identification Query */
+	/* modified to minimize size of the output */
+	SELECT /* dss_11.sql */
+	        P_PARTKEY,
+	        CAST(SUM(P_SUPPLYCOST * P_AVAILQTY) AS DEC(18,2)) AS "VALUE"
+	FROM 
+	        tpch.PART,
+	        tpch.SUPPLIER
+	WHERE
+	         P_SUPPKEY=S_SUPPKEY
+	AND      S_NATION = 'GERMANY'
+	GROUP BY
+	        P_PARTKEY HAVING 
+	                SUM(P_SUPPLYCOST * P_AVAILQTY) > (
+	                        SELECT
+	                                CAST(SUM(P_SUPPLYCOST * P_AVAILQTY) * 0.0001000000 AS DECIMAL(18,2))
+	                        FROM
+	                                PART,
+	                                SUPPLIER
+	                        WHERE
+	                                P_SUPPKEY=S_SUPPKEY
+	                        AND     S_NATION = 'GERMANY'
+	                )
+	ORDER BY
+	        "VALUE" DESC
+	LIMIT 10;
+2024-04-06 14:01:39.838 PDT [57381] ERROR:  relation "tpch.lineorder" does not exist at character 551
+2024-04-06 14:01:39.838 PDT [57381] STATEMENT:  /* Query 12 - Var_0 Rev_01 - SSBench Shipping Modes and Order Priority Query */
+	SELECT /* dss_12.sql */
+	        LO_SHIPMODE,
+	        SUM(CASE
+	                WHEN LO_ORDERPRIORITY = '1-URGENT'
+	                        OR LO_ORDERPRIORITY = '2-HIGH'
+	                THEN 1 
+	                ELSE 0 
+	        END) AS HIGH_LINE_COUNT,
+	        SUM(CASE 
+	                WHEN LO_ORDERPRIORITY <> '1-URGENT'
+	                        AND LO_ORDERPRIORITY <> '2-HIGH' 
+	                THEN 1 
+	                ELSE 0 
+	        END) AS LOW_LINE_COUNT
+	FROM 
+	        tpch.LINEORDER
+	WHERE 
+	        LO_SHIPMODE IN ('MAIL','SHIP')
+	        AND LO_COMMITDATE < LO_RECEIPTDATE
+	        AND LO_SHIPDATE < LO_COMMITDATE
+	        AND LO_RECEIPTDATE >= '1994-01-01'
+	        AND LO_RECEIPTDATE < DATE '1994-01-01' + INTERVAL '1' YEAR
+	GROUP BY 
+	        LO_SHIPMODE
+	ORDER BY 
+	        LO_SHIPMODE;
+2024-04-06 14:01:39.844 PDT [57383] ERROR:  relation "tpch.lineorder" does not exist at character 289
+2024-04-06 14:01:39.844 PDT [57383] STATEMENT:  /* Query 13 - Var_0 Rev_01 - TPC-H/TPC-R Customer Distribution Query */
+	SELECT /* dss_13.sql */
+	        C_COUNT, COUNT(*) AS CUSTDIST
+	FROM   (
+	        SELECT
+	                C_CUSTKEY,
+	                COUNT(DISTINCT LO_ORDERKEY)
+	        FROM
+	                tpch.CUSTOMER LEFT OUTER JOIN tpch.LINEORDER ON
+	                        C_CUSTKEY = LO_CUSTKEY
+	                        AND LO_COMMENT NOT LIKE '%special%requests%'
+	        GROUP BY
+	                C_CUSTKEY
+	        ) AS C_ORDERS (C_CUSTKEY, C_COUNT)
+	GROUP BY
+	        C_COUNT
+	ORDER BY
+	        CUSTDIST DESC,
+	        C_COUNT DESC;
+2024-04-06 14:01:39.850 PDT [57385] ERROR:  relation "tpch.lineorder" does not exist at character 343
+2024-04-06 14:01:39.850 PDT [57385] STATEMENT:  /* Query 14 - Var_0 Rev_01 - SSBench Promotion Effect Query */
+	SELECT /* dss_14.sql */
+	        100.00*SUM(CASE 
+	                WHEN P_TYPE LIKE 'PROMO%'
+	                THEN LO_EXTENDEDPRICE*(1-LO_DISCOUNT) 
+	                ELSE 0 
+	        END ) / CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)) AS DECIMAL (18,2)) AS PROMO_REVENUE
+	FROM 
+	        tpch.LINEORDER,
+	        tpch.PART
+	WHERE
+	        LO_PARTKEY = P_PARTKEY
+	        AND LO_SHIPDATE >= '1995-09-01'
+	        AND LO_SHIPDATE < DATE '1995-09-01' + INTERVAL '1' MONTH;
+2024-04-06 14:01:39.858 PDT [57387] ERROR:  relation "tpch.lineorder" does not exist at character 218
+2024-04-06 14:01:39.858 PDT [57387] STATEMENT:  /* Query 15 - Var_0 Rev_01 - TPC-H/TPC-R  Top Supplier Query */
+	WITH   /* dss_15.sql */ REVENUE (SUPPLIER_NO, TOTAL_REVENUE) AS (
+	SELECT
+	LO_SUPPKEY,
+	CAST(SUM(LO_EXTENDEDPRICE * (1-LO_DISCOUNT)) AS DECIMAL(18,2))
+	FROM
+	tpch.LINEORDER
+	WHERE
+	LO_SHIPDATE >= DATE '1996-01-01'
+	AND LO_SHIPDATE <  DATE '1996-01-01'+ INTERVAL '3' MONTH
+	GROUP BY
+	LO_SUPPKEY
+	)
+	SELECT 
+	DISTINCT S_SUPPKEY,
+	S_NAME,
+	S_ADDRESS,
+	S_PHONE,
+	TOTAL_REVENUE
+	FROM
+	tpch.SUPPLIER,
+	tpch.REVENUE
+	WHERE
+	S_SUPPKEY = SUPPLIER_NO
+	AND TOTAL_REVENUE = (
+	SELECT
+	MAX(TOTAL_REVENUE)
+	FROM
+	tpch.REVENUE
+	)
+	ORDER BY
+	S_SUPPKEY;
+2024-04-06 14:01:39.865 PDT [57389] ERROR:  column "p_suppkey" does not exist at character 214
+2024-04-06 14:01:39.865 PDT [57389] STATEMENT:  /* Query 16 - Var_0 Rev_01 - SSBench Parts/Supplier Relationship Query */
+	/* modified to minimize size of output  */
+	SELECT /* dss_16.sql */
+	        P_BRAND,
+	        P_TYPE,
+	        P_SIZE,
+	        COUNT(DISTINCT P_SUPPKEY) AS SUPPLIER_CNT
+	FROM 
+	        tpch.PART
+	WHERE
+	        P_BRAND <> 'Brand#45'
+	        AND P_TYPE NOT LIKE 'MEDIUM POLISHED%'
+	        AND P_SIZE IN (49,14,23,45,19,3,36,9)
+	        AND P_SUPPKEY NOT IN (
+	                SELECT 
+	                        S_SUPPKEY 
+	                FROM 
+	                        tpch.SUPPLIER
+	                WHERE 
+	                        S_COMMENT LIKE '%Customer%Complaints%'
+	        )
+	GROUP BY
+	        P_BRAND,
+	        P_TYPE,
+	        P_SIZE
+	ORDER BY
+	        SUPPLIER_CNT DESC,
+	        P_BRAND,
+	        P_TYPE,
+	        P_SIZE
+	LIMIT 10;
+2024-04-06 14:01:39.871 PDT [57391] ERROR:  relation "tpch.lineorder" does not exist at character 167
+2024-04-06 14:01:39.871 PDT [57391] STATEMENT:  /* Query 17 - Var_0 Rev_01 - TPC-H/TPC-R Small-Quantity-Order Revenue Query */
+	SELECT /* dss_17.sql */
+	        SUM(LO_EXTENDEDPRICE) / 7.0 AS AVG_YEARLY
+	FROM
+	        tpch.LINEORDER,
+	        tpch.PART
+	WHERE
+	        P_PARTKEY = LO_PARTKEY
+	        AND P_SUPPKEY = LO_SUPPKEY
+	--        AND P_BRAND = 'Brand#23'
+	        AND P_CONTAINER = 'MED BOX'
+	        AND LO_QUANTITY < (
+	                SELECT
+	                        0.2 * AVG(LO_QUANTITY)
+	                FROM
+	                        LINEORDER
+	                WHERE
+	                        LO_PARTKEY = P_PARTKEY
+	        )
+	;
+2024-04-06 14:01:39.876 PDT [57393] ERROR:  relation "tpch.lineorder" does not exist at character 395
+2024-04-06 14:01:39.876 PDT [57393] STATEMENT:  /* @(#)TERADATA 18.sql 1.1.1.1@(#) */
+	/* Query 18 - Var_0 Rev_01 - SSBench Large Volume Customer Query */
+	/* Return the first 100 selected rows                            */
+	SELECT /* dss_18.sql */
+	        C_NAME,
+	        C_CUSTKEY,
+	        LO_ORDERKEY,
+	        LO_ORDERDATE,
+	        LO_TOTALPRICE,
+	        CAST(SUM(LO_QUANTITY) AS DECIMAL(18,2)) AS SUM_QTY
+	FROM
+	        tpch.CUSTOMER,
+	        tpch.LINEORDER
+	WHERE
+	        LO_ORDERKEY IN (
+	                SELECT
+	                        LO_ORDERKEY
+	                FROM
+	                        tpch.LINEORDER
+	                GROUP BY
+	                        LO_ORDERKEY HAVING
+	                                SUM(LO_QUANTITY) > 300
+	        )
+	        AND C_CUSTKEY = LO_CUSTKEY
+	GROUP BY
+	        C_NAME,
+	        C_CUSTKEY,
+	        LO_ORDERKEY,
+	        LO_ORDERDATE,
+	        LO_TOTALPRICE
+	ORDER BY
+	        LO_TOTALPRICE DESC,
+	        LO_ORDERDATE
+	LIMIT 100;
+2024-04-06 14:01:39.883 PDT [57395] ERROR:  relation "tpch.lineorder" does not exist at character 222
+2024-04-06 14:01:39.883 PDT [57395] STATEMENT:  /* @(#)TERADATA 19.sql 1.1.1.1@(#) */
+	/* Query 19 - Var_0 Rev_1 - SSBench Discounted Revenue Query */
+	SELECT /* dss_19.sql */
+	        CAST(SUM(LO_EXTENDEDPRICE*(1 - LO_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE
+	FROM
+	        tpch.LINEORDER,
+	        tpch.PART
+	WHERE
+	        (
+	                P_PARTKEY = LO_PARTKEY
+	                AND P_SUPPKEY = LO_SUPPKEY
+	                AND P_BRAND = 'Brand#12'
+	                AND P_CONTAINER IN  ( 'SM CASE', 'SM BOX', 'SM PACK', 'SM PKG')
+	                AND LO_QUANTITY >= 1 AND LO_QUANTITY <= 1 + 10
+	                AND P_SIZE BETWEEN 1 AND 5
+	                AND LO_SHIPMODE IN ('AIR', 'AIR REG')
+	                AND LO_SHIPINSTRUCT = 'DELIVER IN PERSON'
+	        )
+	        OR
+	        (
+	                P_PARTKEY = LO_PARTKEY
+	                AND P_SUPPKEY = LO_SUPPKEY
+	                AND P_BRAND = 'Brand#23'
+	                AND P_CONTAINER IN  ('MED BAG', 'MED BOX', 'MED PKG', 'MED PACK')
+	                AND LO_QUANTITY >= 10 AND LO_QUANTITY <= 10 + 10
+	                AND P_SIZE BETWEEN 1  AND 10
+	                AND LO_SHIPMODE IN ('AIR', 'AIR REG')
+	                AND LO_SHIPINSTRUCT = 'DELIVER IN PERSON'
+	        )
+	        OR
+	        (
+	                P_PARTKEY = LO_PARTKEY
+	                AND P_SUPPKEY = LO_SUPPKEY
+	                AND P_BRAND = 'Brand#34'
+	                AND P_CONTAINER IN  ( 'LG CASE', 'LG BOX', 'LG PACK', 'LG PKG')
+	                AND LO_QUANTITY >= 20 AND LO_QUANTITY <= 20 + 10
+	                AND P_SIZE BETWEEN 1  AND 15
+	                AND LO_SHIPMODE IN ('AIR', 'AIR REG')
+	                AND LO_SHIPINSTRUCT = 'DELIVER IN PERSON'
+	        );
+2024-04-06 14:01:39.890 PDT [57397] ERROR:  column "p_suppkey" does not exist at character 279
+2024-04-06 14:01:39.890 PDT [57397] HINT:  Perhaps you meant to reference the column "supplier.s_suppkey".
+2024-04-06 14:01:39.890 PDT [57397] STATEMENT:  /* @(#)TERADATA 20.sql 1.1.1.1@(#) */
+	/* Query 20 - Var_0 Rev_01 - TPC-H/TPC-R The Potential Part Promotion query */
+	SELECT /* dss_20.sql */
+	        S_NAME,
+	        S_ADDRESS
+	FROM
+	        tpch.SUPPLIER
+	WHERE
+	        S_SUPPKEY IN (
+	                SELECT
+	                        P_SUPPKEY
+	                FROM
+	                        tpch.PART
+	                WHERE
+	                        P_PARTKEY IN (
+	                                SELECT
+	                                        P_PARTKEY
+	                                FROM
+	                                        PART
+	                                WHERE
+	                                        P_NAME LIKE 'forest%'
+	                        )
+	                AND  P_AVAILQTY > (
+	                        SELECT
+	                                0.5 * SUM(LO_QUANTITY)
+	                        FROM
+	                                tpch.LINEORDER
+	                        WHERE
+	                                LO_PARTKEY = P_PARTKEY
+	                                AND  LO_SUPPKEY = P_SUPPKEY
+	                                AND  LO_SHIPDATE >= '1994-01-01'
+	                                AND  LO_SHIPDATE <  DATE '1994-01-01' + INTERVAL '1' YEAR
+	                )
+	        )
+	        AND S_NATION = 'CANADA'
+	ORDER BY
+	        S_NAME
+	LIMIT 10;
+2024-04-06 14:01:39.895 PDT [57399] ERROR:  relation "tpch.lineorder" does not exist at character 283
+2024-04-06 14:01:39.895 PDT [57399] STATEMENT:  /* Query 21 - Var_0 Rev_01 - TPC-H/TPC-R  The Suppliers Who Kept Orders Waiting Query */
+	/* Return the first 100 selected rows.                                                */
+	SELECT /* dss_21.sql */
+	        S_NAME,
+	        COUNT(*) AS NUMWAIT
+	FROM
+	        tpch.SUPPLIER,
+	        tpch.LINEORDER L1
+	WHERE
+	        S_SUPPKEY = L1.LO_SUPPKEY
+	        AND LO_ORDERSTATUS='F'
+	        AND L1.LO_RECEIPTDATE > L1.LO_COMMITDATE
+	        AND EXISTS (
+	                SELECT
+	                        *
+	                FROM 
+	                        tpch.LINEORDER L2
+	                WHERE
+	                        L2.LO_ORDERKEY = L1.LO_ORDERKEY
+	                        AND L2.LO_SUPPKEY <> L1.LO_SUPPKEY
+	        )
+	        AND NOT EXISTS (
+	                SELECT
+	                        *
+	                FROM 
+	                        tpch.LINEORDER L3
+	                WHERE
+	                        L3.LO_ORDERKEY = L1.LO_ORDERKEY
+	                        AND L3.LO_SUPPKEY <> L1.LO_SUPPKEY
+	                        AND L3.LO_RECEIPTDATE > L3.LO_COMMITDATE
+	        )
+	        AND S_NATION = 'SAUDI ARABIA'
+	GROUP BY
+	        S_NAME
+	ORDER BY
+	        NUMWAIT DESC,
+	        S_NAME
+	LIMIT 100;
+2024-04-06 14:01:39.911 PDT [57401] ERROR:  relation "tpch.lineorder" does not exist at character 1070
+2024-04-06 14:01:39.911 PDT [57401] STATEMENT:  /* @(#)TERADATA 22.sql 1.1.1.1@(#) */
+	/* Query 22 - Var_0 Rev_01 - TPC-H/TPC-R Global Saleds opportunity Query */
+	SELECT /* dss_22.sql */
+	        CNTRYCODE,
+	        COUNT(*) AS NUMCUST,
+	        SUM(C_ACCTBAL) AS TOTACCTBAL
+	FROM    (
+	        SELECT
+	                SUBSTRING(C_PHONE,1,2) AS CNTRYCODE,
+	                C_ACCTBAL
+	        FROM
+	                tpch.CUSTOMER
+	        WHERE
+	                SUBSTRING(C_PHONE,1,2) IN
+	                        ('13','31','23','29','30','18','17')
+	                AND C_ACCTBAL > (
+	                        SELECT
+	                                AVG(C_ACCTBAL)
+	                        FROM
+	                                tpch.CUSTOMER
+	                        WHERE
+	                                C_ACCTBAL > 0.00
+	                                AND SUBSTRING(C_PHONE,1,2) IN
+	                                        ('13','31','23','29','30','18','17')
+	                )
+	                AND NOT EXISTS (
+	                        SELECT
+	                                *
+	                        FROM
+	                                tpch.LINEORDER
+	                        WHERE
+	                                LO_CUSTKEY=C_CUSTKEY
+	                )
+	        ) AS CUSTSALE
+	GROUP BY
+	        CNTRYCODE
+	ORDER BY
+	        CNTRYCODE;
+2024-04-06 14:02:20.842 PDT [57442] ERROR:  relation "tpch.lineorder" does not exist at character 22
+2024-04-06 14:02:20.842 PDT [57442] STATEMENT:  select count(*) from tpch.lineorder;
+2024-04-06 14:02:38.291 PDT [57442] ERROR:  syntax error at or near "tpch" at character 12
+2024-04-06 14:02:38.291 PDT [57442] STATEMENT:  set schema tpch;
+2024-04-06 14:02:45.779 PDT [57442] ERROR:  relation "tpch.lineorder" does not exist at character 22
+2024-04-06 14:02:45.779 PDT [57442] STATEMENT:  select count(*) from tpch.lineorder;
+2024-04-06 14:02:49.196 PDT [57442] ERROR:  relation "lineorder" does not exist at character 22
+2024-04-06 14:02:49.196 PDT [57442] STATEMENT:  select count(*) from lineorder;
+2024-04-06 14:04:06.171 PDT [15172] LOG:  checkpoint starting: time
+2024-04-06 14:08:36.132 PDT [15172] LOG:  checkpoint complete: wrote 13595 buffers (83.0%); 0 WAL file(s) added, 0 removed, 15 recycled; write=269.899 s, sync=0.018 s, total=269.962 s; sync files=21, longest=0.003 s, average=0.001 s; distance=247099 kB, estimate=513845 kB; lsn=2/DF54E630, redo lsn=2/DF54E5F8
+2024-04-06 14:10:29.367 PDT [60439] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.367 PDT [60439] STATEMENT:  :x
+	:o
+	select
+		l_returnflag,
+		l_linestatus,
+		sum(l_quantity) as sum_qty,
+		sum(l_extendedprice) as sum_base_price,
+		sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
+		sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+		avg(l_quantity) as avg_qty,
+		avg(l_extendedprice) as avg_price,
+		avg(l_discount) as avg_disc,
+		count(*) as count_order
+	from
+		lineitem
+	where
+		l_shipdate <= date '1998-12-01' - interval ':1' day (3)
+	group by
+		l_returnflag,
+		l_linestatus
+	order by
+		l_returnflag,
+		l_linestatus;
+2024-04-06 14:10:29.368 PDT [60439] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.368 PDT [60439] STATEMENT:  :n -1
+2024-04-06 14:10:29.375 PDT [60441] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.375 PDT [60441] STATEMENT:  :x
+	:o
+	select
+		s_acctbal,
+		s_name,
+		n_name,
+		p_partkey,
+		p_mfgr,
+		s_address,
+		s_phone,
+		s_comment
+	from
+		part,
+		supplier,
+		partsupp,
+		nation,
+		region
+	where
+		p_partkey = ps_partkey
+		and s_suppkey = ps_suppkey
+		and p_size = :1
+		and p_type like '%:2'
+		and s_nationkey = n_nationkey
+		and n_regionkey = r_regionkey
+		and r_name = ':3'
+		and ps_supplycost = (
+			select
+				min(ps_supplycost)
+			from
+				partsupp,
+				supplier,
+				nation,
+				region
+			where
+				p_partkey = ps_partkey
+				and s_suppkey = ps_suppkey
+				and s_nationkey = n_nationkey
+				and n_regionkey = r_regionkey
+				and r_name = ':3'
+		)
+	order by
+		s_acctbal desc,
+		n_name,
+		s_name,
+		p_partkey;
+2024-04-06 14:10:29.375 PDT [60441] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.375 PDT [60441] STATEMENT:  :n 100
+2024-04-06 14:10:29.385 PDT [60443] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.385 PDT [60443] STATEMENT:  :x
+	:o
+	select
+		l_orderkey,
+		sum(l_extendedprice * (1 - l_discount)) as revenue,
+		o_orderdate,
+		o_shippriority
+	from
+		customer,
+		orders,
+		lineitem
+	where
+		c_mktsegment = ':1'
+		and c_custkey = o_custkey
+		and l_orderkey = o_orderkey
+		and o_orderdate < date ':2'
+		and l_shipdate > date ':2'
+	group by
+		l_orderkey,
+		o_orderdate,
+		o_shippriority
+	order by
+		revenue desc,
+		o_orderdate;
+2024-04-06 14:10:29.385 PDT [60443] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.385 PDT [60443] STATEMENT:  :n 10
+2024-04-06 14:10:29.392 PDT [60445] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.392 PDT [60445] STATEMENT:  :x
+	:o
+	select
+		o_orderpriority,
+		count(*) as order_count
+	from
+		orders
+	where
+		o_orderdate >= date ':1'
+		and o_orderdate < date ':1' + interval '3' month
+		and exists (
+			select
+				*
+			from
+				lineitem
+			where
+				l_orderkey = o_orderkey
+				and l_commitdate < l_receiptdate
+		)
+	group by
+		o_orderpriority
+	order by
+		o_orderpriority;
+2024-04-06 14:10:29.393 PDT [60445] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.393 PDT [60445] STATEMENT:  :n -1
+2024-04-06 14:10:29.399 PDT [60447] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.399 PDT [60447] STATEMENT:  :x
+	:o
+	select
+		n_name,
+		sum(l_extendedprice * (1 - l_discount)) as revenue
+	from
+		customer,
+		orders,
+		lineitem,
+		supplier,
+		nation,
+		region
+	where
+		c_custkey = o_custkey
+		and l_orderkey = o_orderkey
+		and l_suppkey = s_suppkey
+		and c_nationkey = s_nationkey
+		and s_nationkey = n_nationkey
+		and n_regionkey = r_regionkey
+		and r_name = ':1'
+		and o_orderdate >= date ':2'
+		and o_orderdate < date ':2' + interval '1' year
+	group by
+		n_name
+	order by
+		revenue desc;
+2024-04-06 14:10:29.399 PDT [60447] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.399 PDT [60447] STATEMENT:  :n -1
+2024-04-06 14:10:29.404 PDT [60449] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.404 PDT [60449] STATEMENT:  :x
+	:o
+	select
+		sum(l_extendedprice * l_discount) as revenue
+	from
+		lineitem
+	where
+		l_shipdate >= date ':1'
+		and l_shipdate < date ':1' + interval '1' year
+		and l_discount between :2 - 0.01 and :2 + 0.01
+		and l_quantity < :3;
+2024-04-06 14:10:29.404 PDT [60449] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.404 PDT [60449] STATEMENT:  :n -1
+2024-04-06 14:10:29.410 PDT [60451] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.410 PDT [60451] STATEMENT:  :x
+	:o
+	select
+		supp_nation,
+		cust_nation,
+		l_year,
+		sum(volume) as revenue
+	from
+		(
+			select
+				n1.n_name as supp_nation,
+				n2.n_name as cust_nation,
+				extract(year from l_shipdate) as l_year,
+				l_extendedprice * (1 - l_discount) as volume
+			from
+				supplier,
+				lineitem,
+				orders,
+				customer,
+				nation n1,
+				nation n2
+			where
+				s_suppkey = l_suppkey
+				and o_orderkey = l_orderkey
+				and c_custkey = o_custkey
+				and s_nationkey = n1.n_nationkey
+				and c_nationkey = n2.n_nationkey
+				and (
+					(n1.n_name = ':1' and n2.n_name = ':2')
+					or (n1.n_name = ':2' and n2.n_name = ':1')
+				)
+				and l_shipdate between date '1995-01-01' and date '1996-12-31'
+		) as shipping
+	group by
+		supp_nation,
+		cust_nation,
+		l_year
+	order by
+		supp_nation,
+		cust_nation,
+		l_year;
+2024-04-06 14:10:29.410 PDT [60451] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.410 PDT [60451] STATEMENT:  :n -1
+2024-04-06 14:10:29.422 PDT [60453] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.422 PDT [60453] STATEMENT:  :x
+	:o
+	select
+		o_year,
+		sum(case
+			when nation = ':1' then volume
+			else 0
+		end) / sum(volume) as mkt_share
+	from
+		(
+			select
+				extract(year from o_orderdate) as o_year,
+				l_extendedprice * (1 - l_discount) as volume,
+				n2.n_name as nation
+			from
+				part,
+				supplier,
+				lineitem,
+				orders,
+				customer,
+				nation n1,
+				nation n2,
+				region
+			where
+				p_partkey = l_partkey
+				and s_suppkey = l_suppkey
+				and l_orderkey = o_orderkey
+				and o_custkey = c_custkey
+				and c_nationkey = n1.n_nationkey
+				and n1.n_regionkey = r_regionkey
+				and r_name = ':2'
+				and s_nationkey = n2.n_nationkey
+				and o_orderdate between date '1995-01-01' and date '1996-12-31'
+				and p_type = ':3'
+		) as all_nations
+	group by
+		o_year
+	order by
+		o_year;
+2024-04-06 14:10:29.422 PDT [60453] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.422 PDT [60453] STATEMENT:  :n -1
+2024-04-06 14:10:29.430 PDT [60455] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.430 PDT [60455] STATEMENT:  :x
+	:o
+	select
+		nation,
+		o_year,
+		sum(amount) as sum_profit
+	from
+		(
+			select
+				n_name as nation,
+				extract(year from o_orderdate) as o_year,
+				l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+			from
+				part,
+				supplier,
+				lineitem,
+				partsupp,
+				orders,
+				nation
+			where
+				s_suppkey = l_suppkey
+				and ps_suppkey = l_suppkey
+				and ps_partkey = l_partkey
+				and p_partkey = l_partkey
+				and o_orderkey = l_orderkey
+				and s_nationkey = n_nationkey
+				and p_name like '%:1%'
+		) as profit
+	group by
+		nation,
+		o_year
+	order by
+		nation,
+		o_year desc;
+2024-04-06 14:10:29.431 PDT [60455] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.431 PDT [60455] STATEMENT:  :n -1
+2024-04-06 14:10:29.448 PDT [60457] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.448 PDT [60457] STATEMENT:  :x
+	:o
+	select
+		c_custkey,
+		c_name,
+		sum(l_extendedprice * (1 - l_discount)) as revenue,
+		c_acctbal,
+		n_name,
+		c_address,
+		c_phone,
+		c_comment
+	from
+		customer,
+		orders,
+		lineitem,
+		nation
+	where
+		c_custkey = o_custkey
+		and l_orderkey = o_orderkey
+		and o_orderdate >= date ':1'
+		and o_orderdate < date ':1' + interval '3' month
+		and l_returnflag = 'R'
+		and c_nationkey = n_nationkey
+	group by
+		c_custkey,
+		c_name,
+		c_acctbal,
+		c_phone,
+		n_name,
+		c_address,
+		c_comment
+	order by
+		revenue desc;
+2024-04-06 14:10:29.449 PDT [60457] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.449 PDT [60457] STATEMENT:  :n 20
+2024-04-06 14:10:29.461 PDT [60459] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.461 PDT [60459] STATEMENT:  :x
+	:o
+	select
+		ps_partkey,
+		sum(ps_supplycost * ps_availqty) as value
+	from
+		partsupp,
+		supplier,
+		nation
+	where
+		ps_suppkey = s_suppkey
+		and s_nationkey = n_nationkey
+		and n_name = ':1'
+	group by
+		ps_partkey having
+			sum(ps_supplycost * ps_availqty) > (
+				select
+					sum(ps_supplycost * ps_availqty) * :2
+				from
+					partsupp,
+					supplier,
+					nation
+				where
+					ps_suppkey = s_suppkey
+					and s_nationkey = n_nationkey
+					and n_name = ':1'
+			)
+	order by
+		value desc;
+2024-04-06 14:10:29.461 PDT [60459] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.461 PDT [60459] STATEMENT:  :n -1
+2024-04-06 14:10:29.466 PDT [60461] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.466 PDT [60461] STATEMENT:  :x
+	:o
+	select
+		l_shipmode,
+		sum(case
+			when o_orderpriority = '1-URGENT'
+				or o_orderpriority = '2-HIGH'
+				then 1
+			else 0
+		end) as high_line_count,
+		sum(case
+			when o_orderpriority <> '1-URGENT'
+				and o_orderpriority <> '2-HIGH'
+				then 1
+			else 0
+		end) as low_line_count
+	from
+		orders,
+		lineitem
+	where
+		o_orderkey = l_orderkey
+		and l_shipmode in (':1', ':2')
+		and l_commitdate < l_receiptdate
+		and l_shipdate < l_commitdate
+		and l_receiptdate >= date ':3'
+		and l_receiptdate < date ':3' + interval '1' year
+	group by
+		l_shipmode
+	order by
+		l_shipmode;
+2024-04-06 14:10:29.466 PDT [60461] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.466 PDT [60461] STATEMENT:  :n -1
+2024-04-06 14:10:29.480 PDT [60463] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.480 PDT [60463] STATEMENT:  :x
+	:o
+	select
+		c_count,
+		count(*) as custdist
+	from
+		(
+			select
+				c_custkey,
+				count(o_orderkey)
+			from
+				customer left outer join orders on
+					c_custkey = o_custkey
+					and o_comment not like '%:1%:2%'
+			group by
+				c_custkey
+		) as c_orders (c_custkey, c_count)
+	group by
+		c_count
+	order by
+		custdist desc,
+		c_count desc;
+2024-04-06 14:10:29.480 PDT [60463] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.480 PDT [60463] STATEMENT:  :n -1
+2024-04-06 14:10:29.485 PDT [60465] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.485 PDT [60465] STATEMENT:  :x
+	:o
+	select
+		100.00 * sum(case
+			when p_type like 'PROMO%'
+				then l_extendedprice * (1 - l_discount)
+			else 0
+		end) / sum(l_extendedprice * (1 - l_discount)) as promo_revenue
+	from
+		lineitem,
+		part
+	where
+		l_partkey = p_partkey
+		and l_shipdate >= date ':1'
+		and l_shipdate < date ':1' + interval '1' month;
+2024-04-06 14:10:29.485 PDT [60465] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.485 PDT [60465] STATEMENT:  :n -1
+2024-04-06 14:10:29.492 PDT [60467] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.492 PDT [60467] STATEMENT:  :x
+	create view revenue:s (supplier_no, total_revenue) as
+		select
+			l_suppkey,
+			sum(l_extendedprice * (1 - l_discount))
+		from
+			lineitem
+		where
+			l_shipdate >= date ':1'
+			and l_shipdate < date ':1' + interval '3' month
+		group by
+			l_suppkey;
+2024-04-06 14:10:29.492 PDT [60467] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.492 PDT [60467] STATEMENT:  :o
+	select
+		s_suppkey,
+		s_name,
+		s_address,
+		s_phone,
+		total_revenue
+	from
+		supplier,
+		revenue:s
+	where
+		s_suppkey = supplier_no
+		and total_revenue = (
+			select
+				max(total_revenue)
+			from
+				revenue:s
+		)
+	order by
+		s_suppkey;
+2024-04-06 14:10:29.492 PDT [60467] ERROR:  syntax error at or near ":" at character 18
+2024-04-06 14:10:29.492 PDT [60467] STATEMENT:  drop view revenue:s;
+2024-04-06 14:10:29.492 PDT [60467] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.492 PDT [60467] STATEMENT:  :n -1
+2024-04-06 14:10:29.499 PDT [60469] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.499 PDT [60469] STATEMENT:  :x
+	:o
+	select
+		p_brand,
+		p_type,
+		p_size,
+		count(distinct ps_suppkey) as supplier_cnt
+	from
+		partsupp,
+		part
+	where
+		p_partkey = ps_partkey
+		and p_brand <> ':1'
+		and p_type not like ':2%'
+		and p_size in (:3, :4, :5, :6, :7, :8, :9, :10)
+		and ps_suppkey not in (
+			select
+				s_suppkey
+			from
+				supplier
+			where
+				s_comment like '%Customer%Complaints%'
+		)
+	group by
+		p_brand,
+		p_type,
+		p_size
+	order by
+		supplier_cnt desc,
+		p_brand,
+		p_type,
+		p_size;
+2024-04-06 14:10:29.499 PDT [60469] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.499 PDT [60469] STATEMENT:  :n -1
+2024-04-06 14:10:29.505 PDT [60471] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.505 PDT [60471] STATEMENT:  :x
+	:o
+	select
+		sum(l_extendedprice) / 7.0 as avg_yearly
+	from
+		lineitem,
+		part
+	where
+		p_partkey = l_partkey
+		and p_brand = ':1'
+		and p_container = ':2'
+		and l_quantity < (
+			select
+				0.2 * avg(l_quantity)
+			from
+				lineitem
+			where
+				l_partkey = p_partkey
+		);
+2024-04-06 14:10:29.505 PDT [60471] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.505 PDT [60471] STATEMENT:  :n -1
+2024-04-06 14:10:29.513 PDT [60473] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.513 PDT [60473] STATEMENT:  :x
+	:o
+	select
+		c_name,
+		c_custkey,
+		o_orderkey,
+		o_orderdate,
+		o_totalprice,
+		sum(l_quantity)
+	from
+		customer,
+		orders,
+		lineitem
+	where
+		o_orderkey in (
+			select
+				l_orderkey
+			from
+				lineitem
+			group by
+				l_orderkey having
+					sum(l_quantity) > :1
+		)
+		and c_custkey = o_custkey
+		and o_orderkey = l_orderkey
+	group by
+		c_name,
+		c_custkey,
+		o_orderkey,
+		o_orderdate,
+		o_totalprice
+	order by
+		o_totalprice desc,
+		o_orderdate;
+2024-04-06 14:10:29.513 PDT [60473] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.513 PDT [60473] STATEMENT:  :n 100
+2024-04-06 14:10:29.519 PDT [60475] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.519 PDT [60475] STATEMENT:  :x
+	:o
+	select
+		sum(l_extendedprice* (1 - l_discount)) as revenue
+	from
+		lineitem,
+		part
+	where
+		(
+			p_partkey = l_partkey
+			and p_brand = ':1'
+			and p_container in ('SM CASE', 'SM BOX', 'SM PACK', 'SM PKG')
+			and l_quantity >= :4 and l_quantity <= :4 + 10
+			and p_size between 1 and 5
+			and l_shipmode in ('AIR', 'AIR REG')
+			and l_shipinstruct = 'DELIVER IN PERSON'
+		)
+		or
+		(
+			p_partkey = l_partkey
+			and p_brand = ':2'
+			and p_container in ('MED BAG', 'MED BOX', 'MED PKG', 'MED PACK')
+			and l_quantity >= :5 and l_quantity <= :5 + 10
+			and p_size between 1 and 10
+			and l_shipmode in ('AIR', 'AIR REG')
+			and l_shipinstruct = 'DELIVER IN PERSON'
+		)
+		or
+		(
+			p_partkey = l_partkey
+			and p_brand = ':3'
+			and p_container in ('LG CASE', 'LG BOX', 'LG PACK', 'LG PKG')
+			and l_quantity >= :6 and l_quantity <= :6 + 10
+			and p_size between 1 and 15
+			and l_shipmode in ('AIR', 'AIR REG')
+			and l_shipinstruct = 'DELIVER IN PERSON'
+		);
+2024-04-06 14:10:29.519 PDT [60475] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.519 PDT [60475] STATEMENT:  :n -1
+2024-04-06 14:10:29.526 PDT [60477] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.526 PDT [60477] STATEMENT:  :x
+	:o
+	select
+		s_name,
+		s_address
+	from
+		supplier,
+		nation
+	where
+		s_suppkey in (
+			select
+				ps_suppkey
+			from
+				partsupp
+			where
+				ps_partkey in (
+					select
+						p_partkey
+					from
+						part
+					where
+						p_name like ':1%'
+				)
+				and ps_availqty > (
+					select
+						0.5 * sum(l_quantity)
+					from
+						lineitem
+					where
+						l_partkey = ps_partkey
+						and l_suppkey = ps_suppkey
+						and l_shipdate >= date ':2'
+						and l_shipdate < date ':2' + interval '1' year
+				)
+		)
+		and s_nationkey = n_nationkey
+		and n_name = ':3'
+	order by
+		s_name;
+2024-04-06 14:10:29.527 PDT [60477] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.527 PDT [60477] STATEMENT:  :n -1
+2024-04-06 14:10:29.533 PDT [60479] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.533 PDT [60479] STATEMENT:  :x
+	:o
+	select
+		s_name,
+		count(*) as numwait
+	from
+		supplier,
+		lineitem l1,
+		orders,
+		nation
+	where
+		s_suppkey = l1.l_suppkey
+		and o_orderkey = l1.l_orderkey
+		and o_orderstatus = 'F'
+		and l1.l_receiptdate > l1.l_commitdate
+		and exists (
+			select
+				*
+			from
+				lineitem l2
+			where
+				l2.l_orderkey = l1.l_orderkey
+				and l2.l_suppkey <> l1.l_suppkey
+		)
+		and not exists (
+			select
+				*
+			from
+				lineitem l3
+			where
+				l3.l_orderkey = l1.l_orderkey
+				and l3.l_suppkey <> l1.l_suppkey
+				and l3.l_receiptdate > l3.l_commitdate
+		)
+		and s_nationkey = n_nationkey
+		and n_name = ':1'
+	group by
+		s_name
+	order by
+		numwait desc,
+		s_name;
+2024-04-06 14:10:29.534 PDT [60479] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.534 PDT [60479] STATEMENT:  :n 100
+2024-04-06 14:10:29.541 PDT [60481] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.541 PDT [60481] STATEMENT:  :x
+	:o
+	select
+		cntrycode,
+		count(*) as numcust,
+		sum(c_acctbal) as totacctbal
+	from
+		(
+			select
+				substring(c_phone from 1 for 2) as cntrycode,
+				c_acctbal
+			from
+				customer
+			where
+				substring(c_phone from 1 for 2) in
+					(':1', ':2', ':3', ':4', ':5', ':6', ':7')
+				and c_acctbal > (
+					select
+						avg(c_acctbal)
+					from
+						customer
+					where
+						c_acctbal > 0.00
+						and substring(c_phone from 1 for 2) in
+							(':1', ':2', ':3', ':4', ':5', ':6', ':7')
+				)
+				and not exists (
+					select
+						*
+					from
+						orders
+					where
+						o_custkey = c_custkey
+				)
+		) as custsale
+	group by
+		cntrycode
+	order by
+		cntrycode;
+2024-04-06 14:10:29.541 PDT [60481] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:10:29.541 PDT [60481] STATEMENT:  :n -1
+2024-04-06 14:14:39.609 PDT [61513] ERROR:  syntax error at or near "(" at character 432
+2024-04-06 14:14:39.609 PDT [61513] STATEMENT:  select
+		l_returnflag,
+		l_linestatus,
+		sum(l_quantity) as sum_qty,
+		sum(l_extendedprice) as sum_base_price,
+		sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
+		sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+		avg(l_quantity) as avg_qty,
+		avg(l_extendedprice) as avg_price,
+		avg(l_discount) as avg_disc,
+		count(*) as count_order
+	from
+		lineitem
+	where
+		l_shipdate <= date '1998-12-01' - interval ':1' day (3)
+	group by
+		l_returnflag,
+		l_linestatus
+	order by
+		l_returnflag,
+		l_linestatus;
+2024-04-06 14:14:39.614 PDT [61515] ERROR:  syntax error at or near ":" at character 215
+2024-04-06 14:14:39.614 PDT [61515] STATEMENT:  select
+		s_acctbal,
+		s_name,
+		n_name,
+		p_partkey,
+		p_mfgr,
+		s_address,
+		s_phone,
+		s_comment
+	from
+		part,
+		supplier,
+		partsupp,
+		nation,
+		region
+	where
+		p_partkey = ps_partkey
+		and s_suppkey = ps_suppkey
+		and p_size = :1
+		and p_type like '%:2'
+		and s_nationkey = n_nationkey
+		and n_regionkey = r_regionkey
+		and r_name = ':3'
+		and ps_supplycost = (
+			select
+				min(ps_supplycost)
+			from
+				partsupp,
+				supplier,
+				nation,
+				region
+			where
+				p_partkey = ps_partkey
+				and s_suppkey = ps_suppkey
+				and s_nationkey = n_nationkey
+				and n_regionkey = r_regionkey
+				and r_name = ':3'
+		)
+	order by
+		s_acctbal desc,
+		n_name,
+		s_name,
+		p_partkey;
+2024-04-06 14:14:39.624 PDT [61517] ERROR:  relation "customer" does not exist at character 110
+2024-04-06 14:14:39.624 PDT [61517] STATEMENT:  select
+		l_orderkey,
+		sum(l_extendedprice * (1 - l_discount)) as revenue,
+		o_orderdate,
+		o_shippriority
+	from
+		customer,
+		orders,
+		lineitem
+	where
+		c_mktsegment = ':1'
+		and c_custkey = o_custkey
+		and l_orderkey = o_orderkey
+		and o_orderdate < date ':2'
+		and l_shipdate > date ':2'
+	group by
+		l_orderkey,
+		o_orderdate,
+		o_shippriority
+	order by
+		revenue desc,
+		o_orderdate;
+2024-04-06 14:14:39.631 PDT [61519] ERROR:  relation "orders" does not exist at character 57
+2024-04-06 14:14:39.631 PDT [61519] STATEMENT:  select
+		o_orderpriority,
+		count(*) as order_count
+	from
+		orders
+	where
+		o_orderdate >= date ':1'
+		and o_orderdate < date ':1' + interval '3' month
+		and exists (
+			select
+				*
+			from
+				lineitem
+			where
+				l_orderkey = o_orderkey
+				and l_commitdate < l_receiptdate
+		)
+	group by
+		o_orderpriority
+	order by
+		o_orderpriority;
+2024-04-06 14:14:39.640 PDT [61521] ERROR:  relation "customer" does not exist at character 75
+2024-04-06 14:14:39.640 PDT [61521] STATEMENT:  select
+		n_name,
+		sum(l_extendedprice * (1 - l_discount)) as revenue
+	from
+		customer,
+		orders,
+		lineitem,
+		supplier,
+		nation,
+		region
+	where
+		c_custkey = o_custkey
+		and l_orderkey = o_orderkey
+		and l_suppkey = s_suppkey
+		and c_nationkey = s_nationkey
+		and s_nationkey = n_nationkey
+		and n_regionkey = r_regionkey
+		and r_name = ':1'
+		and o_orderdate >= date ':2'
+		and o_orderdate < date ':2' + interval '1' year
+	group by
+		n_name
+	order by
+		revenue desc;
+2024-04-06 14:14:39.647 PDT [61523] ERROR:  syntax error at or near ":" at character 172
+2024-04-06 14:14:39.647 PDT [61523] STATEMENT:  select
+		sum(l_extendedprice * l_discount) as revenue
+	from
+		lineitem
+	where
+		l_shipdate >= date ':1'
+		and l_shipdate < date ':1' + interval '1' year
+		and l_discount between :2 - 0.01 and :2 + 0.01
+		and l_quantity < :3;
+2024-04-06 14:14:39.657 PDT [61525] ERROR:  relation "supplier" does not exist at character 246
+2024-04-06 14:14:39.657 PDT [61525] STATEMENT:  select
+		supp_nation,
+		cust_nation,
+		l_year,
+		sum(volume) as revenue
+	from
+		(
+			select
+				n1.n_name as supp_nation,
+				n2.n_name as cust_nation,
+				extract(year from l_shipdate) as l_year,
+				l_extendedprice * (1 - l_discount) as volume
+			from
+				supplier,
+				lineitem,
+				orders,
+				customer,
+				nation n1,
+				nation n2
+			where
+				s_suppkey = l_suppkey
+				and o_orderkey = l_orderkey
+				and c_custkey = o_custkey
+				and s_nationkey = n1.n_nationkey
+				and c_nationkey = n2.n_nationkey
+				and (
+					(n1.n_name = ':1' and n2.n_name = ':2')
+					or (n1.n_name = ':2' and n2.n_name = ':1')
+				)
+				and l_shipdate between date '1995-01-01' and date '1996-12-31'
+		) as shipping
+	group by
+		supp_nation,
+		cust_nation,
+		l_year
+	order by
+		supp_nation,
+		cust_nation,
+		l_year;
+2024-04-06 14:14:39.665 PDT [61527] ERROR:  relation "part" does not exist at character 246
+2024-04-06 14:14:39.665 PDT [61527] STATEMENT:  select
+		o_year,
+		sum(case
+			when nation = ':1' then volume
+			else 0
+		end) / sum(volume) as mkt_share
+	from
+		(
+			select
+				extract(year from o_orderdate) as o_year,
+				l_extendedprice * (1 - l_discount) as volume,
+				n2.n_name as nation
+			from
+				part,
+				supplier,
+				lineitem,
+				orders,
+				customer,
+				nation n1,
+				nation n2,
+				region
+			where
+				p_partkey = l_partkey
+				and s_suppkey = l_suppkey
+				and l_orderkey = o_orderkey
+				and o_custkey = c_custkey
+				and c_nationkey = n1.n_nationkey
+				and n1.n_regionkey = r_regionkey
+				and r_name = ':2'
+				and s_nationkey = n2.n_nationkey
+				and o_orderdate between date '1995-01-01' and date '1996-12-31'
+				and p_type = ':3'
+		) as all_nations
+	group by
+		o_year
+	order by
+		o_year;
+2024-04-06 14:14:39.672 PDT [61529] ERROR:  relation "part" does not exist at character 223
+2024-04-06 14:14:39.672 PDT [61529] STATEMENT:  select
+		nation,
+		o_year,
+		sum(amount) as sum_profit
+	from
+		(
+			select
+				n_name as nation,
+				extract(year from o_orderdate) as o_year,
+				l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+			from
+				part,
+				supplier,
+				lineitem,
+				partsupp,
+				orders,
+				nation
+			where
+				s_suppkey = l_suppkey
+				and ps_suppkey = l_suppkey
+				and ps_partkey = l_partkey
+				and p_partkey = l_partkey
+				and o_orderkey = l_orderkey
+				and s_nationkey = n_nationkey
+				and p_name like '%:1%'
+		) as profit
+	group by
+		nation,
+		o_year
+	order by
+		nation,
+		o_year desc;
+2024-04-06 14:14:39.678 PDT [61531] ERROR:  relation "customer" does not exist at character 142
+2024-04-06 14:14:39.678 PDT [61531] STATEMENT:  select
+		c_custkey,
+		c_name,
+		sum(l_extendedprice * (1 - l_discount)) as revenue,
+		c_acctbal,
+		n_name,
+		c_address,
+		c_phone,
+		c_comment
+	from
+		customer,
+		orders,
+		lineitem,
+		nation
+	where
+		c_custkey = o_custkey
+		and l_orderkey = o_orderkey
+		and o_orderdate >= date ':1'
+		and o_orderdate < date ':1' + interval '3' month
+		and l_returnflag = 'R'
+		and c_nationkey = n_nationkey
+	group by
+		c_custkey,
+		c_name,
+		c_acctbal,
+		c_phone,
+		n_name,
+		c_address,
+		c_comment
+	order by
+		revenue desc;
+2024-04-06 14:14:39.685 PDT [61533] ERROR:  syntax error at or near ":" at character 295
+2024-04-06 14:14:39.685 PDT [61533] STATEMENT:  select
+		ps_partkey,
+		sum(ps_supplycost * ps_availqty) as value
+	from
+		partsupp,
+		supplier,
+		nation
+	where
+		ps_suppkey = s_suppkey
+		and s_nationkey = n_nationkey
+		and n_name = ':1'
+	group by
+		ps_partkey having
+			sum(ps_supplycost * ps_availqty) > (
+				select
+					sum(ps_supplycost * ps_availqty) * :2
+				from
+					partsupp,
+					supplier,
+					nation
+				where
+					ps_suppkey = s_suppkey
+					and s_nationkey = n_nationkey
+					and n_name = ':1'
+			)
+	order by
+		value desc;
+2024-04-06 14:14:39.691 PDT [61535] ERROR:  relation "orders" does not exist at character 276
+2024-04-06 14:14:39.691 PDT [61535] STATEMENT:  select
+		l_shipmode,
+		sum(case
+			when o_orderpriority = '1-URGENT'
+				or o_orderpriority = '2-HIGH'
+				then 1
+			else 0
+		end) as high_line_count,
+		sum(case
+			when o_orderpriority <> '1-URGENT'
+				and o_orderpriority <> '2-HIGH'
+				then 1
+			else 0
+		end) as low_line_count
+	from
+		orders,
+		lineitem
+	where
+		o_orderkey = l_orderkey
+		and l_shipmode in (':1', ':2')
+		and l_commitdate < l_receiptdate
+		and l_shipdate < l_commitdate
+		and l_receiptdate >= date ':3'
+		and l_receiptdate < date ':3' + interval '1' year
+	group by
+		l_shipmode
+	order by
+		l_shipmode;
+2024-04-06 14:14:39.699 PDT [61537] ERROR:  relation "customer" does not exist at character 102
+2024-04-06 14:14:39.699 PDT [61537] STATEMENT:  select
+		c_count,
+		count(*) as custdist
+	from
+		(
+			select
+				c_custkey,
+				count(o_orderkey)
+			from
+				customer left outer join orders on
+					c_custkey = o_custkey
+					and o_comment not like '%:1%:2%'
+			group by
+				c_custkey
+		) as c_orders (c_custkey, c_count)
+	group by
+		c_count
+	order by
+		custdist desc,
+		c_count desc;
+2024-04-06 14:14:39.706 PDT [61539] ERROR:  relation "lineitem" does not exist at character 178
+2024-04-06 14:14:39.706 PDT [61539] STATEMENT:  select
+		100.00 * sum(case
+			when p_type like 'PROMO%'
+				then l_extendedprice * (1 - l_discount)
+			else 0
+		end) / sum(l_extendedprice * (1 - l_discount)) as promo_revenue
+	from
+		lineitem,
+		part
+	where
+		l_partkey = p_partkey
+		and l_shipdate >= date ':1'
+		and l_shipdate < date ':1' + interval '1' month;
+2024-04-06 14:14:39.711 PDT [61541] ERROR:  relation "lineitem" does not exist at character 124
+2024-04-06 14:14:39.711 PDT [61541] STATEMENT:  create view revenue (supplier_no, total_revenue) as
+		select
+			l_suppkey,
+			sum(l_extendedprice * (1 - l_discount))
+		from
+			lineitem
+		where
+			l_shipdate >= date ':1'
+			and l_shipdate < date ':1' + interval '3' month
+		group by
+			l_suppkey;
+2024-04-06 14:14:39.711 PDT [61541] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:14:39.711 PDT [61541] STATEMENT:  :o
+	select
+		s_suppkey,
+		s_name,
+		s_address,
+		s_phone,
+		total_revenue
+	from
+		supplier,
+		revenue
+	where
+		s_suppkey = supplier_no
+		and total_revenue = (
+			select
+				max(total_revenue)
+			from
+				revenue
+		)
+	order by
+		s_suppkey;
+2024-04-06 14:14:39.716 PDT [61541] ERROR:  view "revenue" does not exist
+2024-04-06 14:14:39.716 PDT [61541] STATEMENT:  drop view revenue;
+2024-04-06 14:14:39.722 PDT [61543] ERROR:  syntax error at or near ":" at character 196
+2024-04-06 14:14:39.722 PDT [61543] STATEMENT:  select
+		p_brand,
+		p_type,
+		p_size,
+		count(distinct ps_suppkey) as supplier_cnt
+	from
+		partsupp,
+		part
+	where
+		p_partkey = ps_partkey
+		and p_brand <> ':1'
+		and p_type not like ':2%'
+		and p_size in (:3, :4, :5, :6, :7, :8, :9, :10)
+		and ps_suppkey not in (
+			select
+				s_suppkey
+			from
+				supplier
+			where
+				s_comment like '%Customer%Complaints%'
+		)
+	group by
+		p_brand,
+		p_type,
+		p_size
+	order by
+		supplier_cnt desc,
+		p_brand,
+		p_type,
+		p_size;
+2024-04-06 14:14:39.729 PDT [61545] ERROR:  relation "lineitem" does not exist at character 56
+2024-04-06 14:14:39.729 PDT [61545] STATEMENT:  select
+		sum(l_extendedprice) / 7.0 as avg_yearly
+	from
+		lineitem,
+		part
+	where
+		p_partkey = l_partkey
+		and p_brand = ':1'
+		and p_container = ':2'
+		and l_quantity < (
+			select
+				0.2 * avg(l_quantity)
+			from
+				lineitem
+			where
+				l_partkey = p_partkey
+		);
+2024-04-06 14:14:39.736 PDT [61547] ERROR:  syntax error at or near ":" at character 242
+2024-04-06 14:14:39.736 PDT [61547] STATEMENT:  select
+		c_name,
+		c_custkey,
+		o_orderkey,
+		o_orderdate,
+		o_totalprice,
+		sum(l_quantity)
+	from
+		customer,
+		orders,
+		lineitem
+	where
+		o_orderkey in (
+			select
+				l_orderkey
+			from
+				lineitem
+			group by
+				l_orderkey having
+					sum(l_quantity) > :1
+		)
+		and c_custkey = o_custkey
+		and o_orderkey = l_orderkey
+	group by
+		c_name,
+		c_custkey,
+		o_orderkey,
+		o_orderdate,
+		o_totalprice
+	order by
+		o_totalprice desc,
+		o_orderdate;
+2024-04-06 14:14:39.743 PDT [61549] ERROR:  syntax error at or near ":" at character 219
+2024-04-06 14:14:39.743 PDT [61549] STATEMENT:  select
+		sum(l_extendedprice* (1 - l_discount)) as revenue
+	from
+		lineitem,
+		part
+	where
+		(
+			p_partkey = l_partkey
+			and p_brand = ':1'
+			and p_container in ('SM CASE', 'SM BOX', 'SM PACK', 'SM PKG')
+			and l_quantity >= :4 and l_quantity <= :4 + 10
+			and p_size between 1 and 5
+			and l_shipmode in ('AIR', 'AIR REG')
+			and l_shipinstruct = 'DELIVER IN PERSON'
+		)
+		or
+		(
+			p_partkey = l_partkey
+			and p_brand = ':2'
+			and p_container in ('MED BAG', 'MED BOX', 'MED PKG', 'MED PACK')
+			and l_quantity >= :5 and l_quantity <= :5 + 10
+			and p_size between 1 and 10
+			and l_shipmode in ('AIR', 'AIR REG')
+			and l_shipinstruct = 'DELIVER IN PERSON'
+		)
+		or
+		(
+			p_partkey = l_partkey
+			and p_brand = ':3'
+			and p_container in ('LG CASE', 'LG BOX', 'LG PACK', 'LG PKG')
+			and l_quantity >= :6 and l_quantity <= :6 + 10
+			and p_size between 1 and 15
+			and l_shipmode in ('AIR', 'AIR REG')
+			and l_shipinstruct = 'DELIVER IN PERSON'
+		);
+2024-04-06 14:14:39.750 PDT [61551] ERROR:  relation "supplier" does not exist at character 34
+2024-04-06 14:14:39.750 PDT [61551] STATEMENT:  select
+		s_name,
+		s_address
+	from
+		supplier,
+		nation
+	where
+		s_suppkey in (
+			select
+				ps_suppkey
+			from
+				partsupp
+			where
+				ps_partkey in (
+					select
+						p_partkey
+					from
+						part
+					where
+						p_name like ':1%'
+				)
+				and ps_availqty > (
+					select
+						0.5 * sum(l_quantity)
+					from
+						lineitem
+					where
+						l_partkey = ps_partkey
+						and l_suppkey = ps_suppkey
+						and l_shipdate >= date ':2'
+						and l_shipdate < date ':2' + interval '1' year
+				)
+		)
+		and s_nationkey = n_nationkey
+		and n_name = ':3'
+	order by
+		s_name;
+2024-04-06 14:14:39.756 PDT [61553] ERROR:  relation "supplier" does not exist at character 44
+2024-04-06 14:14:39.756 PDT [61553] STATEMENT:  select
+		s_name,
+		count(*) as numwait
+	from
+		supplier,
+		lineitem l1,
+		orders,
+		nation
+	where
+		s_suppkey = l1.l_suppkey
+		and o_orderkey = l1.l_orderkey
+		and o_orderstatus = 'F'
+		and l1.l_receiptdate > l1.l_commitdate
+		and exists (
+			select
+				*
+			from
+				lineitem l2
+			where
+				l2.l_orderkey = l1.l_orderkey
+				and l2.l_suppkey <> l1.l_suppkey
+		)
+		and not exists (
+			select
+				*
+			from
+				lineitem l3
+			where
+				l3.l_orderkey = l1.l_orderkey
+				and l3.l_suppkey <> l1.l_suppkey
+				and l3.l_receiptdate > l3.l_commitdate
+		)
+		and s_nationkey = n_nationkey
+		and n_name = ':1'
+	group by
+		s_name
+	order by
+		numwait desc,
+		s_name;
+2024-04-06 14:14:39.762 PDT [61555] ERROR:  relation "customer" does not exist at character 161
+2024-04-06 14:14:39.762 PDT [61555] STATEMENT:  select
+		cntrycode,
+		count(*) as numcust,
+		sum(c_acctbal) as totacctbal
+	from
+		(
+			select
+				substring(c_phone from 1 for 2) as cntrycode,
+				c_acctbal
+			from
+				customer
+			where
+				substring(c_phone from 1 for 2) in
+					(':1', ':2', ':3', ':4', ':5', ':6', ':7')
+				and c_acctbal > (
+					select
+						avg(c_acctbal)
+					from
+						customer
+					where
+						c_acctbal > 0.00
+						and substring(c_phone from 1 for 2) in
+							(':1', ':2', ':3', ':4', ':5', ':6', ':7')
+				)
+				and not exists (
+					select
+						*
+					from
+						orders
+					where
+						o_custkey = c_custkey
+				)
+		) as custsale
+	group by
+		cntrycode
+	order by
+		cntrycode;
+2024-04-06 14:14:48.036 PDT [61595] ERROR:  syntax error at or near "(" at character 432
+2024-04-06 14:14:48.036 PDT [61595] STATEMENT:  select
+		l_returnflag,
+		l_linestatus,
+		sum(l_quantity) as sum_qty,
+		sum(l_extendedprice) as sum_base_price,
+		sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
+		sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+		avg(l_quantity) as avg_qty,
+		avg(l_extendedprice) as avg_price,
+		avg(l_discount) as avg_disc,
+		count(*) as count_order
+	from
+		lineitem
+	where
+		l_shipdate <= date '1998-12-01' - interval ':1' day (3)
+	group by
+		l_returnflag,
+		l_linestatus
+	order by
+		l_returnflag,
+		l_linestatus;
+2024-04-06 14:14:48.043 PDT [61597] ERROR:  syntax error at or near ":" at character 215
+2024-04-06 14:14:48.043 PDT [61597] STATEMENT:  select
+		s_acctbal,
+		s_name,
+		n_name,
+		p_partkey,
+		p_mfgr,
+		s_address,
+		s_phone,
+		s_comment
+	from
+		part,
+		supplier,
+		partsupp,
+		nation,
+		region
+	where
+		p_partkey = ps_partkey
+		and s_suppkey = ps_suppkey
+		and p_size = :1
+		and p_type like '%:2'
+		and s_nationkey = n_nationkey
+		and n_regionkey = r_regionkey
+		and r_name = ':3'
+		and ps_supplycost = (
+			select
+				min(ps_supplycost)
+			from
+				partsupp,
+				supplier,
+				nation,
+				region
+			where
+				p_partkey = ps_partkey
+				and s_suppkey = ps_suppkey
+				and s_nationkey = n_nationkey
+				and n_regionkey = r_regionkey
+				and r_name = ':3'
+		)
+	order by
+		s_acctbal desc,
+		n_name,
+		s_name,
+		p_partkey;
+2024-04-06 14:14:48.050 PDT [61599] ERROR:  relation "customer" does not exist at character 110
+2024-04-06 14:14:48.050 PDT [61599] STATEMENT:  select
+		l_orderkey,
+		sum(l_extendedprice * (1 - l_discount)) as revenue,
+		o_orderdate,
+		o_shippriority
+	from
+		customer,
+		orders,
+		lineitem
+	where
+		c_mktsegment = ':1'
+		and c_custkey = o_custkey
+		and l_orderkey = o_orderkey
+		and o_orderdate < date ':2'
+		and l_shipdate > date ':2'
+	group by
+		l_orderkey,
+		o_orderdate,
+		o_shippriority
+	order by
+		revenue desc,
+		o_orderdate;
+2024-04-06 14:14:48.057 PDT [61601] ERROR:  relation "orders" does not exist at character 57
+2024-04-06 14:14:48.057 PDT [61601] STATEMENT:  select
+		o_orderpriority,
+		count(*) as order_count
+	from
+		orders
+	where
+		o_orderdate >= date ':1'
+		and o_orderdate < date ':1' + interval '3' month
+		and exists (
+			select
+				*
+			from
+				lineitem
+			where
+				l_orderkey = o_orderkey
+				and l_commitdate < l_receiptdate
+		)
+	group by
+		o_orderpriority
+	order by
+		o_orderpriority;
+2024-04-06 14:14:48.065 PDT [61603] ERROR:  relation "customer" does not exist at character 75
+2024-04-06 14:14:48.065 PDT [61603] STATEMENT:  select
+		n_name,
+		sum(l_extendedprice * (1 - l_discount)) as revenue
+	from
+		customer,
+		orders,
+		lineitem,
+		supplier,
+		nation,
+		region
+	where
+		c_custkey = o_custkey
+		and l_orderkey = o_orderkey
+		and l_suppkey = s_suppkey
+		and c_nationkey = s_nationkey
+		and s_nationkey = n_nationkey
+		and n_regionkey = r_regionkey
+		and r_name = ':1'
+		and o_orderdate >= date ':2'
+		and o_orderdate < date ':2' + interval '1' year
+	group by
+		n_name
+	order by
+		revenue desc;
+2024-04-06 14:14:48.072 PDT [61605] ERROR:  syntax error at or near ":" at character 172
+2024-04-06 14:14:48.072 PDT [61605] STATEMENT:  select
+		sum(l_extendedprice * l_discount) as revenue
+	from
+		lineitem
+	where
+		l_shipdate >= date ':1'
+		and l_shipdate < date ':1' + interval '1' year
+		and l_discount between :2 - 0.01 and :2 + 0.01
+		and l_quantity < :3;
+2024-04-06 14:14:48.078 PDT [61607] ERROR:  relation "supplier" does not exist at character 246
+2024-04-06 14:14:48.078 PDT [61607] STATEMENT:  select
+		supp_nation,
+		cust_nation,
+		l_year,
+		sum(volume) as revenue
+	from
+		(
+			select
+				n1.n_name as supp_nation,
+				n2.n_name as cust_nation,
+				extract(year from l_shipdate) as l_year,
+				l_extendedprice * (1 - l_discount) as volume
+			from
+				supplier,
+				lineitem,
+				orders,
+				customer,
+				nation n1,
+				nation n2
+			where
+				s_suppkey = l_suppkey
+				and o_orderkey = l_orderkey
+				and c_custkey = o_custkey
+				and s_nationkey = n1.n_nationkey
+				and c_nationkey = n2.n_nationkey
+				and (
+					(n1.n_name = ':1' and n2.n_name = ':2')
+					or (n1.n_name = ':2' and n2.n_name = ':1')
+				)
+				and l_shipdate between date '1995-01-01' and date '1996-12-31'
+		) as shipping
+	group by
+		supp_nation,
+		cust_nation,
+		l_year
+	order by
+		supp_nation,
+		cust_nation,
+		l_year;
+2024-04-06 14:14:48.087 PDT [61609] ERROR:  relation "part" does not exist at character 246
+2024-04-06 14:14:48.087 PDT [61609] STATEMENT:  select
+		o_year,
+		sum(case
+			when nation = ':1' then volume
+			else 0
+		end) / sum(volume) as mkt_share
+	from
+		(
+			select
+				extract(year from o_orderdate) as o_year,
+				l_extendedprice * (1 - l_discount) as volume,
+				n2.n_name as nation
+			from
+				part,
+				supplier,
+				lineitem,
+				orders,
+				customer,
+				nation n1,
+				nation n2,
+				region
+			where
+				p_partkey = l_partkey
+				and s_suppkey = l_suppkey
+				and l_orderkey = o_orderkey
+				and o_custkey = c_custkey
+				and c_nationkey = n1.n_nationkey
+				and n1.n_regionkey = r_regionkey
+				and r_name = ':2'
+				and s_nationkey = n2.n_nationkey
+				and o_orderdate between date '1995-01-01' and date '1996-12-31'
+				and p_type = ':3'
+		) as all_nations
+	group by
+		o_year
+	order by
+		o_year;
+2024-04-06 14:14:48.095 PDT [61611] ERROR:  relation "part" does not exist at character 223
+2024-04-06 14:14:48.095 PDT [61611] STATEMENT:  select
+		nation,
+		o_year,
+		sum(amount) as sum_profit
+	from
+		(
+			select
+				n_name as nation,
+				extract(year from o_orderdate) as o_year,
+				l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+			from
+				part,
+				supplier,
+				lineitem,
+				partsupp,
+				orders,
+				nation
+			where
+				s_suppkey = l_suppkey
+				and ps_suppkey = l_suppkey
+				and ps_partkey = l_partkey
+				and p_partkey = l_partkey
+				and o_orderkey = l_orderkey
+				and s_nationkey = n_nationkey
+				and p_name like '%:1%'
+		) as profit
+	group by
+		nation,
+		o_year
+	order by
+		nation,
+		o_year desc;
+2024-04-06 14:14:48.101 PDT [61613] ERROR:  relation "customer" does not exist at character 142
+2024-04-06 14:14:48.101 PDT [61613] STATEMENT:  select
+		c_custkey,
+		c_name,
+		sum(l_extendedprice * (1 - l_discount)) as revenue,
+		c_acctbal,
+		n_name,
+		c_address,
+		c_phone,
+		c_comment
+	from
+		customer,
+		orders,
+		lineitem,
+		nation
+	where
+		c_custkey = o_custkey
+		and l_orderkey = o_orderkey
+		and o_orderdate >= date ':1'
+		and o_orderdate < date ':1' + interval '3' month
+		and l_returnflag = 'R'
+		and c_nationkey = n_nationkey
+	group by
+		c_custkey,
+		c_name,
+		c_acctbal,
+		c_phone,
+		n_name,
+		c_address,
+		c_comment
+	order by
+		revenue desc;
+2024-04-06 14:14:48.107 PDT [61615] ERROR:  syntax error at or near ":" at character 295
+2024-04-06 14:14:48.107 PDT [61615] STATEMENT:  select
+		ps_partkey,
+		sum(ps_supplycost * ps_availqty) as value
+	from
+		partsupp,
+		supplier,
+		nation
+	where
+		ps_suppkey = s_suppkey
+		and s_nationkey = n_nationkey
+		and n_name = ':1'
+	group by
+		ps_partkey having
+			sum(ps_supplycost * ps_availqty) > (
+				select
+					sum(ps_supplycost * ps_availqty) * :2
+				from
+					partsupp,
+					supplier,
+					nation
+				where
+					ps_suppkey = s_suppkey
+					and s_nationkey = n_nationkey
+					and n_name = ':1'
+			)
+	order by
+		value desc;
+2024-04-06 14:14:48.114 PDT [61617] ERROR:  relation "orders" does not exist at character 276
+2024-04-06 14:14:48.114 PDT [61617] STATEMENT:  select
+		l_shipmode,
+		sum(case
+			when o_orderpriority = '1-URGENT'
+				or o_orderpriority = '2-HIGH'
+				then 1
+			else 0
+		end) as high_line_count,
+		sum(case
+			when o_orderpriority <> '1-URGENT'
+				and o_orderpriority <> '2-HIGH'
+				then 1
+			else 0
+		end) as low_line_count
+	from
+		orders,
+		lineitem
+	where
+		o_orderkey = l_orderkey
+		and l_shipmode in (':1', ':2')
+		and l_commitdate < l_receiptdate
+		and l_shipdate < l_commitdate
+		and l_receiptdate >= date ':3'
+		and l_receiptdate < date ':3' + interval '1' year
+	group by
+		l_shipmode
+	order by
+		l_shipmode;
+2024-04-06 14:14:48.120 PDT [61619] ERROR:  relation "customer" does not exist at character 102
+2024-04-06 14:14:48.120 PDT [61619] STATEMENT:  select
+		c_count,
+		count(*) as custdist
+	from
+		(
+			select
+				c_custkey,
+				count(o_orderkey)
+			from
+				customer left outer join orders on
+					c_custkey = o_custkey
+					and o_comment not like '%:1%:2%'
+			group by
+				c_custkey
+		) as c_orders (c_custkey, c_count)
+	group by
+		c_count
+	order by
+		custdist desc,
+		c_count desc;
+2024-04-06 14:14:48.128 PDT [61621] ERROR:  relation "lineitem" does not exist at character 178
+2024-04-06 14:14:48.128 PDT [61621] STATEMENT:  select
+		100.00 * sum(case
+			when p_type like 'PROMO%'
+				then l_extendedprice * (1 - l_discount)
+			else 0
+		end) / sum(l_extendedprice * (1 - l_discount)) as promo_revenue
+	from
+		lineitem,
+		part
+	where
+		l_partkey = p_partkey
+		and l_shipdate >= date ':1'
+		and l_shipdate < date ':1' + interval '1' month;
+2024-04-06 14:14:48.136 PDT [61623] ERROR:  relation "lineitem" does not exist at character 124
+2024-04-06 14:14:48.136 PDT [61623] STATEMENT:  create view revenue (supplier_no, total_revenue) as
+		select
+			l_suppkey,
+			sum(l_extendedprice * (1 - l_discount))
+		from
+			lineitem
+		where
+			l_shipdate >= date ':1'
+			and l_shipdate < date ':1' + interval '3' month
+		group by
+			l_suppkey;
+2024-04-06 14:14:48.140 PDT [61623] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:14:48.140 PDT [61623] STATEMENT:  :o
+	select
+		s_suppkey,
+		s_name,
+		s_address,
+		s_phone,
+		total_revenue
+	from
+		supplier,
+		revenue
+	where
+		s_suppkey = supplier_no
+		and total_revenue = (
+			select
+				max(total_revenue)
+			from
+				revenue
+		)
+	order by
+		s_suppkey;
+2024-04-06 14:14:48.140 PDT [61623] ERROR:  view "revenue" does not exist
+2024-04-06 14:14:48.140 PDT [61623] STATEMENT:  drop view revenue;
+2024-04-06 14:14:48.147 PDT [61625] ERROR:  syntax error at or near ":" at character 196
+2024-04-06 14:14:48.147 PDT [61625] STATEMENT:  select
+		p_brand,
+		p_type,
+		p_size,
+		count(distinct ps_suppkey) as supplier_cnt
+	from
+		partsupp,
+		part
+	where
+		p_partkey = ps_partkey
+		and p_brand <> ':1'
+		and p_type not like ':2%'
+		and p_size in (:3, :4, :5, :6, :7, :8, :9, :10)
+		and ps_suppkey not in (
+			select
+				s_suppkey
+			from
+				supplier
+			where
+				s_comment like '%Customer%Complaints%'
+		)
+	group by
+		p_brand,
+		p_type,
+		p_size
+	order by
+		supplier_cnt desc,
+		p_brand,
+		p_type,
+		p_size;
+2024-04-06 14:14:48.154 PDT [61627] ERROR:  relation "lineitem" does not exist at character 56
+2024-04-06 14:14:48.154 PDT [61627] STATEMENT:  select
+		sum(l_extendedprice) / 7.0 as avg_yearly
+	from
+		lineitem,
+		part
+	where
+		p_partkey = l_partkey
+		and p_brand = ':1'
+		and p_container = ':2'
+		and l_quantity < (
+			select
+				0.2 * avg(l_quantity)
+			from
+				lineitem
+			where
+				l_partkey = p_partkey
+		);
+2024-04-06 14:14:48.162 PDT [61629] ERROR:  syntax error at or near ":" at character 242
+2024-04-06 14:14:48.162 PDT [61629] STATEMENT:  select
+		c_name,
+		c_custkey,
+		o_orderkey,
+		o_orderdate,
+		o_totalprice,
+		sum(l_quantity)
+	from
+		customer,
+		orders,
+		lineitem
+	where
+		o_orderkey in (
+			select
+				l_orderkey
+			from
+				lineitem
+			group by
+				l_orderkey having
+					sum(l_quantity) > :1
+		)
+		and c_custkey = o_custkey
+		and o_orderkey = l_orderkey
+	group by
+		c_name,
+		c_custkey,
+		o_orderkey,
+		o_orderdate,
+		o_totalprice
+	order by
+		o_totalprice desc,
+		o_orderdate;
+2024-04-06 14:14:48.168 PDT [61631] ERROR:  syntax error at or near ":" at character 219
+2024-04-06 14:14:48.168 PDT [61631] STATEMENT:  select
+		sum(l_extendedprice* (1 - l_discount)) as revenue
+	from
+		lineitem,
+		part
+	where
+		(
+			p_partkey = l_partkey
+			and p_brand = ':1'
+			and p_container in ('SM CASE', 'SM BOX', 'SM PACK', 'SM PKG')
+			and l_quantity >= :4 and l_quantity <= :4 + 10
+			and p_size between 1 and 5
+			and l_shipmode in ('AIR', 'AIR REG')
+			and l_shipinstruct = 'DELIVER IN PERSON'
+		)
+		or
+		(
+			p_partkey = l_partkey
+			and p_brand = ':2'
+			and p_container in ('MED BAG', 'MED BOX', 'MED PKG', 'MED PACK')
+			and l_quantity >= :5 and l_quantity <= :5 + 10
+			and p_size between 1 and 10
+			and l_shipmode in ('AIR', 'AIR REG')
+			and l_shipinstruct = 'DELIVER IN PERSON'
+		)
+		or
+		(
+			p_partkey = l_partkey
+			and p_brand = ':3'
+			and p_container in ('LG CASE', 'LG BOX', 'LG PACK', 'LG PKG')
+			and l_quantity >= :6 and l_quantity <= :6 + 10
+			and p_size between 1 and 15
+			and l_shipmode in ('AIR', 'AIR REG')
+			and l_shipinstruct = 'DELIVER IN PERSON'
+		);
+2024-04-06 14:14:48.175 PDT [61633] ERROR:  relation "supplier" does not exist at character 34
+2024-04-06 14:14:48.175 PDT [61633] STATEMENT:  select
+		s_name,
+		s_address
+	from
+		supplier,
+		nation
+	where
+		s_suppkey in (
+			select
+				ps_suppkey
+			from
+				partsupp
+			where
+				ps_partkey in (
+					select
+						p_partkey
+					from
+						part
+					where
+						p_name like ':1%'
+				)
+				and ps_availqty > (
+					select
+						0.5 * sum(l_quantity)
+					from
+						lineitem
+					where
+						l_partkey = ps_partkey
+						and l_suppkey = ps_suppkey
+						and l_shipdate >= date ':2'
+						and l_shipdate < date ':2' + interval '1' year
+				)
+		)
+		and s_nationkey = n_nationkey
+		and n_name = ':3'
+	order by
+		s_name;
+2024-04-06 14:14:48.181 PDT [61635] ERROR:  relation "supplier" does not exist at character 44
+2024-04-06 14:14:48.181 PDT [61635] STATEMENT:  select
+		s_name,
+		count(*) as numwait
+	from
+		supplier,
+		lineitem l1,
+		orders,
+		nation
+	where
+		s_suppkey = l1.l_suppkey
+		and o_orderkey = l1.l_orderkey
+		and o_orderstatus = 'F'
+		and l1.l_receiptdate > l1.l_commitdate
+		and exists (
+			select
+				*
+			from
+				lineitem l2
+			where
+				l2.l_orderkey = l1.l_orderkey
+				and l2.l_suppkey <> l1.l_suppkey
+		)
+		and not exists (
+			select
+				*
+			from
+				lineitem l3
+			where
+				l3.l_orderkey = l1.l_orderkey
+				and l3.l_suppkey <> l1.l_suppkey
+				and l3.l_receiptdate > l3.l_commitdate
+		)
+		and s_nationkey = n_nationkey
+		and n_name = ':1'
+	group by
+		s_name
+	order by
+		numwait desc,
+		s_name;
+2024-04-06 14:14:48.187 PDT [61637] ERROR:  relation "customer" does not exist at character 161
+2024-04-06 14:14:48.187 PDT [61637] STATEMENT:  select
+		cntrycode,
+		count(*) as numcust,
+		sum(c_acctbal) as totacctbal
+	from
+		(
+			select
+				substring(c_phone from 1 for 2) as cntrycode,
+				c_acctbal
+			from
+				customer
+			where
+				substring(c_phone from 1 for 2) in
+					(':1', ':2', ':3', ':4', ':5', ':6', ':7')
+				and c_acctbal > (
+					select
+						avg(c_acctbal)
+					from
+						customer
+					where
+						c_acctbal > 0.00
+						and substring(c_phone from 1 for 2) in
+							(':1', ':2', ':3', ':4', ':5', ':6', ':7')
+				)
+				and not exists (
+					select
+						*
+					from
+						orders
+					where
+						o_custkey = c_custkey
+				)
+		) as custsale
+	group by
+		cntrycode
+	order by
+		cntrycode;
+2024-04-06 14:16:56.313 PDT [62038] ERROR:  syntax error at or near "(" at character 432
+2024-04-06 14:16:56.313 PDT [62038] STATEMENT:  select
+		l_returnflag,
+		l_linestatus,
+		sum(l_quantity) as sum_qty,
+		sum(l_extendedprice) as sum_base_price,
+		sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
+		sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+		avg(l_quantity) as avg_qty,
+		avg(l_extendedprice) as avg_price,
+		avg(l_discount) as avg_disc,
+		count(*) as count_order
+	from
+		lineitem
+	where
+		l_shipdate <= date '1998-12-01' - interval ':1' day (3)
+	group by
+		l_returnflag,
+		l_linestatus
+	order by
+		l_returnflag,
+		l_linestatus;
+2024-04-06 14:16:56.325 PDT [62040] ERROR:  syntax error at or near ":" at character 215
+2024-04-06 14:16:56.325 PDT [62040] STATEMENT:  select
+		s_acctbal,
+		s_name,
+		n_name,
+		p_partkey,
+		p_mfgr,
+		s_address,
+		s_phone,
+		s_comment
+	from
+		part,
+		supplier,
+		partsupp,
+		nation,
+		region
+	where
+		p_partkey = ps_partkey
+		and s_suppkey = ps_suppkey
+		and p_size = :1
+		and p_type like '%:2'
+		and s_nationkey = n_nationkey
+		and n_regionkey = r_regionkey
+		and r_name = ':3'
+		and ps_supplycost = (
+			select
+				min(ps_supplycost)
+			from
+				partsupp,
+				supplier,
+				nation,
+				region
+			where
+				p_partkey = ps_partkey
+				and s_suppkey = ps_suppkey
+				and s_nationkey = n_nationkey
+				and n_regionkey = r_regionkey
+				and r_name = ':3'
+		)
+	order by
+		s_acctbal desc,
+		n_name,
+		s_name,
+		p_partkey;
+2024-04-06 14:16:56.341 PDT [62042] ERROR:  invalid input syntax for type date: ":2" at character 246
+2024-04-06 14:16:56.341 PDT [62042] STATEMENT:  select
+		l_orderkey,
+		sum(l_extendedprice * (1 - l_discount)) as revenue,
+		o_orderdate,
+		o_shippriority
+	from
+		customer,
+		orders,
+		lineitem
+	where
+		c_mktsegment = ':1'
+		and c_custkey = o_custkey
+		and l_orderkey = o_orderkey
+		and o_orderdate < date ':2'
+		and l_shipdate > date ':2'
+	group by
+		l_orderkey,
+		o_orderdate,
+		o_shippriority
+	order by
+		revenue desc,
+		o_orderdate;
+2024-04-06 14:16:56.351 PDT [62044] ERROR:  invalid input syntax for type date: ":1" at character 91
+2024-04-06 14:16:56.351 PDT [62044] STATEMENT:  select
+		o_orderpriority,
+		count(*) as order_count
+	from
+		orders
+	where
+		o_orderdate >= date ':1'
+		and o_orderdate < date ':1' + interval '3' month
+		and exists (
+			select
+				*
+			from
+				lineitem
+			where
+				l_orderkey = o_orderkey
+				and l_commitdate < l_receiptdate
+		)
+	group by
+		o_orderpriority
+	order by
+		o_orderpriority;
+2024-04-06 14:16:56.360 PDT [62046] ERROR:  invalid input syntax for type date: ":2" at character 355
+2024-04-06 14:16:56.360 PDT [62046] STATEMENT:  select
+		n_name,
+		sum(l_extendedprice * (1 - l_discount)) as revenue
+	from
+		customer,
+		orders,
+		lineitem,
+		supplier,
+		nation,
+		region
+	where
+		c_custkey = o_custkey
+		and l_orderkey = o_orderkey
+		and l_suppkey = s_suppkey
+		and c_nationkey = s_nationkey
+		and s_nationkey = n_nationkey
+		and n_regionkey = r_regionkey
+		and r_name = ':1'
+		and o_orderdate >= date ':2'
+		and o_orderdate < date ':2' + interval '1' year
+	group by
+		n_name
+	order by
+		revenue desc;
+2024-04-06 14:16:56.366 PDT [62048] ERROR:  syntax error at or near ":" at character 172
+2024-04-06 14:16:56.366 PDT [62048] STATEMENT:  select
+		sum(l_extendedprice * l_discount) as revenue
+	from
+		lineitem
+	where
+		l_shipdate >= date ':1'
+		and l_shipdate < date ':1' + interval '1' year
+		and l_discount between :2 - 0.01 and :2 + 0.01
+		and l_quantity < :3;
+2024-04-06 14:16:56.572 PDT [62062] ERROR:  invalid input syntax for type date: ":1" at character 263
+2024-04-06 14:16:56.572 PDT [62062] STATEMENT:  select
+		c_custkey,
+		c_name,
+		sum(l_extendedprice * (1 - l_discount)) as revenue,
+		c_acctbal,
+		n_name,
+		c_address,
+		c_phone,
+		c_comment
+	from
+		customer,
+		orders,
+		lineitem,
+		nation
+	where
+		c_custkey = o_custkey
+		and l_orderkey = o_orderkey
+		and o_orderdate >= date ':1'
+		and o_orderdate < date ':1' + interval '3' month
+		and l_returnflag = 'R'
+		and c_nationkey = n_nationkey
+	group by
+		c_custkey,
+		c_name,
+		c_acctbal,
+		c_phone,
+		n_name,
+		c_address,
+		c_comment
+	order by
+		revenue desc;
+2024-04-06 14:16:56.578 PDT [62064] ERROR:  syntax error at or near ":" at character 295
+2024-04-06 14:16:56.578 PDT [62064] STATEMENT:  select
+		ps_partkey,
+		sum(ps_supplycost * ps_availqty) as value
+	from
+		partsupp,
+		supplier,
+		nation
+	where
+		ps_suppkey = s_suppkey
+		and s_nationkey = n_nationkey
+		and n_name = ':1'
+	group by
+		ps_partkey having
+			sum(ps_supplycost * ps_availqty) > (
+				select
+					sum(ps_supplycost * ps_availqty) * :2
+				from
+					partsupp,
+					supplier,
+					nation
+				where
+					ps_suppkey = s_suppkey
+					and s_nationkey = n_nationkey
+					and n_name = ':1'
+			)
+	order by
+		value desc;
+2024-04-06 14:16:56.585 PDT [62066] ERROR:  invalid input syntax for type date: ":3" at character 449
+2024-04-06 14:16:56.585 PDT [62066] STATEMENT:  select
+		l_shipmode,
+		sum(case
+			when o_orderpriority = '1-URGENT'
+				or o_orderpriority = '2-HIGH'
+				then 1
+			else 0
+		end) as high_line_count,
+		sum(case
+			when o_orderpriority <> '1-URGENT'
+				and o_orderpriority <> '2-HIGH'
+				then 1
+			else 0
+		end) as low_line_count
+	from
+		orders,
+		lineitem
+	where
+		o_orderkey = l_orderkey
+		and l_shipmode in (':1', ':2')
+		and l_commitdate < l_receiptdate
+		and l_shipdate < l_commitdate
+		and l_receiptdate >= date ':3'
+		and l_receiptdate < date ':3' + interval '1' year
+	group by
+		l_shipmode
+	order by
+		l_shipmode;
+2024-04-06 14:16:57.820 PDT [62072] ERROR:  invalid input syntax for type date: ":1" at character 247
+2024-04-06 14:16:57.820 PDT [62072] STATEMENT:  select
+		100.00 * sum(case
+			when p_type like 'PROMO%'
+				then l_extendedprice * (1 - l_discount)
+			else 0
+		end) / sum(l_extendedprice * (1 - l_discount)) as promo_revenue
+	from
+		lineitem,
+		part
+	where
+		l_partkey = p_partkey
+		and l_shipdate >= date ':1'
+		and l_shipdate < date ':1' + interval '1' month;
+2024-04-06 14:16:57.828 PDT [62074] ERROR:  invalid input syntax for type date: ":1" at character 161
+2024-04-06 14:16:57.828 PDT [62074] STATEMENT:  create view revenue (supplier_no, total_revenue) as
+		select
+			l_suppkey,
+			sum(l_extendedprice * (1 - l_discount))
+		from
+			lineitem
+		where
+			l_shipdate >= date ':1'
+			and l_shipdate < date ':1' + interval '3' month
+		group by
+			l_suppkey;
+2024-04-06 14:16:57.829 PDT [62074] ERROR:  syntax error at or near ":" at character 1
+2024-04-06 14:16:57.829 PDT [62074] STATEMENT:  :o
+	select
+		s_suppkey,
+		s_name,
+		s_address,
+		s_phone,
+		total_revenue
+	from
+		supplier,
+		revenue
+	where
+		s_suppkey = supplier_no
+		and total_revenue = (
+			select
+				max(total_revenue)
+			from
+				revenue
+		)
+	order by
+		s_suppkey;
+2024-04-06 14:16:57.829 PDT [62074] ERROR:  view "revenue" does not exist
+2024-04-06 14:16:57.829 PDT [62074] STATEMENT:  drop view revenue;
+2024-04-06 14:16:57.834 PDT [62076] ERROR:  syntax error at or near ":" at character 196
+2024-04-06 14:16:57.834 PDT [62076] STATEMENT:  select
+		p_brand,
+		p_type,
+		p_size,
+		count(distinct ps_suppkey) as supplier_cnt
+	from
+		partsupp,
+		part
+	where
+		p_partkey = ps_partkey
+		and p_brand <> ':1'
+		and p_type not like ':2%'
+		and p_size in (:3, :4, :5, :6, :7, :8, :9, :10)
+		and ps_suppkey not in (
+			select
+				s_suppkey
+			from
+				supplier
+			where
+				s_comment like '%Customer%Complaints%'
+		)
+	group by
+		p_brand,
+		p_type,
+		p_size
+	order by
+		supplier_cnt desc,
+		p_brand,
+		p_type,
+		p_size;
+2024-04-06 14:16:57.874 PDT [62082] ERROR:  syntax error at or near ":" at character 242
+2024-04-06 14:16:57.874 PDT [62082] STATEMENT:  select
+		c_name,
+		c_custkey,
+		o_orderkey,
+		o_orderdate,
+		o_totalprice,
+		sum(l_quantity)
+	from
+		customer,
+		orders,
+		lineitem
+	where
+		o_orderkey in (
+			select
+				l_orderkey
+			from
+				lineitem
+			group by
+				l_orderkey having
+					sum(l_quantity) > :1
+		)
+		and c_custkey = o_custkey
+		and o_orderkey = l_orderkey
+	group by
+		c_name,
+		c_custkey,
+		o_orderkey,
+		o_orderdate,
+		o_totalprice
+	order by
+		o_totalprice desc,
+		o_orderdate;
+2024-04-06 14:16:57.880 PDT [62084] ERROR:  syntax error at or near ":" at character 219
+2024-04-06 14:16:57.880 PDT [62084] STATEMENT:  select
+		sum(l_extendedprice* (1 - l_discount)) as revenue
+	from
+		lineitem,
+		part
+	where
+		(
+			p_partkey = l_partkey
+			and p_brand = ':1'
+			and p_container in ('SM CASE', 'SM BOX', 'SM PACK', 'SM PKG')
+			and l_quantity >= :4 and l_quantity <= :4 + 10
+			and p_size between 1 and 5
+			and l_shipmode in ('AIR', 'AIR REG')
+			and l_shipinstruct = 'DELIVER IN PERSON'
+		)
+		or
+		(
+			p_partkey = l_partkey
+			and p_brand = ':2'
+			and p_container in ('MED BAG', 'MED BOX', 'MED PKG', 'MED PACK')
+			and l_quantity >= :5 and l_quantity <= :5 + 10
+			and p_size between 1 and 10
+			and l_shipmode in ('AIR', 'AIR REG')
+			and l_shipinstruct = 'DELIVER IN PERSON'
+		)
+		or
+		(
+			p_partkey = l_partkey
+			and p_brand = ':3'
+			and p_container in ('LG CASE', 'LG BOX', 'LG PACK', 'LG PKG')
+			and l_quantity >= :6 and l_quantity <= :6 + 10
+			and p_size between 1 and 15
+			and l_shipmode in ('AIR', 'AIR REG')
+			and l_shipinstruct = 'DELIVER IN PERSON'
+		);
+2024-04-06 14:16:57.892 PDT [62086] ERROR:  invalid input syntax for type date: ":2" at character 408
+2024-04-06 14:16:57.892 PDT [62086] STATEMENT:  select
+		s_name,
+		s_address
+	from
+		supplier,
+		nation
+	where
+		s_suppkey in (
+			select
+				ps_suppkey
+			from
+				partsupp
+			where
+				ps_partkey in (
+					select
+						p_partkey
+					from
+						part
+					where
+						p_name like ':1%'
+				)
+				and ps_availqty > (
+					select
+						0.5 * sum(l_quantity)
+					from
+						lineitem
+					where
+						l_partkey = ps_partkey
+						and l_suppkey = ps_suppkey
+						and l_shipdate >= date ':2'
+						and l_shipdate < date ':2' + interval '1' year
+				)
+		)
+		and s_nationkey = n_nationkey
+		and n_name = ':3'
+	order by
+		s_name;
+2024-04-06 14:19:06.332 PDT [15172] LOG:  checkpoint starting: time
+2024-04-06 14:19:06.751 PDT [15172] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.407 s, sync=0.003 s, total=0.419 s; sync files=1, longest=0.003 s, average=0.003 s; distance=16 kB, estimate=462462 kB; lsn=2/DF552A08, redo lsn=2/DF5529D0
+2024-04-06 14:25:08.353 PDT [64127] ERROR:  relation "lineitem" does not exist at character 364
+2024-04-06 14:25:08.353 PDT [64127] STATEMENT:  select
+		l_returnflag,
+		l_linestatus,
+		sum(l_quantity) as sum_qty,
+		sum(l_extendedprice) as sum_base_price,
+		sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
+		sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+		avg(l_quantity) as avg_qty,
+		avg(l_extendedprice) as avg_price,
+		avg(l_discount) as avg_disc,
+		count(*) as count_order
+	from
+		lineitem
+	where
+		l_shipdate <= date '1998-12-01' - interval '117' day
+	group by
+		l_returnflag,
+		l_linestatus
+	order by
+		l_returnflag,
+		l_linestatus
+	limit 1;
+2024-04-06 14:25:08.360 PDT [64129] ERROR:  relation "part" does not exist at character 98
+2024-04-06 14:25:08.360 PDT [64129] STATEMENT:  select
+		s_acctbal,
+		s_name,
+		n_name,
+		p_partkey,
+		p_mfgr,
+		s_address,
+		s_phone,
+		s_comment
+	from
+		part,
+		supplier,
+		partsupp,
+		nation,
+		region
+	where
+		p_partkey = ps_partkey
+		and s_suppkey = ps_suppkey
+		and p_size = 25
+		and p_type like '%STEEL'
+		and s_nationkey = n_nationkey
+		and n_regionkey = r_regionkey
+		and r_name = 'EUROPE'
+		and ps_supplycost = (
+			select
+				min(ps_supplycost)
+			from
+				partsupp,
+				supplier,
+				nation,
+				region
+			where
+				p_partkey = ps_partkey
+				and s_suppkey = ps_suppkey
+				and s_nationkey = n_nationkey
+				and n_regionkey = r_regionkey
+				and r_name = 'EUROPE'
+		)
+	order by
+		s_acctbal desc,
+		n_name,
+		s_name,
+		p_partkey
+	LIMIT 100;
+2024-04-06 14:25:08.366 PDT [64131] ERROR:  relation "customer" does not exist at character 110
+2024-04-06 14:25:08.366 PDT [64131] STATEMENT:  select
+		l_orderkey,
+		sum(l_extendedprice * (1 - l_discount)) as revenue,
+		o_orderdate,
+		o_shippriority
+	from
+		customer,
+		orders,
+		lineitem
+	where
+		c_mktsegment = 'HOUSEHOLD'
+		and c_custkey = o_custkey
+		and l_orderkey = o_orderkey
+		and o_orderdate < date '1995-03-21'
+		and l_shipdate > date '1995-03-21'
+	group by
+		l_orderkey,
+		o_orderdate,
+		o_shippriority
+	order by
+		revenue desc,
+		o_orderdate
+	limit 10;
+2024-04-06 14:25:08.372 PDT [64133] ERROR:  relation "orders" does not exist at character 57
+2024-04-06 14:25:08.372 PDT [64133] STATEMENT:  select
+		o_orderpriority,
+		count(*) as order_count
+	from
+		orders
+	where
+		o_orderdate >= date '1996-03-01'
+		and o_orderdate < date '1996-03-01' + interval '3' month
+		and exists (
+			select
+				*
+			from
+				lineitem
+			where
+				l_orderkey = o_orderkey
+				and l_commitdate < l_receiptdate
+		)
+	group by
+		o_orderpriority
+	order by
+		o_orderpriority
+	limit 1;
+2024-04-06 14:25:08.379 PDT [64135] ERROR:  relation "customer" does not exist at character 75
+2024-04-06 14:25:08.379 PDT [64135] STATEMENT:  select
+		n_name,
+		sum(l_extendedprice * (1 - l_discount)) as revenue
+	from
+		customer,
+		orders,
+		lineitem,
+		supplier,
+		nation,
+		region
+	where
+		c_custkey = o_custkey
+		and l_orderkey = o_orderkey
+		and l_suppkey = s_suppkey
+		and c_nationkey = s_nationkey
+		and s_nationkey = n_nationkey
+		and n_regionkey = r_regionkey
+		and r_name = 'AMERICA'
+		and o_orderdate >= date '1995-01-01'
+		and o_orderdate < date '1995-01-01' + interval '1' year
+	group by
+		n_name
+	order by
+		revenue desc
+	limit 1;
+2024-04-06 14:25:08.385 PDT [64137] ERROR:  relation "lineitem" does not exist at character 60
+2024-04-06 14:25:08.385 PDT [64137] STATEMENT:  select
+		sum(l_extendedprice * l_discount) as revenue
+	from
+		lineitem
+	where
+		l_shipdate >= date '1995-01-01'
+		and l_shipdate < date '1995-01-01' + interval '1' year
+		and l_discount between 0.09 - 0.01 and 0.09 + 0.01
+		and l_quantity < 24
+	limit 1;
+2024-04-06 14:25:08.391 PDT [64139] ERROR:  relation "supplier" does not exist at character 246
+2024-04-06 14:25:08.391 PDT [64139] STATEMENT:  select
+		supp_nation,
+		cust_nation,
+		l_year,
+		sum(volume) as revenue
+	from
+		(
+			select
+				n1.n_name as supp_nation,
+				n2.n_name as cust_nation,
+				extract(year from l_shipdate) as l_year,
+				l_extendedprice * (1 - l_discount) as volume
+			from
+				supplier,
+				lineitem,
+				orders,
+				customer,
+				nation n1,
+				nation n2
+			where
+				s_suppkey = l_suppkey
+				and o_orderkey = l_orderkey
+				and c_custkey = o_custkey
+				and s_nationkey = n1.n_nationkey
+				and c_nationkey = n2.n_nationkey
+				and (
+					(n1.n_name = 'RUSSIA' and n2.n_name = 'INDIA')
+					or (n1.n_name = 'INDIA' and n2.n_name = 'RUSSIA')
+				)
+				and l_shipdate between date '1995-01-01' and date '1996-12-31'
+		) as shipping
+	group by
+		supp_nation,
+		cust_nation,
+		l_year
+	order by
+		supp_nation,
+		cust_nation,
+		l_year
+	limit 1;
+2024-04-06 14:25:08.400 PDT [64141] ERROR:  relation "part" does not exist at character 249
+2024-04-06 14:25:08.400 PDT [64141] STATEMENT:  select
+		o_year,
+		sum(case
+			when nation = 'INDIA' then volume
+			else 0
+		end) / sum(volume) as mkt_share
+	from
+		(
+			select
+				extract(year from o_orderdate) as o_year,
+				l_extendedprice * (1 - l_discount) as volume,
+				n2.n_name as nation
+			from
+				part,
+				supplier,
+				lineitem,
+				orders,
+				customer,
+				nation n1,
+				nation n2,
+				region
+			where
+				p_partkey = l_partkey
+				and s_suppkey = l_suppkey
+				and l_orderkey = o_orderkey
+				and o_custkey = c_custkey
+				and c_nationkey = n1.n_nationkey
+				and n1.n_regionkey = r_regionkey
+				and r_name = 'ASIA'
+				and s_nationkey = n2.n_nationkey
+				and o_orderdate between date '1995-01-01' and date '1996-12-31'
+				and p_type = 'LARGE BRUSHED NICKEL'
+		) as all_nations
+	group by
+		o_year
+	order by
+		o_year
+	limit 1;
+2024-04-06 14:25:08.406 PDT [64143] ERROR:  relation "part" does not exist at character 223
+2024-04-06 14:25:08.406 PDT [64143] STATEMENT:  select
+		nation,
+		o_year,
+		sum(amount) as sum_profit
+	from
+		(
+			select
+				n_name as nation,
+				extract(year from o_orderdate) as o_year,
+				l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+			from
+				part,
+				supplier,
+				lineitem,
+				partsupp,
+				orders,
+				nation
+			where
+				s_suppkey = l_suppkey
+				and ps_suppkey = l_suppkey
+				and ps_partkey = l_partkey
+				and p_partkey = l_partkey
+				and o_orderkey = l_orderkey
+				and s_nationkey = n_nationkey
+				and p_name like '%orchid%'
+		) as profit
+	group by
+		nation,
+		o_year
+	order by
+		nation,
+		o_year desc
+	limit 1;
+2024-04-06 14:25:08.414 PDT [64145] ERROR:  relation "customer" does not exist at character 142
+2024-04-06 14:25:08.414 PDT [64145] STATEMENT:  select
+		c_custkey,
+		c_name,
+		sum(l_extendedprice * (1 - l_discount)) as revenue,
+		c_acctbal,
+		n_name,
+		c_address,
+		c_phone,
+		c_comment
+	from
+		customer,
+		orders,
+		lineitem,
+		nation
+	where
+		c_custkey = o_custkey
+		and l_orderkey = o_orderkey
+		and o_orderdate >= date '1995-01-01'
+		and o_orderdate < date '1995-01-01' + interval '3' month
+		and l_returnflag = 'R'
+		and c_nationkey = n_nationkey
+	group by
+		c_custkey,
+		c_name,
+		c_acctbal,
+		c_phone,
+		n_name,
+		c_address,
+		c_comment
+	order by
+		revenue desc
+	limit 1;
+2024-04-06 14:25:08.419 PDT [64147] ERROR:  relation "partsupp" does not exist at character 70
+2024-04-06 14:25:08.419 PDT [64147] STATEMENT:  select
+		ps_partkey,
+		sum(ps_supplycost * ps_availqty) as value
+	from
+		partsupp,
+		supplier,
+		nation
+	where
+		ps_suppkey = s_suppkey
+		and s_nationkey = n_nationkey
+		and n_name = 'SAUDI ARABIA'
+	group by
+		ps_partkey having
+			sum(ps_supplycost * ps_availqty) > (
+				select
+					sum(ps_supplycost * ps_availqty) * 0.0001000000
+				from
+					partsupp,
+					supplier,
+					nation
+				where
+					ps_suppkey = s_suppkey
+					and s_nationkey = n_nationkey
+					and n_name = 'SAUDI ARABIA'
+			)
+	order by
+		value desc
+	limit 1;
+2024-04-06 14:25:08.426 PDT [64149] ERROR:  relation "orders" does not exist at character 276
+2024-04-06 14:25:08.426 PDT [64149] STATEMENT:  select
+		l_shipmode,
+		sum(case
+			when o_orderpriority = '1-URGENT'
+				or o_orderpriority = '2-HIGH'
+				then 1
+			else 0
+		end) as high_line_count,
+		sum(case
+			when o_orderpriority <> '1-URGENT'
+				and o_orderpriority <> '2-HIGH'
+				then 1
+			else 0
+		end) as low_line_count
+	from
+		orders,
+		lineitem
+	where
+		o_orderkey = l_orderkey
+		and l_shipmode in ('TRUCK', 'AIR')
+		and l_commitdate < l_receiptdate
+		and l_shipdate < l_commitdate
+		and l_receiptdate >= date '1997-01-01'
+		and l_receiptdate < date '1997-01-01' + interval '1' year
+	group by
+		l_shipmode
+	order by
+		l_shipmode
+	limit 1;
+2024-04-06 14:25:08.434 PDT [64151] ERROR:  relation "customer" does not exist at character 102
+2024-04-06 14:25:08.434 PDT [64151] STATEMENT:  select
+		c_count,
+		count(*) as custdist
+	from
+		(
+			select
+				c_custkey,
+				count(o_orderkey)
+			from
+				customer left outer join orders on
+					c_custkey = o_custkey
+					and o_comment not like '%pending%packages%'
+			group by
+				c_custkey
+		) as c_orders (c_custkey, c_count)
+	group by
+		c_count
+	order by
+		custdist desc,
+		c_count desc
+	limit 1;
+2024-04-06 14:25:08.440 PDT [64153] ERROR:  relation "lineitem" does not exist at character 178
+2024-04-06 14:25:08.440 PDT [64153] STATEMENT:  select
+		100.00 * sum(case
+			when p_type like 'PROMO%'
+				then l_extendedprice * (1 - l_discount)
+			else 0
+		end) / sum(l_extendedprice * (1 - l_discount)) as promo_revenue
+	from
+		lineitem,
+		part
+	where
+		l_partkey = p_partkey
+		and l_shipdate >= date '1993-11-01'
+		and l_shipdate < date '1993-11-01' + interval '1' month
+	limit 1;
+2024-04-06 14:25:08.447 PDT [64155] ERROR:  relation "lineitem" does not exist at character 125
+2024-04-06 14:25:08.447 PDT [64155] STATEMENT:  create view revenue0 (supplier_no, total_revenue) as
+		select
+			l_suppkey,
+			sum(l_extendedprice * (1 - l_discount))
+		from
+			lineitem
+		where
+			l_shipdate >= date '1997-05-01'
+			and l_shipdate < date '1997-05-01' + interval '3' month
+		group by
+			l_suppkey;
+2024-04-06 14:25:08.447 PDT [64155] ERROR:  relation "supplier" does not exist at character 72
+2024-04-06 14:25:08.447 PDT [64155] STATEMENT:  select
+		s_suppkey,
+		s_name,
+		s_address,
+		s_phone,
+		total_revenue
+	from
+		supplier,
+		revenue0
+	where
+		s_suppkey = supplier_no
+		and total_revenue = (
+			select
+				max(total_revenue)
+			from
+				revenue0
+		)
+	order by
+		s_suppkey;
+2024-04-06 14:25:08.447 PDT [64155] ERROR:  syntax error at or near "limit" at character 20
+2024-04-06 14:25:08.447 PDT [64155] STATEMENT:  drop view revenue0
+	limit 1;
+2024-04-06 14:25:08.452 PDT [64157] ERROR:  relation "partsupp" does not exist at character 86
+2024-04-06 14:25:08.452 PDT [64157] STATEMENT:  select
+		p_brand,
+		p_type,
+		p_size,
+		count(distinct ps_suppkey) as supplier_cnt
+	from
+		partsupp,
+		part
+	where
+		p_partkey = ps_partkey
+		and p_brand <> 'Brand#53'
+		and p_type not like 'LARGE ANODIZED%'
+		and p_size in (45, 37, 43, 7, 18, 13, 22, 12)
+		and ps_suppkey not in (
+			select
+				s_suppkey
+			from
+				supplier
+			where
+				s_comment like '%Customer%Complaints%'
+		)
+	group by
+		p_brand,
+		p_type,
+		p_size
+	order by
+		supplier_cnt desc,
+		p_brand,
+		p_type,
+		p_size
+	limit 1;
+2024-04-06 14:25:08.458 PDT [64159] ERROR:  relation "lineitem" does not exist at character 56
+2024-04-06 14:25:08.458 PDT [64159] STATEMENT:  select
+		sum(l_extendedprice) / 7.0 as avg_yearly
+	from
+		lineitem,
+		part,
+	        (select l_partkey as agg_partkey, 0.2 * avg(l_quantity) as avg_quantity from lineitem group by l_partkey) part_agg
+	where
+		p_partkey = l_partkey
+	        and agg_partkey = l_partkey
+		and p_brand = 'brand#33'
+		and p_container = 'wrap jar'
+		and l_quantity < avg_quantity  
+	limit 1;
+2024-04-06 14:25:08.464 PDT [64161] ERROR:  relation "customer" does not exist at character 94
+2024-04-06 14:25:08.464 PDT [64161] STATEMENT:  select
+		c_name,
+		c_custkey,
+		o_orderkey,
+		o_orderdate,
+		o_totalprice,
+		sum(l_quantity)
+	from
+		customer,
+		orders,
+		lineitem
+	where
+		o_orderkey in (
+			select
+				l_orderkey
+			from
+				lineitem
+			group by
+				l_orderkey having
+					sum(l_quantity) > 314
+		)
+		and c_custkey = o_custkey
+		and o_orderkey = l_orderkey
+	group by
+		c_name,
+		c_custkey,
+		o_orderkey,
+		o_orderdate,
+		o_totalprice
+	order by
+		o_totalprice desc,
+		o_orderdate
+	limit 1;
+2024-04-06 14:25:08.469 PDT [64163] ERROR:  relation "lineitem" does not exist at character 65
+2024-04-06 14:25:08.469 PDT [64163] STATEMENT:  select
+		sum(l_extendedprice* (1 - l_discount)) as revenue
+	from
+		lineitem,
+		part
+	where
+		(
+			p_partkey = l_partkey
+			and p_brand = 'Brand#54'
+			and p_container in ('SM CASE', 'SM BOX', 'SM PACK', 'SM PKG')
+			and l_quantity >= 4 and l_quantity <= 4 + 10
+			and p_size between 1 and 5
+			and l_shipmode in ('AIR', 'AIR REG')
+			and l_shipinstruct = 'DELIVER IN PERSON'
+		)
+		or
+		(
+			p_partkey = l_partkey
+			and p_brand = 'Brand#51'
+			and p_container in ('MED BAG', 'MED BOX', 'MED PKG', 'MED PACK')
+			and l_quantity >= 11 and l_quantity <= 11 + 10
+			and p_size between 1 and 10
+			and l_shipmode in ('AIR', 'AIR REG')
+			and l_shipinstruct = 'DELIVER IN PERSON'
+		)
+		or
+		(
+			p_partkey = l_partkey
+			and p_brand = 'Brand#21'
+			and p_container in ('LG CASE', 'LG BOX', 'LG PACK', 'LG PKG')
+			and l_quantity >= 28 and l_quantity <= 28 + 10
+			and p_size between 1 and 15
+			and l_shipmode in ('AIR', 'AIR REG')
+			and l_shipinstruct = 'DELIVER IN PERSON'
+		)
+	limit 1;
+2024-04-06 14:25:08.478 PDT [64165] ERROR:  relation "supplier" does not exist at character 34
+2024-04-06 14:25:08.478 PDT [64165] STATEMENT:  select
+		s_name,
+		s_address
+	from
+		supplier,
+		nation
+	where
+		s_suppkey in (
+			select
+				ps_suppkey
+			from
+				partsupp,
+				(
+					select
+						l_partkey agg_partkey,
+						l_suppkey agg_suppkey,
+						0.5 * sum(l_quantity) AS agg_quantity
+					from
+						lineitem
+					where
+						l_shipdate >= date '1997-01-01'
+						and l_shipdate < date '1997-01-01' + interval '1' year
+					group by
+						l_partkey,
+						l_suppkey
+				) agg_lineitem
+			where
+				agg_partkey = ps_partkey
+				and agg_suppkey = ps_suppkey
+				and ps_partkey in (
+					select
+						p_partkey
+					from
+						part
+					where
+						p_name like 'powder%'
+				)
+				and ps_availqty > agg_quantity
+		)
+		and s_nationkey = n_nationkey
+		and n_name = 'ARGENTINA'
+	order by
+		s_name
+	limit 1;
+2024-04-06 14:25:08.484 PDT [64167] ERROR:  relation "supplier" does not exist at character 44
+2024-04-06 14:25:08.484 PDT [64167] STATEMENT:  select
+		s_name,
+		count(*) as numwait
+	from
+		supplier,
+		lineitem l1,
+		orders,
+		nation
+	where
+		s_suppkey = l1.l_suppkey
+		and o_orderkey = l1.l_orderkey
+		and o_orderstatus = 'F'
+		and l1.l_receiptdate > l1.l_commitdate
+		and exists (
+			select
+				*
+			from
+				lineitem l2
+			where
+				l2.l_orderkey = l1.l_orderkey
+				and l2.l_suppkey <> l1.l_suppkey
+		)
+		and not exists (
+			select
+				*
+			from
+				lineitem l3
+			where
+				l3.l_orderkey = l1.l_orderkey
+				and l3.l_suppkey <> l1.l_suppkey
+				and l3.l_receiptdate > l3.l_commitdate
+		)
+		and s_nationkey = n_nationkey
+		and n_name = 'VIETNAM'
+	group by
+		s_name
+	order by
+		numwait desc,
+		s_name
+	limit 1;
+2024-04-06 14:25:08.491 PDT [64169] ERROR:  relation "customer" does not exist at character 161
+2024-04-06 14:25:08.491 PDT [64169] STATEMENT:  select
+		cntrycode,
+		count(*) as numcust,
+		sum(c_acctbal) as totacctbal
+	from
+		(
+			select
+				substring(c_phone from 1 for 2) as cntrycode,
+				c_acctbal
+			from
+				customer
+			where
+				substring(c_phone from 1 for 2) in
+					('11', '18', '15', '20', '12', '29', '30')
+				and c_acctbal > (
+					select
+						avg(c_acctbal)
+					from
+						customer
+					where
+						c_acctbal > 0.00
+						and substring(c_phone from 1 for 2) in
+							('11', '18', '15', '20', '12', '29', '30')
+				)
+				and not exists (
+					select
+						*
+					from
+						orders
+					where
+						o_custkey = c_custkey
+				)
+		) as custsale
+	group by
+		cntrycode
+	order by
+		cntrycode
+	limit 1;
+2024-04-06 14:30:35.231 PDT [65167] ERROR:  relation "supplier" does not exist at character 97
+2024-04-06 14:30:35.231 PDT [65167] STATEMENT:  select
+		tpch.s_suppkey,
+		tpch.s_name,
+		tpch.s_address,
+		tpch.s_phone,
+		tpch.total_revenue
+	from
+		supplier,
+		revenue0
+	where
+		s_suppkey = supplier_no
+		and total_revenue = (
+			select
+				max(total_revenue)
+			from
+				revenue0
+		)
+	order by
+		s_suppkey;
+2024-04-06 14:30:35.231 PDT [65167] ERROR:  syntax error at or near "limit" at character 20
+2024-04-06 14:30:35.231 PDT [65167] STATEMENT:  drop view revenue0
+	limit 1;
+2024-04-06 14:30:40.427 PDT [65189] ERROR:  relation "part" does not exist at character 575
+2024-04-06 14:30:40.427 PDT [65189] STATEMENT:  select
+		s_name,
+		s_address
+	from
+		tpch.supplier,
+		tpch.nation
+	where
+		s_suppkey in (
+			select
+				ps_suppkey
+			from
+				tpch.partsupp,
+				(
+					select
+						l_partkey agg_partkey,
+						l_suppkey agg_suppkey,
+						0.5 * sum(l_quantity) AS agg_quantity
+					from
+						tpch.lineitem
+					where
+						l_shipdate >= date '1997-01-01'
+						and l_shipdate < date '1997-01-01' + interval '1' year
+					group by
+						l_partkey,
+						l_suppkey
+				) agg_lineitem
+			where
+				agg_partkey = ps_partkey
+				and agg_suppkey = ps_suppkey
+				and ps_partkey in (
+					select
+						p_partkey
+					from
+						part
+					where
+						p_name like 'powder%'
+				)
+				and ps_availqty > agg_quantity
+		)
+		and s_nationkey = n_nationkey
+		and n_name = 'ARGENTINA'
+	order by
+		s_name
+	limit 1;
+2024-04-06 14:34:06.923 PDT [15172] LOG:  checkpoint starting: time
+2024-04-06 14:34:06.951 PDT [15172] LOG:  checkpoint complete: wrote 1 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.017 s, total=0.028 s; sync files=21, longest=0.002 s, average=0.001 s; distance=87 kB, estimate=416224 kB; lsn=2/DF568810, redo lsn=2/DF5687D8

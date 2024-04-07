@@ -1,41 +1,39 @@
-/* @(#)TERADATA 19.sql 1.1.1.1@(#) */
-/* Query 19 - Var_0 Rev_1 - SSBench Discounted Revenue Query */
-SELECT /* dss_19.sql */
-        CAST(SUM(LO_EXTENDEDPRICE*(1 - LO_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE
-FROM
-        LINEORDER,
-        PART
-WHERE
-        (
-                P_PARTKEY = LO_PARTKEY
-                AND P_SUPPKEY = LO_SUPPKEY
-                AND P_BRAND = 'Brand#12'
-                AND P_CONTAINER IN  ( 'SM CASE', 'SM BOX', 'SM PACK', 'SM PKG')
-                AND LO_QUANTITY >= 1 AND LO_QUANTITY <= 1 + 10
-                AND P_SIZE BETWEEN 1 AND 5
-                AND LO_SHIPMODE IN ('AIR', 'AIR REG')
-                AND LO_SHIPINSTRUCT = 'DELIVER IN PERSON'
-        )
-        OR
-        (
-                P_PARTKEY = LO_PARTKEY
-                AND P_SUPPKEY = LO_SUPPKEY
-                AND P_BRAND = 'Brand#23'
-                AND P_CONTAINER IN  ('MED BAG', 'MED BOX', 'MED PKG', 'MED PACK')
-                AND LO_QUANTITY >= 10 AND LO_QUANTITY <= 10 + 10
-                AND P_SIZE BETWEEN 1  AND 10
-                AND LO_SHIPMODE IN ('AIR', 'AIR REG')
-                AND LO_SHIPINSTRUCT = 'DELIVER IN PERSON'
-        )
-        OR
-        (
-                P_PARTKEY = LO_PARTKEY
-                AND P_SUPPKEY = LO_SUPPKEY
-                AND P_BRAND = 'Brand#34'
-                AND P_CONTAINER IN  ( 'LG CASE', 'LG BOX', 'LG PACK', 'LG PKG')
-                AND LO_QUANTITY >= 20 AND LO_QUANTITY <= 20 + 10
-                AND P_SIZE BETWEEN 1  AND 15
-                AND LO_SHIPMODE IN ('AIR', 'AIR REG')
-                AND LO_SHIPINSTRUCT = 'DELIVER IN PERSON'
-        );
+-- using 1472396759 as a seed to the RNG
 
+
+select
+	sum(l_extendedprice* (1 - l_discount)) as revenue
+from
+	tpch.lineitem,
+	tpch.part
+where
+	(
+		p_partkey = l_partkey
+		and p_brand = 'Brand#54'
+		and p_container in ('SM CASE', 'SM BOX', 'SM PACK', 'SM PKG')
+		and l_quantity >= 4 and l_quantity <= 4 + 10
+		and p_size between 1 and 5
+		and l_shipmode in ('AIR', 'AIR REG')
+		and l_shipinstruct = 'DELIVER IN PERSON'
+	)
+	or
+	(
+		p_partkey = l_partkey
+		and p_brand = 'Brand#51'
+		and p_container in ('MED BAG', 'MED BOX', 'MED PKG', 'MED PACK')
+		and l_quantity >= 11 and l_quantity <= 11 + 10
+		and p_size between 1 and 10
+		and l_shipmode in ('AIR', 'AIR REG')
+		and l_shipinstruct = 'DELIVER IN PERSON'
+	)
+	or
+	(
+		p_partkey = l_partkey
+		and p_brand = 'Brand#21'
+		and p_container in ('LG CASE', 'LG BOX', 'LG PACK', 'LG PKG')
+		and l_quantity >= 28 and l_quantity <= 28 + 10
+		and p_size between 1 and 15
+		and l_shipmode in ('AIR', 'AIR REG')
+		and l_shipinstruct = 'DELIVER IN PERSON'
+	)
+limit 1;

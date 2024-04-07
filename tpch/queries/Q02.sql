@@ -1,34 +1,47 @@
-/* Query 02 - Var_0 Rev_01 - TPC-H/TPC-R Minimum Cost Supplier Query  */
-*/ Return the first 100 selected rows                                 */
-SELECT /* dss_02.sql */ DISTINCT
-        S_ACCTBAL,
-        S_NAME,
-        S_REGION,
-        P_PARTKEY,
-        P_MFGR,
-        S_ADDRESS,
-        S_PHONE
-        S_COMMENT 
-FROM PART O, 
-        SUPPLIER
-WHERE O.P_SUPPKEY = S_SUPPKEY
-       AND O.P_TYPE LIKE '%BRASS'
-       AND O.P_SIZE = 15
-    AND S_REGION = 'ASIA'
-       AND O.P_SUPPLYCOST =
-       (SELECT  Min(P_SUPPLYCOST)
-                FROM 
-                        PART,
-                        SUPPLIER
-                WHERE
-                        O.P_PARTKEY = P_PARTKEY 
-                         AND S_SUPPKEY = P_SUPPKEY
-                         AND S_REGION = 'ASIA'  
-                GROUP BY P_PARTKEY)
-       ORDER BY
-       S_ACCTBAL DESC,
-        S_REGION,
-        S_NAME,
-        P_PARTKEY
-LIMIT 100;
+-- using 1472396759 as a seed to the RNG
 
+
+select
+	s_acctbal,
+	s_name,
+	n_name,
+	p_partkey,
+	p_mfgr,
+	s_address,
+	s_phone,
+	s_comment
+from
+	tpch.part,
+	tpch.supplier,
+	tpch.partsupp,
+	tpch.nation,
+	tpch.region
+where
+	p_partkey = ps_partkey
+	and s_suppkey = ps_suppkey
+	and p_size = 25
+	and p_type like '%STEEL'
+	and s_nationkey = n_nationkey
+	and n_regionkey = r_regionkey
+	and r_name = 'EUROPE'
+	and ps_supplycost = (
+		select
+			min(ps_supplycost)
+		from
+			tpch.partsupp,
+			tpch.supplier,
+			tpch.nation,
+			tpch.region
+		where
+			p_partkey = ps_partkey
+			and s_suppkey = ps_suppkey
+			and s_nationkey = n_nationkey
+			and n_regionkey = r_regionkey
+			and r_name = 'EUROPE'
+	)
+order by
+	s_acctbal desc,
+	n_name,
+	s_name,
+	p_partkey
+LIMIT 100;

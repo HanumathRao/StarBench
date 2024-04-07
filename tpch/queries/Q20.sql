@@ -1,39 +1,47 @@
-/* @(#)TERADATA 20.sql 1.1.1.1@(#) */
-/* Query 20 - Var_0 Rev_01 - TPC-H/TPC-R The Potential Part Promotion query */
-SELECT /* dss_20.sql */
-        S_NAME,
-        S_ADDRESS
-FROM
-        SUPPLIER
-WHERE
-        S_SUPPKEY IN (
-                SELECT
-                        P_SUPPKEY
-                FROM
-                        PART
-                WHERE
-                        P_PARTKEY IN (
-                                SELECT
-                                        P_PARTKEY
-                                FROM
-                                        PART
-                                WHERE
-                                        P_NAME LIKE 'forest%'
-                        )
-                AND  P_AVAILQTY > (
-                        SELECT
-                                0.5 * SUM(LO_QUANTITY)
-                        FROM
-                                LINEORDER
-                        WHERE
-                                LO_PARTKEY = P_PARTKEY
-                                AND  LO_SUPPKEY = P_SUPPKEY
-                                AND  LO_SHIPDATE >= '1994-01-01'
-                                AND  LO_SHIPDATE <  DATE '1994-01-01' + INTERVAL '1' YEAR
-                )
-        )
-        AND S_NATION = 'CANADA'
-ORDER BY
-        S_NAME
-LIMIT 10;
+-- using 1472396759 as a seed to the RNG
 
+
+select
+	s_name,
+	s_address
+from
+	tpch.supplier,
+	tpch.nation
+where
+	s_suppkey in (
+		select
+			ps_suppkey
+		from
+			tpch.partsupp,
+			(
+				select
+					l_partkey agg_partkey,
+					l_suppkey agg_suppkey,
+					0.5 * sum(l_quantity) AS agg_quantity
+				from
+					tpch.lineitem
+				where
+					l_shipdate >= date '1997-01-01'
+					and l_shipdate < date '1997-01-01' + interval '1' year
+				group by
+					l_partkey,
+					l_suppkey
+			) agg_lineitem
+		where
+			agg_partkey = ps_partkey
+			and agg_suppkey = ps_suppkey
+			and ps_partkey in (
+				select
+					p_partkey
+				from
+					part
+				where
+					p_name like 'powder%'
+			)
+			and ps_availqty > agg_quantity
+	)
+	and s_nationkey = n_nationkey
+	and n_name = 'ARGENTINA'
+order by
+	s_name
+limit 1;

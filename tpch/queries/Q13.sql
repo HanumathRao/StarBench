@@ -1,20 +1,24 @@
-/* Query 13 - Var_0 Rev_01 - TPC-H/TPC-R Customer Distribution Query */
-SELECT /* dss_13.sql */
-        C_COUNT, COUNT(*) AS CUSTDIST
-FROM   (
-        SELECT
-                C_CUSTKEY,
-                COUNT(DISTINCT LO_ORDERKEY)
-        FROM
-                CUSTOMER LEFT OUTER JOIN LINEORDER ON
-                        C_CUSTKEY = LO_CUSTKEY
-                        AND LO_COMMENT NOT LIKE '%special%requests%'
-        GROUP BY
-                C_CUSTKEY
-        ) AS C_ORDERS (C_CUSTKEY, C_COUNT)
-GROUP BY
-        C_COUNT
-ORDER BY
-        CUSTDIST DESC,
-        C_COUNT DESC;
+-- using 1472396759 as a seed to the RNG
 
+
+select
+	c_count,
+	count(*) as custdist
+from
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			tpch.customer left outer join tpch.orders on
+				c_custkey = o_custkey
+				and o_comment not like '%pending%packages%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
+group by
+	c_count
+order by
+	custdist desc,
+	c_count desc
+limit 1;

@@ -1,39 +1,43 @@
-/* Query 21 - Var_0 Rev_01 - TPC-H/TPC-R  The Suppliers Who Kept Orders Waiting Query */
-/* Return the first 100 selected rows.                                                */
-SELECT /* dss_21.sql */
-        S_NAME,
-        COUNT(*) AS NUMWAIT
-FROM
-        SUPPLIER,
-        LINEORDER L1
-WHERE
-        S_SUPPKEY = L1.LO_SUPPKEY
-        AND LO_ORDERSTATUS='F'
-        AND L1.LO_RECEIPTDATE > L1.LO_COMMITDATE
-        AND EXISTS (
-                SELECT
-                        *
-                FROM 
-                        LINEORDER L2
-                WHERE
-                        L2.LO_ORDERKEY = L1.LO_ORDERKEY
-                        AND L2.LO_SUPPKEY <> L1.LO_SUPPKEY
-        )
-        AND NOT EXISTS (
-                SELECT
-                        *
-                FROM 
-                        LINEORDER L3
-                WHERE
-                        L3.LO_ORDERKEY = L1.LO_ORDERKEY
-                        AND L3.LO_SUPPKEY <> L1.LO_SUPPKEY
-                        AND L3.LO_RECEIPTDATE > L3.LO_COMMITDATE
-        )
-        AND S_NATION = 'SAUDI ARABIA'
-GROUP BY
-        S_NAME
-ORDER BY
-        NUMWAIT DESC,
-        S_NAME
-LIMIT 100;
+-- using 1472396759 as a seed to the RNG
 
+
+select
+	s_name,
+	count(*) as numwait
+from
+	tpch.supplier,
+	tpch.lineitem l1,
+	tpch.orders,
+	tpch.nation
+where
+	s_suppkey = l1.l_suppkey
+	and o_orderkey = l1.l_orderkey
+	and o_orderstatus = 'F'
+	and l1.l_receiptdate > l1.l_commitdate
+	and exists (
+		select
+			*
+		from
+			tpch.lineitem l2
+		where
+			l2.l_orderkey = l1.l_orderkey
+			and l2.l_suppkey <> l1.l_suppkey
+	)
+	and not exists (
+		select
+			*
+		from
+			tpch.lineitem l3
+		where
+			l3.l_orderkey = l1.l_orderkey
+			and l3.l_suppkey <> l1.l_suppkey
+			and l3.l_receiptdate > l3.l_commitdate
+	)
+	and s_nationkey = n_nationkey
+	and n_name = 'VIETNAM'
+group by
+	s_name
+order by
+	numwait desc,
+	s_name
+limit 1;

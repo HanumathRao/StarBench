@@ -1,35 +1,36 @@
-/* @(#)TERADATA 18.sql 1.1.1.1@(#) */
-/* Query 18 - Var_0 Rev_01 - SSBench Large Volume Customer Query */
-/* Return the first 100 selected rows                            */
-SELECT /* dss_18.sql */
-        C_NAME,
-        C_CUSTKEY,
-        LO_ORDERKEY,
-        LO_ORDERDATE,
-        LO_TOTALPRICE,
-        CAST(SUM(LO_QUANTITY) AS DECIMAL(18,2)) AS SUM_QTY
-FROM
-        CUSTOMER,
-        LINEORDER
-WHERE
-        LO_ORDERKEY IN (
-                SELECT
-                        LO_ORDERKEY
-                FROM
-                        LINEORDER
-                GROUP BY
-                        LO_ORDERKEY HAVING
-                                SUM(LO_QUANTITY) > 300
-        )
-        AND C_CUSTKEY = LO_CUSTKEY
-GROUP BY
-        C_NAME,
-        C_CUSTKEY,
-        LO_ORDERKEY,
-        LO_ORDERDATE,
-        LO_TOTALPRICE
-ORDER BY
-        LO_TOTALPRICE DESC,
-        LO_ORDERDATE
-LIMIT 100;
+-- using 1472396759 as a seed to the RNG
 
+
+select
+	c_name,
+	c_custkey,
+	o_orderkey,
+	o_orderdate,
+	o_totalprice,
+	sum(l_quantity)
+from
+	tpch.customer,
+	tpch.orders,
+	tpch.lineitem
+where
+	o_orderkey in (
+		select
+			l_orderkey
+		from
+			tpch.lineitem
+		group by
+			l_orderkey having
+				sum(l_quantity) > 314
+	)
+	and c_custkey = o_custkey
+	and o_orderkey = l_orderkey
+group by
+	c_name,
+	c_custkey,
+	o_orderkey,
+	o_orderdate,
+	o_totalprice
+order by
+	o_totalprice desc,
+	o_orderdate
+limit 1;

@@ -1,29 +1,35 @@
-/* Query 10 - Var_0 Rev_01 - TPC-H/TPC-R Returned Item Reporting Query */
-/* Return the first 20 selected rows                                   */
-SELECT /* dss_10.sql */
-        C_CUSTKEY,
-        C_NAME,
-        CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE,
-        C_ACCTBAL,
-        C_NATION,
-        C_ADDRESS,
-        C_PHONE 
-FROM 
-        CUSTOMER,
-        LINEORDER
-WHERE
-        C_CUSTKEY = LO_CUSTKEY
-        AND LO_ORDERDATE >= '1993-10-01'
-        AND LO_ORDERDATE < DATE '1993-10-01' + INTERVAL '3' MONTH
-        AND LO_RETURNFLAG = 'R'
-GROUP BY 
-        C_CUSTKEY,
-        C_NAME,
-        C_ACCTBAL,
-        C_PHONE,
-        C_NATION,
-        C_ADDRESS
-ORDER BY 
-        REVENUE DESC
-LIMIT 20;
+-- using 1472396759 as a seed to the RNG
 
+
+select
+	c_custkey,
+	c_name,
+	sum(l_extendedprice * (1 - l_discount)) as revenue,
+	c_acctbal,
+	n_name,
+	c_address,
+	c_phone,
+	c_comment
+from
+	tpch.customer,
+	tpch.orders,
+	tpch.lineitem,
+	tpch.nation
+where
+	c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and o_orderdate >= date '1995-01-01'
+	and o_orderdate < date '1995-01-01' + interval '3' month
+	and l_returnflag = 'R'
+	and c_nationkey = n_nationkey
+group by
+	c_custkey,
+	c_name,
+	c_acctbal,
+	c_phone,
+	n_name,
+	c_address,
+	c_comment
+order by
+	revenue desc
+limit 1;

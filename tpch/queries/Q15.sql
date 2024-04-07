@@ -1,33 +1,37 @@
-/* Query 15 - Var_0 Rev_01 - TPC-H/TPC-R  Top Supplier Query */
-WITH   /* dss_15.sql */ REVENUE (SUPPLIER_NO, TOTAL_REVENUE) AS (
-SELECT
-LO_SUPPKEY,
-CAST(SUM(LO_EXTENDEDPRICE * (1-LO_DISCOUNT)) AS DECIMAL(18,2))
-FROM
-LINEORDER
-WHERE
-LO_SHIPDATE >= DATE '1996-01-01'
-AND LO_SHIPDATE <  DATE '1996-01-01'+ INTERVAL '3' MONTH
-GROUP BY
-LO_SUPPKEY
-)
-SELECT 
-DISTINCT S_SUPPKEY,
-S_NAME,
-S_ADDRESS,
-S_PHONE,
-TOTAL_REVENUE
-FROM
-SUPPLIER,
-REVENUE
-WHERE
-S_SUPPKEY = SUPPLIER_NO
-AND TOTAL_REVENUE = (
-SELECT
-MAX(TOTAL_REVENUE)
-FROM
-REVENUE
-)
-ORDER BY
-S_SUPPKEY;
+-- using 1472396759 as a seed to the RNG
 
+create view revenue0 (supplier_no, total_revenue) as
+	select
+		l_suppkey,
+		sum(l_extendedprice * (1 - l_discount))
+	from
+		tpch.lineitem
+	where
+		l_shipdate >= date '1997-05-01'
+		and l_shipdate < date '1997-05-01' + interval '3' month
+	group by
+		l_suppkey;
+
+
+select
+	tpch.s_suppkey,
+	tpch.s_name,
+	tpch.s_address,
+	tpch.s_phone,
+	tpch.total_revenue
+from
+	supplier,
+	revenue0
+where
+	s_suppkey = supplier_no
+	and total_revenue = (
+		select
+			max(total_revenue)
+		from
+			revenue0
+	)
+order by
+	s_suppkey;
+
+drop view revenue0
+limit 1;

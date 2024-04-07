@@ -1,10 +1,13 @@
-/* Query 06 - Var_0 Rev_01 - SSBench Forecasting Revenue Change Query */
-SELECT /* dss_06.sql */
-        CAST(SUM(LO_EXTENDEDPRICE*LO_DISCOUNT) AS DECIMAL(18,2)) AS REVENUE
-FROM 
-        LINEORDER
-WHERE
-        LO_SHIPDATE >= '1994-01-01'
-        AND LO_SHIPDATE < DATE '1994-01-01' + INTERVAL '1' YEAR
-        AND LO_DISCOUNT BETWEEN .06 - 0.01 AND .06 + 0.01
-        AND LO_QUANTITY < 24;
+-- using 1472396759 as a seed to the RNG
+
+
+select
+	sum(l_extendedprice * l_discount) as revenue
+from
+	tpch.lineitem
+where
+	l_shipdate >= date '1995-01-01'
+	and l_shipdate < date '1995-01-01' + interval '1' year
+	and l_discount between 0.09 - 0.01 and 0.09 + 0.01
+	and l_quantity < 24
+limit 1;

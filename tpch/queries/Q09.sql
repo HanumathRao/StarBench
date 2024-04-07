@@ -1,22 +1,36 @@
-/* Query 09 - Var_0 Rev_01 - SSBench Product Type Profit Measure Query */
-SELECT /* dss_09.sql */
-        S_NATION  AS NATION,
-        EXTRACT(YEAR FROM LO_ORDERDATE) AS YEAR1,
-        CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)-P_SUPPLYCOST*LO_QUANTITY) AS DECIMAL(18,2)) AS SUM_PROFIT
-FROM
-        PART,
-        SUPPLIER,
-        LINEORDER
-WHERE
-        S_SUPPKEY = LO_SUPPKEY
-        AND S_SUPPKEY = LO_SUPPKEY
-        AND P_PARTKEY = LO_PARTKEY
-        AND P_SUPPKEY = LO_SUPPKEY
-        AND P_NAME LIKE '%green%'
-GROUP BY
-        NATION,
-        YEAR1
-ORDER BY
-        NATION,
-        YEAR1 DESC;
+-- using 1472396759 as a seed to the RNG
 
+
+select
+	nation,
+	o_year,
+	sum(amount) as sum_profit
+from
+	(
+		select
+			n_name as nation,
+			extract(year from o_orderdate) as o_year,
+			l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+		from
+			tpch.part,
+			tpch.supplier,
+			tpch.lineitem,
+			tpch.partsupp,
+			tpch.orders,
+			tpch.nation
+		where
+			s_suppkey = l_suppkey
+			and ps_suppkey = l_suppkey
+			and ps_partkey = l_partkey
+			and p_partkey = l_partkey
+			and o_orderkey = l_orderkey
+			and s_nationkey = n_nationkey
+			and p_name like '%orchid%'
+	) as profit
+group by
+	nation,
+	o_year
+order by
+	nation,
+	o_year desc
+limit 1;
