@@ -1,9 +1,10 @@
 /* Query 04 - Var_0 Rev_01 - SSB Order Priority Checking Query */
+\timing
 WITH   /* dss_04.sql */ 
         T1(OKEY) AS  (
                 SELECT 
                 LO_ORDERKEY 
-                FROM tpch.LINEORDER 
+                FROM ssb2.LINEORDER 
                 WHERE LO_COMMITDATE < LO_RECEIPTDATE
         )
         SELECT 
@@ -11,7 +12,7 @@ WITH   /* dss_04.sql */
         COUNT(DISTINCT LO_ORDERKEY) AS ORDER_COUNT
         FROM 
                 T1, 
-                tpch.LINEORDER
+                ssb2.LINEORDER
         WHERE
                 OKEY=LO_ORDERKEY
                 AND LO_ORDERDATE >=  '1993-07-01'
@@ -19,3 +20,4 @@ WITH   /* dss_04.sql */
 GROUP BY LO_ORDERPRIORITY
 ORDER BY LO_ORDERPRIORITY;
 
+\timing

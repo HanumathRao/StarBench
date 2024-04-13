@@ -1,16 +1,17 @@
 /* @(#)TERADATA 20.sql 1.1.1.1@(#) */
 /* Query 20 - Var_0 Rev_01 - TPC-H/TPC-R The Potential Part Promotion query */
+\timing
 SELECT /* dss_20.sql */
         S_NAME,
         S_ADDRESS
 FROM
-        tpch.SUPPLIER
+        ssb2.SUPPLIER
 WHERE
         S_SUPPKEY IN (
                 SELECT
                         P_SUPPKEY
                 FROM
-                        tpch.PART
+                        ssb2.PART
                 WHERE
                         P_PARTKEY IN (
                                 SELECT
@@ -24,7 +25,7 @@ WHERE
                         SELECT
                                 0.5 * SUM(LO_QUANTITY)
                         FROM
-                                tpch.LINEORDER
+                                ssb2.LINEORDER
                         WHERE
                                 LO_PARTKEY = P_PARTKEY
                                 AND  LO_SUPPKEY = P_SUPPKEY
@@ -37,3 +38,4 @@ ORDER BY
         S_NAME
 LIMIT 10;
 
+\timing

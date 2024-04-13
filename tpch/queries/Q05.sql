@@ -1,5 +1,5 @@
 -- using 1472396759 as a seed to the RNG
-
+\timing
 
 select
 	n_name,
@@ -27,3 +27,4 @@ order by
 	revenue desc
 limit 1;
 
+\timing

@@ -1,5 +1,5 @@
 -- using 1472396759 as a seed to the RNG
-
+\timing
 
 select
 	l_shipmode,
@@ -30,3 +30,5 @@ group by
 order by
 	l_shipmode
 limit 1;
+
+\timing

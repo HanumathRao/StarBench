@@ -1,11 +1,12 @@
 /* Query 05 - Var_0 Rev_01 - SSBench Local Supplier Volume Query */
+\timing
 SELECT /* dss_05.sql */
         S_NATION,
         CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT))  AS DECIMAL(18,2)) AS REVENUE
 FROM 
-        tpch.CUSTOMER,
-        tpch.LINEORDER,
-        tpch.SUPPLIER
+        ssb2.CUSTOMER,
+        ssb2.LINEORDER,
+        ssb2.SUPPLIER
 WHERE
         C_CUSTKEY = LO_CUSTKEY
         AND LO_SUPPKEY = S_SUPPKEY
@@ -19,3 +20,4 @@ GROUP BY
 ORDER BY
         REVENUE DESC;
 
+\timing

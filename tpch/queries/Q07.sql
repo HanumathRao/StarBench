@@ -1,5 +1,5 @@
 -- using 1472396759 as a seed to the RNG
-
+\timing
 
 select
 	supp_nation,
@@ -41,3 +41,5 @@ order by
 	cust_nation,
 	l_year
 limit 1;
+
+\timing

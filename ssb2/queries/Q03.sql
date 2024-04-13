@@ -1,13 +1,14 @@
 /* Query 03 - Var_0 Rev_01 - SSBench TPC-H Shipping Priority Query      */
 /* Return the first 100 selected rows                                   */
+\timing
 SELECT /* dss_03.sql */
         LO_ORDERKEY,
         CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE,
         LO_ORDERDATE,
         LO_SHIPPRIORITY
 FROM  
-        tpch.CUSTOMER,
-        tpch.LINEORDER
+        ssb2.CUSTOMER,
+        ssb2.LINEORDER
 WHERE
 --        C_MKTSEGMENT  = 'BUILDING'
 --        AND C_CUSTKEY    = LO_CUSTKEY
@@ -22,3 +23,4 @@ ORDER BY
         REVENUE DESC,
         LO_ORDERDATE
 LIMIT 100;
+\timing

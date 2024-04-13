@@ -1,9 +1,10 @@
 /* Query 17 - Var_0 Rev_01 - TPC-H/TPC-R Small-Quantity-Order Revenue Query */
+\timing
 SELECT /* dss_17.sql */
         SUM(LO_EXTENDEDPRICE) / 7.0 AS AVG_YEARLY
 FROM
-        tpch.LINEORDER,
-        tpch.PART
+        ssb2.LINEORDER,
+        ssb2.PART
 WHERE
         P_PARTKEY = LO_PARTKEY
         AND P_SUPPKEY = LO_SUPPKEY
@@ -19,3 +20,4 @@ WHERE
         )
 ;
 
+\timing

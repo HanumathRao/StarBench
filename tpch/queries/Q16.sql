@@ -1,5 +1,5 @@
 -- using 1472396759 as a seed to the RNG
-
+\timing
 
 select
 	p_brand,
@@ -32,3 +32,5 @@ order by
 	p_type,
 	p_size
 limit 1;
+
+\timing

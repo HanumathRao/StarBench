@@ -1,4 +1,5 @@
 /* Query 12 - Var_0 Rev_01 - SSBench Shipping Modes and Order Priority Query */
+\timing
 SELECT /* dss_12.sql */
         LO_SHIPMODE,
         SUM(CASE
@@ -14,7 +15,7 @@ SELECT /* dss_12.sql */
                 ELSE 0 
         END) AS LOW_LINE_COUNT
 FROM 
-        tpch.LINEORDER
+        ssb2.LINEORDER
 WHERE 
         LO_SHIPMODE IN ('MAIL','SHIP')
         AND LO_COMMITDATE < LO_RECEIPTDATE
@@ -26,3 +27,4 @@ GROUP BY
 ORDER BY 
         LO_SHIPMODE;
 
+\timing

@@ -1,5 +1,6 @@
 /* Query 10 - Var_0 Rev_01 - TPC-H/TPC-R Returned Item Reporting Query */
 /* Return the first 20 selected rows                                   */
+\timing
 SELECT /* dss_10.sql */
         C_CUSTKEY,
         C_NAME,
@@ -9,8 +10,8 @@ SELECT /* dss_10.sql */
         C_ADDRESS,
         C_PHONE 
 FROM 
-        tpch.CUSTOMER,
-        tpch.LINEORDER
+        ssb2.CUSTOMER,
+        ssb2.LINEORDER
 WHERE
         C_CUSTKEY = LO_CUSTKEY
         AND LO_ORDERDATE >= '1993-10-01'
@@ -27,3 +28,4 @@ ORDER BY
         REVENUE DESC
 LIMIT 20;
 
+\timing

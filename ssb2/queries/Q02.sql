@@ -1,5 +1,6 @@
 /* Query 02 - Var_0 Rev_01 - TPC-H/TPC-R Minimum Cost Supplier Query  */
 */ Return the first 100 selected rows                                 */
+\timing
 SELECT /* dss_02.sql */ DISTINCT
         S_ACCTBAL,
         S_NAME,
@@ -9,7 +10,7 @@ SELECT /* dss_02.sql */ DISTINCT
         S_ADDRESS,
         S_PHONE
         S_COMMENT 
-FROM tpch.PART O, 
+FROM ssb2.PART O, 
         SUPPLIER
 WHERE O.P_SUPPKEY = S_SUPPKEY
        AND O.P_TYPE LIKE '%BRASS'
@@ -18,8 +19,8 @@ WHERE O.P_SUPPKEY = S_SUPPKEY
        AND O.P_SUPPLYCOST =
        (SELECT  Min(P_SUPPLYCOST)
                 FROM 
-                        tpch.PART,
-                        tpch.SUPPLIER
+                        ssb2.PART,
+                        ssb2.SUPPLIER
                 WHERE
                         O.P_PARTKEY = P_PARTKEY 
                          AND S_SUPPKEY = P_SUPPKEY
@@ -32,3 +33,4 @@ WHERE O.P_SUPPKEY = S_SUPPKEY
         P_PARTKEY
 LIMIT 100;
 
+\timing

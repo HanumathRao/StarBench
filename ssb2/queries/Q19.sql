@@ -1,10 +1,11 @@
 /* @(#)TERADATA 19.sql 1.1.1.1@(#) */
 /* Query 19 - Var_0 Rev_1 - SSBench Discounted Revenue Query */
+\timing
 SELECT /* dss_19.sql */
         CAST(SUM(LO_EXTENDEDPRICE*(1 - LO_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE
 FROM
-        tpch.LINEORDER,
-        tpch.PART
+        ssb2.LINEORDER,
+        ssb2.PART
 WHERE
         (
                 P_PARTKEY = LO_PARTKEY
@@ -39,3 +40,4 @@ WHERE
                 AND LO_SHIPINSTRUCT = 'DELIVER IN PERSON'
         );
 
+\timing

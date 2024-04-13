@@ -1,6 +1,7 @@
 /* @(#)TERADATA 18.sql 1.1.1.1@(#) */
 /* Query 18 - Var_0 Rev_01 - SSBench Large Volume Customer Query */
 /* Return the first 100 selected rows                            */
+\timing
 SELECT /* dss_18.sql */
         C_NAME,
         C_CUSTKEY,
@@ -9,14 +10,14 @@ SELECT /* dss_18.sql */
         LO_TOTALPRICE,
         CAST(SUM(LO_QUANTITY) AS DECIMAL(18,2)) AS SUM_QTY
 FROM
-        tpch.CUSTOMER,
-        tpch.LINEORDER
+        ssb2.CUSTOMER,
+        ssb2.LINEORDER
 WHERE
         LO_ORDERKEY IN (
                 SELECT
                         LO_ORDERKEY
                 FROM
-                        tpch.LINEORDER
+                        ssb2.LINEORDER
                 GROUP BY
                         LO_ORDERKEY HAVING
                                 SUM(LO_QUANTITY) > 300
@@ -33,3 +34,4 @@ ORDER BY
         LO_ORDERDATE
 LIMIT 100;
 
+\timing

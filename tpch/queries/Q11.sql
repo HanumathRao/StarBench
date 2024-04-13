@@ -1,5 +1,5 @@
 -- using 1472396759 as a seed to the RNG
-
+\timing
 
 select
 	ps_partkey,
@@ -29,3 +29,5 @@ group by
 order by
 	value desc
 limit 1;
+
+\timing

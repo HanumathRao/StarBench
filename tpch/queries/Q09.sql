@@ -1,5 +1,5 @@
 -- using 1472396759 as a seed to the RNG
-
+\timing
 
 select
 	nation,
@@ -34,3 +34,5 @@ order by
 	nation,
 	o_year desc
 limit 1;
+
+\timing

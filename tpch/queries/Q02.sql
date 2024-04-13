@@ -1,5 +1,5 @@
 -- using 1472396759 as a seed to the RNG
-
+\timing
 
 select
 	s_acctbal,
@@ -45,3 +45,5 @@ order by
 	s_name,
 	p_partkey
 LIMIT 100;
+
+\timing

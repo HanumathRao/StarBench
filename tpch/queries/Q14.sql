@@ -1,5 +1,5 @@
 -- using 1472396759 as a seed to the RNG
-
+\timing
 
 select
 	100.00 * sum(case
@@ -15,3 +15,5 @@ where
 	and l_shipdate >= date '1993-11-01'
 	and l_shipdate < date '1993-11-01' + interval '1' month
 limit 1;
+
+\timing

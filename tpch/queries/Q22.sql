@@ -1,5 +1,5 @@
 -- using 1472396759 as a seed to the RNG
-
+\timing
 
 select
 	cntrycode,
@@ -39,3 +39,5 @@ group by
 order by
 	cntrycode
 limit 1;
+
+\timing

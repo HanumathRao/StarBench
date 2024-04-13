@@ -1,4 +1,5 @@
 /* Query 08 - Var_0 Rev_01 - SSBench National Market Share Query */
+\timing
 SELECT /* dss_08.sql */
         EXTRACT(YEAR FROM LO_ORDERDATE) AS YEAR1,
         SUM(CASE
@@ -7,10 +8,10 @@ SELECT /* dss_08.sql */
                 ELSE 0
         END) / CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)) AS DECIMAL(18,2)) AS MKT_SHARE
 FROM 
-        tpch.PART,
-        tpch.SUPPLIER,
-        tpch.LINEORDER,
-        tpch.CUSTOMER
+        ssb2.PART,
+        ssb2.SUPPLIER,
+        ssb2.LINEORDER,
+        ssb2.CUSTOMER
 WHERE
         P_PARTKEY = LO_PARTKEY
         AND S_SUPPKEY = LO_SUPPKEY
@@ -24,3 +25,4 @@ GROUP BY
 ORDER BY
         YEAR1;
 
+\timing

@@ -1,5 +1,5 @@
 -- using 1472396759 as a seed to the RNG
-
+\timing
 
 select
 	sum(l_extendedprice) / 7.0 as avg_yearly
@@ -14,3 +14,5 @@ where
 	and p_container = 'wrap jar'
 	and l_quantity < avg_quantity  
 limit 1;
+
+\timing

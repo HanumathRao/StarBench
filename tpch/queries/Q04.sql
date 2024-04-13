@@ -1,5 +1,5 @@
 -- using 1472396759 as a seed to the RNG
-
+\timing
 
 select
 	o_orderpriority,
@@ -24,3 +24,4 @@ order by
 	o_orderpriority
 limit 1;
 
+\timing

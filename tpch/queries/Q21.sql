@@ -1,5 +1,5 @@
 -- using 1472396759 as a seed to the RNG
-
+\timing
 
 select
 	s_name,
@@ -41,3 +41,5 @@ order by
 	numwait desc,
 	s_name
 limit 1;
+
+\timing

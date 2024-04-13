@@ -1,5 +1,5 @@
 -- using 1472396759 as a seed to the RNG
-
+\timing
 
 select
 	c_custkey,
@@ -33,3 +33,5 @@ group by
 order by
 	revenue desc
 limit 1;
+
+\timing

@@ -1,5 +1,5 @@
 -- using 1472396759 as a seed to the RNG
-
+\timing
 
 select
 	c_name,
@@ -34,3 +34,5 @@ order by
 	o_totalprice desc,
 	o_orderdate
 limit 1;
+
+\timing

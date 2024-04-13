@@ -1,5 +1,5 @@
 -- using 1472396759 as a seed to the RNG
-
+\timing
 
 select
 	l_orderkey,
@@ -24,3 +24,5 @@ order by
 	revenue desc,
 	o_orderdate
 limit 10;
+
+\timing

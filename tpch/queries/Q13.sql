@@ -1,5 +1,5 @@
 -- using 1472396759 as a seed to the RNG
-
+\timing
 
 select
 	c_count,
@@ -22,3 +22,5 @@ order by
 	custdist desc,
 	c_count desc
 limit 1;
+
+\timing

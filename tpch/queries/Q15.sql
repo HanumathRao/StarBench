@@ -11,7 +11,7 @@ create view revenue0 (supplier_no, total_revenue) as
 		and l_shipdate < date '1997-05-01' + interval '3' month
 	group by
 		l_suppkey;
-
+\timing
 
 select
 	tpch.s_suppkey,
@@ -32,5 +32,7 @@ where
 	)
 order by
 	s_suppkey;
+
+\timing
 
 drop view revenue0;

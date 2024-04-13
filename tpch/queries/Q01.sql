@@ -1,4 +1,6 @@
 -- using 1472396759 as a seed to the RNG
+\timing
+
 select
 	l_returnflag,
 	l_linestatus,
@@ -22,3 +24,4 @@ order by
 	l_linestatus
 limit 1;
 
+\timing

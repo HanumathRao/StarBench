@@ -1,5 +1,5 @@
 -- using 1472396759 as a seed to the RNG
-
+\timing
 
 select
 	sum(l_extendedprice* (1 - l_discount)) as revenue
@@ -37,3 +37,5 @@ where
 		and l_shipinstruct = 'DELIVER IN PERSON'
 	)
 limit 1;
+
+\timing

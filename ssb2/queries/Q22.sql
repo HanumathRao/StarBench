@@ -1,5 +1,6 @@
 /* @(#)TERADATA 22.sql 1.1.1.1@(#) */
 /* Query 22 - Var_0 Rev_01 - TPC-H/TPC-R Global Saleds opportunity Query */
+\timing
 SELECT /* dss_22.sql */
         CNTRYCODE,
         COUNT(*) AS NUMCUST,
@@ -9,7 +10,7 @@ FROM    (
                 SUBSTRING(C_PHONE,1,2) AS CNTRYCODE,
                 C_ACCTBAL
         FROM
-                tpch.CUSTOMER
+                ssb2.CUSTOMER
         WHERE
                 SUBSTRING(C_PHONE,1,2) IN
                         ('13','31','23','29','30','18','17')
@@ -17,7 +18,7 @@ FROM    (
                         SELECT
                                 AVG(C_ACCTBAL)
                         FROM
-                                tpch.CUSTOMER
+                                ssb2.CUSTOMER
                         WHERE
                                 C_ACCTBAL > 0.00
                                 AND SUBSTRING(C_PHONE,1,2) IN
@@ -27,7 +28,7 @@ FROM    (
                         SELECT
                                 *
                         FROM
-                                tpch.LINEORDER
+                                ssb2.LINEORDER
                         WHERE
                                 LO_CUSTKEY=C_CUSTKEY
                 )
@@ -37,3 +38,4 @@ GROUP BY
 ORDER BY
         CNTRYCODE;
 
+\timing

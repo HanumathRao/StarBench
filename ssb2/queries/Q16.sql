@@ -1,12 +1,13 @@
 /* Query 16 - Var_0 Rev_01 - SSBench Parts/Supplier Relationship Query */
 /* modified to minimize size of output  */
+\timing
 SELECT /* dss_16.sql */
         P_BRAND,
         P_TYPE,
         P_SIZE,
         COUNT(DISTINCT P_SUPPKEY) AS SUPPLIER_CNT
 FROM 
-        tpch.PART
+        ssb2.PART
 WHERE
         P_BRAND <> 'Brand#45'
         AND P_TYPE NOT LIKE 'MEDIUM POLISHED%'
@@ -15,7 +16,7 @@ WHERE
                 SELECT 
                         S_SUPPKEY 
                 FROM 
-                        tpch.SUPPLIER
+                        ssb2.SUPPLIER
                 WHERE 
                         S_COMMENT LIKE '%Customer%Complaints%'
         )
@@ -30,3 +31,4 @@ ORDER BY
         P_SIZE
 LIMIT 10;
 
+\timing

@@ -1,4 +1,5 @@
 /* Query 01 - Var_0 Rev_01 - TPC-H/TPC-R Pricing Summary Report Query   */
+\timing
 SELECT /* dss_01.sql */
         LO_RETURNFLAG, 
         LO_LINESTATUS,
@@ -11,7 +12,7 @@ SELECT /* dss_01.sql */
         CAST(AVG(LO_DISCOUNT) AS DECIMAL(18,2)) AS AVG_DISC,
         COUNT(*) AS COUNT_ORDER
 FROM 
-        tpch.LINEORDER
+        ssb2.LINEORDER
 WHERE
         LO_SHIPDATE <= DATE '1998-12-01' - INTERVAL '90' DAY
 GROUP BY
@@ -21,3 +22,4 @@ ORDER BY
         LO_RETURNFLAG,
         LO_LINESTATUS;
 
+\timing

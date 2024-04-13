@@ -1,11 +1,12 @@
 /* Query 21 - Var_0 Rev_01 - TPC-H/TPC-R  The Suppliers Who Kept Orders Waiting Query */
 /* Return the first 100 selected rows.                                                */
+\timing
 SELECT /* dss_21.sql */
         S_NAME,
         COUNT(*) AS NUMWAIT
 FROM
-        tpch.SUPPLIER,
-        tpch.LINEORDER L1
+        ssb2.SUPPLIER,
+        ssb2.LINEORDER L1
 WHERE
         S_SUPPKEY = L1.LO_SUPPKEY
         AND LO_ORDERSTATUS='F'
@@ -14,7 +15,7 @@ WHERE
                 SELECT
                         *
                 FROM 
-                        tpch.LINEORDER L2
+                        ssb2.LINEORDER L2
                 WHERE
                         L2.LO_ORDERKEY = L1.LO_ORDERKEY
                         AND L2.LO_SUPPKEY <> L1.LO_SUPPKEY
@@ -23,7 +24,7 @@ WHERE
                 SELECT
                         *
                 FROM 
-                        tpch.LINEORDER L3
+                        ssb2.LINEORDER L3
                 WHERE
                         L3.LO_ORDERKEY = L1.LO_ORDERKEY
                         AND L3.LO_SUPPKEY <> L1.LO_SUPPKEY
@@ -37,3 +38,4 @@ ORDER BY
         S_NAME
 LIMIT 100;
 
+\timing
