@@ -42,11 +42,7 @@ echo "Creating the database tpch"
 echo "Creating the tpch tables"
 /usr/local/pgsql/bin/psql tpch < $DATA_DIR/tpch/tables.sql
 
-#pre process the load.sql to use the right directory in the load
-ESC_DATA_DIR=$(printf '%s\n' "$DATA_DIR" | sed -e 's/[\/&]/\\&/g' | sed 's/\./\\./g')
-sed "s/<DATA_DIR>/$ESC_DATA_DIR/g" $DATA_DIR/tpch/load.sql > /tmp/load.sql
-
 
 echo "loading the data into tpch tables"
-/usr/local/pgsql/bin/psql tpch < /tmp/load.sql
+/usr/local/pgsql/bin/psql tpch < $DATA_DIR/tpch/load.sql
 
