@@ -17,7 +17,7 @@ WHERE
                                 SELECT
                                         P_PARTKEY
                                 FROM
-                                        PART
+                                        ssb2.PART
                                 WHERE
                                         P_NAME LIKE 'forest%'
                         )

@@ -12,3 +12,4 @@ do
 done
 
 ./parse_timings.sh OUT
+./verify_results.sh OUT

@@ -14,7 +14,7 @@ WHERE
                 SELECT
                         0.2 * AVG(LO_QUANTITY)
                 FROM
-                        LINEORDER
+                        ssb2.LINEORDER
                 WHERE
                         LO_PARTKEY = P_PARTKEY
         )

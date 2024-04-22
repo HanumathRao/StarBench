@@ -16,8 +16,8 @@ GROUP BY
                         SELECT
                                 CAST(SUM(P_SUPPLYCOST * P_AVAILQTY) * 0.0001000000 AS DECIMAL(18,2))
                         FROM
-                                PART,
-                                SUPPLIER
+                                ssb2.PART,
+                                ssb2.SUPPLIER
                         WHERE
                                 P_SUPPKEY=S_SUPPKEY
                         AND     S_NATION = 'GERMANY'

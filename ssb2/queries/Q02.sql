@@ -1,5 +1,5 @@
 /* Query 02 - Var_0 Rev_01 - TPC-H/TPC-R Minimum Cost Supplier Query  */
-*/ Return the first 100 selected rows                                 */
+/* Return the first 100 selected rows                                 */
 \timing
 SELECT /* dss_02.sql */ DISTINCT
         S_ACCTBAL,
