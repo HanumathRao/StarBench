@@ -1,33 +1,32 @@
--- using 1472396759 as a seed to the RNG
+-- using default substitutions
+/* Query 11 - Var_0 Rev_01 - TPC-H/TPC-R Important Stock Identification Query */
+
 \timing
-
-select
-	ps_partkey,
-	sum(ps_supplycost * ps_availqty) as value
-from
-	tpch.partsupp,
-	tpch.supplier,
-	tpch.nation
-where
-	ps_suppkey = s_suppkey
-	and s_nationkey = n_nationkey
-	and n_name = 'SAUDI ARABIA'
-group by
-	ps_partkey having
-		sum(ps_supplycost * ps_availqty) > (
-			select
-				sum(ps_supplycost * ps_availqty) * 0.0001000000
-			from
-				tpch.partsupp,
-				tpch.supplier,
-				tpch.nation
-			where
-				ps_suppkey = s_suppkey
-				and s_nationkey = n_nationkey
-				and n_name = 'SAUDI ARABIA'
-		)
-order by
-	value desc
-limit 1;
-
+SELECT
+        PS_PARTKEY,
+        CAST(SUM(PS_SUPPLYCOST * PS_AVAILQTY) AS DEC(18,2)) AS VALUE
+FROM 
+        tpch.PARTSUPP,
+        tpch.SUPPLIER,
+        tpch.NATION
+WHERE
+        PS_SUPPKEY = S_SUPPKEY
+        AND S_NATIONKEY = N_NATIONKEY
+        AND N_NAME = 'GERMANY'
+GROUP BY
+        PS_PARTKEY HAVING 
+                SUM(PS_SUPPLYCOST * PS_AVAILQTY) > (
+                        SELECT
+                                SUM(PS_SUPPLYCOST * PS_AVAILQTY) * 0.0001000000
+                        FROM
+                                tpch.PARTSUPP,
+                                tpch.SUPPLIER,
+                                tpch.NATION
+                        WHERE
+                                PS_SUPPKEY = S_SUPPKEY
+                                AND S_NATIONKEY = N_NATIONKEY
+                                AND N_NAME = 'GERMANY'
+                )
+ORDER BY
+        VALUE DESC;
 \timing

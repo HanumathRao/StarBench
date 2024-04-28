@@ -40,9 +40,9 @@ echo "Creating the database tpch"
 /usr/local/pgsql/bin/psql postgres < $DATA_DIR/tpch/create_db.sql
 
 echo "Creating the tpch tables"
-/usr/local/pgsql/bin/psql tpch < $DATA_DIR/tpch/tables.sql
+/usr/local/pgsql/bin/psql postgres < $DATA_DIR/tpch/tables.sql
 
 
 echo "loading the data into tpch tables"
-/usr/local/pgsql/bin/psql tpch < $DATA_DIR/tpch/load.sql
+/usr/local/pgsql/bin/psql postgres < $DATA_DIR/tpch/load.sql
 

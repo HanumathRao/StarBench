@@ -1,38 +1,36 @@
--- using 1472396759 as a seed to the RNG
-
-create view revenue0 (supplier_no, total_revenue) as
-	select
-		l_suppkey,
-		sum(l_extendedprice * (1 - l_discount))
-	from
-		tpch.lineitem
-	where
-		l_shipdate >= date '1997-05-01'
-		and l_shipdate < date '1997-05-01' + interval '3' month
-	group by
-		l_suppkey;
+-- using default substitutions
+/* Query 15 - Var_0 Rev_01 - TPC-H/TPC-R  Top Supplier Query */
 \timing
-
-select
-	tpch.s_suppkey,
-	tpch.s_name,
-	tpch.s_address,
-	tpch.s_phone,
-	tpch.total_revenue
-from
-	tpch.supplier,
-	revenue0
-where
-	s_suppkey = supplier_no
-	and total_revenue = (
-		select
-			max(total_revenue)
-		from
-			revenue0
-	)
-order by
-	s_suppkey;
-
+WITH /* dss_15.sql */ REVENUE (SUPPLIER_NO, TOTAL_REVENUE) AS (
+SELECT
+	L_SUPPKEY,
+        SUM(L_EXTENDEDPRICE*(1-L_DISCOUNT))
+FROM
+        tpch.LINEITEM
+WHERE
+        L_SHIPDATE >= '1996-01-01'
+        AND L_SHIPDATE < DATE '1996-01-01' + INTERVAL '3' MONTH
+GROUP BY
+        L_SUPPKEY
+)
+SELECT
+        S_SUPPKEY,
+        S_NAME,
+        S_ADDRESS,
+        S_PHONE,
+        CAST(TOTAL_REVENUE AS DECIMAL(18,2))
+FROM 
+        tpch.SUPPLIER,
+        tpch.REVENUE
+WHERE
+        S_SUPPKEY = SUPPLIER_NO
+        AND TOTAL_REVENUE = (
+                SELECT 
+                        MAX(TOTAL_REVENUE)
+                FROM 
+                        tpch.REVENUE
+        )
+ORDER BY 
+        S_SUPPKEY;
+ 
 \timing
-
-drop view revenue0;

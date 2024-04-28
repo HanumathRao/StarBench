@@ -1,27 +1,26 @@
--- using 1472396759 as a seed to the RNG
+-- using default substitutions
+/* Query 01 - Var_0 Rev_01 - TPC-H/TPC-R Pricing Summary Report Query   */
+
 \timing
-
-select
-	l_returnflag,
-	l_linestatus,
-	sum(l_quantity) as sum_qty,
-	sum(l_extendedprice) as sum_base_price,
-	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
-	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
-	avg(l_quantity) as avg_qty,
-	avg(l_extendedprice) as avg_price,
-	avg(l_discount) as avg_disc,
-	count(*) as count_order
-from
-	tpch.lineitem
-where
-	l_shipdate <= date '1998-12-01' - interval '117' day
-group by
-	l_returnflag,
-	l_linestatus
-order by
-	l_returnflag,
-	l_linestatus
-limit 1;
-
+SELECT
+        L_RETURNFLAG, 
+        L_LINESTATUS,
+        CAST(SUM(L_QUANTITY) AS DECIMAL(18,2)) AS SUM_QTY,
+        CAST(SUM(L_EXTENDEDPRICE) AS DECIMAL(18,2)) AS SUM_BASE_PRICE,
+        CAST(SUM(L_EXTENDEDPRICE*(1-L_DISCOUNT)) AS DECIMAL(18,2)) AS SUM_DISC_PRICE,
+        CAST(SUM(L_EXTENDEDPRICE*(1-L_DISCOUNT)*(1+L_TAX)) AS DECIMAL(18,2)) AS SUM_CHARGE,
+        CAST(AVG(L_QUANTITY) AS DECIMAL(18,2)) AS AVG_QTY,
+        CAST(AVG(L_EXTENDEDPRICE) AS DECIMAL(18,2)) AS AVG_PRICE,
+        CAST(AVG(L_DISCOUNT) AS DECIMAL(18,2)) AS AVG_DISC,
+        COUNT(*) AS COUNT_ORDER
+FROM 
+        tpch.LINEITEM
+WHERE
+        L_SHIPDATE <= DATE '1998-12-01' - INTERVAL '90' DAY
+GROUP BY
+        L_RETURNFLAG,
+        L_LINESTATUS
+ORDER BY
+        L_RETURNFLAG,
+        L_LINESTATUS;
 \timing

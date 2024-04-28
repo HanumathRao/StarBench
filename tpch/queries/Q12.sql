@@ -1,34 +1,32 @@
--- using 1472396759 as a seed to the RNG
+-- using default substitutions
+/* Query 12 - Var_0 Rev_01 - TPC-H/TPC-R Shipping Modes and Order Priority Query */
 \timing
-
-select
-	l_shipmode,
-	sum(case
-		when o_orderpriority = '1-URGENT'
-			or o_orderpriority = '2-HIGH'
-			then 1
-		else 0
-	end) as high_line_count,
-	sum(case
-		when o_orderpriority <> '1-URGENT'
-			and o_orderpriority <> '2-HIGH'
-			then 1
-		else 0
-	end) as low_line_count
-from
-	tpch.orders,
-	tpch.lineitem
-where
-	o_orderkey = l_orderkey
-	and l_shipmode in ('TRUCK', 'AIR')
-	and l_commitdate < l_receiptdate
-	and l_shipdate < l_commitdate
-	and l_receiptdate >= date '1997-01-01'
-	and l_receiptdate < date '1997-01-01' + interval '1' year
-group by
-	l_shipmode
-order by
-	l_shipmode
-limit 1;
-
+SELECT
+        L_SHIPMODE,
+        SUM(CASE
+                WHEN O_ORDERPRIORITY = '1-URGENT'
+                        OR O_ORDERPRIORITY = '2-HIGH'
+                THEN 1 
+                ELSE 0 
+        END) AS HIGH_LINE_COUNT,
+        SUM(CASE 
+                WHEN O_ORDERPRIORITY <> '1-URGENT'
+                        AND O_ORDERPRIORITY <> '2-HIGH' 
+                THEN 1 
+                ELSE 0 
+        END) AS LOW_LINE_COUNT
+FROM 
+        tpch.ORDERS,
+        tpch.LINEITEM
+WHERE 
+        O_ORDERKEY = L_ORDERKEY
+        AND L_SHIPMODE IN ('MAIL','SHIP')
+        AND L_COMMITDATE < L_RECEIPTDATE
+        AND L_SHIPDATE < L_COMMITDATE
+        AND L_RECEIPTDATE >= '1994-01-01'
+        AND L_RECEIPTDATE < DATE '1994-01-01' + INTERVAL '1' YEAR
+GROUP BY 
+        L_SHIPMODE
+ORDER BY 
+        L_SHIPMODE;
 \timing

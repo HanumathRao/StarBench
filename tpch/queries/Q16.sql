@@ -1,36 +1,35 @@
--- using 1472396759 as a seed to the RNG
+-- using default substitutions
+/* Query 16 - Var_0 Rev_01 - TPC-H/TPC-R Parts/Supplier Relationship Query */
 \timing
-
-select
-	p_brand,
-	p_type,
-	p_size,
-	count(distinct ps_suppkey) as supplier_cnt
-from
-	tpch.partsupp,
-	tpch.part
-where
-	p_partkey = ps_partkey
-	and p_brand <> 'Brand#53'
-	and p_type not like 'LARGE ANODIZED%'
-	and p_size in (45, 37, 43, 7, 18, 13, 22, 12)
-	and ps_suppkey not in (
-		select
-			s_suppkey
-		from
-			tpch.supplier
-		where
-			s_comment like '%Customer%Complaints%'
-	)
-group by
-	p_brand,
-	p_type,
-	p_size
-order by
-	supplier_cnt desc,
-	p_brand,
-	p_type,
-	p_size
-limit 1;
-
+SELECT
+        P_BRAND,
+        P_TYPE,
+        P_SIZE,
+        COUNT(DISTINCT PS_SUPPKEY) AS SUPPLIER_CNT
+FROM 
+        tpch.PARTSUPP,
+        tpch.PART
+WHERE
+        P_PARTKEY = PS_PARTKEY
+        AND P_BRAND <> 'Brand#45'
+        AND P_TYPE NOT LIKE 'MEDIUM POLISHED%'
+        AND P_SIZE IN (49,14,23,45,19,3,36,9)
+        AND PS_SUPPKEY NOT IN (
+                SELECT 
+                        S_SUPPKEY 
+                FROM 
+                        tpch.SUPPLIER
+                WHERE 
+                        S_COMMENT LIKE '%Customer%Complaints%'
+        )
+GROUP BY
+        P_BRAND,
+        P_TYPE,
+        P_SIZE
+ORDER BY
+        SUPPLIER_CNT DESC,
+        P_BRAND,
+        P_TYPE,
+        P_SIZE
+LIMIT 10;
 \timing

@@ -1,49 +1,48 @@
--- using 1472396759 as a seed to the RNG
+-- using default substitutions
+/* Query 02 - Var_0 Rev_01 - TPC-H/TPC-R Minimum Cost Supplier Query  */
 \timing
-
-select
-	s_acctbal,
-	s_name,
-	n_name,
-	p_partkey,
-	p_mfgr,
-	s_address,
-	s_phone,
-	s_comment
-from
-	tpch.part,
-	tpch.supplier,
-	tpch.partsupp,
-	tpch.nation,
-	tpch.region
-where
-	p_partkey = ps_partkey
-	and s_suppkey = ps_suppkey
-	and p_size = 25
-	and p_type like '%STEEL'
-	and s_nationkey = n_nationkey
-	and n_regionkey = r_regionkey
-	and r_name = 'EUROPE'
-	and ps_supplycost = (
-		select
-			min(ps_supplycost)
-		from
-			tpch.partsupp,
-			tpch.supplier,
-			tpch.nation,
-			tpch.region
-		where
-			p_partkey = ps_partkey
-			and s_suppkey = ps_suppkey
-			and s_nationkey = n_nationkey
-			and n_regionkey = r_regionkey
-			and r_name = 'EUROPE'
-	)
-order by
-	s_acctbal desc,
-	n_name,
-	s_name,
-	p_partkey
+SELECT
+        S_ACCTBAL,
+        S_NAME,
+        N_NAME,
+        P_PARTKEY,
+        P_MFGR,
+        S_ADDRESS,
+        S_PHONE,
+        S_COMMENT
+FROM 
+        tpch.PART,
+        tpch.SUPPLIER,
+        tpch.PARTSUPP,
+        tpch.NATION,
+        tpch.REGION
+WHERE
+        P_PARTKEY = PS_PARTKEY
+        AND S_SUPPKEY = PS_SUPPKEY
+        AND P_SIZE = 15
+        AND P_TYPE LIKE '%BRASS'
+        AND S_NATIONKEY = N_NATIONKEY
+        AND N_REGIONKEY = R_REGIONKEY
+        AND R_NAME = 'EUROPE'
+        AND PS_SUPPLYCOST = (
+                SELECT 
+                        MIN(PS_SUPPLYCOST)
+                FROM 
+                        tpch.PARTSUPP,
+                        tpch.SUPPLIER,
+                        tpch.NATION,
+                        tpch.REGION
+                WHERE
+                        P_PARTKEY = PS_PARTKEY
+                        AND S_SUPPKEY = PS_SUPPKEY
+                        AND S_NATIONKEY = N_NATIONKEY
+                        AND N_REGIONKEY = R_REGIONKEY
+                        AND R_NAME = 'EUROPE'
+        )
+ORDER BY 
+        S_ACCTBAL DESC,
+        N_NAME,
+        S_NAME,
+        P_PARTKEY
 LIMIT 100;
-
 \timing

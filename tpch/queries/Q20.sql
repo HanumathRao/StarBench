@@ -1,49 +1,36 @@
--- using 1472396759 as a seed to the RNG
+-- using default substitutions
+/* Query 20 - Var_0 Rev_01 - TPC-H/TPC-R The Potential Part Promotion query */
 \timing
-
-select
-	s_name,
-	s_address
-from
-	tpch.supplier,
-	tpch.nation
-where
-	s_suppkey in (
-		select
-			ps_suppkey
-		from
-			tpch.partsupp,
-			(
-				select
-					l_partkey agg_partkey,
-					l_suppkey agg_suppkey,
-					0.5 * sum(l_quantity) AS agg_quantity
-				from
-					tpch.lineitem
-				where
-					l_shipdate >= date '1997-01-01'
-					and l_shipdate < date '1997-01-01' + interval '1' year
-				group by
-					l_partkey,
-					l_suppkey
-			) agg_lineitem
-		where
-			agg_partkey = ps_partkey
-			and agg_suppkey = ps_suppkey
-			and ps_partkey in (
-				select
-					p_partkey
-				from
-					tpch.part
-				where
-					p_name like 'powder%'
-			)
-			and ps_availqty > agg_quantity
-	)
-	and s_nationkey = n_nationkey
-	and n_name = 'ARGENTINA'
-order by
-	s_name
-limit 1;
+WITH T1 (PARTKEY, SUPPKEY, QUANTITY) AS (
+	SELECT L_PARTKEY, L_SUPPKEY, 0.5 * SUM(L_QUANTITY)
+	FROM tpch.LINEITEM
+	WHERE L_SHIPDATE >= '1994-01-01'
+	AND  L_SHIPDATE <  DATE '1994-01-01' + INTERVAL '1' YEAR
+	GROUP BY L_PARTKEY, L_SUPPKEY
+),
+T2 (PARTKEY) AS (
+	SELECT P_PARTKEY
+	FROM tpch.PART
+	WHERE P_NAME LIKE 'forest%'
+)
+SELECT
+        S_NAME,
+        S_ADDRESS
+FROM
+        T1,
+        T2,
+  	tpch.PARTSUPP,
+        tpch.SUPPLIER,
+        tpch.NATION
+WHERE
+	T1.PARTKEY = PS_PARTKEY
+	AND T1.SUPPKEY = PS_SUPPKEY
+	AND T1.SUPPKEY = S_SUPPKEY
+	AND T2.PARTKEY = PS_PARTKEY
+        AND PS_AVAILQTY > T1.QUANTITY
+        AND S_NATIONKEY = N_NATIONKEY
+        AND N_NAME = 'CANADA'
+ORDER BY
+        S_NAME;
 
 \timing

@@ -1,43 +1,35 @@
--- using 1472396759 as a seed to the RNG
+-- using default substitutions
+/* Query 08 - Var_0 Rev_01 - TPC-H/TPC-R National Market Share Query */
 \timing
-
-select
-	o_year,
-	sum(case
-		when nation = 'INDIA' then volume
-		else 0
-	end) / sum(volume) as mkt_share
-from
-	(
-		select
-			extract(year from o_orderdate) as o_year,
-			l_extendedprice * (1 - l_discount) as volume,
-			n2.n_name as nation
-		from
-			tpch.part,
-			tpch.supplier,
-			tpch.lineitem,
-			tpch.orders,
-			tpch.customer,
-			tpch.nation n1,
-			tpch.nation n2,
-			tpch.region
-		where
-			p_partkey = l_partkey
-			and s_suppkey = l_suppkey
-			and l_orderkey = o_orderkey
-			and o_custkey = c_custkey
-			and c_nationkey = n1.n_nationkey
-			and n1.n_regionkey = r_regionkey
-			and r_name = 'ASIA'
-			and s_nationkey = n2.n_nationkey
-			and o_orderdate between date '1995-01-01' and date '1996-12-31'
-			and p_type = 'LARGE BRUSHED NICKEL'
-	) as all_nations
-group by
-	o_year
-order by
-	o_year
-limit 1;
-
+SELECT
+        EXTRACT(YEAR FROM O_ORDERDATE) AS L_YEAR,
+        SUM(CASE
+                WHEN N2.N_NAME = 'BRAZIL' 
+                THEN L_EXTENDEDPRICE*(1-L_DISCOUNT)
+                ELSE 0
+        END) / SUM(L_EXTENDEDPRICE*(1-L_DISCOUNT)) AS MKT_SHARE
+FROM 
+        tpch.PARTTBL,
+        tpch.SUPPLIER,
+        tpch.LINEITEM,
+        tpch.ORDERTBL,
+        tpch.CUSTOMER,
+        tpch.NATION N1,
+        tpch.NATION N2,
+        tpch.REGION
+WHERE
+        P_PARTKEY = L_PARTKEY
+        AND S_SUPPKEY = L_SUPPKEY
+        AND L_ORDERKEY = O_ORDERKEY
+        AND O_CUSTKEY = C_CUSTKEY
+        AND C_NATIONKEY = N1.N_NATIONKEY
+        AND N1.N_REGIONKEY = R_REGIONKEY
+        AND R_NAME = 'AMERICA'
+        AND S_NATIONKEY = N2.N_NATIONKEY
+        AND O_ORDERDATE BETWEEN '1995-01-01' AND '1996-12-31'
+        AND P_TYPE = 'ECONOMY ANODIZED STEEL'
+GROUP BY
+        L_YEAR
+ORDER BY
+        L_YEAR;
 \timing

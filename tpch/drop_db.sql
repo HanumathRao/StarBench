@@ -1,1 +1,1 @@
-DROP schema tpch CASCADE;
+DROP schema if exists tpch CASCADE;

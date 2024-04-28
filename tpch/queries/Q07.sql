@@ -1,45 +1,35 @@
--- using 1472396759 as a seed to the RNG
+-- using default substitutions
+/* Query 07 - Var_0 Rev_01 - TPC-H/TPC-R Volume Shipping Query  */ 
 \timing
-
-select
-	supp_nation,
-	cust_nation,
-	l_year,
-	sum(volume) as revenue
-from
-	(
-		select
-			n1.n_name as supp_nation,
-			n2.n_name as cust_nation,
-			extract(year from l_shipdate) as l_year,
-			l_extendedprice * (1 - l_discount) as volume
-		from
-			tpch.supplier,
-			tpch.lineitem,
-			tpch.orders,
-			tpch.customer,
-			tpch.nation n1,
-			tpch.nation n2
-		where
-			s_suppkey = l_suppkey
-			and o_orderkey = l_orderkey
-			and c_custkey = o_custkey
-			and s_nationkey = n1.n_nationkey
-			and c_nationkey = n2.n_nationkey
-			and (
-				(n1.n_name = 'RUSSIA' and n2.n_name = 'INDIA')
-				or (n1.n_name = 'INDIA' and n2.n_name = 'RUSSIA')
-			)
-			and l_shipdate between date '1995-01-01' and date '1996-12-31'
-	) as shipping
-group by
-	supp_nation,
-	cust_nation,
-	l_year
-order by
-	supp_nation,
-	cust_nation,
-	l_year
-limit 1;
-
+SELECT
+        N1.N_NAME  AS SUPP_NATION,
+        N2.N_NAME  AS CUST_NATION,
+        EXTRACT(YEAR FROM L_SHIPDATE) AS L_YEAR,
+        CAST(SUM(L_EXTENDEDPRICE * (1-L_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE
+FROM 
+        tpch.SUPPLIER,
+        tpch.LINEITEM,
+        tpch.ORDERS,
+        tpch.CUSTOMER,
+        tpch.NATION N1,
+        tpch.NATION N2
+WHERE
+        S_SUPPKEY  = L_SUPPKEY
+        AND O_ORDERKEY = L_ORDERKEY
+        AND C_CUSTKEY = O_CUSTKEY
+        AND S_NATIONKEY = N1.N_NATIONKEY
+        AND C_NATIONKEY = N2.N_NATIONKEY
+        AND (
+                (N1.N_NAME = 'FRANCE' AND N2.N_NAME = 'GERMANY')
+                OR (N1.N_NAME = 'GERMANY' AND N2.N_NAME = 'FRANCE')
+        )
+        AND  L_SHIPDATE BETWEEN '1995-01-01' AND '1996-12-31'
+GROUP BY
+        SUPP_NATION,
+        CUST_NATION,
+        L_YEAR
+ORDER BY
+        SUPP_NATION,
+        CUST_NATION,
+        L_YEAR;
 \timing

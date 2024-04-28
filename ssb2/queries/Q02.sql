@@ -11,7 +11,7 @@ SELECT /* dss_02.sql */ DISTINCT
         S_PHONE
         S_COMMENT 
 FROM ssb2.PART O, 
-        SUPPLIER
+        ssb2.SUPPLIER
 WHERE O.P_SUPPKEY = S_SUPPKEY
        AND O.P_TYPE LIKE '%BRASS'
        AND O.P_SIZE = 15

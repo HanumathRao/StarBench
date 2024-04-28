@@ -1,18 +1,25 @@
--- using 1472396759 as a seed to the RNG
+-- using default substitutions
+/* Query 17 - Var_0 Rev_01 - TPC-H/TPC-R Small-Quantity-Order Revenue Query */
 \timing
-
-select
-	sum(l_extendedprice) / 7.0 as avg_yearly
-from
-	tpch.lineitem,
-	tpch.part,
-        (select l_partkey as agg_partkey, 0.2 * avg(l_quantity) as avg_quantity from tpch.lineitem group by l_partkey) part_agg
-where
-	p_partkey = l_partkey
-        and agg_partkey = l_partkey
-	and p_brand = 'brand#33'
-	and p_container = 'wrap jar'
-	and l_quantity < avg_quantity  
-limit 1;
-
+WITH   /* dss_17.sql */
+T1(PARTKEY, QUANTITY) AS (
+SELECT
+	L_PARTKEY,
+        0.2 * AVG(L_QUANTITY)
+FROM 
+	tpch.LINEITEM
+GROUP BY 1
+)
+SELECT
+        CAST(SUM(L_EXTENDEDPRICE) / 7.0 AS DECIMAL(18,2)) AS AVG_YEARLY
+FROM
+        T1,
+        tpch.PART,
+        tpch.LINEITEM
+WHERE
+        P_PARTKEY = L_PARTKEY
+        AND T1.PARTKEY = P_PARTKEY
+        AND P_BRAND = 'Brand#23'
+        AND P_CONTAINER = 'MED BOX'
+        AND L_QUANTITY < T1.QUANTITY;
 \timing

@@ -1,28 +1,27 @@
--- using 1472396759 as a seed to the RNG
+-- using default substitutions
+/* Query 03 - Var_0 Rev_01 - TPC-H/TPC-R Shipping Priority Query      */
 \timing
-
-select
-	l_orderkey,
-	sum(l_extendedprice * (1 - l_discount)) as revenue,
-	o_orderdate,
-	o_shippriority
-from
-	tpch.customer,
-	tpch.orders,
-	tpch.lineitem
-where
-	c_mktsegment = 'HOUSEHOLD'
-	and c_custkey = o_custkey
-	and l_orderkey = o_orderkey
-	and o_orderdate < date '1995-03-21'
-	and l_shipdate > date '1995-03-21'
-group by
-	l_orderkey,
-	o_orderdate,
-	o_shippriority
-order by
-	revenue desc,
-	o_orderdate
-limit 10;
-
+SELECT
+        L_ORDERKEY,
+        CAST(SUM(L_EXTENDEDPRICE*(1-L_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE,
+        O_ORDERDATE,
+        O_SHIPPRIORITY
+FROM  
+        tpch.CUSTOMER,
+        tpch.ORDERS,
+        tpch.LINEITEM
+WHERE
+        C_MKTSEGMENT  = 'BUILDING'
+        AND C_CUSTKEY    = O_CUSTKEY
+        AND L_ORDERKEY   = O_ORDERKEY
+        AND O_ORDERDATE  < '1995-03-15'
+        AND L_SHIPDATE   > '1995-03-15'
+GROUP BY
+        L_ORDERKEY,
+        O_ORDERDATE,
+        O_SHIPPRIORITY
+ORDER BY
+        REVENUE DESC,
+        O_ORDERDATE
+LIMIT 10;
 \timing
