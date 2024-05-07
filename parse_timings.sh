@@ -18,6 +18,8 @@ for i in {01..22}; do
     if [ -f "$1/tpch/Q$i.out" ] && [ -f "$1/ssb2/Q$i.out" ]; then
         tpch_timing=$(awk '/Time: [0-9]+\.[0-9]+ ms/ {match($0, /[0-9]+\.[0-9]+/); print substr($0, RSTART, RLENGTH)}' "$1/tpch/Q$i.out")
         ssb2_timing=$(awk '/Time: [0-9]+\.[0-9]+ ms/ {match($0, /[0-9]+\.[0-9]+/); print substr($0, RSTART, RLENGTH)}' "$1/ssb2/Q$i.out")
-        printf "Q%-10s \t %-10s \t %-10s\n" "$i" "$tpch_timing" "$ssb2_timing"
+	tpch_timing_rounded=`echo $tpch_timing | awk '{print int($1+0.5)}'`
+	ssb2_timing_rounded=`echo $ssb2_timing | awk '{print int($1+0.5)}'`
+        printf "Q%-10s \t %-10s \t %-10s\n" "$i" "$tpch_timing_rounded" "$ssb2_timing_rounded"
     fi
 done

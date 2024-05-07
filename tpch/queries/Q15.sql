@@ -21,14 +21,14 @@ SELECT
         CAST(TOTAL_REVENUE AS DECIMAL(18,2))
 FROM 
         tpch.SUPPLIER,
-        tpch.REVENUE
+        REVENUE
 WHERE
         S_SUPPKEY = SUPPLIER_NO
         AND TOTAL_REVENUE = (
                 SELECT 
                         MAX(TOTAL_REVENUE)
                 FROM 
-                        tpch.REVENUE
+                        REVENUE
         )
 ORDER BY 
         S_SUPPKEY;

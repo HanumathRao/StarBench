@@ -9,10 +9,10 @@ SELECT
                 ELSE 0
         END) / SUM(L_EXTENDEDPRICE*(1-L_DISCOUNT)) AS MKT_SHARE
 FROM 
-        tpch.PARTTBL,
+        tpch.PART,
         tpch.SUPPLIER,
         tpch.LINEITEM,
-        tpch.ORDERTBL,
+        tpch.ORDERS,
         tpch.CUSTOMER,
         tpch.NATION N1,
         tpch.NATION N2,
