@@ -31,6 +31,6 @@ WHERE
         AND S_NATIONKEY = N_NATIONKEY
         AND N_NAME = 'CANADA'
 ORDER BY
-        S_NAME;
-
+        S_NAME
+LIMIT 10;
 \timing
