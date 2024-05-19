@@ -5,7 +5,7 @@ if [ -n $DATA_DIR ]; then
    DATA_DIR=$BENCH
 fi
 
-if ![ -f /etc/init.d/mysql* ]; then
+if ! [ -f /etc/init.d/mysql* ]; then
     echo "mysql is not installed or configured; please install and configure."
     exit 0
 fi

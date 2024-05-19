@@ -1,0 +1,22 @@
+-- USING 12345 AS A SEED TO THE RNG
+/* QUERY 04 -  SSB ORDER PRIORITY CHECKING QUERY */
+WITH   /* DSS_04.SQL */ 
+        T1(OKEY) AS  (
+                SELECT 
+                OD_ORDERKEY 
+                FROM ORDER_DETAIL 
+                WHERE OD_COMMITDATE < OD_RECEIPTDATE
+        )
+        SELECT 
+        OD_ORDERPRIORITY, 
+        COUNT(DISTINCT OD_ORDERKEY) AS ORDER_COUNT
+        FROM 
+                T1, 
+                ORDER_DETAIL
+        WHERE
+                OKEY=OD_ORDERKEY
+                AND OD_ORDERDATE >=  '1993-02-01'
+                AND OD_ORDERDATE < DATE '1993-02-01' + INTERVAL '3' MONTH
+GROUP BY OD_ORDERPRIORITY
+ORDER BY OD_ORDERPRIORITY;
+
