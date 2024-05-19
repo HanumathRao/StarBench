@@ -1,4 +1,4 @@
-# ssb2-bench
+# StarBench
 
 SSB2 is an evolution of SSB the Star Schema benchmark (https://www.cs.umb.edu/~poneil/StarSchemaB.PDF) created by Pat O’Neil and his team to test specific Star Schema features such as the “slowly changing dimension”.  We followed the same idea as SSB in the sense that the SSB2 schema is based on TPC-H: ORDERS and LINEITEM are joined into the LINEORDER fact table and PART, SUPPLIER and CUSTOMER become dimensions. But, unlike in SSB we did not drop the PARTSUPP table – instead we merged the useful PARTSUPP information linking part availability and cost from suppliers into the PART table. SSB also included a time dimension and we did not need.  Note that while at Teradata we used SSB for the PPI Wizard testing.
 Another substantial difference between SSB and SSB2 is the queries. While the SSB designers SSB were limited in their query set due to the lack of availability of PARTSUPP information we have rewritten all the 22 TPC-H queries to produce exactly the same results on SSB2 as the original TPC-H queries on a TPC-H schema.
