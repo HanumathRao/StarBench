@@ -1,25 +1,20 @@
--- using default substitutions
-/* Query 17 - Var_0 Rev_01 - TPC-H/TPC-R Small-Quantity-Order Revenue Query */
-\timing
-WITH   /* dss_17.sql */
-T1(PARTKEY, QUANTITY) AS (
+-- USING 12345 AS A SEED TO THE RNG
+
+
 SELECT
-	L_PARTKEY,
-        0.2 * AVG(L_QUANTITY)
-FROM 
-	tpch.LINEITEM
-GROUP BY 1
-)
-SELECT
-        CAST(SUM(L_EXTENDEDPRICE) / 7.0 AS DECIMAL(18,2)) AS AVG_YEARLY
+	SUM(L_EXTENDEDPRICE) / 7.0 AS AVG_YEARLY
 FROM
-        T1,
-        tpch.PART,
-        tpch.LINEITEM
+	tpch.LINEITEM,
+	tpch.PART
 WHERE
-        P_PARTKEY = L_PARTKEY
-        AND T1.PARTKEY = P_PARTKEY
-        AND P_BRAND = 'Brand#23'
-        AND P_CONTAINER = 'MED BOX'
-        AND L_QUANTITY < T1.QUANTITY;
-\timing
+	P_PARTKEY = L_PARTKEY
+	AND P_BRAND = 'BRAND#12'
+	AND P_CONTAINER = 'SM CAN'
+	AND L_QUANTITY < (
+		SELECT
+			0.2 * AVG(L_QUANTITY)
+		FROM
+			tpch.LINEITEM
+		WHERE
+			L_PARTKEY = P_PARTKEY
+	);

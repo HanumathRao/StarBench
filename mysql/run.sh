@@ -1,12 +1,12 @@
 #!/bin/bash
 
-rm -rf $BENCH/mysql/tpch/OUT/*.out
-rm -rf $BENCH/mysql/ssb/OUT/*.out
+rm -rf $BENCH/mysql/tpch/OUT/*
+rm -rf $BENCH/mysql/ssb/OUT/*
 
 echo "executing the mysql tpch and ssb queries...."
 
 # run tpch queries
-for i in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22
+for i in 01 03 04 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22
 do
 	start=`date +%s.%N`
 	mysql --local-infile=1 -u root --database=tpch < $BENCH/mysql/tpch/queries/Q${i}.sql > $BENCH/mysql/tpch/OUT/Q${i}.out 2>&1
