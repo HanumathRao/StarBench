@@ -1,4 +1,4 @@
--- USING DEFAULT SUBSTITUTIONS
+-- USING 12345 AS A SEED TO THE RNG
 
 
 SELECT
@@ -14,7 +14,7 @@ FROM
 			CUSTOMER
 		WHERE
 			SUBSTRING(C_PHONE FROM 1 FOR 2) IN
-				('13', '31', '23', '29', '30', '18', '17')
+				('42', '26', '43', '22', '30', '37', '35')
 			AND C_ACCTBAL > (
 				SELECT
 					AVG(C_ACCTBAL)
@@ -23,7 +23,7 @@ FROM
 				WHERE
 					C_ACCTBAL > 0.00
 					AND SUBSTRING(C_PHONE FROM 1 FOR 2) IN
-						('13', '31', '23', '29', '30', '18', '17')
+						('42', '26', '43', '22', '30', '37', '35')
 			)
 			AND NOT EXISTS (
 				SELECT
