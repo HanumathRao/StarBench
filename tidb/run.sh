@@ -13,7 +13,6 @@ do
 	end=`date +%s.%N`
 	runtime=$( echo "$end - $start" | bc -l ) 
 	echo "query execution time=$runtime" > $BENCH/tidb/tpch/OUT/Q${i}.timing
-	#mysql --host=localhost --database=tpch < $BENCH/mysql/tpch/queries/Q${i}.sql > $BENCH/mysql/tpch/OUT/Q${i}.out 2>&1
 done
 
 # run ssb queries

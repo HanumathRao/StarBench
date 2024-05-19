@@ -1,21 +1,8 @@
 #!/bin/bash
 
-declare
-
 if [ -n $DATA_DIR ]; then
    echo "DATA_DIR is not, so defaulting to current dir `pwd`"
    DATA_DIR=`pwd`
-fi
-
-# check if the tuner dir contains the tpch queries and tpch data to load.
-if ! [ -d $DATA_DIR/tpch ]; then
-   echo "Invalid DATA_DIR:$DATA_DIR as it doesn't contain data or tpch-queries directory"
-   exit 0
-fi
-
-if ![ -f /etc/init.d/tidb* ]; then
-    echo "tidb is not installed or configured; please install and configure."
-    exit 0
 fi
 
 
@@ -41,5 +28,5 @@ mysql --comments --host 127.0.0.1 --port 4000 -u root --database=tpch < $DATA_DI
 
 
 echo "loading the data into tpch tables"
-mysql --comments --host 127.0.0.1 --port 4000 -u root --database=tpch < $DATA_DIR/tidb/tpch/load.sql
+mysql --comments --local-infile=1 --host 127.0.0.1 --port 4000 -u root --database=tpch < $DATA_DIR/tidb/tpch/load.sql
 

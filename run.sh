@@ -1,25 +1,57 @@
 #!/bin/bash
 
-export BENCH=`pwd`
-# Check if a parameter is provided
-if [ $# -ne 1 ]; then
-    echo "Usage: $0 [pg | mysql | tidb]"
+export BENCH=$(pwd)
+
+# Check if two parameters are provided
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <load> <pg | mysql | tidb>"
     exit 1
 fi
 
-# Check if the parameter is either pg or mysql
-if [ "$1" != "pg" ] && [ "$1" != "mysql" ] && [ "$1" != "tidb" ]; then
-    echo "Invalid parameter. Usage: $0 [pg | mysql | tidb]"
+# Extract parameters
+load="$1"
+db_type="$2"
+
+# Initialize flag
+has_l_flag=false
+
+# Parse command line options
+while getopts ":l" opt; do
+  case ${opt} in
+    l )
+      # Set flag if -l is provided
+      has_l_flag=true
+      ;;
+    \? )
+      echo "Usage: $0 [-l]"
+      exit 1
+      ;;
+  esac
+done
+shift $((OPTIND -1))
+
+# Check if the database type is valid
+if [ "$db_type" != "pg" ] && [ "$db_type" != "mysql" ] && [ "$db_type" != "tidb" ]; then
+    echo "Invalid database type. Usage: $0 <load> <pg | mysql | tidb>"
     exit 1
 fi
 
-# Run the appropriate script based on the parameter
-if [ "$1" == "pg" ]; then
+# Run the appropriate script based on the database type
+if [ "$db_type" == "pg" ]; then
+    if [ "$has_l_flag" = true ]; then
+        ./pg/tpch/load_data.sh
+    fi
     ./pg/run.sh
-elif [ "$1" == "mysql" ]; then
+elif [ "$db_type" == "mysql" ]; then
+    if [ "$has_l_flag" = true ]; then
+        ./mysql/tpch/load_data.sh
+    fi
     ./mysql/run.sh
-elif [ "$1" == "tidb" ]; then
-    ./tidb/run.sh
+elif [ "$db_type" == "tidb" ]; then
+    if [ "$has_l_flag" = true ]; then
+        ./mysql/tpch/load_data.sh
+    fi
+    ./mysql/run.sh
 fi
 
 
