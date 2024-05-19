@@ -1,36 +1,44 @@
-/* Query 02 - Var_0 Rev_01 - TPC-H/TPC-R Minimum Cost Supplier Query  */
-/* Return the first 100 selected rows                                 */
-\timing
-SELECT /* dss_02.sql */ DISTINCT
+-- USING DEFAULT SUBSTITUTIONS
+/* QUERY 02 - STARBENCH - MINIMUM COST SUPPLIER QUERY  */
+/* RETURN THE FIRST 100 SELECTED ROWS                                 */
+/* VARIANT Q2.1 DECORELLATING  QUERY (MYSQL AND POSTGRESQL)           */
+WITH T1(PARTKEY, MINCOST)  AS (
+SELECT 
+	P_PARTKEY,
+	MIN(P_SUPPLYCOST) OVER (PARTITION BY P_PARTKEY)
+FROM
+	ssb2.PART,
+	ssb2.SUPPLIER
+WHERE
+	P_SUPPKEY = S_SUPPKEY
+	AND P_SIZE = 15
+	AND P_TYPE LIKE '%BRASS'
+	AND S_REGION = 'EUROPE'
+)
+SELECT  /* DSS_02.SQL */
         S_ACCTBAL,
         S_NAME,
-        S_REGION,
+        S_NATION,
         P_PARTKEY,
         P_MFGR,
         S_ADDRESS,
-        S_PHONE
+        S_PHONE,
         S_COMMENT 
-FROM ssb2.PART O, 
+FROM 
+	T1,
+	ssb2.PART,
         ssb2.SUPPLIER
-WHERE O.P_SUPPKEY = S_SUPPKEY
-       AND O.P_TYPE LIKE '%BRASS'
-       AND O.P_SIZE = 15
-    AND S_REGION = 'ASIA'
-       AND O.P_SUPPLYCOST =
-       (SELECT  Min(P_SUPPLYCOST)
-                FROM 
-                        ssb2.PART,
-                        ssb2.SUPPLIER
-                WHERE
-                        O.P_PARTKEY = P_PARTKEY 
-                         AND S_SUPPKEY = P_SUPPKEY
-                         AND S_REGION = 'ASIA'  
-                GROUP BY P_PARTKEY)
-       ORDER BY
-       S_ACCTBAL DESC,
-        S_REGION,
+WHERE 
+	P_PARTKEY=PARTKEY
+	AND P_SUPPKEY=S_SUPPKEY
+        AND P_SIZE = 15
+        AND P_TYPE LIKE '%BRASS'
+        AND S_REGION = 'EUROPE'   
+	AND P_SUPPLYCOST = MINCOST
+ORDER BY
+	S_ACCTBAL DESC,
+        S_NATION,
         S_NAME,
         P_PARTKEY
 LIMIT 100;
 
-\timing

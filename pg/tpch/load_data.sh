@@ -9,11 +9,6 @@ if [ -n $DATA_DIR ]; then
    DATA_DIR=$BENCH
 fi
 
-if ! [ -f /usr/local/pgsql/bin/psql ]; then
-   echo "Postgres sql is not installed or configured; please install and configure"
-   exit 0
-fi
-
 if ! [ -f $DATA_DIR/pg/tpch/tables.sql ]; then
    echo "No schema.sql file exists under $DATA_DIR"
    exit 0
@@ -26,15 +21,15 @@ if ! [ -f $DATA_DIR/pg/tpch/load.sql ]; then
 fi
 
 echo "Dropping the database tpch"
-/usr/local/pgsql/bin/psql postgres < $DATA_DIR/pg/tpch/drop_db.sql
+psql postgres < $DATA_DIR/pg/tpch/drop_db.sql
 
 echo "Creating the database tpch"
-/usr/local/pgsql/bin/psql postgres < $DATA_DIR/pg/tpch/create_db.sql
+psql postgres < $DATA_DIR/pg/tpch/create_db.sql
 
 echo "Creating the tpch tables"
-/usr/local/pgsql/bin/psql postgres < $DATA_DIR/pg/tpch/tables.sql
+psql postgres < $DATA_DIR/pg/tpch/tables.sql
 
 
 echo "loading the data into tpch tables"
-/usr/local/pgsql/bin/psql postgres < $DATA_DIR/pg/tpch/load.sql
+psql postgres < $DATA_DIR/pg/tpch/load.sql
 

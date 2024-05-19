@@ -1,30 +1,29 @@
-/* Query 12 - Var_0 Rev_01 - SSBench Shipping Modes and Order Priority Query */
-\timing
-SELECT /* dss_12.sql */
-        LO_SHIPMODE,
+-- USING DEFAULT SUBSTITUTIONS
+/* QUERY 12 - STARBENCH - SHIPPING MODES AND ORDER PRIORITY QUERY */
+SELECT /* DSS_12.SQL */
+        OD_SHIPMODE,
         SUM(CASE
-                WHEN LO_ORDERPRIORITY = '1-URGENT'
-                        OR LO_ORDERPRIORITY = '2-HIGH'
+                WHEN OD_ORDERPRIORITY = '1-URGENT'
+                        OR OD_ORDERPRIORITY = '2-HIGH'
                 THEN 1 
                 ELSE 0 
         END) AS HIGH_LINE_COUNT,
         SUM(CASE 
-                WHEN LO_ORDERPRIORITY <> '1-URGENT'
-                        AND LO_ORDERPRIORITY <> '2-HIGH' 
+                WHEN OD_ORDERPRIORITY <> '1-URGENT'
+                        AND OD_ORDERPRIORITY <> '2-HIGH' 
                 THEN 1 
                 ELSE 0 
         END) AS LOW_LINE_COUNT
 FROM 
-        ssb2.LINEORDER
+        ssb2.ORDER_DETAIL
 WHERE 
-        LO_SHIPMODE IN ('MAIL','SHIP')
-        AND LO_COMMITDATE < LO_RECEIPTDATE
-        AND LO_SHIPDATE < LO_COMMITDATE
-        AND LO_RECEIPTDATE >= '1994-01-01'
-        AND LO_RECEIPTDATE < DATE '1994-01-01' + INTERVAL '1' YEAR
+        OD_SHIPMODE IN ('MAIL','SHIP')
+        AND OD_COMMITDATE < OD_RECEIPTDATE
+        AND OD_SHIPDATE < OD_COMMITDATE
+        AND OD_RECEIPTDATE >= '1994-01-01'
+        AND OD_RECEIPTDATE < DATE '1994-01-01' + INTERVAL '1' YEAR
 GROUP BY 
-        LO_SHIPMODE
+        OD_SHIPMODE
 ORDER BY 
-        LO_SHIPMODE;
+        OD_SHIPMODE;
 
-\timing

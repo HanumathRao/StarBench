@@ -1,7 +1,6 @@
-/* Query 16 - Var_0 Rev_01 - SSBench Parts/Supplier Relationship Query */
-/* modified to minimize size of output  */
-\timing
-SELECT /* dss_16.sql */
+-- USING DEFAULT SUBSTITUTIONS
+/* QUERY 16 - STARBENCH - PARTS/SUPPLIER RELATIONSHIP QUERY */
+SELECT /* DSS_16.SQL */
         P_BRAND,
         P_TYPE,
         P_SIZE,
@@ -9,7 +8,7 @@ SELECT /* dss_16.sql */
 FROM 
         ssb2.PART
 WHERE
-        P_BRAND <> 'Brand#45'
+        P_BRAND <> 'BRAND#45'
         AND P_TYPE NOT LIKE 'MEDIUM POLISHED%'
         AND P_SIZE IN (49,14,23,45,19,3,36,9)
         AND P_SUPPKEY NOT IN (
@@ -18,7 +17,7 @@ WHERE
                 FROM 
                         ssb2.SUPPLIER
                 WHERE 
-                        S_COMMENT LIKE '%Customer%Complaints%'
+                        S_COMMENT LIKE '%CUSTOMER%COMPLAINTS%'
         )
 GROUP BY
         P_BRAND,
@@ -28,7 +27,5 @@ ORDER BY
         SUPPLIER_CNT DESC,
         P_BRAND,
         P_TYPE,
-        P_SIZE
-LIMIT 10;
+        P_SIZE;
 
-\timing

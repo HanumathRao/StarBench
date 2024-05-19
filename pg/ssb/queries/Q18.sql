@@ -1,37 +1,35 @@
-/* @(#)TERADATA 18.sql 1.1.1.1@(#) */
-/* Query 18 - Var_0 Rev_01 - SSBench Large Volume Customer Query */
-/* Return the first 100 selected rows                            */
-\timing
-SELECT /* dss_18.sql */
+-- USING DEFAULT SUBSTITUTIONS
+/* QUERY 18 - STARBENCH - LARGE VOLUME CUSTOMER QUERY */
+/* RETURN THE FIRST 100 SELECTED ROWS                            */
+SELECT /* DSS_18.SQL */
         C_NAME,
         C_CUSTKEY,
-        LO_ORDERKEY,
-        LO_ORDERDATE,
-        LO_TOTALPRICE,
-        CAST(SUM(LO_QUANTITY) AS DECIMAL(18,2)) AS SUM_QTY
+        OD_ORDERKEY,
+        OD_ORDERDATE,
+        OD_TOTALPRICE,
+        CAST(SUM(OD_QUANTITY) AS DECIMAL(18,2)) AS SUM_QTY
 FROM
         ssb2.CUSTOMER,
-        ssb2.LINEORDER
+        ssb2.ORDER_DETAIL
 WHERE
-        LO_ORDERKEY IN (
+        OD_ORDERKEY IN (
                 SELECT
-                        LO_ORDERKEY
+                        OD_ORDERKEY
                 FROM
-                        ssb2.LINEORDER
+                        ssb2.ORDER_DETAIL
                 GROUP BY
-                        LO_ORDERKEY HAVING
-                                SUM(LO_QUANTITY) > 300
+                        OD_ORDERKEY HAVING
+                                SUM(OD_QUANTITY) > 300
         )
-        AND C_CUSTKEY = LO_CUSTKEY
+        AND C_CUSTKEY = OD_CUSTKEY
 GROUP BY
         C_NAME,
         C_CUSTKEY,
-        LO_ORDERKEY,
-        LO_ORDERDATE,
-        LO_TOTALPRICE
+        OD_ORDERKEY,
+        OD_ORDERDATE,
+        OD_TOTALPRICE
 ORDER BY
-        LO_TOTALPRICE DESC,
-        LO_ORDERDATE
+        OD_TOTALPRICE DESC,
+        OD_ORDERDATE
 LIMIT 100;
 
-\timing

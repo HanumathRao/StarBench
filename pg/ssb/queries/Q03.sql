@@ -1,26 +1,24 @@
-/* Query 03 - Var_0 Rev_01 - SSBench TPC-H Shipping Priority Query      */
-/* Return the first 100 selected rows                                   */
-\timing
-SELECT /* dss_03.sql */
-        LO_ORDERKEY,
-        CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE,
-        LO_ORDERDATE,
-        LO_SHIPPRIORITY
+-- USING DEFAULT SUBSTITUTIONS
+/* QUERY 03 - STARBENCH - TPC-H SHIPPING PRIORITY QUERY      */
+/* RETURN THE FIRST 10 SELECTED ROWS                                    */
+SELECT /* DSS_03.SQL */
+        OD_ORDERKEY,
+        CAST(SUM(OD_EXTENDEDPRICE*(1-OD_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE,
+        OD_ORDERDATE,
+        OD_SHIPPRIORITY
 FROM  
         ssb2.CUSTOMER,
-        ssb2.LINEORDER
+        ssb2.ORDER_DETAIL
 WHERE
---        C_MKTSEGMENT  = 'BUILDING'
---        AND C_CUSTKEY    = LO_CUSTKEY
-         C_CUSTKEY    = LO_CUSTKEY
---        AND LO_ORDERDATE  < '1995-03-15'
---        AND LO_SHIPDATE   > '1995-03-15'
+        C_MKTSEGMENT      = 'BUILDING'
+        AND C_CUSTKEY     = OD_CUSTKEY
+        AND OD_ORDERDATE  < '1995-03-15'
+        AND OD_SHIPDATE   > '1995-03-15'
 GROUP BY
-        LO_ORDERKEY,
-        LO_ORDERDATE,
-        LO_SHIPPRIORITY
+        OD_ORDERKEY,
+        OD_ORDERDATE,
+        OD_SHIPPRIORITY
 ORDER BY
         REVENUE DESC,
-        LO_ORDERDATE
-LIMIT 100;
-\timing
+        OD_ORDERDATE
+LIMIT 10;

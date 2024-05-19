@@ -1,15 +1,15 @@
-/* Query 13 - Var_0 Rev_01 - TPC-H/TPC-R Customer Distribution Query */
-\timing
-SELECT /* dss_13.sql */
+-- USING DEFAULT SUBSTITUTIONS
+/* QUERY 13 - STARBENCH - CUSTOMER DISTRIBUTION QUERY */
+SELECT /* DSS_13.SQL */
         C_COUNT, COUNT(*) AS CUSTDIST
 FROM   (
         SELECT
                 C_CUSTKEY,
-                COUNT(DISTINCT LO_ORDERKEY)
+                COUNT(DISTINCT OD_ORDERKEY)
         FROM
-                ssb2.CUSTOMER LEFT OUTER JOIN ssb2.LINEORDER ON
-                        C_CUSTKEY = LO_CUSTKEY
-                        AND LO_COMMENT NOT LIKE '%special%requests%'
+                ssb2.CUSTOMER LEFT OUTER JOIN ssb2.ORDER_DETAIL ON
+                        C_CUSTKEY = OD_CUSTKEY
+                        AND OD_COMMENT NOT LIKE '%SPECIAL%REQUESTS%'
         GROUP BY
                 C_CUSTKEY
         ) AS C_ORDERS (C_CUSTKEY, C_COUNT)
@@ -19,4 +19,3 @@ ORDER BY
         CUSTDIST DESC,
         C_COUNT DESC;
 
-\timing

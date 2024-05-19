@@ -1,22 +1,22 @@
-/* Query 10 - Var_0 Rev_01 - TPC-H/TPC-R Returned Item Reporting Query */
-/* Return the first 20 selected rows                                   */
-\timing
-SELECT /* dss_10.sql */
+-- USING DEFAULT SUBSTITUTIONS
+/* QUERY 10 - STARBENCH - RETURNED ITEM REPORTING QUERY */
+/* RETURN THE FIRST 20 SELECTED ROWS                                   */
+SELECT /* DSS_10.SQL */
         C_CUSTKEY,
         C_NAME,
-        CAST(SUM(LO_EXTENDEDPRICE*(1-LO_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE,
+        CAST(SUM(OD_EXTENDEDPRICE*(1-OD_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE,
         C_ACCTBAL,
         C_NATION,
         C_ADDRESS,
         C_PHONE 
 FROM 
         ssb2.CUSTOMER,
-        ssb2.LINEORDER
+        ssb2.ORDER_DETAIL
 WHERE
-        C_CUSTKEY = LO_CUSTKEY
-        AND LO_ORDERDATE >= '1993-10-01'
-        AND LO_ORDERDATE < DATE '1993-10-01' + INTERVAL '3' MONTH
-        AND LO_RETURNFLAG = 'R'
+        C_CUSTKEY = OD_CUSTKEY
+        AND OD_ORDERDATE >= '1993-10-01'
+        AND OD_ORDERDATE < DATE '1993-10-01' + INTERVAL '3' MONTH
+        AND OD_RETURNFLAG = 'R'
 GROUP BY 
         C_CUSTKEY,
         C_NAME,
@@ -28,4 +28,3 @@ ORDER BY
         REVENUE DESC
 LIMIT 20;
 
-\timing

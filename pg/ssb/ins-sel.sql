@@ -39,7 +39,7 @@ ps.PS_AVAILQTY,
 ps.PS_SUPPLYCOST
 from tpch.PART p inner join tpch.PARTSUPP ps on p.P_PARTKEY = ps.PS_PARTKEY; 
 
-insert into ssb2.LINEORDER
+insert into ssb2.ORDER_DETAIL
 select
 l.L_ORDERKEY,
 l.L_PARTKEY,
