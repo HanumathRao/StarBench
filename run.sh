@@ -40,6 +40,7 @@ fi
 if [ "$db_type" == "pg" ]; then
     if [ "$has_l_flag" = true ]; then
         ./pg/tpch/load_data.sh
+	./pg/ssb/load_data.sh
     fi
     ./pg/run.sh
 elif [ "$db_type" == "mysql" ]; then
@@ -49,9 +50,9 @@ elif [ "$db_type" == "mysql" ]; then
     ./mysql/run.sh
 elif [ "$db_type" == "tidb" ]; then
     if [ "$has_l_flag" = true ]; then
-        ./mysql/tpch/load_data.sh
+        ./tidb/tpch/load_data.sh
     fi
-    ./mysql/run.sh
+    ./tidb/run.sh
 fi
 
 
