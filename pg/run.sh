@@ -17,4 +17,4 @@ done
 
 
 
-./parse_timings.sh $BENCH/pg
+$BENCH/pg/parse_timings.sh $BENCH/pg
