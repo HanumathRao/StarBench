@@ -10,7 +10,10 @@ How to run the StarBench
   To generate the scale factor do the following steps.
 a. clone the repostory at https://github.com/electrum/tpch-dbgen.
 b. run the make to compile the code which produces qgen and dbgen. (make )
-c. dbgen -s SF -r. this step produces *.tbl files (please note the location of these files).
+c. This step produces *.tbl files (please note the location of these files).
+```shell
+dbgen -s SF -r
+```
 
 2. Clone the repository of the StarBench.
 3. change the location of the data in load.sql of corresponding database locations.
@@ -36,7 +39,10 @@ c. dbgen -s SF -r. this step produces *.tbl files (please note the location of t
 
    This assumes that the postgres | mysql | tidb is installed on the machine.
    there is an optional parameter -l which loads the data based on the location provided
-   ./run.sh pg -l (loads the data and runs the queries in ssb and tpch and compares the results).
+   ```shell
+   #(loads the data and runs the queries in ssb and tpch and compares the results).
+      ./run.sh pg -l 
+   ``` 
 
 
 
