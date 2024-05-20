@@ -29,7 +29,9 @@ c. dbgen -s SF -r. this step produces *.tbl files (please note the location of t
       scripts
    
    To run the StarBench for a particular database one needs to submit the following command.
+   ```shell
    ./run.sh pg (for postgres, mysql for mysql and tidb for tidb).
+   ```
    
 
    This assumes that the postgres | mysql | tidb is installed on the machine.
