@@ -8,9 +8,12 @@ How to run the StarBench
 
 1. Generate the data for the tpch for a representative scale factor.
   To generate the scale factor do the following steps.
-a. clone the repostory at https://github.com/electrum/tpch-dbgen.
-b. run the make to compile the code which produces qgen and dbgen. (make )
-c. This step produces *.tbl files (please note the location of these files).
+1.1. clone the repostory at https://github.com/electrum/tpch-dbgen.
+1.2. run the make to compile the code which produces qgen and dbgen. 
+     ```shell
+        make
+     ```
+1.3. This step produces *.tbl files (please note the location of these files).
 ```shell
 dbgen -s SF -r
 ```
