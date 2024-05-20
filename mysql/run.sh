@@ -2,6 +2,8 @@
 
 rm -rf $BENCH/mysql/tpch/OUT/*
 rm -rf $BENCH/mysql/ssb/OUT/*
+mkdir -p $BENCH/mysql/tpch/OUT
+mkdir -p $BENCH/mysql/ssb/OUT
 
 echo "executing the mysql tpch and ssb queries...."
 
@@ -12,7 +14,7 @@ do
 	mysql --local-infile=1 -u root --database=tpch < $BENCH/mysql/tpch/queries/Q${i}.sql > $BENCH/mysql/tpch/OUT/Q${i}.out 2>&1
 	end=`date +%s.%N`
 	runtime=$( echo "$end - $start" | bc -l ) 
-	echo "query execution time=$runtime" > $BENCH/mysql/tpch/OUT/Q${i}.timing
+	echo "$runtime" > $BENCH/mysql/tpch/OUT/Q${i}.timing
 done
 
 # run ssb queries
@@ -22,7 +24,7 @@ do
 	mysql --local-infile=1 -u root --database=ssb2 < $BENCH/mysql/ssb/queries/Q${i}.sql > $BENCH/mysql/ssb/OUT/Q${i}.out 2>&1
 	end=`date +%s.%N`
 	runtime=$( echo "$end - $start" | bc -l ) 
-	echo "query execution time=$runtime" > $BENCH/mysql/tpch/OUT/Q${i}.timing
+	echo "$runtime" > $BENCH/mysql/ssb/OUT/Q${i}.timing
 done
 
 
