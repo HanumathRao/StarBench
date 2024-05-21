@@ -1,3 +1,8 @@
+drop table if exists ORDER_DETAIL;
+drop table if exists PART;
+drop table if exists CUSTOMER;
+drop table if exists SUPPLIER;
+
 CREATE TABLE ORDER_DETAIL
 (
 OD_ORDERKEY INTEGER NOT NULL,    

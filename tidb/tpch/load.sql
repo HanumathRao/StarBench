@@ -1,8 +1,10 @@
-LOAD DATA LOCAL INFILE '/home/vboxuser/contribs/tpch/tpch-dbgen/1g/customer.tbl' INTO TABLE CUSTOMER FIELDS TERMINATED BY '|';
-LOAD DATA LOCAL INFILE '/home/vboxuser/contribs/tpch/tpch-dbgen/1g/orders.tbl' INTO TABLE ORDERS FIELDS TERMINATED BY '|';
-LOAD DATA LOCAL INFILE '/home/vboxuser/contribs/tpch/tpch-dbgen/1g/lineitem.tbl' INTO TABLE LINEITEM FIELDS TERMINATED BY '|';
-LOAD DATA LOCAL INFILE '/home/vboxuser/contribs/tpch/tpch-dbgen/1g/nation.tbl' INTO TABLE NATION FIELDS TERMINATED BY '|';
-LOAD DATA LOCAL INFILE '/home/vboxuser/contribs/tpch/tpch-dbgen/1g/partsupp.tbl' INTO TABLE PARTSUPP FIELDS TERMINATED BY '|';
-LOAD DATA LOCAL INFILE '/home/vboxuser/contribs/tpch/tpch-dbgen/1g/part.tbl' INTO TABLE PART FIELDS TERMINATED BY '|';
-LOAD DATA LOCAL INFILE '/home/vboxuser/contribs/tpch/tpch-dbgen/1g/region.tbl' INTO TABLE REGION FIELDS TERMINATED BY '|';
-LOAD DATA LOCAL INFILE '/home/vboxuser/contribs/tpch/tpch-dbgen/1g/supplier.tbl' INTO TABLE SUPPLIER FIELDS TERMINATED BY '|';
+SET GLOBAL tidb_server_memory_limit = "128GB";
+LOAD DATA LOCAL INFILE '/Users/ahmadghazal/code/star_schema_data/sf_1_data_in_tbl/lineitem_part1.tbl' INTO TABLE LINEITEM FIELDS TERMINATED BY '|';
+LOAD DATA LOCAL INFILE '/Users/ahmadghazal/code/star_schema_data/sf_1_data_in_tbl/lineitem_part2.tbl' INTO TABLE LINEITEM FIELDS TERMINATED BY '|';
+LOAD DATA LOCAL INFILE '/Users/ahmadghazal/code/star_schema_data/sf_1_data_in_tbl/customer.tbl' INTO TABLE CUSTOMER FIELDS TERMINATED BY '|';
+LOAD DATA LOCAL INFILE '/Users/ahmadghazal/code/star_schema_data/sf_1_data_in_tbl/orders.tbl' INTO TABLE ORDERS FIELDS TERMINATED BY '|';
+LOAD DATA LOCAL INFILE '/Users/ahmadghazal/code/star_schema_data/sf_1_data_in_tbl/nation.tbl' INTO TABLE NATION FIELDS TERMINATED BY '|';
+LOAD DATA LOCAL INFILE '/Users/ahmadghazal/code/star_schema_data/sf_1_data_in_tbl/partsupp.tbl' INTO TABLE PARTSUPP FIELDS TERMINATED BY '|';
+LOAD DATA LOCAL INFILE '/Users/ahmadghazal/code/star_schema_data/sf_1_data_in_tbl/part.tbl' INTO TABLE PART FIELDS TERMINATED BY '|';
+LOAD DATA LOCAL INFILE '/Users/ahmadghazal/code/star_schema_data/sf_1_data_in_tbl/region.tbl' INTO TABLE REGION FIELDS TERMINATED BY '|';
+LOAD DATA LOCAL INFILE '/Users/ahmadghazal/code/star_schema_data/sf_1_data_in_tbl/supplier.tbl' INTO TABLE SUPPLIER FIELDS TERMINATED BY '|';

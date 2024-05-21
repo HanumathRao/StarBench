@@ -12,15 +12,13 @@ if ! [ -f $DATA_DIR/mysql/ssb/ins-sel.sql ]; then
 fi
 
 echo "Dropping the database ssb"
-mysql --local-infile=1 -u root < $DATA_DIR/mysql/ssb/drop_db.sql
+mysql -h 127.0.0.1 -P 4000 -u root < $DATA_DIR/tidb/ssb/drop_db.sql
 
 echo "Creating the database ssb"
-mysql --local-infile=1 -u root < $DATA_DIR/mysql/ssb/create_db.sql
+mysql -h 127.0.0.1 -P 4000 -u root < $DATA_DIR/tidb/ssb/create_db.sql
 
 echo "Creating the ssb tables"
-mysql --local-infile=1 -u root --database=ssb < $DATA_DIR/mysql/ssb/tables.sql
-
+mysql -h 127.0.0.1 -P 4000 -u root -D  ssb < $DATA_DIR/tidb/ssb/tables.sql
 
 echo "loading the data into ssb tables"
-mysql --local-infile=1 -u root < $DATA_DIR/mysql/ssb/ins-sel.sql
-
+mysql -h 127.0.0.1 -P 4000 -u root < $DATA_DIR/tidb/ssb/ins-sel.sql

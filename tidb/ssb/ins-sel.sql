@@ -1,3 +1,5 @@
+SET GLOBAL tidb_server_memory_limit = "128GB";
+
 insert into ssb.SUPPLIER
 select
 s.S_SUPPKEY,
@@ -64,4 +66,32 @@ o.O_ORDERPRIORITY,
 o.O_CLERK,
 o.O_SHIPPRIORITY,
 o.O_COMMENT
-from tpch.LINEITEM l inner join tpch.ORDERS o on l.L_ORDERKEY = o.O_ORDERKEY; 
+from tpch.LINEITEM l inner join tpch.ORDERS o on l.L_ORDERKEY = o.O_ORDERKEY where l.L_ORDERKEY < (select max(L_ORDERKEY)/2 from tpch.LINEITEM); 
+
+insert into ssb.ORDER_DETAIL
+select
+l.L_ORDERKEY,
+l.L_PARTKEY,
+l.L_SUPPKEY,
+l.L_LINENUMBER,
+l.L_QUANTITY,
+l.L_EXTENDEDPRICE,
+l.L_DISCOUNT,
+l.L_TAX,
+l.L_RETURNFLAG,
+l.L_LINESTATUS,
+l.L_SHIPDATE,
+l.L_COMMITDATE,
+l.L_RECEIPTDATE,
+l.L_SHIPINSTRUCT,
+l.L_SHIPMODE,
+o.O_CUSTKEY,
+o.O_ORDERSTATUS,
+o.O_TOTALPRICE,
+o.O_ORDERDATE,
+o.O_ORDERPRIORITY,
+o.O_CLERK,
+o.O_SHIPPRIORITY,
+o.O_COMMENT
+from tpch.LINEITEM l inner join tpch.ORDERS o on l.L_ORDERKEY = o.O_ORDERKEY where l.L_ORDERKEY >= (select max(L_ORDERKEY)/2 from tpch.LINEITEM); 
+
