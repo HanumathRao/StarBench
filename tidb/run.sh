@@ -29,4 +29,4 @@ done
 
 
 
-#./parse_timings.sh $BENCH/tidb
+./parse_timings.sh $BENCH/tidb
