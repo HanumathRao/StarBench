@@ -19,7 +19,8 @@ dbgen -s SF -r
 ```
 
 2. Clone the repository of the StarBench.
-3. change the location of the data in load.sql of corresponding database locations.
+3. Set environment variable BENCH to the new repository.
+4. change the location of the data in load.sql of corresponding database locations.
    This repository has following directories
    mysql
       tpch
