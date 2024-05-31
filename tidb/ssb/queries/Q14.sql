@@ -1,6 +1,6 @@
--- USING 12345 AS A SEED TO THE RNG
-/* QUERY 14 - STARBENCH - PROMOTION EFFECT QUERY */
-SELECT /* DSS_14.SQL */
+-- using 12345 as a seed to the RNG
+/* Query 14 - StarBench - Promotion Effect Query */
+SELECT
         CAST(100.00*SUM(CASE 
                 WHEN P_TYPE LIKE 'PROMO%'
                 THEN OD_EXTENDEDPRICE*(1-OD_DISCOUNT) 

@@ -1,21 +1,7 @@
--- USING 12345 AS A SEED TO THE RNG
-/* QUERY 02 - STARBENCH - MINIMUM COST SUPPLIER QUERY  */
-/* RETURN THE FIRST 100 SELECTED ROWS                                 */
-/* VARIANT Q2.1 DECORELLATING  QUERY (MYSQL AND POSTGRESQL)           */
-WITH T1(PARTKEY, MINCOST)  AS (
-SELECT 
-	P_PARTKEY,
-	MIN(P_SUPPLYCOST) OVER (PARTITION BY P_PARTKEY)
-FROM
-	PART,
-	SUPPLIER
-WHERE
-	P_SUPPKEY = S_SUPPKEY
-	AND P_SIZE = 48
-	AND P_TYPE LIKE '%TIN'
-	AND S_REGION = 'AFRICA'
-)
-SELECT  /* DSS_02.SQL */
+-- using 12345 as a seed to the RNG
+/* Query 02 - StarBench - Minimum Cost Supplier Query  */
+/* Return the first 100 selected rows                                 */
+SELECT
         S_ACCTBAL,
         S_NAME,
         S_NATION,
@@ -25,20 +11,26 @@ SELECT  /* DSS_02.SQL */
         S_PHONE,
         S_COMMENT 
 FROM 
-	T1,
-	PART,
+        PART P,
         SUPPLIER
 WHERE 
-	P_PARTKEY=PARTKEY
-	AND P_SUPPKEY=S_SUPPKEY
+        P_SUPPKEY = S_SUPPKEY
         AND P_SIZE = 48
         AND P_TYPE LIKE '%TIN'
-        AND S_REGION = 'AFRICA'   
-	AND P_SUPPLYCOST = MINCOST
+        AND S_REGION = 'AFRICA'        
+        AND P_SUPPLYCOST =
+                (SELECT MIN(P_SUPPLYCOST)
+                 FROM
+                        PART,
+                        SUPPLIER
+                WHERE 
+                        P_SUPPKEY = S_SUPPKEY
+                        AND P_PARTKEY = P.P_PARTKEY
+                        AND  S_REGION = 'AFRICA'
+                )
 ORDER BY
-	S_ACCTBAL DESC,
+        S_ACCTBAL DESC,
         S_NATION,
         S_NAME,
         P_PARTKEY
 LIMIT 100;
-

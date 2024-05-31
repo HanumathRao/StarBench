@@ -1,41 +1,40 @@
--- USING DEFAULT SUBSTITUTIONS
+-- using 12345 as a seed to the RNG
 
 
-SELECT
-	CNTRYCODE,
-	COUNT(*) AS NUMCUST,
-	SUM(C_ACCTBAL) AS TOTACCTBAL
-FROM
+select
+	cntrycode,
+	count(*) as numcust,
+	sum(c_acctbal) as totacctbal
+from
 	(
-		SELECT
-			SUBSTRING(C_PHONE FROM 1 FOR 2) AS CNTRYCODE,
-			C_ACCTBAL
-		FROM
-			CUSTOMER
-		WHERE
-			SUBSTRING(C_PHONE FROM 1 FOR 2) IN
-				('13', '31', '23', '29', '30', '18', '17')
-			AND C_ACCTBAL > (
-				SELECT
-					AVG(C_ACCTBAL)
-				FROM
-					CUSTOMER
-				WHERE
-					C_ACCTBAL > 0.00
-					AND SUBSTRING(C_PHONE FROM 1 FOR 2) IN
-						('13', '31', '23', '29', '30', '18', '17')
+		select
+			substring(c_phone from 1 for 2) as cntrycode,
+			c_acctbal
+		from
+			customer
+		where
+			substring(c_phone from 1 for 2) in
+				('42', '26', '43', '22', '30', '37', '35')
+			and c_acctbal > (
+				select
+					avg(c_acctbal)
+				from
+					customer
+				where
+					c_acctbal > 0.00
+					and substring(c_phone from 1 for 2) in
+						('42', '26', '43', '22', '30', '37', '35')
 			)
-			AND NOT EXISTS (
-				SELECT
+			and not exists (
+				select
 					*
-				FROM
-					ORDERS
-				WHERE
-					O_CUSTKEY = C_CUSTKEY
+				from
+					orders
+				where
+					o_custkey = c_custkey
 			)
-	) AS CUSTSALE
-GROUP BY
-	CNTRYCODE
-ORDER BY
-	CNTRYCODE;
-
+	) as custsale
+group by
+	cntrycode
+order by
+	cntrycode;

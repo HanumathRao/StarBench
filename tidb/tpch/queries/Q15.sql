@@ -1,37 +1,36 @@
--- USING DEFAULT SUBSTITUTIONS
+-- using 12345 as a seed to the RNG
 
-CREATE VIEW REVENUE0 (SUPPLIER_NO, TOTAL_REVENUE) AS
-	SELECT
-		L_SUPPKEY,
-		SUM(L_EXTENDEDPRICE * (1 - L_DISCOUNT))
-	FROM
-		LINEITEM
-	WHERE
-		L_SHIPDATE >= DATE '1996-01-01'
-		AND L_SHIPDATE < DATE '1996-01-01' + INTERVAL '3' MONTH
-	GROUP BY
-		L_SUPPKEY;
+create view revenue0 (supplier_no, total_revenue) as
+	select
+		l_suppkey,
+		sum(l_extendedprice * (1 - l_discount))
+	from
+		lineitem
+	where
+		l_shipdate >= date '1993-09-01'
+		and l_shipdate < date '1993-09-01' + interval '3' month
+	group by
+		l_suppkey;
 
 
-SELECT
-	S_SUPPKEY,
-	S_NAME,
-	S_ADDRESS,
-	S_PHONE,
-	TOTAL_REVENUE
-FROM
-	SUPPLIER,
-	REVENUE0
-WHERE
-	S_SUPPKEY = SUPPLIER_NO
-	AND TOTAL_REVENUE = (
-		SELECT
-			MAX(TOTAL_REVENUE)
-		FROM
-			REVENUE0
+select
+	s_suppkey,
+	s_name,
+	s_address,
+	s_phone,
+	total_revenue
+from
+	supplier,
+	revenue0
+where
+	s_suppkey = supplier_no
+	and total_revenue = (
+		select
+			max(total_revenue)
+		from
+			revenue0
 	)
-ORDER BY
-	S_SUPPKEY;
+order by
+	s_suppkey;
 
-DROP VIEW REVENUE0;
-
+drop view revenue0;

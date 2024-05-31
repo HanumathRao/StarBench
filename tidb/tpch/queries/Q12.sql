@@ -1,32 +1,31 @@
--- USING DEFAULT SUBSTITUTIONS
+-- using 12345 as a seed to the RNG
 
 
-SELECT
-	L_SHIPMODE,
-	SUM(CASE
-		WHEN O_ORDERPRIORITY = '1-URGENT'
-			OR O_ORDERPRIORITY = '2-HIGH'
-			THEN 1
-		ELSE 0
-	END) AS HIGH_LINE_COUNT,
-	SUM(CASE
-		WHEN O_ORDERPRIORITY <> '1-URGENT'
-			AND O_ORDERPRIORITY <> '2-HIGH'
-			THEN 1
-		ELSE 0
-	END) AS LOW_LINE_COUNT
-FROM
-	ORDERS,
-	LINEITEM
-WHERE
-	O_ORDERKEY = L_ORDERKEY
-	AND L_SHIPMODE IN ('MAIL', 'SHIP')
-	AND L_COMMITDATE < L_RECEIPTDATE
-	AND L_SHIPDATE < L_COMMITDATE
-	AND L_RECEIPTDATE >= DATE '1994-01-01'
-	AND L_RECEIPTDATE < DATE '1994-01-01' + INTERVAL '1' YEAR
-GROUP BY
-	L_SHIPMODE
-ORDER BY
-	L_SHIPMODE;
-
+select
+	l_shipmode,
+	sum(case
+		when o_orderpriority = '1-URGENT'
+			or o_orderpriority = '2-HIGH'
+			then 1
+		else 0
+	end) as high_line_count,
+	sum(case
+		when o_orderpriority <> '1-URGENT'
+			and o_orderpriority <> '2-HIGH'
+			then 1
+		else 0
+	end) as low_line_count
+from
+	orders,
+	lineitem
+where
+	o_orderkey = l_orderkey
+	and l_shipmode in ('AIR', 'FOB')
+	and l_commitdate < l_receiptdate
+	and l_shipdate < l_commitdate
+	and l_receiptdate >= date '1997-01-01'
+	and l_receiptdate < date '1997-01-01' + interval '1' year
+group by
+	l_shipmode
+order by
+	l_shipmode;

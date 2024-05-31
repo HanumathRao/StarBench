@@ -1,6 +1,6 @@
--- USING 12345 AS A SEED TO THE RNG
-/* QUERY 13 - STARBENCH - CUSTOMER DISTRIBUTION QUERY */
-SELECT /* DSS_13.SQL */
+-- using 12345 as a seed to the RNG
+/* Query 13 - StarBench - Customer Distribution Query */
+SELECT
         C_COUNT, COUNT(*) AS CUSTDIST
 FROM   (
         SELECT
@@ -9,7 +9,7 @@ FROM   (
         FROM
                 CUSTOMER LEFT OUTER JOIN ORDER_DETAIL ON
                         C_CUSTKEY = OD_CUSTKEY
-                        AND OD_COMMENT NOT LIKE '%EXPRESS%DEPOSITS%'
+                        AND OD_COMMENT NOT LIKE '%express%deposits%'
         GROUP BY
                 C_CUSTKEY
         ) AS C_ORDERS (C_CUSTKEY, C_COUNT)

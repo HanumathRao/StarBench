@@ -1,6 +1,6 @@
--- USING 12345 AS A SEED TO THE RNG
-/* QUERY 05 - STARBENCH - LOCAL SUPPLIER VOLUME QUERY */
-SELECT /* DSS_05.SQL */
+-- using 12345 as a seed to the RNG
+/* Query 05 - StarBench - Local Supplier Volume Query */
+SELECT
         S_NATION,
         CAST(SUM(OD_EXTENDEDPRICE*(1-OD_DISCOUNT))  AS DECIMAL(18,2)) AS REVENUE
 FROM 

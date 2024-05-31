@@ -1,25 +1,24 @@
--- USING DEFAULT SUBSTITUTIONS
+-- using 12345 as a seed to the RNG
 
 
-SELECT
-	O_ORDERPRIORITY,
-	COUNT(*) AS ORDER_COUNT
-FROM
-	ORDERS
-WHERE
-	O_ORDERDATE >= DATE '1993-07-01'
-	AND O_ORDERDATE < DATE '1993-07-01' + INTERVAL '3' MONTH
-	AND EXISTS (
-		SELECT
+select
+	o_orderpriority,
+	count(*) as order_count
+from
+	orders
+where
+	o_orderdate >= date '1993-02-01'
+	and o_orderdate < date '1993-02-01' + interval '3' month
+	and exists (
+		select
 			*
-		FROM
-			LINEITEM
-		WHERE
-			L_ORDERKEY = O_ORDERKEY
-			AND L_COMMITDATE < L_RECEIPTDATE
+		from
+			lineitem
+		where
+			l_orderkey = o_orderkey
+			and l_commitdate < l_receiptdate
 	)
-GROUP BY
-	O_ORDERPRIORITY
-ORDER BY
-	O_ORDERPRIORITY;
-
+group by
+	o_orderpriority
+order by
+	o_orderpriority;

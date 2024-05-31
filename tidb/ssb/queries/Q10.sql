@@ -1,7 +1,7 @@
--- USING 12345 AS A SEED TO THE RNG
-/* QUERY 10 - STARBENCH - RETURNED ITEM REPORTING QUERY */
-/* RETURN THE FIRST 20 SELECTED ROWS                                   */
-SELECT /* DSS_10.SQL */
+-- using 12345 as a seed to the RNG
+/* Query 10 - StarBench - Returned Item Reporting Query */
+/* Return the first 20 selected rows                                   */
+SELECT
         C_CUSTKEY,
         C_NAME,
         CAST(SUM(OD_EXTENDEDPRICE*(1-OD_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE,

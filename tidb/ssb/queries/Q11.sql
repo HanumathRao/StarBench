@@ -1,6 +1,6 @@
--- USING 12345 AS A SEED TO THE RNG
-/* QUERY 11 - STARBENCH - IMPORTANT STOCK IDENTIFICATION QUERY */
-SELECT /* DSS_11.SQL */
+-- using 12345 as a seed to the RNG
+/* Query 11 - StarBench - Important Stock Identification Query */
+SELECT
         P_PARTKEY,
         CAST(SUM(P_SUPPLYCOST * P_AVAILQTY) AS DEC(18,2)) AS VALUE
 FROM 
@@ -13,7 +13,7 @@ GROUP BY
         P_PARTKEY HAVING 
                 SUM(P_SUPPLYCOST * P_AVAILQTY) > (
                         SELECT
-                                CAST(SUM(P_SUPPLYCOST * P_AVAILQTY) * 0.0001000000 AS DECIMAL(18,2))
+                                CAST(SUM(P_SUPPLYCOST * P_AVAILQTY) * 0.0000020000 AS DECIMAL(18,2))
                         FROM
                                 PART,
                                 SUPPLIER

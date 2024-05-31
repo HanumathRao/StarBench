@@ -1,6 +1,6 @@
--- USING 12345 AS A SEED TO THE RNG
-/* QUERY 22 - STARBENCH - GLOBAL SALEDS OPPORTUNITY QUERY */
-SELECT /* DSS_22.SQL */
+-- using 12345 as a seed to the RNG
+/* Query 22 - StarBench - Global Saleds opportunity Query */
+SELECT
         CNTRYCODE,
         COUNT(*) AS NUMCUST,
         SUM(C_ACCTBAL) AS TOTACCTBAL

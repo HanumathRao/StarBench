@@ -1,6 +1,6 @@
--- USING 12345 AS A SEED TO THE RNG
-/* QUERY 04 -  SSB ORDER PRIORITY CHECKING QUERY */
-WITH   /* DSS_04.SQL */ 
+-- using 12345 as a seed to the RNG
+/* Query 04 -  SSB Order Priority Checking Query */
+WITH 
         T1(OKEY) AS  (
                 SELECT 
                 OD_ORDERKEY 
