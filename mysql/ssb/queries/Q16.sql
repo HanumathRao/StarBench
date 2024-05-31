@@ -1,6 +1,6 @@
--- USING 12345 AS A SEED TO THE RNG
-/* QUERY 16 - STARBENCH - PARTS/SUPPLIER RELATIONSHIP QUERY */
-SELECT /* DSS_16.SQL */
+-- using 12345 as a seed to the RNG
+/* Query 16 - StarBench - Parts/Supplier Relationship Query */
+SELECT
         P_BRAND,
         P_TYPE,
         P_SIZE,
@@ -8,7 +8,7 @@ SELECT /* DSS_16.SQL */
 FROM 
         PART
 WHERE
-        P_BRAND <> 'BRAND#21'
+        P_BRAND <> 'Brand#21'
         AND P_TYPE NOT LIKE 'SMALL PLATED%'
         AND P_SIZE IN (9,44,13,47,15,4,48,21)
         AND P_SUPPKEY NOT IN (
@@ -17,7 +17,7 @@ WHERE
                 FROM 
                         SUPPLIER
                 WHERE 
-                        S_COMMENT LIKE '%CUSTOMER%COMPLAINTS%'
+                        S_COMMENT LIKE '%Customer%Complaints%'
         )
 GROUP BY
         P_BRAND,

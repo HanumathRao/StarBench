@@ -1,7 +1,7 @@
--- USING 12345 AS A SEED TO THE RNG
-/* QUERY 21 - STARBENCH - THE SUPPLIERS WHO KEPT ORDERS WAITING QUERY */
-/* RETURN THE FIRST 100 SELECTED ROWS.                                                */
-SELECT /* DSS_21.SQL */
+-- using 12345 as a seed to the RNG
+/* Query 21 - StarBench - The Suppliers Who Kept Orders Waiting Query */
+/* Return the first 100 selected rows.                                                */
+SELECT
         S_NAME,
         COUNT(*) AS NUMWAIT
 FROM

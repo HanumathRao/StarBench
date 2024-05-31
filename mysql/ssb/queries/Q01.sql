@@ -1,6 +1,6 @@
--- USING 12345 AS A SEED TO THE RNG
-/* QUERY 01 - STARBENCH - PRICING SUMMARY REPORT QUERY   */
-SELECT /* DSS_01.SQL */
+-- using 12345 as a seed to the RNG
+/* Query 01 - StarBench - Pricing Summary Report Query   */
+SELECT
         OD_RETURNFLAG, 
         OD_LINESTATUS,
         CAST(SUM(OD_QUANTITY) AS DECIMAL(18,2)) AS SUM_QTY,

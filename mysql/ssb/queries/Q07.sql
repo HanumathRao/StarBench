@@ -1,6 +1,6 @@
--- USING 12345 AS A SEED TO THE RNG
-/* QUERY 07 - STARBENCH - VOLUME SHIPPING QUERY  */ 
-SELECT /* DSS_07.SQL */
+-- using 12345 as a seed to the RNG
+/* Query 07 - StarBench - Volume Shipping Query  */ 
+SELECT
         S_NATION  AS SUPP_NATION,
         C_NATION  AS CUST_NATION,
         EXTRACT(YEAR FROM OD_SHIPDATE) AS L_YEAR,

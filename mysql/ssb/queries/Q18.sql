@@ -1,7 +1,7 @@
--- USING 12345 AS A SEED TO THE RNG
-/* QUERY 18 - STARBENCH - LARGE VOLUME CUSTOMER QUERY */
-/* RETURN THE FIRST 100 SELECTED ROWS                            */
-SELECT /* DSS_18.SQL */
+-- using 12345 as a seed to the RNG
+/* Query 18 - StarBench - Large Volume Customer Query */
+/* Return the first 100 selected rows                            */
+SELECT
         C_NAME,
         C_CUSTKEY,
         OD_ORDERKEY,

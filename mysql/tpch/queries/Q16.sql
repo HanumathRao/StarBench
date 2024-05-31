@@ -31,4 +31,3 @@ ORDER BY
 	P_BRAND,
 	P_TYPE,
 	P_SIZE;
-

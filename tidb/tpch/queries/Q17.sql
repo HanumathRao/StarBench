@@ -1,20 +1,20 @@
--- using 12345 as a seed to the RNG
+-- USING 12345 AS A SEED TO THE RNG
 
 
-select
-	sum(l_extendedprice) / 7.0 as avg_yearly
-from
-	lineitem,
-	part
-where
-	p_partkey = l_partkey
-	and p_brand = 'Brand#12'
-	and p_container = 'SM CAN'
-	and l_quantity < (
-		select
-			0.2 * avg(l_quantity)
-		from
-			lineitem
-		where
-			l_partkey = p_partkey
+SELECT
+	SUM(L_EXTENDEDPRICE) / 7.0 AS AVG_YEARLY
+FROM
+	LINEITEM,
+	PART
+WHERE
+	P_PARTKEY = L_PARTKEY
+	AND P_BRAND = 'BRAND#12'
+	AND P_CONTAINER = 'SM CAN'
+	AND L_QUANTITY < (
+		SELECT
+			0.2 * AVG(L_QUANTITY)
+		FROM
+			LINEITEM
+		WHERE
+			L_PARTKEY = P_PARTKEY
 	);

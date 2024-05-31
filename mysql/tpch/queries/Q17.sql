@@ -18,4 +18,3 @@ WHERE
 		WHERE
 			L_PARTKEY = P_PARTKEY
 	);
-

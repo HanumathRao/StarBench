@@ -1,6 +1,6 @@
--- USING 12345 AS A SEED TO THE RNG
-/* QUERY 12 - STARBENCH - SHIPPING MODES AND ORDER PRIORITY QUERY */
-SELECT /* DSS_12.SQL */
+-- using 12345 as a seed to the RNG
+/* Query 12 - StarBench - Shipping Modes and Order Priority Query */
+SELECT
         OD_SHIPMODE,
         SUM(CASE
                 WHEN OD_ORDERPRIORITY = '1-URGENT'

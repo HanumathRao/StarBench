@@ -1,7 +1,7 @@
--- USING 12345 AS A SEED TO THE RNG
-/* QUERY 03 - STARBENCH - TPC-H SHIPPING PRIORITY QUERY      */
-/* RETURN THE FIRST 10 SELECTED ROWS                                    */
-SELECT /* DSS_03.SQL */
+-- using 12345 as a seed to the RNG
+/* Query 03 - StarBench - Shipping Priority Query      */
+/* Return the first 10 selected rows                                    */
+SELECT
         OD_ORDERKEY,
         CAST(SUM(OD_EXTENDEDPRICE*(1-OD_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE,
         OD_ORDERDATE,
