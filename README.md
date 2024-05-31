@@ -7,7 +7,9 @@ How to run the StarBench
 
 1. Generate the data for the tpch for a representative scale factor.
    To generate the scale factor do the following steps.
+   
    1.1. clone the repostory at https://github.com/electrum/tpch-dbgen.
+   
    1.2. run the make to compile the code which produces qgen and dbgen.
 
    ```shell
@@ -20,9 +22,9 @@ How to run the StarBench
    dbgen -s SF -r
    ```
 
-2. Clone the repository of the StarBench.
-3. Set environment variable BENCH to the new repository.
-4. change the location of the data in load.sql of corresponding database locations.
+3. Clone the repository of the StarBench.
+4. Set environment variable BENCH to the new repository.
+5. change the location of the data in load.sql of corresponding database locations.
    This repository has following directories
    mysql
    tpch
