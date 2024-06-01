@@ -46,12 +46,14 @@ elif [ "$db_type" == "mysql" ]; then
 	./mysql/ssb/load_data.sh
     fi
     ./mysql/run.sh
+    ./parse_timings.sh ./mysql
 elif [ "$db_type" == "tidb" ]; then
     if [ "$has_l_flag" = true ]; then
         ./tidb/tpch/load_data.sh
 	./tidb/ssb/load_data.sh
     fi
     ./tidb/run.sh
+    ./parse_timings.sh ./tidb
 fi
 
 

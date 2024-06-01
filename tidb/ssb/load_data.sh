@@ -22,3 +22,6 @@ mysql -h 127.0.0.1 -P 4000 -u root -D  ssb < $DATA_DIR/tidb/ssb/tables.sql
 
 echo "loading the data into ssb tables"
 mysql -h 127.0.0.1 -P 4000 -u root < $DATA_DIR/tidb/ssb/ins-sel.sql
+
+echo "creating index for ssb tables"
+mysql -h 127.0.0.1 -P 4000 -u root < $DATA_DIR/tidb/ssb/create-idx.sql
