@@ -1,4 +1,4 @@
-insert into ssb2_temp.LINEORDER_RF1
+insert into starbench_temp.LINEORDER_RF1
 select
 l.L_ORDERKEY,
 l.L_PARTKEY,
@@ -23,4 +23,4 @@ o.O_ORDERPRIORITY,
 o.O_CLERK,
 o.O_SHIPPRIORITY,
 o.O_COMMENT
-from ssb2_temp.LINEITEM_RF1 l inner join ssb2_temp.ORDERS_RF1 o on l.L_ORDERKEY = o.O_ORDERKEY; 
+from starbench_temp.LINEITEM_RF1 l inner join starbench_temp.ORDERS_RF1 o on l.L_ORDERKEY = o.O_ORDERKEY; 

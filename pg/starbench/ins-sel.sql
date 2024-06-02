@@ -1,4 +1,4 @@
-insert into ssb.SUPPLIER
+insert into starbench.SUPPLIER
 select
 s.S_SUPPKEY,
 s.S_NAME,
@@ -11,7 +11,7 @@ s.S_COMMENT
 from tpch.SUPPLIER as s inner join tpch.NATION as n on s.S_NATIONKEY = n.N_NATIONKEY
 inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY; 
 
-insert into ssb.CUSTOMER
+insert into starbench.CUSTOMER
 select
 c.C_CUSTKEY,
 c.C_NAME,
@@ -24,7 +24,7 @@ c.C_MKTSEGMENT
 from tpch.CUSTOMER as c inner join tpch.NATION as n on c.C_NATIONKEY = n.N_NATIONKEY
 inner join tpch.REGION as r on n.N_REGIONKEY = r.R_REGIONKEY;
 
-insert into ssb.PART
+insert into starbench.PART
 select
 p.P_PARTKEY,
 p.P_NAME,
@@ -39,7 +39,7 @@ ps.PS_AVAILQTY,
 ps.PS_SUPPLYCOST
 from tpch.PART p inner join tpch.PARTSUPP ps on p.P_PARTKEY = ps.PS_PARTKEY; 
 
-insert into ssb.ORDER_DETAIL
+insert into starbench.ORDER_DETAIL
 select
 l.L_ORDERKEY,
 l.L_PARTKEY,

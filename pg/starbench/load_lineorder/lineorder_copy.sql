@@ -1,5 +1,5 @@
-drop table ssb2_temp.lineorder;
-CREATE TABLE ssb2_temp.LINEORDER
+drop table starbench_temp.lineorder;
+CREATE TABLE starbench_temp.LINEORDER
 (
 LO_ORDERKEY INTEGER NOT NULL,    
 LO_PARTKEY INTEGER NOT NULL,    
@@ -27,7 +27,7 @@ LO_COMMENT VARCHAR(79) NOT NULL,
 PRIMARY KEY ( LO_ORDERKEY,LO_LINENUMBER )); 
 
 
-insert into ssb2_temp.LINEORDER
+insert into starbench_temp.LINEORDER
 select
 l.L_ORDERKEY,
 l.L_PARTKEY,

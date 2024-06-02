@@ -1,5 +1,5 @@
-drop table ssb2_temp.LINEORDER_RF1;
-CREATE TABLE ssb2_temp.LINEORDER_RF1
+drop table starbench_temp.LINEORDER_RF1;
+CREATE TABLE starbench_temp.LINEORDER_RF1
 (
 LO_ORDERKEY INTEGER NOT NULL,    
 LO_PARTKEY INTEGER NOT NULL,    

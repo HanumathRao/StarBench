@@ -35,7 +35,7 @@ if [ "$db_type" == "pg" ]; then
     if [ "$has_l_flag" = true ]; then
 	echo "loading data for pg..."
         ./pg/tpch/load_data.sh
-	./pg/ssb/load_data.sh
+	./pg/starbench/load_data.sh
     fi
     echo "running queries for pg...."
     ./pg/run.sh
@@ -43,14 +43,14 @@ if [ "$db_type" == "pg" ]; then
 elif [ "$db_type" == "mysql" ]; then
     if [ "$has_l_flag" = true ]; then
         ./mysql/tpch/load_data.sh
-	./mysql/ssb/load_data.sh
+	./mysql/starbench/load_data.sh
     fi
     ./mysql/run.sh
     ./parse_timings.sh ./mysql
 elif [ "$db_type" == "tidb" ]; then
     if [ "$has_l_flag" = true ]; then
         ./tidb/tpch/load_data.sh
-	./tidb/ssb/load_data.sh
+	./tidb/starbench/load_data.sh
     fi
     ./tidb/run.sh
     ./parse_timings.sh ./tidb

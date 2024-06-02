@@ -1,1 +1,0 @@
-drop DATABASE IF EXISTS ssb;

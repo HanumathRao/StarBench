@@ -1,5 +1,5 @@
-drop table ssb2_temp.ORDERS_RF1;
-CREATE TABLE ssb2_temp.ORDERS_RF1 ( O_ORDERKEY       INTEGER NOT NULL,
+drop table starbench_temp.ORDERS_RF1;
+CREATE TABLE starbench_temp.ORDERS_RF1 ( O_ORDERKEY       INTEGER NOT NULL,
                            O_CUSTKEY        INTEGER NOT NULL,
                            O_ORDERSTATUS    CHAR(1) NOT NULL,
                            O_TOTALPRICE     DECIMAL(15,2) NOT NULL,
@@ -10,8 +10,8 @@ CREATE TABLE ssb2_temp.ORDERS_RF1 ( O_ORDERKEY       INTEGER NOT NULL,
                            O_COMMENT        VARCHAR(79) NOT NULL,
                              ef            CHAR(1) NOT NULL,
 PRIMARY KEY (O_ORDERKEY));
-drop table ssb2_temp.LINEITEM_RF1;
-CREATE TABLE ssb2_temp.LINEITEM_RF1 ( L_ORDERKEY    INTEGER NOT NULL,
+drop table starbench_temp.LINEITEM_RF1;
+CREATE TABLE starbench_temp.LINEITEM_RF1 ( L_ORDERKEY    INTEGER NOT NULL,
                              L_PARTKEY     INTEGER NOT NULL,
                              L_SUPPKEY     INTEGER NOT NULL,
                              L_LINENUMBER  INTEGER NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE ssb2_temp.LINEITEM_RF1 ( L_ORDERKEY    INTEGER NOT NULL,
                              L_COMMENT      VARCHAR(44) NOT NULL,
                              ef            CHAR(1) NOT NULL,
 PRIMARY KEY (L_ORDERKEY,L_LINENUMBER));
-drop table ssb2_temp.DELETE_1;
-CREATE TABLE ssb2_temp.DELETE_1  ( ORDERKEY INTEGER NOT NULL,
+drop table starbench_temp.DELETE_1;
+CREATE TABLE starbench_temp.DELETE_1  ( ORDERKEY INTEGER NOT NULL,
                        ef            CHAR(1) NOT NULL,
 PRIMARY KEY (ORDERKEY));

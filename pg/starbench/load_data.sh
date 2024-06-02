@@ -9,27 +9,27 @@ if [ -n $DATA_DIR ]; then
    DATA_DIR=$BENCH
 fi
 
-if ! [ -f $DATA_DIR/pg/ssb/tables.sql ]; then
+if ! [ -f $DATA_DIR/pg/starbench/tables.sql ]; then
    echo "No schema.sql file exists under $DATA_DIR"
    exit 0
 fi
 
 
-if ! [ -f $DATA_DIR/pg/ssb/ins-sel.sql ]; then
+if ! [ -f $DATA_DIR/pg/starbench/ins-sel.sql ]; then
    echo "No ins-sel.sql file exists under $DATA_DIR"
    exit 0
 fi
 
 echo "Dropping the database tpch"
-psql postgres < $DATA_DIR/pg/ssb/drop_db.sql
+psql postgres < $DATA_DIR/pg/starbench/drop_db.sql
 
 echo "Creating the database tpch"
-psql postgres < $DATA_DIR/pg/ssb/create_db.sql
+psql postgres < $DATA_DIR/pg/starbench/create_db.sql
 
 echo "Creating the tpch tables"
-psql postgres < $DATA_DIR/pg/ssb/tables.sql
+psql postgres < $DATA_DIR/pg/starbench/tables.sql
 
 
 echo "loading the data into tpch tables"
-psql postgres < $DATA_DIR/pg/ssb/ins-sel.sql
+psql postgres < $DATA_DIR/pg/starbench/ins-sel.sql
 
