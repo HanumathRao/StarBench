@@ -1,0 +1,22 @@
+/* Query 09 - StarBench - Product Type Profit Measure Query */
+SELECT /* dss_09.sql */
+        S_NATION  AS NATION,
+        EXTRACT(YEAR FROM OD_ORDERDATE) AS L_YEAR,
+        CAST(SUM(OD_EXTENDEDPRICE*(1-OD_DISCOUNT)-P_SUPPLYCOST*OD_QUANTITY) AS DECIMAL(18,2)) AS SUM_PROFIT
+FROM
+        PART,
+        SUPPLIER,
+        ORDER_DETAIL
+WHERE
+        S_SUPPKEY = OD_SUPPKEY
+        AND S_SUPPKEY = OD_SUPPKEY
+        AND P_PARTKEY = OD_PARTKEY
+        AND P_SUPPKEY = OD_SUPPKEY
+        AND P_NAME LIKE '%:1%'
+GROUP BY
+        NATION,
+        L_YEAR
+ORDER BY
+        NATION,
+        L_YEAR DESC;
+
