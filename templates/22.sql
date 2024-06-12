@@ -1,5 +1,5 @@
 /* Query 22 - StarBench - Global Saleds opportunity Query */
-SELECT /* dss_22.sql */
+SELECT
         CNTRYCODE,
         COUNT(*) AS NUMCUST,
         SUM(C_ACCTBAL) AS TOTACCTBAL

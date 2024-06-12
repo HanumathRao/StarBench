@@ -1,5 +1,5 @@
 /* Query 13 - StarBench - Customer Distribution Query */
-SELECT /* dss_13.sql */
+SELECT
         C_COUNT, COUNT(*) AS CUSTDIST
 FROM   (
         SELECT

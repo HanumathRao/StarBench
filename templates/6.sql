@@ -1,5 +1,5 @@
 /* Query 06 - StarBench - Forecasting Revenue Change Query */
-SELECT /* dss_06.sql */
+SELECT
         CAST(SUM(OD_EXTENDEDPRICE*OD_DISCOUNT) AS DECIMAL(18,2)) AS REVENUE
 FROM 
         ORDER_DETAIL

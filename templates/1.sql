@@ -1,5 +1,5 @@
 /* Query 01 - StarBench - Pricing Summary Report Query   */
-SELECT /* dss_01.sql */
+SELECT
         OD_RETURNFLAG, 
         OD_LINESTATUS,
         CAST(SUM(OD_QUANTITY) AS DECIMAL(18,2)) AS SUM_QTY,

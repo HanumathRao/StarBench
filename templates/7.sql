@@ -1,5 +1,5 @@
 /* Query 07 - StarBench - Volume Shipping Query  */ 
-SELECT /* dss_07.sql */
+SELECT
         S_NATION  AS SUPP_NATION,
         C_NATION  AS CUST_NATION,
         EXTRACT(YEAR FROM OD_SHIPDATE) AS L_YEAR,

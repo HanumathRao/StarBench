@@ -1,5 +1,5 @@
 /* Query 04 -  SSB Order Priority Checking Query */
-WITH   /* dss_04.sql */ 
+WITH 
         T1(OKEY) AS  (
                 SELECT 
                 OD_ORDERKEY 

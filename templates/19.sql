@@ -1,5 +1,5 @@
 /* Query 19 - StarBench - Discounted Revenue Query */
-SELECT /* dss_19.sql */
+SELECT
         CAST(SUM(OD_EXTENDEDPRICE*(1 - OD_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE
 FROM
         ORDER_DETAIL,

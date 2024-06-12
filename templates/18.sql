@@ -1,6 +1,6 @@
 /* Query 18 - StarBench - Large Volume Customer Query */
 /* Return the first 100 selected rows                            */
-SELECT /* dss_18.sql */
+SELECT
         C_NAME,
         C_CUSTKEY,
         OD_ORDERKEY,

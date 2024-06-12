@@ -1,5 +1,5 @@
 /* Query 12 - StarBench - Shipping Modes and Order Priority Query */
-SELECT /* dss_12.sql */
+SELECT
         OD_SHIPMODE,
         SUM(CASE
                 WHEN OD_ORDERPRIORITY = '1-URGENT'

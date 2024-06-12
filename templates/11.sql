@@ -1,5 +1,5 @@
 /* Query 11 - StarBench - Important Stock Identification Query */
-SELECT /* dss_11.sql */
+SELECT
         P_PARTKEY,
         CAST(SUM(P_SUPPLYCOST * P_AVAILQTY) AS DEC(18,2)) AS VALUE
 FROM 

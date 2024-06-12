@@ -1,5 +1,5 @@
 /* Query 14 - StarBench - Promotion Effect Query */
-SELECT /* dss_14.sql */
+SELECT
         CAST(100.00*SUM(CASE 
                 WHEN P_TYPE LIKE 'PROMO%'
                 THEN OD_EXTENDEDPRICE*(1-OD_DISCOUNT) 

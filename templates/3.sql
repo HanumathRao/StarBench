@@ -1,6 +1,6 @@
-/* Query 03 - StarBench - TPC-H Shipping Priority Query      */
+/* Query 03 - StarBench - Shipping Priority Query      */
 /* Return the first 10 selected rows                                    */
-SELECT /* dss_03.sql */
+SELECT
         OD_ORDERKEY,
         CAST(SUM(OD_EXTENDEDPRICE*(1-OD_DISCOUNT)) AS DECIMAL(18,2)) AS REVENUE,
         OD_ORDERDATE,

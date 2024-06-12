@@ -1,6 +1,6 @@
 /* Query 21 - StarBench - The Suppliers Who Kept Orders Waiting Query */
 /* Return the first 100 selected rows.                                                */
-SELECT /* dss_21.sql */
+SELECT
         S_NAME,
         COUNT(*) AS NUMWAIT
 FROM

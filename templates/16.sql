@@ -1,5 +1,5 @@
 /* Query 16 - StarBench - Parts/Supplier Relationship Query */
-SELECT /* dss_16.sql */
+SELECT
         P_BRAND,
         P_TYPE,
         P_SIZE,

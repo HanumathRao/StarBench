@@ -1,11 +1,11 @@
 /* Query 08 - StarBench - National Market Share Query */
-SELECT /* dss_08.sql */
+SELECT
         EXTRACT(YEAR FROM OD_ORDERDATE) AS L_YEAR,
         CAST(SUM(CASE
                 WHEN S_NATION = ':1'  
                 THEN OD_EXTENDEDPRICE*(1-OD_DISCOUNT)
                 ELSE 0
-        END) / SUM(OD_EXTENDEDPRICE*(1-OD_DISCOUNT))) AS DECIMAL(18,2) AS MKT_SHARE
+        END) / SUM(OD_EXTENDEDPRICE*(1-OD_DISCOUNT)) AS DECIMAL(18,2)) AS MKT_SHARE
 FROM 
         PART,
         SUPPLIER,

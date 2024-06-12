@@ -1,5 +1,5 @@
 /* Query 05 - StarBench - Local Supplier Volume Query */
-SELECT /* dss_05.sql */
+SELECT
         S_NATION,
         CAST(SUM(OD_EXTENDEDPRICE*(1-OD_DISCOUNT))  AS DECIMAL(18,2)) AS REVENUE
 FROM 
